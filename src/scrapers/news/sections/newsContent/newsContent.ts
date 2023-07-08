@@ -9,13 +9,13 @@ export type ContentSection = NewsSection & {
   title: string;
 };
 
-const ignoredTags = ["br", "style"];
+const ignoredTags = ["style"];
 
 const newsContent: NewsSection = {
   format: (html, url, title) => {
     const contentRoot = parse(html);
 
-    const content: MediaWikiContent[] = [];
+    let content: MediaWikiContent[] = [];
 
     contentRoot.childNodes.forEach((node) => {
       const tag = getNodeTagName(node);
@@ -24,7 +24,7 @@ const newsContent: NewsSection = {
       }
       const result = nodeParser(node);
       if (Array.isArray(result)) {
-        content.concat(result);
+        content = content.concat(result);
       } else {
         content.push(result);
       }

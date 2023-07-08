@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-node",
+  "name": "osrs-web-scraper",
   "version": "0.0.0",
-  "description": "A quick and easy way to setup a TypeScript node application.",
+  "description": "Tools to scrape the osrs website.",
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ./dist && ts-patch install -s && tsc",
@@ -17,24 +17,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allenkinzalow/boilerplate-node.git"
+    "url": "git+https://github.com/allenkinzalow/osrs-web-scraper.git"
   },
   "author": "Allen Kinzalow",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/allenkinzalow/boilerplate-node/issues"
+    "url": "https://github.com/allenkinzalow/osrs-web-scraper/issues"
   },
-  "homepage": "https://github.com/allenkinzalow/boilerplate-node#readme",
+  "homepage": "https://github.com/allenkinzalow/osrs-web-scraper#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "node-html-parser": "^6.1.5",
-    "puppeteer": "^19.11.1",
+    "puppeteer": "^20.8.0",
     "tsconfig-paths": "^4.2.0",
     "typescript-transform-paths": "^3.4.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.21.3",
-    "@changesets/cli": "^2.26.1",
+    "@changesets/cli": "^2.26.2",
     "@types/jest": "^28.1.7",
     "@types/node": "^17.0.25",
     "@typescript-eslint/eslint-plugin": "^5.59.1",

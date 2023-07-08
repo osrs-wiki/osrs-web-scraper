@@ -1,9 +1,11 @@
-import paragraphParser from "./paragraph";
+import breakParser from "./break";
+import textParser from "./text";
 import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
-  p: paragraphParser,
+  br: breakParser,
+  p: textParser,
 };
 
 const nodeParser: ContentNodeParser = (node) => {

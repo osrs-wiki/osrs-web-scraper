@@ -4,7 +4,9 @@ import { parse } from "node-html-parser";
 import { NewsSection } from "./types";
 import { downloadImage } from "../../../utils/images";
 import {
+  MediaWikiBreak,
   MediaWikiContent,
+  MediaWikiFile,
   MediaWikiTemplate,
   UpdateTemplate,
 } from "../../../utils/mediawiki";
@@ -18,12 +20,13 @@ const newsHeader: NewsSection = {
 
     const newsDirectory = `./out/news/${title}`;
     if (!fs.existsSync(newsDirectory)) {
-      fs.mkdirSync(newsDirectory);
+      fs.mkdirSync(newsDirectory, { recursive: true });
     }
 
+    const newspostImageName = `${title} newspost`;
     downloadImage(
       image.attributes.src,
-      `${newsDirectory}/${title} newspost.png`
+      `${newsDirectory}/${newspostImageName}.png`
     );
 
     const content: MediaWikiContent[] = [];
@@ -35,7 +38,13 @@ const newsHeader: NewsSection = {
         category: "game",
       }).build()
     );
+    content.push(new MediaWikiBreak());
+    content.push(
+      new MediaWikiFile(newspostImageName, { horizontalAlignment: "right" })
+    );
+    content.push(new MediaWikiBreak());
     content.push(new MediaWikiTemplate("clear"));
+    content.push(new MediaWikiBreak());
 
     return content;
   },

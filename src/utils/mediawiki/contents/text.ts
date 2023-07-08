@@ -17,14 +17,13 @@ class MediaWikiText extends MediaWikiContent {
   }
 
   build() {
-    if (this.styling.bold && this.styling.underline) {
-      this.value = `''<b>${this.value}</b>''`;
-    } else if (this.styling.bold) {
+    if (this.styling?.bold) {
       this.value = `'''${this.value}'''`;
-    } else if (this.styling.italics) {
+    }
+    if (this.styling?.italics) {
       this.value = `''${this.value}''`;
     }
-    if (this.styling.underline) {
+    if (this.styling?.underline) {
       this.value = `<u>${this.value}</u>`;
     }
     return `${this.value}`;
