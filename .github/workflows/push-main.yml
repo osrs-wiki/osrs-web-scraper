@@ -1,0 +1,65 @@
+name: Push Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint_build_test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.READ_PACKAGES }}
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+  changeset:
+    needs: lint_build_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          cache: yarn
+          node-version: 16
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+
+      - name: Install yarn packages
+        run: yarn install --frozen-lockfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+
+      - name: Create Release Pull Request or Release
+        id: changeset
+        uses: changesets/action@v1
+        with:
+          publish: echo Release && echo "New tag:"
+          title: Release
+          commit: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
