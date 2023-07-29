@@ -12,7 +12,7 @@ import {
 } from "../../../utils/mediawiki";
 
 const newsHeader: NewsSection = {
-  format: (html, url, title) => {
+  format: async (html, url, title) => {
     const headerRoot = parse(html);
 
     const date = headerRoot.querySelector(".news-article-header__date");

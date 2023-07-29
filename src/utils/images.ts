@@ -35,3 +35,12 @@ export const getImageName = (imageUrl: string) => {
   const parsed = new URL(imageUrl);
   return path.basename(parsed.pathname);
 };
+
+/**
+ * Get the extension of an image from a url link.
+ * @param imageUrl The image url
+ * @returns
+ */
+export const getImageExtension = (imageUrl: string) => {
+  return imageUrl.split(/[#?]/)[0].split(".").pop().trim();
+};

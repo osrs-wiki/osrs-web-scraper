@@ -27,6 +27,7 @@
   "homepage": "https://github.com/allenkinzalow/osrs-web-scraper#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "image-size": "^1.0.2",
     "node-html-parser": "^6.1.5",
     "puppeteer": "^20.8.0",
     "tsconfig-paths": "^4.2.0",

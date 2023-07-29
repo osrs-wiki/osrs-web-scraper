@@ -21,10 +21,10 @@ const news: ScrapingService<MediaWikiBuilder> = {
 
       const builder = new MediaWikiBuilder();
       builder.addContents(
-        newsHeader.format(results.header, page.url(), results.title)
+        await newsHeader.format(results.header, page.url(), results.title)
       );
       builder.addContents(
-        newsContent.format(results.content, page.url(), results.title)
+        await newsContent.format(results.content, page.url(), results.title)
       );
 
       console.log(builder.build());
