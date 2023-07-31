@@ -2,7 +2,7 @@ import fs from "fs";
 import { parse } from "node-html-parser";
 
 import { nodeParser } from "./nodes";
-import { downloadImage } from "../../../../utils/images";
+import { downloadImage, formatFileName } from "../../../../utils/images";
 import { MediaWikiContent } from "../../../../utils/mediawiki";
 import { getNodeTagName } from "../../../../utils/nodes";
 import { NewsSection } from "../types";
@@ -22,6 +22,7 @@ const newsContent: NewsSection = {
     const contentRoot = parse(html);
 
     const images = contentRoot.querySelectorAll("img");
+    let downloadedImages = 0;
     for (let index = 0; index < images.length; index++) {
       const image = images[index];
       const imageLink = image.attributes.src;
@@ -30,12 +31,13 @@ const newsContent: NewsSection = {
         continue;
       }
 
-      const imageDirectory = `./out/news/${title}`;
+      const formattedTitle = formatFileName(title);
+      const imageDirectory = `./out/news/${formattedTitle}`;
       if (!fs.existsSync(imageDirectory)) {
         fs.mkdirSync(imageDirectory, { recursive: true });
       }
 
-      const imageName = `${title} (${index + 1})`;
+      const imageName = `${formattedTitle} (${++downloadedImages})`;
       await downloadImage(imageLink, `${imageDirectory}/${imageName}.png`);
     }
 

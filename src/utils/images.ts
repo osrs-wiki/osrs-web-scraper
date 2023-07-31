@@ -44,3 +44,12 @@ export const getImageName = (imageUrl: string) => {
 export const getImageExtension = (imageUrl: string) => {
   return imageUrl.split(/[#?]/)[0].split(".").pop().trim();
 };
+
+/**
+ * Format a file name to ensure it is valid.
+ * @param fileName The file name
+ * @returns
+ */
+export const formatFileName = (fileName: string) => {
+  return fileName.replaceAll(":", "-");
+};

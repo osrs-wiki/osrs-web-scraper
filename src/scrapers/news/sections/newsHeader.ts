@@ -2,7 +2,7 @@ import fs from "fs";
 import { parse } from "node-html-parser";
 
 import { NewsSection } from "./types";
-import { downloadImage } from "../../../utils/images";
+import { downloadImage, formatFileName } from "../../../utils/images";
 import {
   MediaWikiBreak,
   MediaWikiContent,
@@ -18,12 +18,13 @@ const newsHeader: NewsSection = {
     const date = headerRoot.querySelector(".news-article-header__date");
     const image = headerRoot.querySelector("#osrsSummaryImage img");
 
-    const newsDirectory = `./out/news/${title}`;
+    const formattedTitle = formatFileName(title);
+    const newsDirectory = `./out/news/${formattedTitle}`;
     if (!fs.existsSync(newsDirectory)) {
       fs.mkdirSync(newsDirectory, { recursive: true });
     }
 
-    const newspostImageName = `${title} newspost`;
+    const newspostImageName = `${formattedTitle} newspost`;
     downloadImage(
       image.attributes.src,
       `${newsDirectory}/${newspostImageName}.png`
