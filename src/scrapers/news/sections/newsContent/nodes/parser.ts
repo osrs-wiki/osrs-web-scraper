@@ -1,5 +1,6 @@
 import breakParser from "./break";
 import centerParser from "./center";
+import fontParser from "./font";
 import imageParser from "./image";
 import linkParser from "./link";
 import textParser from "./text";
@@ -13,6 +14,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   br: breakParser,
   center: centerParser,
   img: imageParser,
+  font: fontParser,
   p: textParser,
   u: textParser,
 };
