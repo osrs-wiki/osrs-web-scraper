@@ -2,7 +2,11 @@ import fs from "fs";
 import { parse } from "node-html-parser";
 
 import { NewsSection } from "./types";
-import { downloadImage, formatFileName } from "../../../utils/images";
+import {
+  downloadImage,
+  formatFileName,
+  getImageExtension,
+} from "../../../utils/images";
 import {
   MediaWikiBreak,
   MediaWikiContent,
@@ -25,10 +29,12 @@ const newsHeader: NewsSection = {
       fs.mkdirSync(newsDirectory, { recursive: true });
     }
 
-    const newspostImageName = `${formattedTitle} newspost`;
+    const newspostImageName = `${formattedTitle} newspost.${getImageExtension(
+      image.attributes.src
+    )}`;
     downloadImage(
       image.attributes.src,
-      `${newsDirectory}/${newspostImageName}.png`
+      `${newsDirectory}/${newspostImageName}`
     );
 
     const content: MediaWikiContent[] = [];
@@ -42,7 +48,7 @@ const newsHeader: NewsSection = {
     );
     content.push(new MediaWikiBreak());
     content.push(
-      new MediaWikiFile(`${newspostImageName}.png`, {
+      new MediaWikiFile(newspostImageName, {
         horizontalAlignment: "right",
       })
     );

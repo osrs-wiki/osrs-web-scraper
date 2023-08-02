@@ -27,7 +27,9 @@ export const imageParser: ContentNodeParser = (node, { title, center }) => {
 
     const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
     const imageExtension = getImageExtension(imageLink);
-    const dimensions = sizeOf(`${imageDirectory}/${imageName}.png`);
+    const dimensions = sizeOf(
+      `${imageDirectory}/${imageName}.${imageExtension}`
+    );
 
     return new MediaWikiFile(`${imageName}.${imageExtension}`, {
       resizing: { width: dimensions.width > 600 ? 600 : dimensions.width },

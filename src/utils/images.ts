@@ -9,6 +9,7 @@ import path from "path";
  * @returns
  */
 export const downloadImage = async (url: string, filepath: string) => {
+  console.info(`Attempting image download: ${url}`);
   return new Promise((resolve, reject) => {
     client.get(url, (res) => {
       if (res.statusCode === 200) {
@@ -16,6 +17,7 @@ export const downloadImage = async (url: string, filepath: string) => {
           .pipe(fs.createWriteStream(filepath))
           .on("error", reject)
           .once("close", () => resolve(filepath));
+        console.info(`Downloaded image ${filepath}`);
       } else {
         res.resume();
         reject(

@@ -2,7 +2,11 @@ import fs from "fs";
 import { parse } from "node-html-parser";
 
 import { nodeParser } from "./nodes";
-import { downloadImage, formatFileName } from "../../../../utils/images";
+import {
+  downloadImage,
+  formatFileName,
+  getImageExtension,
+} from "../../../../utils/images";
 import { MediaWikiContent } from "../../../../utils/mediawiki";
 import { getNodeTagName } from "../../../../utils/nodes";
 import { NewsSection } from "../types";
@@ -23,6 +27,7 @@ const newsContent: NewsSection = {
 
     const images = contentRoot.querySelectorAll("img");
     let downloadedImages = 0;
+    const downloadQueue = [];
     for (let index = 0; index < images.length; index++) {
       const image = images[index];
       const imageLink = image.attributes.src;
@@ -38,11 +43,18 @@ const newsContent: NewsSection = {
       }
 
       const imageName = `${formattedTitle} (${++downloadedImages})`;
-      await downloadImage(imageLink, `${imageDirectory}/${imageName}.png`);
+      downloadQueue.push(
+        downloadImage(
+          imageLink,
+          `${imageDirectory}/${imageName}.${getImageExtension(imageLink)}`
+        )
+      );
     }
+    await Promise.all(downloadQueue);
 
     let content: MediaWikiContent[] = [];
 
+    console.info("Parsing content nodes...");
     contentRoot.childNodes.forEach((node) => {
       const tag = getNodeTagName(node);
       if (ignoredTags.includes(tag) || tag === undefined) {
