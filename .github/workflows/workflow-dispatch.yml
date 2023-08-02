@@ -1,4 +1,4 @@
-nmae: Run News Scraper
+name: Run News Scraper
 
 on:
   workflow_dispatch:
@@ -27,13 +27,16 @@ jobs:
 
   scrapeNews:
     runs-on: ubuntu-latest
-    requires: build
+    needs: build
     steps:
       - name: Scrape News Post
         run: export NEWS_LINK=${{ github.event.inputs.newsLink }} && yarn start:node
 
   uploadResults:
-    - uses: actions/upload-artifact@v3
-      with:
-        name: newspost-${{ github.run_id }}-${{ github.run_attempt }}
-        path: out/news/
+    runs-on: ubuntu-latest
+    needs: scrapeNews
+    steps:
+      - uses: actions/upload-artifact@v3
+        with:
+          name: newspost-${{ github.run_id }}-${{ github.run_attempt }}
+          path: out/news/
