@@ -7,25 +7,24 @@ import {
 } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
-const textParser: ContentNodeParser = (node) => {
+const textParser: ContentNodeParser = (node, options) => {
+  if (node.childNodes.length === 0) {
+    return new MediaWikiText(node.rawText, {
+      bold: options.bold as boolean,
+      italics: options.italics as boolean,
+      underline: options.underline as boolean,
+    });
+  }
   return node.childNodes
     .map<MediaWikiContent | MediaWikiContent[]>((childNode) => {
       if (childNode instanceof HTMLElement) {
-        const element = childNode as HTMLElement;
-        if (
-          element.childNodes.length > 0 &&
-          element.firstChild instanceof HTMLElement
-        ) {
-          return nodeParser(childNode);
-        }
-        const tagName = element.tagName?.toLowerCase();
-        return new MediaWikiText(childNode.rawText, {
-          bold: tagName === "b",
-          italics: tagName === "i",
-          underline: tagName === "u",
-        });
+        return nodeParser(childNode);
       } else {
-        return new MediaWikiText(childNode.rawText);
+        return new MediaWikiText(childNode.rawText, {
+          bold: options.bold as boolean,
+          italics: options.italics as boolean,
+          underline: options.underline as boolean,
+        });
       }
     })
     .flat();

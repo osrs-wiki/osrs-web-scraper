@@ -1,22 +1,32 @@
+import boldParser from "./bold";
 import breakParser from "./break";
 import centerParser from "./center";
 import fontParser from "./font";
+import iframeParser from "./iframe";
 import imageParser from "./image";
+import italicsParser from "./italics";
 import linkParser from "./link";
-import textParser from "./text";
+import listParser from "./list";
+import listItemParser from "./listItem";
+import paragraphParser from "./paragraph";
+import underlineParser from "./underline";
 import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,
-  b: textParser,
-  i: textParser,
+  b: boldParser,
+  i: italicsParser,
   br: breakParser,
   center: centerParser,
   img: imageParser,
+  iframe: iframeParser,
   font: fontParser,
-  p: textParser,
-  u: textParser,
+  li: listItemParser,
+  ol: listParser,
+  p: paragraphParser,
+  u: underlineParser,
+  ul: listParser,
 };
 
 const nodeParser: ContentNodeParser = (node, options) => {

@@ -1,4 +1,7 @@
+import fs from "fs";
+
 import { newsContent, newsHeader } from "./sections";
+import { formatFileName } from "../../utils/images";
 import { MediaWikiBuilder } from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
 
@@ -28,6 +31,15 @@ const news: ScrapingService<MediaWikiBuilder> = {
       );
 
       console.log(builder.build());
+
+      try {
+        await fs.writeFileSync(
+          `out/news/${formatFileName(results.title)}/newspost.txt`,
+          builder.build()
+        );
+      } catch (err) {
+        console.error(err);
+      }
 
       return builder;
     } catch (error) {

@@ -7,6 +7,7 @@ import {
   MediaWikiBreak,
   MediaWikiContent,
   MediaWikiFile,
+  MediaWikiTOC,
   MediaWikiTemplate,
   UpdateTemplate,
 } from "../../../utils/mediawiki";
@@ -41,11 +42,14 @@ const newsHeader: NewsSection = {
     );
     content.push(new MediaWikiBreak());
     content.push(
-      new MediaWikiFile(newspostImageName, { horizontalAlignment: "right" })
+      new MediaWikiFile(`${newspostImageName}.png`, {
+        horizontalAlignment: "right",
+      })
     );
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiTemplate("clear"));
     content.push(new MediaWikiBreak());
+    content.push(new MediaWikiTOC());
 
     return content;
   },

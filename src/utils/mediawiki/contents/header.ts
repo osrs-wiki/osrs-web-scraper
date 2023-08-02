@@ -11,7 +11,9 @@ class MediaWikiHeader extends MediaWikiContent {
   }
 
   build() {
-    return `${"=".repeat(this.level)}${this.value}${"=".repeat(this.level)}`;
+    return `${"=".repeat(this.level)}${this.value.trim()}${"=".repeat(
+      this.level
+    )}`;
   }
 }
 
