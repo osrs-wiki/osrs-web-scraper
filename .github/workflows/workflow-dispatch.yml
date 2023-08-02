@@ -1,0 +1,42 @@
+name: Run News Scraper
+
+on:
+  workflow_dispatch:
+    inputs:
+      newsLink:
+        description: "News Link"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+  scrapeNews:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Scrape News Post
+        run: export NEWS_LINK=${{ github.event.inputs.newsLink }} && yarn start:node
+
+  uploadResults:
+    runs-on: ubuntu-latest
+    needs: scrapeNews
+    steps:
+      - uses: actions/upload-artifact@v3
+        with:
+          name: newspost-${{ github.run_id }}-${{ github.run_attempt }}
+          path: out/news/

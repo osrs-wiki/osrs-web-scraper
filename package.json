@@ -1,0 +1,65 @@
+{
+  "name": "osrs-web-scraper",
+  "version": "0.0.0",
+  "description": "Tools to scrape the osrs website.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && ts-patch install -s && tsc",
+    "lint": "eslint \"**/src/**/*.{js,ts}\"",
+    "lint:fix": "yarn lint --fix",
+    "prettier": "prettier \"**/src/**/*.{js,ts}\"",
+    "prettier:fix": "yarn prettier --write",
+    "start": "nodemon -r tsconfig-paths/register ./src/index.ts",
+    "start:node": "node -r typescript-transform-paths/register ./dist/index.js",
+    "test": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=.env.test jest --passWithNoTests",
+    "release": "changeset publish",
+    "prepare": "husky install && ts-patch install -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenkinzalow/osrs-web-scraper.git"
+  },
+  "author": "Allen Kinzalow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allenkinzalow/osrs-web-scraper/issues"
+  },
+  "homepage": "https://github.com/allenkinzalow/osrs-web-scraper#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "image-size": "^1.0.2",
+    "node-html-parser": "^6.1.5",
+    "puppeteer": "^20.8.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript-transform-paths": "^3.4.6"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.3",
+    "@changesets/cli": "^2.26.2",
+    "@types/jest": "^28.1.7",
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "husky": "^7.0.4",
+    "jest": "^28.1.2",
+    "lint-staged": "^12.4.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "ts-patch": "^2.1.0",
+    "typescript": "^4.6.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "yarn lint:fix",
+      "yarn prettier:fix"
+    ]
+  }
+}
