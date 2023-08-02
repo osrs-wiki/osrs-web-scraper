@@ -19,6 +19,8 @@ class Scraper {
     });
 
     await scraper.scrape(this.page);
+
+    this.browser.close();
   };
 }
 
