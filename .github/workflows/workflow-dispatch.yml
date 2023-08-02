@@ -10,8 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.READ_PACKAGES }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
