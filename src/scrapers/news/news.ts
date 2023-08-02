@@ -30,8 +30,6 @@ const news: ScrapingService<MediaWikiBuilder> = {
         await newsContent.format(results.content, page.url(), results.title)
       );
 
-      console.log(builder.build());
-
       try {
         await fs.writeFileSync(
           `out/news/${formatFileName(results.title)}/newspost.txt`,
