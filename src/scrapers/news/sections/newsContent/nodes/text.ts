@@ -5,14 +5,15 @@ import {
   MediaWikiContent,
   MediaWikiText,
 } from "../../../../../utils/mediawiki";
+import { formatText } from "../../../../../utils/text";
 import { ContentNodeParser } from "../types";
 
 const textParser: ContentNodeParser = (node, options) => {
   if (node.childNodes.length === 0) {
-    return new MediaWikiText(node.rawText, {
-      bold: options.bold as boolean,
-      italics: options.italics as boolean,
-      underline: options.underline as boolean,
+    return new MediaWikiText(formatText(node.rawText), {
+      bold: options?.bold as boolean,
+      italics: options?.italics as boolean,
+      underline: options?.underline as boolean,
     });
   }
   return node.childNodes
@@ -20,10 +21,10 @@ const textParser: ContentNodeParser = (node, options) => {
       if (childNode instanceof HTMLElement) {
         return nodeParser(childNode);
       } else {
-        return new MediaWikiText(childNode.rawText, {
-          bold: options.bold as boolean,
-          italics: options.italics as boolean,
-          underline: options.underline as boolean,
+        return new MediaWikiText(formatText(childNode.rawText), {
+          bold: options?.bold as boolean,
+          italics: options?.italics as boolean,
+          underline: options?.underline as boolean,
         });
       }
     })

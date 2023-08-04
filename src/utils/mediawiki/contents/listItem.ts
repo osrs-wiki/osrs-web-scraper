@@ -29,7 +29,7 @@ class MediaWikiListItem extends MediaWikiContent {
       : this.value;
     return `${(this.options.ordered ? "#" : "*").repeat(
       this.options.level
-    )} ${parsedValue.trim()}`;
+    )} ${parsedValue.trim()}\n`;
   }
 }
 

@@ -17,6 +17,9 @@ class MediaWikiText extends MediaWikiContent {
   }
 
   build() {
+    if (this.value === "") {
+      return this.value;
+    }
     if (this.styling?.bold) {
       this.value = `'''${this.value}'''`;
     }
