@@ -4,6 +4,7 @@ import { HTMLElement } from "node-html-parser";
 
 import { formatFileName, getImageExtension } from "../../../../../utils/images";
 import {
+  MediaWikiBreak,
   MediaWikiComment,
   MediaWikiFile,
 } from "../../../../../utils/mediawiki";
@@ -31,10 +32,13 @@ export const imageParser: ContentNodeParser = (node, { title, center }) => {
       `${imageDirectory}/${imageName}.${imageExtension}`
     );
 
-    return new MediaWikiFile(`${imageName}.${imageExtension}`, {
-      resizing: { width: dimensions.width > 600 ? 600 : dimensions.width },
-      horizontalAlignment: center ? "center" : undefined,
-    });
+    return [
+      new MediaWikiFile(`${imageName}.${imageExtension}`, {
+        resizing: { width: dimensions.width > 600 ? 600 : dimensions.width },
+        horizontalAlignment: center ? "center" : undefined,
+      }),
+      new MediaWikiBreak(),
+    ];
   }
   return new MediaWikiComment("Invalid image node");
 };

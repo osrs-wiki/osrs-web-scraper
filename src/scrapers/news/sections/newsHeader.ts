@@ -56,6 +56,7 @@ const newsHeader: NewsSection = {
     content.push(new MediaWikiTemplate("clear"));
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiTOC());
+    content.push(new MediaWikiBreak());
 
     return content;
   },
