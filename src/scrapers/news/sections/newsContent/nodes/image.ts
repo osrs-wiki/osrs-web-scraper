@@ -11,12 +11,17 @@ import {
 import { ContentContext } from "../newsContent";
 import { ContentNodeParser } from "../types";
 
+const ignoredClasses = ["demo cursor"];
+
 export const imageParser: ContentNodeParser = (node, { title, center }) => {
   if (node instanceof HTMLElement) {
     const image = node as HTMLElement;
     const imageLink = image.attributes.src;
 
-    if (imageLink.endsWith("hr.png")) {
+    if (
+      imageLink.endsWith("hr.png") ||
+      ignoredClasses.includes(image.classNames.trim())
+    ) {
       return undefined;
     }
 

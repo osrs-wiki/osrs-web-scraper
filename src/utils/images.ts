@@ -2,6 +2,8 @@ import fs from "fs";
 import client from "https";
 import path from "path";
 
+import { formatText } from "./text";
+
 /**
  * Download an image from a url
  * @param url The url of the image to download
@@ -53,5 +55,5 @@ export const getImageExtension = (imageUrl: string) => {
  * @returns
  */
 export const formatFileName = (fileName: string) => {
-  return fileName.replaceAll(":", "-");
+  return formatText(fileName.replaceAll(":", "-"));
 };

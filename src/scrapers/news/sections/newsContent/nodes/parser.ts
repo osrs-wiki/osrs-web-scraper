@@ -40,7 +40,7 @@ const nodeParser: ContentNodeParser = (node, options) => {
   const parse = nodeParserMap[tagName];
   if (parse) {
     return parse(node, options);
-  } else {
+  } else if (tagName) {
     return new MediaWikiComment(`Unsupported tag: ${tagName}`);
   }
 };

@@ -16,6 +16,7 @@ export type ContentSection = NewsSection & {
 };
 
 const ignoredTags = ["style"];
+const ignoredImageClasses = ["demo cursor"];
 
 export const ContentContext = {
   imageCount: 0,
@@ -32,7 +33,10 @@ const newsContent: NewsSection = {
       const image = images[index];
       const imageLink = image.attributes.src;
 
-      if (imageLink.endsWith("hr.png")) {
+      if (
+        imageLink.endsWith("hr.png") ||
+        ignoredImageClasses.includes(image.classNames.trim())
+      ) {
         continue;
       }
 
