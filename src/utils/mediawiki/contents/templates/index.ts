@@ -1,3 +1,4 @@
+import CollapedSectionTemplate from "./collapsedSection";
 import UpdateTemplate from "./update";
 
-export { UpdateTemplate };
+export { CollapedSectionTemplate, UpdateTemplate };

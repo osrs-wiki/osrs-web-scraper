@@ -10,9 +10,9 @@ import { ContentNodeParser } from "../types";
 const textParser: ContentNodeParser = (node, options) => {
   if (node.childNodes.length === 0) {
     return new MediaWikiText(node.rawText, {
-      bold: options.bold as boolean,
-      italics: options.italics as boolean,
-      underline: options.underline as boolean,
+      bold: options?.bold as boolean,
+      italics: options?.italics as boolean,
+      underline: options?.underline as boolean,
     });
   }
   return node.childNodes
@@ -21,9 +21,9 @@ const textParser: ContentNodeParser = (node, options) => {
         return nodeParser(childNode);
       } else {
         return new MediaWikiText(childNode.rawText, {
-          bold: options.bold as boolean,
-          italics: options.italics as boolean,
-          underline: options.underline as boolean,
+          bold: options?.bold as boolean,
+          italics: options?.italics as boolean,
+          underline: options?.underline as boolean,
         });
       }
     })

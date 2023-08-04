@@ -1,6 +1,7 @@
 import boldParser from "./bold";
 import breakParser from "./break";
 import centerParser from "./center";
+import detailsParser from "./details";
 import fontParser from "./font";
 import iframeParser from "./iframe";
 import imageParser from "./image";
@@ -16,6 +17,7 @@ import { ContentNodeParser } from "../types";
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,
   b: boldParser,
+  details: detailsParser,
   i: italicsParser,
   br: breakParser,
   center: centerParser,
