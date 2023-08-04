@@ -4,4 +4,8 @@
  * @returns
  */
 export const formatText = (text: string) =>
-  text.trim().replaceAll("&amp;", "&").replaceAll("\t", "");
+  text
+    .replaceAll("&amp;", "&")
+    .replaceAll("\t", "")
+    .replaceAll("\n", "")
+    .replaceAll("\r", "");

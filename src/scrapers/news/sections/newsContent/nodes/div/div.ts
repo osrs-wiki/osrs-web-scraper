@@ -4,6 +4,8 @@ import pollBoxParser from "./pollBox";
 import { MediaWikiComment } from "../../../../../../utils/mediawiki";
 import { getNodeTagName } from "../../../../../../utils/nodes";
 import { ContentNodeParser } from "../../types";
+import nodeParser from "../parser";
+import textParser from "../text";
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
@@ -12,15 +14,21 @@ const classParserMap: { [key: string]: ContentNodeParser } = {
 export const divParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const element = node as HTMLElement;
-    const className = element.classNames;
+    const className = element.classNames.trim().toLowerCase();
     const parse = classParserMap[className];
     if (parse) {
       return parse(node, options);
     } else {
-      return new MediaWikiComment(`Unsupported tag: ${className}`);
+      const childrenContent = node.childNodes
+        .map((child) => nodeParser(child, options))
+        .flat();
+      childrenContent.unshift(
+        new MediaWikiComment(`Unsupported class: ${className}`)
+      );
+      return childrenContent;
     }
   } else {
-    return new MediaWikiComment(`Unsupported tag: ${getNodeTagName(node)}`);
+    return textParser(node, options);
   }
 };
 
