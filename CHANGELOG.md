@@ -1,5 +1,20 @@
 # osrs-web-scraper
 
+## 0.2.0
+
+### Minor Changes
+
+- fc94e38: Add support for div class parsers and implement in News Poll parser
+- fc94e38: Add support for collapsible sections
+
+### Patch Changes
+
+- 1bdf68e: Fix text trimming for in text node parsing
+- 1bdf68e: Fix iframe/video parsing
+- 1bdf68e: Fix div container parsing
+- 1bdf68e: Fix &amp; in image and file names
+- fc94e38: Fix bulleted lists spacing
+
 ## 0.1.0
 
 ### Minor Changes
