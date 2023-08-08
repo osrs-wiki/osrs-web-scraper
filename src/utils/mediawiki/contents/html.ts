@@ -20,10 +20,10 @@ class MediaWikiHTML extends MediaWikiContent {
     return `<${this.tag}${
       this.attributes
         ? Object.keys(this.attributes).map(
-            (key) => `${key}=\"${this.attributes[key]}\"`
+            (key) => ` ${key}=\"${this.attributes[key]}\"`
           )
         : ""
-    }>${this.children.reduce(
+    }>\n${this.children.reduce(
       (value, content) => (value += content.build()),
       ""
     )}\n</${this.tag}>`;
