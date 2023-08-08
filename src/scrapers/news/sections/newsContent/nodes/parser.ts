@@ -15,6 +15,8 @@ import underlineParser from "./underline";
 import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
+const ignoredTags = ["script"];
+
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,
   b: boldParser,
@@ -40,7 +42,7 @@ const nodeParser: ContentNodeParser = (node, options) => {
   const parse = nodeParserMap[tagName];
   if (parse) {
     return parse(node, options);
-  } else if (tagName) {
+  } else if (tagName && !ignoredTags.includes(tagName)) {
     return new MediaWikiComment(`Unsupported tag: ${tagName}`);
   }
 };
