@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.3.0
+
+### Minor Changes
+
+- 62fffac: Add support for image galleries
+
 ## 0.2.0
 
 ### Minor Changes
