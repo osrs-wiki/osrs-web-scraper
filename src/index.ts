@@ -1,14 +1,17 @@
 import config from "@config";
 
 import scraper from "./scraper";
-import news from "./scrapers/news";
+import { news, polls } from "./scrapers";
 
 console.log(`Running ${config.environment}`);
 
 const newsLink = process.env.NEWS_LINK;
+const pollLink = process.env.POLL_LINK;
 
 if (newsLink) {
   scraper.scrape(newsLink, news);
-} else {
-  console.error("No news link provided.");
+}
+
+if (pollLink) {
+  scraper.scrape(pollLink, polls);
 }
