@@ -1,14 +1,16 @@
 import { HTMLElement } from "node-html-parser";
 
 import pollBoxParser from "./pollBox";
-import { MediaWikiComment } from "../../../../../../utils/mediawiki";
-import { getNodeTagName } from "../../../../../../utils/nodes";
+import rowParser from "./row";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
 
+const ignoredClasses = ["myslides"];
+
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
+  "row": rowParser,
 };
 
 export const divParser: ContentNodeParser = (node, options) => {
@@ -18,14 +20,8 @@ export const divParser: ContentNodeParser = (node, options) => {
     const parse = classParserMap[className];
     if (parse) {
       return parse(node, options);
-    } else {
-      const childrenContent = node.childNodes
-        .map((child) => nodeParser(child, options))
-        .flat();
-      childrenContent.unshift(
-        new MediaWikiComment(`Unsupported class: ${className}`)
-      );
-      return childrenContent;
+    } else if (!ignoredClasses.includes(className)) {
+      return node.childNodes.map((child) => nodeParser(child, options)).flat();
     }
   } else {
     return textParser(node, options);

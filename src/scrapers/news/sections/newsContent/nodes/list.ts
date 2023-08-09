@@ -10,6 +10,7 @@ export const listParser: ContentNodeParser = (node, options) => {
     const ordered = list.tagName === "ol";
     const level = ((options.level as number) ?? 0) + 1;
     return node.childNodes
+      .filter((childNode) => childNode instanceof HTMLElement)
       .map((childNode) => {
         if (childNode instanceof HTMLElement) {
           return nodeParser(childNode, {

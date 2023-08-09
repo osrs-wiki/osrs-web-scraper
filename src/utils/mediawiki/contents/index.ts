@@ -3,6 +3,7 @@ export { default as MediaWikiComment } from "./comment";
 export { default as MediaWikiExternalLink } from "./externalLink";
 export { default as MediaWikiFile } from "./file";
 export { default as MediaWikiHeader } from "./header";
+export { default as MediaWikiHTML } from "./html";
 export { default as MediaWikiLink } from "./link";
 export { default as MediaWikiListItem } from "./listItem";
 export { default as MediaWikiTemplate } from "./template";
