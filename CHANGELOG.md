@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.4.0
+
+### Minor Changes
+
+- 58953b0: Add support for poll pages
+
 ## 0.3.0
 
 ### Minor Changes
