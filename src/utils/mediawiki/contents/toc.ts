@@ -6,7 +6,7 @@ class MediaWikiTOC extends MediaWikiContent {
   }
 
   build() {
-    return "__TOC__";
+    return "__TOC__\n";
   }
 }
 

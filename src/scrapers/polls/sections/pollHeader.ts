@@ -8,6 +8,7 @@ import {
   PollNoticeTemplate,
   PollWrapperTemplate,
 } from "../../../utils/mediawiki";
+import { format } from "date-fns";
 
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {
@@ -28,10 +29,16 @@ const pollHeader: PollSection = {
     const content: MediaWikiContent[] = [];
 
     const number = url.split("=")?.[3];
-    const startDate = title.match(/\(([^)]+)\)/g)?.[0];
+    const startDate = title
+      .match(/\(([^)]+)\)/g)?.[0]
+      .replaceAll(/(\()*(\))*/g, "");
 
     content.push(
-      new PollNoticeTemplate(parseInt(number), startDate, "").build()
+      new PollNoticeTemplate(
+        parseInt(number),
+        format(new Date(startDate), "d MMMM yyyy"),
+        ""
+      ).build()
     );
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiBreak());
