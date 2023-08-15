@@ -1,5 +1,8 @@
-import CollapedSectionTemplate from "./collapsedSection";
-import NewsPollTemplate from "./newsPoll";
-import UpdateTemplate from "./update";
+export { default as CollapedSectionTemplate } from "./collapsedSection";
+export { default as NewsPollTemplate } from "./newsPoll";
+export { default as PollTemplate } from "./poll";
+export { default as PollNoticeTemplate } from "./pollNotice";
+export { default as PollWrapperTemplate } from "./pollWrapper";
+export { default as UpdateTemplate } from "./update";
 
-export { CollapedSectionTemplate, NewsPollTemplate, UpdateTemplate };
+export * from "./poll";

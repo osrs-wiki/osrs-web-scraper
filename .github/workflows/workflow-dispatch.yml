@@ -5,7 +5,11 @@ on:
     inputs:
       newsLink:
         description: "News Link"
-        required: true
+        required: false
+
+      pollLink:
+        description: "Poll Link"
+        required: false
 
 jobs:
   scrapeNews:
@@ -26,10 +30,18 @@ jobs:
         run: yarn build
 
       - name: Scrape News Post
-        run: export NEWS_LINK=${{ github.event.inputs.newsLink }} && yarn start:node
+        run: export NEWS_LINK=${{ github.event.inputs.newsLink }} && export POLL_LINK=${{ github.event.inputs.pollLink }} && yarn start:node
 
-      - name: Upload Results
+      - name: Upload News Results
+        if: "${{ github.event.inputs.newsLink != '' }}"
         uses: actions/upload-artifact@v3
         with:
           name: newspost-${{ github.run_id }}-${{ github.run_attempt }}
           path: out/news/
+
+      - name: Upload Poll Results
+        if: "${{ github.event.inputs.pollLink != '' }}"
+        uses: actions/upload-artifact@v3
+        with:
+          name: poll-${{ github.run_id }}-${{ github.run_attempt }}
+          path: out/polls/

@@ -1,8 +1,13 @@
 import fs from "fs";
+import parse from "node-html-parser";
 
 import { pollHeader, pollQuestions } from "./sections";
 import { formatFileName } from "../../utils/images";
-import { MediaWikiBuilder } from "../../utils/mediawiki";
+import {
+  MediaWikiBuilder,
+  MediaWikiTemplate,
+  PollWrapperTemplate,
+} from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
 
 const polls: ScrapingService<MediaWikiBuilder> = {
@@ -13,28 +18,31 @@ const polls: ScrapingService<MediaWikiBuilder> = {
         // @ts-ignore Ignore window typing
         const $ = window.$;
         const title = $(".widescroll-content h2").html();
-        const header = $(".widescroll-content :not(fieldset)").html();
-        const questions = $(".widescroll-content fieldset").html();
+        const content = $(".widescroll-content").html();
 
         return {
-          header,
-          questions,
+          content,
           title,
         };
       });
 
+      const contentNodes = parse(results.content);
+
       const builder = new MediaWikiBuilder();
-      builder.addContents(await pollHeader.format(results.header, page.url()));
-      builder.addContents(
-        await pollQuestions.format(results.questions, page.url())
-      );
+      builder.addContents(await pollHeader.format(contentNodes, page.url()));
+      builder.addContents(await pollQuestions.format(contentNodes, page.url()));
+      builder.addContent(new PollWrapperTemplate("bottom").build());
+      builder.addContent(new MediaWikiTemplate("PollFooter"));
 
       console.info("Writing poll results to file...");
       try {
-        await fs.writeFileSync(
-          `out/polls/${formatFileName(results.title)}.txt`,
-          builder.build()
+        if (!fs.existsSync("out/polls")) {
+          fs.mkdirSync("out/polls", { recursive: true });
+        }
+        const fileName = formatFileName(
+          results.title.replaceAll(/\((.)*\)/g, "")
         );
+        await fs.writeFileSync(`out/polls/${fileName}.txt`, builder.build());
         console.info("Successfully created poll file");
       } catch (err) {
         console.error(err);

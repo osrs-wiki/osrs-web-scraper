@@ -1,5 +1,10 @@
+import { HTMLElement } from "node-html-parser";
+
 import { MediaWikiContent } from "../../../utils/mediawiki";
 
 export type PollSection = {
-  format: (html: string, url: string) => Promise<MediaWikiContent[]>;
+  format: (
+    htmlElements: HTMLElement,
+    url: string
+  ) => Promise<MediaWikiContent[]>;
 };
