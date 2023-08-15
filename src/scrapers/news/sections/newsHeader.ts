@@ -46,7 +46,6 @@ const newsHeader: NewsSection = {
         category: "game",
       }).build()
     );
-    content.push(new MediaWikiBreak());
     content.push(
       new MediaWikiFile(newspostImageName, {
         horizontalAlignment: "right",
@@ -54,9 +53,7 @@ const newsHeader: NewsSection = {
     );
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiTemplate("clear"));
-    content.push(new MediaWikiBreak());
     content.push(new MediaWikiTOC());
-    content.push(new MediaWikiBreak());
 
     return content;
   },

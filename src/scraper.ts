@@ -18,9 +18,13 @@ class Scraper {
       url: JQUERY_URL,
     });
 
-    await scraper.scrape(this.page);
-
-    this.browser.close();
+    try {
+      await scraper.scrape(this.page);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.browser.close();
+    }
   };
 }
 

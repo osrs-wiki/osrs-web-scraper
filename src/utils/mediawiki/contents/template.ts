@@ -19,10 +19,12 @@ class MediaWikiTemplate extends MediaWikiContent {
   build() {
     const params = this.params.reduce(
       (allParams, param) =>
-        `${allParams}|${param.key ? param.key + "=" : ""}${param.value}`,
+        `${allParams}${this.params.length > 3 ? "\n" : ""}|${
+          param.key ? param.key + "=" : ""
+        }${param.value}`,
       ""
     );
-    return `{{${this.name}${params}}}`;
+    return `{{${this.name}${params}}}\n`;
   }
 }
 

@@ -55,5 +55,5 @@ export const getImageExtension = (imageUrl: string) => {
  * @returns
  */
 export const formatFileName = (fileName: string) => {
-  return formatText(fileName.replaceAll(":", "-"));
+  return formatText(fileName.replaceAll(":", "-").replaceAll("&nbsp;", ""));
 };
