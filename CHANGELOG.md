@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.5.0
+
+### Minor Changes
+
+- 6964dc0: Add support for tables
+
 ## 0.4.0
 
 ### Minor Changes
