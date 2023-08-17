@@ -1,4 +1,5 @@
-import { HTMLElement, parse } from "node-html-parser";
+import { format } from "date-fns";
+import { HTMLElement } from "node-html-parser";
 
 import { PollSection } from "./types";
 import {
@@ -8,7 +9,6 @@ import {
   PollNoticeTemplate,
   PollWrapperTemplate,
 } from "../../../utils/mediawiki";
-import { format } from "date-fns";
 
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {
