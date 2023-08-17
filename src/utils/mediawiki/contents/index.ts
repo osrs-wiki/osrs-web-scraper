@@ -6,6 +6,7 @@ export { default as MediaWikiHeader } from "./header";
 export { default as MediaWikiHTML } from "./html";
 export { default as MediaWikiLink } from "./link";
 export { default as MediaWikiListItem } from "./listItem";
+export { default as MediaWikiTable } from "./table";
 export { default as MediaWikiTemplate } from "./template";
 export { default as MediaWikiText } from "./text";
 export { default as MediaWikiTOC } from "./toc";
