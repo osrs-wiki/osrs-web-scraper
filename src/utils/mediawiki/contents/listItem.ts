@@ -27,9 +27,9 @@ class MediaWikiListItem extends MediaWikiContent {
       : this.value instanceof MediaWikiContent
       ? this.value.build()
       : this.value;
-    return `${(this.options.ordered ? "#" : "*").repeat(
+    return `\n${(this.options.ordered ? "#" : "*").repeat(
       this.options.level
-    )} ${parsedValue.trim()}\n`;
+    )} ${parsedValue.trim()}`;
   }
 }
 

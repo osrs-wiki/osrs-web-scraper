@@ -11,6 +11,7 @@ import linkParser from "./link";
 import listParser from "./list";
 import listItemParser from "./listItem";
 import paragraphParser from "./paragraph";
+import tableParser from "./table";
 import underlineParser from "./underline";
 import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
@@ -31,6 +32,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   li: listItemParser,
   ol: listParser,
   p: paragraphParser,
+  table: tableParser,
   u: underlineParser,
   ul: listParser,
 };
