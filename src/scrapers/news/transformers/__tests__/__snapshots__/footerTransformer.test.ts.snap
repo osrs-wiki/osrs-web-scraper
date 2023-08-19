@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsFooterTransformer should insert the separator in front of oldschool team section 1`] = `
+"__TOC__
+
+[[test|test]]
+'''test'''
+----
+
+''The Old School Team.''"
+`;
+
+exports[`NewsFooterTransformer should insert the separator in front of social media discussion section 1`] = `
+"__TOC__
+
+[[test|test]]
+'''test'''
+----
+
+You can also discuss this update on our
+'''Mods test, test and test'''
+''The Old School Team.''"
+`;
