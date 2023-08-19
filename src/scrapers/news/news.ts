@@ -1,6 +1,7 @@
 import fs from "fs";
 
 import { newsContent, newsHeader } from "./sections";
+import { NewsFooterTransformer } from "./transformers";
 import { formatFileName } from "../../utils/images";
 import { MediaWikiBuilder } from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
@@ -23,12 +24,14 @@ const news: ScrapingService<MediaWikiBuilder> = {
       });
 
       const builder = new MediaWikiBuilder();
-      builder.addContents(
-        await newsHeader.format(results.header, page.url(), results.title)
-      );
-      builder.addContents(
-        await newsContent.format(results.content, page.url(), results.title)
-      );
+      builder
+        .addContents(
+          await newsHeader.format(results.header, page.url(), results.title)
+        )
+        .addContents(
+          await newsContent.format(results.content, page.url(), results.title)
+        )
+        .addTransformer(new NewsFooterTransformer());
 
       console.info("Writing newspost results to file...");
       try {

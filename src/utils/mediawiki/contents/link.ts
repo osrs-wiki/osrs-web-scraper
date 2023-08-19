@@ -1,10 +1,10 @@
 import MediaWikiContent from "../content";
 
 class MediaWikiLink extends MediaWikiContent {
-  label: string;
+  label?: string;
   link: string;
 
-  constructor(label: string, link: string) {
+  constructor(link: string, label?: string) {
     super();
     this.label = label;
     this.link = link;
