@@ -1,5 +1,16 @@
 # osrs-web-scraper
 
+## 0.6.0
+
+### Minor Changes
+
+- fa808be: Add support for content transformers
+
+### Patch Changes
+
+- fa808be: Fix missing seperator in news post footer
+- fa808be: Add test for mediawiki link
+
 ## 0.5.0
 
 ### Minor Changes
