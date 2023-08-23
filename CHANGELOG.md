@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.7.0
+
+### Minor Changes
+
+- 3bcd631: Add support for slideshow-container galleries
+
+### Patch Changes
+
+- 3bcd631: Fix news poll default question number
+- 3bcd631: Fix osw links formatting as external links
+- 29ff316: Fix a pollbox title bug causing the news scraper to fail
+
 ## 0.6.0
 
 ### Minor Changes
