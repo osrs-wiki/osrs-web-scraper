@@ -12,14 +12,10 @@ import {
 import { ContentContext } from "../../newsContent";
 import { ContentNodeParser } from "../../types";
 
-export const rowParser: ContentNodeParser = (node, options) => {
+export const galleryParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement && node.childNodes.length > 0) {
     const divElement = node as HTMLElement;
-    const imageNodes = divElement.childNodes.filter(
-      (childNode) =>
-        childNode instanceof HTMLElement &&
-        (childNode as HTMLElement).rawTagName === "img"
-    );
+    const imageNodes = divElement.querySelectorAll("img");
     const content = imageNodes.map((imageNode) => {
       const image = imageNode as HTMLElement;
       const imageLink = image.attributes.src;
@@ -43,4 +39,4 @@ export const rowParser: ContentNodeParser = (node, options) => {
   }
 };
 
-export default rowParser;
+export default galleryParser;

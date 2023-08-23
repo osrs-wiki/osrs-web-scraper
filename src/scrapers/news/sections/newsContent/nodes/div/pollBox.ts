@@ -13,11 +13,10 @@ export const pollBoxParser: ContentNodeParser = (node) => {
           (childNode as HTMLElement).rawTagName === "p") ||
         (childNode as HTMLElement).rawTagName === "b"
     );
-    const number = parseInt(
-      childNodes?.[0].textContent.replaceAll("Question ", "") ?? "1"
-    );
+    const number = childNodes?.[0]?.textContent?.replaceAll(/[^0-9]+/g, "");
+    const parsedNumber = parseInt(number ? number : "1");
     const question = formatText(childNodes?.[1]?.textContent);
-    return new NewsPollTemplate(number, question).build();
+    return new NewsPollTemplate(parsedNumber, question).build();
   }
 };
 
