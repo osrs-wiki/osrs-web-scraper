@@ -13,7 +13,7 @@ class NewsPollTemplate extends Template {
 
   build() {
     const newsPollTemplate = new MediaWikiTemplate(this.name);
-    newsPollTemplate.add("", this.number.toString());
+    newsPollTemplate.add("", this.number?.toString() ?? "1");
     newsPollTemplate.add("", this.question);
     return newsPollTemplate;
   }

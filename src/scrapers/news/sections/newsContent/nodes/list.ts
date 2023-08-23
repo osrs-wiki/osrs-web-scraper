@@ -2,6 +2,7 @@ import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
+import { MediaWikiBreak } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const listParser: ContentNodeParser = (node, options) => {
@@ -9,7 +10,7 @@ export const listParser: ContentNodeParser = (node, options) => {
     const list = node as HTMLElement;
     const ordered = list.tagName === "ol";
     const level = ((options.level as number) ?? 0) + 1;
-    return node.childNodes
+    const content = node.childNodes
       .filter((childNode) => childNode instanceof HTMLElement)
       .map((childNode) => {
         if (childNode instanceof HTMLElement) {
@@ -22,6 +23,8 @@ export const listParser: ContentNodeParser = (node, options) => {
         return textParser(childNode, { ...options, ordered, level });
       })
       .flat();
+    content.push(new MediaWikiBreak());
+    return content;
   }
 };
 

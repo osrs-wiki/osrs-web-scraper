@@ -26,7 +26,7 @@ class MediaWikiHTML extends MediaWikiContent {
     }>\n${this.children.reduce(
       (value, content) => (value += content.build()),
       ""
-    )}\n</${this.tag}>`;
+    )}\n</${this.tag}>\n`;
   }
 }
 

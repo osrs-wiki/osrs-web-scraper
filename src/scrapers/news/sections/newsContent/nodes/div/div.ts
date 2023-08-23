@@ -1,7 +1,7 @@
 import { HTMLElement } from "node-html-parser";
 
+import galleryParser from "./gallery";
 import pollBoxParser from "./pollBox";
-import rowParser from "./row";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
@@ -10,7 +10,8 @@ const ignoredClasses = ["myslides"];
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
-  "row": rowParser,
+  "row": galleryParser,
+  "slideshow-container": galleryParser,
 };
 
 export const divParser: ContentNodeParser = (node, options) => {
