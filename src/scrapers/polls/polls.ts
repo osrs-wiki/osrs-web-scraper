@@ -31,8 +31,8 @@ const polls: ScrapingService<MediaWikiBuilder> = {
       const builder = new MediaWikiBuilder();
       builder.addContents(await pollHeader.format(contentNodes, page.url()));
       builder.addContents(await pollQuestions.format(contentNodes, page.url()));
-      builder.addContent(new PollWrapperTemplate("bottom").build());
       builder.addContent(new MediaWikiTemplate("PollFooter"));
+      builder.addContent(new PollWrapperTemplate("bottom").build());
 
       console.info("Writing poll results to file...");
       try {
