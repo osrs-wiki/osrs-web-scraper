@@ -12,6 +12,20 @@ import NewsImageCaptionTransformer from "../imageCaptionTransformer";
 describe("NewsImageCaptionTransformer", () => {
   it("should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage", () => {
     const originalContent: MediaWikiContent[] = [
+      new MediaWikiFile("image"),
+      new MediaWikiBreak(),
+      new MediaWikiText("caption", { italics: true }),
+    ];
+    const transformed = new NewsImageCaptionTransformer().transform(
+      originalContent
+    );
+    expect(
+      new MediaWikiBuilder().addContents(transformed).build()
+    ).toMatchSnapshot();
+  });
+
+  it("should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage with surrounding content", () => {
+    const originalContent: MediaWikiContent[] = [
       new MediaWikiTOC(),
       new MediaWikiBreak(),
       new MediaWikiLink("test", "test"),

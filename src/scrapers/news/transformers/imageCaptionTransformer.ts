@@ -8,7 +8,7 @@ import {
 
 class NewsImageCaptionTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {
-    if (content.length < 4) {
+    if (content.length < 3) {
       return content;
     }
     const transformedContent = [];
