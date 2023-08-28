@@ -1,6 +1,8 @@
+import MediaWikiText from "./text";
 import MediaWikiContent from "../content";
 
 type MediaWikiFileOptions = {
+  caption?: MediaWikiText;
   format?: "frameless" | "frame" | "thumb";
   resizing?: {
     width?: number;
@@ -30,8 +32,14 @@ class MediaWikiFile extends MediaWikiContent {
 
   build() {
     let options = "";
-    const { format, resizing, horizontalAlignment, verticalAlignment, link } =
-      this.options;
+    const {
+      caption,
+      format,
+      resizing,
+      horizontalAlignment,
+      verticalAlignment,
+      link,
+    } = this.options ?? {};
     if (format) {
       options += `|${format}`;
     }
@@ -47,6 +55,9 @@ class MediaWikiFile extends MediaWikiContent {
     }
     if (verticalAlignment) {
       options += `|${verticalAlignment}`;
+    }
+    if (caption) {
+      options += `|${caption.build()}`;
     }
     if (link) {
       options += `|link=${link}`;

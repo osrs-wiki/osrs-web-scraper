@@ -1,7 +1,10 @@
 import fs from "fs";
 
 import { newsContent, newsHeader } from "./sections";
-import { NewsFooterTransformer } from "./transformers";
+import {
+  NewsFooterTransformer,
+  NewsImageCaptionTransformer,
+} from "./transformers";
 import { formatFileName } from "../../utils/images";
 import { MediaWikiBuilder } from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
@@ -31,6 +34,7 @@ const news: ScrapingService<MediaWikiBuilder> = {
         .addContents(
           await newsContent.format(results.content, page.url(), results.title)
         )
+        .addTransformer(new NewsImageCaptionTransformer())
         .addTransformer(new NewsFooterTransformer());
 
       console.info("Writing newspost results to file...");
