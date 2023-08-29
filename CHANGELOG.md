@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.8.0
+
+### Minor Changes
+
+- bde9130: Add support for transforming MediaWikiText into MediaWikiFile captions
+- ae249c0: Add transformer for converting single line bold text to header-3
+- ae249c0: Add transformer for combining consecutive MediaWikiBreak's
+
+### Patch Changes
+
+- 400c4d3: Fix PollFooter and PollWrapper order
+
 ## 0.7.0
 
 ### Minor Changes
