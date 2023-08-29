@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsHeaderTransformer should change bold text to header-3 1`] = `
+"__TOC__
+
+===You can also discuss this update on our===
+''The Old School Team.''"
+`;
+
+exports[`NewsHeaderTransformer should not change bold text to header-3 1`] = `
+"__TOC__
+'''test'''
+''The Old School Team.''"
+`;

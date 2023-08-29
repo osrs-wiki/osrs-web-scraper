@@ -1,12 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewsImageCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage 1`] = `"[[File:image|''caption'']]"`;
+exports[`NewsImageCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage 1`] = `
+"[[File:image|''caption'']]
+"
+`;
 
 exports[`NewsImageCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage with surrounding content 1`] = `
 "__TOC__
 
 [[test|test]]
 [[File:image|''caption'']]
+
 You can also discuss this update on our
 "
 `;
