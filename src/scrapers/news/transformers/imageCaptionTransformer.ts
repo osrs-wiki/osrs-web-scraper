@@ -28,6 +28,7 @@ class NewsImageCaptionTransformer extends MediaWikiTransformer {
               caption: second,
             })
           );
+          transformedContent.push(new MediaWikiBreak());
           index += 2;
         } else {
           transformedContent.push(current);

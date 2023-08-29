@@ -23,14 +23,16 @@ class MediaWikiBuilder {
   }
 
   addContent(content: MediaWikiContent): MediaWikiBuilder {
-    if (content !== null) {
+    if (content !== null && content !== undefined) {
       this.content.push(content);
     }
     return this;
   }
 
   addContents(contents: MediaWikiContent[]): MediaWikiBuilder {
-    this.content = this.content.concat(contents);
+    this.content = this.content.concat(
+      contents.filter((content) => content !== undefined && content !== null)
+    );
     return this;
   }
 
