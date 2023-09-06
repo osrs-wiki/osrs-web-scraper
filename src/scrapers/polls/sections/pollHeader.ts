@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { HTMLElement } from "node-html-parser";
 
 import { PollSection } from "./types";
@@ -28,16 +28,20 @@ const pollHeader: PollSection = {
 
     const content: MediaWikiContent[] = [];
 
-    const number = url.split("=")?.[3];
+    const position = url.lastIndexOf("=");
+    const number = url.substring(position + 1, url.length);
     const startDate = title
       .match(/\(([^)]+)\)/g)?.[0]
       .replaceAll(/(\()*(\))*/g, "");
+
+    const endDate = description.match(/This poll will close on (.*)\./)?.[1];
+    const endDateFormatted = parse(endDate, "EEEE do MMMM", new Date());
 
     content.push(
       new PollNoticeTemplate(
         parseInt(number),
         format(new Date(startDate), "d MMMM yyyy"),
-        ""
+        format(endDateFormatted, "d MMMM yyyy")
       ).build()
     );
     content.push(new MediaWikiBreak());
