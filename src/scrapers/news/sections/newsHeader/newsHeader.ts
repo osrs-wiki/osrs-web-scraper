@@ -1,12 +1,17 @@
 import fs from "fs";
 import { parse } from "node-html-parser";
+import Parser from "rss-parser";
 
-import { NewsSection } from "./types";
+import {
+  NEWS_RSS_LINK,
+  getNewsCategory,
+  getNewsUrlIdentifier,
+} from "./newsHeader.utils";
 import {
   downloadImage,
   formatFileName,
   getImageExtension,
-} from "../../../utils/images";
+} from "../../../../utils/images";
 import {
   MediaWikiBreak,
   MediaWikiContent,
@@ -14,10 +19,18 @@ import {
   MediaWikiTOC,
   MediaWikiTemplate,
   UpdateTemplate,
-} from "../../../utils/mediawiki";
+} from "../../../../utils/mediawiki";
+import { NewsSection } from "../types";
 
 const newsHeader: NewsSection = {
   format: async (html, url, title) => {
+    const rss = await new Parser().parseURL(NEWS_RSS_LINK);
+    const urlIdentifier = getNewsUrlIdentifier(url);
+    const item = rss.items.find(
+      (item) => getNewsUrlIdentifier(item.link) === urlIdentifier
+    );
+    const category = getNewsCategory(item.categories?.[0] ?? "");
+
     const headerRoot = parse(html);
 
     const date = headerRoot.querySelector(".news-article-header__date");
@@ -43,7 +56,7 @@ const newsHeader: NewsSection = {
       new UpdateTemplate({
         url,
         date: date.innerText,
-        category: "game",
+        category,
       }).build()
     );
     content.push(
