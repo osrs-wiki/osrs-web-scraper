@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.9.0
+
+### Minor Changes
+
+- dbb6ea8: Add rss parsing for supporting the news category in news post
+
+### Patch Changes
+
+- af84478: Fix poll number and end date parsing
+
 ## 0.8.0
 
 ### Minor Changes
