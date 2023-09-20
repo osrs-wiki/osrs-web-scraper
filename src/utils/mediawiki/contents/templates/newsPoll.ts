@@ -2,10 +2,10 @@ import { Template } from "./types";
 import MediaWikiTemplate from "../template";
 
 class NewsPollTemplate extends Template {
-  number: number;
+  number?: number;
   question: string;
 
-  constructor(number: number, question: string) {
+  constructor(question: string, number?: number) {
     super("News Poll");
     this.number = number;
     this.question = question;
@@ -13,8 +13,10 @@ class NewsPollTemplate extends Template {
 
   build() {
     const newsPollTemplate = new MediaWikiTemplate(this.name);
-    newsPollTemplate.add("", this.number?.toString() ?? "1");
-    newsPollTemplate.add("", this.question);
+    if (this.number) {
+      newsPollTemplate.add("", this.number?.toString());
+    }
+    newsPollTemplate.add(this.number ? "" : "qtext", this.question);
     return newsPollTemplate;
   }
 }
