@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.10.0
+
+### Minor Changes
+
+- 6669835: Add support for a NewsPoll template with only a question
+
 ## 0.9.0
 
 ### Minor Changes
