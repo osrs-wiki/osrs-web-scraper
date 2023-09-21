@@ -36,9 +36,9 @@ const news: ScrapingService<MediaWikiBuilder> = {
         .addContents(
           await newsContent.format(results.content, page.url(), results.title)
         )
+        .addTransformer(new NewsHeaderTransformer())
         .addTransformer(new NewsBreakTransformer())
         .addTransformer(new NewsImageCaptionTransformer())
-        .addTransformer(new NewsHeaderTransformer())
         .addTransformer(new NewsFooterTransformer());
 
       console.info("Writing newspost results to file...");

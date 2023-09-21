@@ -2,6 +2,7 @@ import {
   MediaWikiBreak,
   MediaWikiBuilder,
   MediaWikiContent,
+  MediaWikiHeader,
   MediaWikiText,
   MediaWikiTOC,
 } from "../../../../utils/mediawiki";
@@ -12,6 +13,21 @@ describe("NewsBreakTransformer", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiTOC(),
       new MediaWikiBreak(),
+      new MediaWikiBreak(),
+      new MediaWikiBreak(),
+      new MediaWikiText("The Old School Team.", { italics: true }),
+    ];
+    const transformed = new NewsBreakTransformer().transform(originalContent);
+    expect(
+      new MediaWikiBuilder().addContents(transformed).build()
+    ).toMatchSnapshot();
+  });
+
+  it("should remove the line breaks after a header", () => {
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiTOC(),
+      new MediaWikiBreak(),
+      new MediaWikiHeader("Test", 2),
       new MediaWikiBreak(),
       new MediaWikiBreak(),
       new MediaWikiText("The Old School Team.", { italics: true }),

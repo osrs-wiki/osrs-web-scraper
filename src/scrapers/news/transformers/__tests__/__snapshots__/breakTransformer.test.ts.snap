@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsBreakTransformer should combine three lines breaks to one 1`] = `
+"__TOC__
+
+''The Old School Team.''"
+`;
+
+exports[`NewsBreakTransformer should remove the line breaks after a header 1`] = `
+"__TOC__
+
+==Test==
+''The Old School Team.''"
+`;
