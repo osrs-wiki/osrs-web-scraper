@@ -1,10 +1,7 @@
 import fs from "fs";
 import { HTMLElement } from "node-html-parser";
 
-import {
-  formatFileName,
-  getImageExtension,
-} from "../../../../../../utils/images";
+import { formatFileName, getFileExtension } from "../../../../../../utils/file";
 import {
   MediaWikiHTML,
   MediaWikiText,
@@ -27,7 +24,7 @@ export const galleryParser: ContentNodeParser = (node, options) => {
       }
 
       const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
-      const imageExtension = getImageExtension(imageLink);
+      const imageExtension = getFileExtension(imageLink);
 
       return new MediaWikiText(`\n${imageName}.${imageExtension}`);
     });

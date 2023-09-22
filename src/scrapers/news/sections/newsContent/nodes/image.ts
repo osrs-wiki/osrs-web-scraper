@@ -2,7 +2,7 @@ import fs from "fs";
 import sizeOf from "image-size";
 import { HTMLElement } from "node-html-parser";
 
-import { formatFileName, getImageExtension } from "../../../../../utils/images";
+import { formatFileName, getFileExtension } from "../../../../../utils/file";
 import {
   MediaWikiBreak,
   MediaWikiComment,
@@ -32,7 +32,7 @@ export const imageParser: ContentNodeParser = (node, { title, center }) => {
     }
 
     const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
-    const imageExtension = getImageExtension(imageLink);
+    const imageExtension = getFileExtension(imageLink);
     const dimensions = sizeOf(
       `${imageDirectory}/${imageName}.${imageExtension}`
     );

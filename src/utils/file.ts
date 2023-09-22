@@ -5,13 +5,13 @@ import path from "path";
 import { formatText } from "./text";
 
 /**
- * Download an image from a url
- * @param url The url of the image to download
- * @param filepath The filepath of the downloaded image
+ * Download a file from a url
+ * @param url The url of the file to download
+ * @param filepath The filepath of the downloaded file
  * @returns
  */
-export const downloadImage = async (url: string, filepath: string) => {
-  console.info(`Attempting image download: ${url}`);
+export const downloadFile = async (url: string, filepath: string) => {
+  console.info(`Attempting file download: ${url}`);
   return new Promise((resolve, reject) => {
     client.get(url, (res) => {
       if (res.statusCode === 200) {
@@ -19,7 +19,7 @@ export const downloadImage = async (url: string, filepath: string) => {
           .pipe(fs.createWriteStream(filepath))
           .on("error", reject)
           .once("close", () => resolve(filepath));
-        console.info(`Downloaded image ${filepath}`);
+        console.info(`Downloaded file ${filepath}`);
       } else {
         res.resume();
         reject(
@@ -31,22 +31,22 @@ export const downloadImage = async (url: string, filepath: string) => {
 };
 
 /**
- * Get an image name from a url
- * @param imageUrl The image url
+ * Get a file from a url
+ * @param fileUrl The file url
  * @returns
  */
-export const getImageName = (imageUrl: string) => {
-  const parsed = new URL(imageUrl);
+export const getFileName = (fileUrl: string) => {
+  const parsed = new URL(fileUrl);
   return path.basename(parsed.pathname);
 };
 
 /**
- * Get the extension of an image from a url link.
- * @param imageUrl The image url
+ * Get the extension of a file from a url link.
+ * @param fileUrl The file url
  * @returns
  */
-export const getImageExtension = (imageUrl: string) => {
-  return imageUrl.split(/[#?]/)[0].split(".").pop().trim();
+export const getFileExtension = (fileUrl: string) => {
+  return fileUrl.split(/[#?]/)[0].split(".").pop().trim();
 };
 
 /**

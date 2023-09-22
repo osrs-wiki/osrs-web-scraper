@@ -2,10 +2,10 @@ import fs from "fs";
 import { HTMLElement } from "node-html-parser";
 
 import {
-  downloadImage,
+  downloadFile,
   formatFileName,
-  getImageExtension,
-} from "../../../../../utils/images";
+  getFileExtension,
+} from "../../../../../utils/file";
 import {
   ListenTemplate,
   MediaWikiComment,
@@ -23,10 +23,10 @@ export const audioParser: ContentNodeParser = (node, { title }) => {
       fs.mkdirSync(audioDirectory, { recursive: true });
     }
 
-    const audioExtension = getImageExtension(audioLink);
+    const audioExtension = getFileExtension(audioLink);
     const outputFileName = `${formattedTitle} narration.${audioExtension}`;
 
-    downloadImage(audioLink, `${audioDirectory}/${outputFileName}`);
+    downloadFile(audioLink, `${audioDirectory}/${outputFileName}`);
 
     return new ListenTemplate(outputFileName, {
       align: "center",

@@ -8,10 +8,10 @@ import {
   getNewsUrlIdentifier,
 } from "./newsHeader.utils";
 import {
-  downloadImage,
+  downloadFile,
   formatFileName,
-  getImageExtension,
-} from "../../../../utils/images";
+  getFileExtension,
+} from "../../../../utils/file";
 import {
   MediaWikiBreak,
   MediaWikiContent,
@@ -42,13 +42,10 @@ const newsHeader: NewsSection = {
       fs.mkdirSync(newsDirectory, { recursive: true });
     }
 
-    const newspostImageName = `${formattedTitle} newspost.${getImageExtension(
+    const newspostImageName = `${formattedTitle} newspost.${getFileExtension(
       image.attributes.src
     )}`;
-    downloadImage(
-      image.attributes.src,
-      `${newsDirectory}/${newspostImageName}`
-    );
+    downloadFile(image.attributes.src, `${newsDirectory}/${newspostImageName}`);
 
     const content: MediaWikiContent[] = [];
 

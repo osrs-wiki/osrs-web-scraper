@@ -3,10 +3,10 @@ import { parse } from "node-html-parser";
 
 import { nodeParser } from "./nodes";
 import {
-  downloadImage,
+  downloadFile,
   formatFileName,
-  getImageExtension,
-} from "../../../../utils/images";
+  getFileExtension,
+} from "../../../../utils/file";
 import { MediaWikiContent } from "../../../../utils/mediawiki";
 import { getNodeTagName } from "../../../../utils/nodes";
 import { NewsSection } from "../types";
@@ -48,9 +48,9 @@ const newsContent: NewsSection = {
 
       const imageName = `${formattedTitle} (${++downloadedImages})`;
       downloadQueue.push(
-        downloadImage(
+        downloadFile(
           imageLink,
-          `${imageDirectory}/${imageName}.${getImageExtension(imageLink)}`
+          `${imageDirectory}/${imageName}.${getFileExtension(imageLink)}`
         )
       );
     }
