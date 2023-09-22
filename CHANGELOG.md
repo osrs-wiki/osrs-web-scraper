@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.11.0
+
+### Minor Changes
+
+- c7dee3c: Add support for parsing audio files in news posts
+
+### Patch Changes
+
+- 3356030: Fix sub-bullet list spacing
+- 9f05356: Add support for the "Dev Blogs" news post category
+- 3356030: Fix spacing around MediaWikiHeader's
+
 ## 0.10.0
 
 ### Minor Changes
