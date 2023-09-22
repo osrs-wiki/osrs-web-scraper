@@ -7,7 +7,7 @@ import {
   NewsHeaderTransformer,
   NewsImageCaptionTransformer,
 } from "./transformers";
-import { formatFileName } from "../../utils/images";
+import { formatFileName } from "../../utils/file";
 import { MediaWikiBuilder } from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
 

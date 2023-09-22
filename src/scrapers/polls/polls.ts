@@ -2,7 +2,7 @@ import fs from "fs";
 import parse from "node-html-parser";
 
 import { pollHeader, pollQuestions } from "./sections";
-import { formatFileName } from "../../utils/images";
+import { formatFileName } from "../../utils/file";
 import {
   MediaWikiBuilder,
   MediaWikiTemplate,
