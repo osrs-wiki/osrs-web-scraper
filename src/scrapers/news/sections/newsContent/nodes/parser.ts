@@ -1,3 +1,4 @@
+import audioParser from "./audio";
 import boldParser from "./bold";
 import breakParser from "./break";
 import centerParser from "./center";
@@ -20,6 +21,7 @@ const ignoredTags = ["script"];
 
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,
+  audio: audioParser,
   b: boldParser,
   details: detailsParser,
   div: divParser,
