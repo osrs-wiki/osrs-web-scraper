@@ -27,6 +27,8 @@ const updateCategories: { [key: string]: NewsCategory } = {
   "Competitions": "competitions",
   "Developer Blogs": "devblog",
   "Developer Blog": "devblog",
+  "Dev Blog": "devblog",
+  "Dev Blogs": "devblog",
   "Event updates": "event",
   "Event update": "event",
   "Game updates": "game",
