@@ -20,7 +20,7 @@ const news: ScrapingService<MediaWikiBuilder> = {
         const $ = window.$;
         const title = $(".news-article-header__title").html();
         const headerHtml = $(".news-article-header").html();
-        const contentHtml = $(".news-article-content #article-top").html();
+        const contentHtml = $(".news-article-content").html();
         return {
           title,
           header: headerHtml,
