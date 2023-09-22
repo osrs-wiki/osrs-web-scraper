@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.11.1
+
+### Patch Changes
+
+- 295894e: Fix css selector for news post content container
+
 ## 0.11.0
 
 ### Minor Changes
