@@ -22,7 +22,10 @@ class NewsBreakTransformer extends MediaWikiTransformer {
           after instanceof MediaWikiBreak
         ) {
           index++;
-        } else if (before instanceof MediaWikiHeader) {
+        } else if (
+          before instanceof MediaWikiHeader &&
+          after instanceof MediaWikiBreak
+        ) {
           continue;
         } else {
           transformedContent.push(current);
