@@ -23,7 +23,9 @@ export const listParser: ContentNodeParser = (node, options) => {
         return textParser(childNode, { ...options, ordered, level });
       })
       .flat();
-    content.push(new MediaWikiBreak());
+    if (!options.level) {
+      content.push(new MediaWikiBreak());
+    }
     return content;
   }
 };

@@ -1,6 +1,7 @@
 import {
   MediaWikiBreak,
   MediaWikiContent,
+  MediaWikiHeader,
   MediaWikiTransformer,
 } from "../../../utils/mediawiki";
 
@@ -21,6 +22,8 @@ class NewsBreakTransformer extends MediaWikiTransformer {
           after instanceof MediaWikiBreak
         ) {
           index++;
+        } else if (before instanceof MediaWikiHeader) {
+          continue;
         } else {
           transformedContent.push(current);
         }
