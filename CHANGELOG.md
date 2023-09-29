@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.11.2
+
+### Patch Changes
+
+- f52e6a2: Fix hidden poll result parsing
+
 ## 0.11.1
 
 ### Patch Changes
