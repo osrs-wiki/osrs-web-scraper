@@ -23,9 +23,13 @@ const pollQuestions: PollSection = {
             (node) => node instanceof HTMLElement
           );
           const answer = answerColumns?.[0].textContent;
-          const vote = answerColumns?.[2].textContent
-            .replaceAll(/([\d\.\d\%]* \()+/g, "")
-            .replaceAll(" votes)", "");
+          const voteRaw = answerColumns?.[2].textContent;
+          const vote =
+            voteRaw === "Results Hidden"
+              ? "1"
+              : voteRaw
+                  .replaceAll(/([\d\.\d\%]* \()+/g, "")
+                  .replaceAll(" votes)", "");
           answers.push({
             answer,
             vote,
