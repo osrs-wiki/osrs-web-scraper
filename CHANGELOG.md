@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.11.3
+
+### Patch Changes
+
+- 1838729: Support image buttons including a link
+
 ## 0.11.2
 
 ### Patch Changes
