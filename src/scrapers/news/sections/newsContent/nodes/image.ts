@@ -13,7 +13,10 @@ import { ContentNodeParser } from "../types";
 
 const ignoredClasses = ["demo cursor"];
 
-export const imageParser: ContentNodeParser = (node, { title, center }) => {
+export const imageParser: ContentNodeParser = (
+  node,
+  { title, center, link }
+) => {
   if (node instanceof HTMLElement) {
     const image = node as HTMLElement;
     const imageLink = image.attributes.src;
@@ -41,6 +44,10 @@ export const imageParser: ContentNodeParser = (node, { title, center }) => {
       new MediaWikiFile(`${imageName}.${imageExtension}`, {
         resizing: { width: dimensions.width > 600 ? 600 : dimensions.width },
         horizontalAlignment: center ? "center" : undefined,
+        link:
+          imageLink.includes("Button.png") && link
+            ? (link as string)
+            : undefined,
       }),
       new MediaWikiBreak(),
     ];
