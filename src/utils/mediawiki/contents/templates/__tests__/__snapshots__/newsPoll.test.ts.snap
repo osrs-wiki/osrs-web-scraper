@@ -2,6 +2,7 @@
 
 exports[`NewsPollTemplate it should render with a number and question 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "News Poll",
   "params": Array [
     Object {
@@ -18,6 +19,7 @@ MediaWikiTemplate {
 
 exports[`NewsPollTemplate it should render with only a question 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "News Poll",
   "params": Array [
     Object {
