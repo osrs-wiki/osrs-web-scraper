@@ -36,13 +36,18 @@ export const imageParser: ContentNodeParser = (
 
     const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
     const imageExtension = getFileExtension(imageLink);
-    const dimensions = sizeOf(
-      `${imageDirectory}/${imageName}.${imageExtension}`
-    );
+    const imagePath = `${imageDirectory}/${imageName}.${imageExtension}`;
+    let dimensions;
+    if (fs.existsSync(imagePath)) {
+      dimensions = sizeOf(`${imageDirectory}/${imageName}.${imageExtension}`);
+    }
 
     return [
       new MediaWikiFile(`${imageName}.${imageExtension}`, {
-        resizing: { width: dimensions.width > 600 ? 600 : dimensions.width },
+        resizing: {
+          width:
+            dimensions?.width > 600 || !dimensions ? 600 : dimensions.width,
+        },
         horizontalAlignment: center ? "center" : undefined,
         link:
           imageLink.includes("Button.png") && link

@@ -54,7 +54,11 @@ const newsContent: NewsSection = {
         )
       );
     }
-    await Promise.all(downloadQueue);
+    try {
+      await Promise.all(downloadQueue);
+    } catch (error) {
+      console.error(error);
+    }
 
     let content: MediaWikiContent[] = [];
 
