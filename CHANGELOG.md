@@ -1,5 +1,16 @@
 # osrs-web-scraper
 
+## 0.12.0
+
+### Minor Changes
+
+- dcc15b4: Add children support to MediaWikiContent
+- dcc15b4: Support text parsing in MediaWikiHeader
+
+### Patch Changes
+
+- 030f087: Handle image download failures
+
 ## 0.11.3
 
 ### Patch Changes
