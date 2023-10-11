@@ -2,7 +2,6 @@ import MediaWikiContent from "../content";
 
 class MediaWikiHTML extends MediaWikiContent {
   attributes?: { [key: string]: string };
-  children: MediaWikiContent[];
   tag: string;
 
   constructor(
@@ -10,9 +9,8 @@ class MediaWikiHTML extends MediaWikiContent {
     children: MediaWikiContent[],
     attributes?: { [key: string]: string }
   ) {
-    super();
+    super(children);
     this.tag = tag;
-    this.children = children;
     this.attributes = attributes;
   }
 
@@ -23,10 +21,7 @@ class MediaWikiHTML extends MediaWikiContent {
             (key) => ` ${key}=\"${this.attributes[key]}\"`
           )
         : ""
-    }>\n${this.children.reduce(
-      (value, content) => (value += content.build()),
-      ""
-    )}\n</${this.tag}>\n`;
+    }>\n${this.buildChildren()}\n</${this.tag}>\n`;
   }
 }
 

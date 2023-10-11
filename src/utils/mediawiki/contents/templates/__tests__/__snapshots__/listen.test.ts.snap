@@ -2,6 +2,7 @@
 
 exports[`ListenTemplate it should render with only a file 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "Listen",
   "params": Array [
     Object {
@@ -14,6 +15,7 @@ MediaWikiTemplate {
 
 exports[`ListenTemplate it should render with options: {"align":"left","title":"test title"} 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "Listen",
   "params": Array [
     Object {
@@ -34,6 +36,7 @@ MediaWikiTemplate {
 
 exports[`ListenTemplate it should render with options: {"align":"left"} 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "Listen",
   "params": Array [
     Object {
@@ -50,6 +53,7 @@ MediaWikiTemplate {
 
 exports[`ListenTemplate it should render with options: {"title":"test title"} 1`] = `
 MediaWikiTemplate {
+  "children": undefined,
   "name": "Listen",
   "params": Array [
     Object {
