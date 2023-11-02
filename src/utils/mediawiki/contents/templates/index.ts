@@ -1,4 +1,5 @@
 export { default as CollapedSectionTemplate } from "./collapsedSection";
+export { default as LetterTemplate } from "./letter";
 export { default as ListenTemplate } from "./listen";
 export { default as NewsPollTemplate } from "./newsPoll";
 export { default as PollTemplate } from "./poll";
