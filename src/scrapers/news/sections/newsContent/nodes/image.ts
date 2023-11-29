@@ -12,14 +12,15 @@ import { ContentContext } from "../newsContent";
 import { ContentNodeParser } from "../types";
 
 const ignoredClasses = ["demo cursor"];
+const imageExtensions = ["png", "jpg", "gif"];
 
 export const imageParser: ContentNodeParser = (
   node,
-  { title, center, link }
+  { title, center, link, width }
 ) => {
   if (node instanceof HTMLElement) {
     const image = node as HTMLElement;
-    const imageLink = image.attributes.src;
+    const imageLink = image.attributes.src ?? image.attributes.href;
 
     if (
       imageLink.endsWith("hr.png") ||
@@ -38,7 +39,7 @@ export const imageParser: ContentNodeParser = (
     const imageExtension = getFileExtension(imageLink);
     const imagePath = `${imageDirectory}/${imageName}.${imageExtension}`;
     let dimensions;
-    if (fs.existsSync(imagePath)) {
+    if (imageExtensions.includes(imageExtension) && fs.existsSync(imagePath)) {
       dimensions = sizeOf(`${imageDirectory}/${imageName}.${imageExtension}`);
     }
 
@@ -46,7 +47,8 @@ export const imageParser: ContentNodeParser = (
       new MediaWikiFile(`${imageName}.${imageExtension}`, {
         resizing: {
           width:
-            dimensions?.width > 600 || !dimensions ? 600 : dimensions.width,
+            (width as number) ??
+            (dimensions?.width > 600 || !dimensions ? 600 : dimensions.width),
         },
         horizontalAlignment: center ? "center" : undefined,
         link:

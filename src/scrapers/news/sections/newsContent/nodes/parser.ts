@@ -14,6 +14,7 @@ import listItemParser from "./listItem";
 import paragraphParser from "./paragraph";
 import tableParser from "./table";
 import underlineParser from "./underline";
+import videoParser from "./video";
 import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
@@ -37,6 +38,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   table: tableParser,
   u: underlineParser,
   ul: listParser,
+  video: videoParser,
 };
 
 const nodeParser: ContentNodeParser = (node, options) => {

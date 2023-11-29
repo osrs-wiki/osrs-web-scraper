@@ -26,12 +26,12 @@ const newsContent: NewsSection = {
   format: async (html, url, title) => {
     const contentRoot = parse(html);
 
-    const images = contentRoot.querySelectorAll("img");
+    const images = contentRoot.querySelectorAll("img, video > source");
     let downloadedImages = 0;
     const downloadQueue = [];
     for (let index = 0; index < images.length; index++) {
       const image = images[index];
-      const imageLink = image.attributes.src;
+      const imageLink = image.attributes.src ?? image.attributes.href;
 
       if (
         imageLink.endsWith("hr.png") ||
