@@ -1,5 +1,13 @@
 # osrs-web-scraper
 
+## 0.13.0
+
+### Minor Changes
+
+- 1bfdc93: Add support for Letter parsing
+- 438d9b1: Add support for embedded videos
+- 1df9ee9: Add support for parsing different header levels
+
 ## 0.12.0
 
 ### Minor Changes
