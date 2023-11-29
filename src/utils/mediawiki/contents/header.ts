@@ -22,9 +22,11 @@ class MediaWikiHeader extends MediaWikiContent {
     if (this.children) {
       parsedValue = this.buildChildren();
     } else if (this.value) {
-      parsedValue = this.value.trim();
+      parsedValue = this.value;
     }
-    return `${"=".repeat(this.level)}${parsedValue}${"=".repeat(this.level)}`;
+    return `${"=".repeat(this.level)}${parsedValue.trim()}${"=".repeat(
+      this.level
+    )}`;
   }
 }
 
