@@ -1,4 +1,4 @@
-import { MediaWikiContent } from "../../../utils/mediawiki";
+import { MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
 
 export type NewsSection = {
   format: (

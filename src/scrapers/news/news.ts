@@ -1,3 +1,4 @@
+import { MediaWikiBuilder } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 
 import { newsContent, newsHeader } from "./sections";
@@ -8,7 +9,6 @@ import {
   NewsImageCaptionTransformer,
 } from "./transformers";
 import { formatFileName } from "../../utils/file";
-import { MediaWikiBuilder } from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
 
 const news: ScrapingService<MediaWikiBuilder> = {

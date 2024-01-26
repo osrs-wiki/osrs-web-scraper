@@ -1,10 +1,10 @@
 import {
   MediaWikiBreak,
   MediaWikiContent,
+  MediaWikiSeparator,
   MediaWikiText,
   MediaWikiTransformer,
-} from "../../../utils/mediawiki";
-import MediaWikiSeparator from "../../../utils/mediawiki/contents/separator";
+} from "@osrs-wiki/mediawiki-builder";
 
 class NewsFooterTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {

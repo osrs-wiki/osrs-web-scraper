@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ./dist && ts-patch install -s && tsc",
-    "lint": "eslint \"**/src/**/*.{js,ts}\"",
+    "lint": "eslint \"src/**/*.{js,ts}\"",
     "lint:fix": "yarn lint --fix",
-    "prettier": "prettier \"**/src/**/*.{js,ts}\"",
+    "prettier": "prettier \"src/**/*.{js,ts}\"",
     "prettier:fix": "yarn prettier --write",
     "start": "nodemon -r tsconfig-paths/register ./src/index.ts",
     "start:node": "node -r typescript-transform-paths/register ./dist/index.js",
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/allenkinzalow/osrs-web-scraper#readme",
   "dependencies": {
+    "@osrs-wiki/mediawiki-builder": "^1.1.2",
     "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
     "image-size": "^1.0.2",

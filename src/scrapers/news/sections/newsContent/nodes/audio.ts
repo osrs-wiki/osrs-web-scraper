@@ -1,3 +1,4 @@
+import { ListenTemplate, MediaWikiComment } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { HTMLElement } from "node-html-parser";
 
@@ -6,10 +7,6 @@ import {
   formatFileName,
   getFileExtension,
 } from "../../../../../utils/file";
-import {
-  ListenTemplate,
-  MediaWikiComment,
-} from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const audioParser: ContentNodeParser = (node, { title }) => {

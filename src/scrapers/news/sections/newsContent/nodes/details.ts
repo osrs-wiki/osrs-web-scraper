@@ -1,12 +1,12 @@
-import { HTMLElement } from "node-html-parser";
-
-import nodeParser from "./parser";
-import textParser from "./text";
 import {
   CollapedSectionTemplate,
   MediaWikiContent,
   MediaWikiTemplate,
-} from "../../../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+import { HTMLElement } from "node-html-parser";
+
+import nodeParser from "./parser";
+import textParser from "./text";
 import { ContentNodeParser } from "../types";
 
 export const detailsParser: ContentNodeParser = (node, options) => {

@@ -1,8 +1,8 @@
+import { MediaWikiTable } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
-import { MediaWikiTable } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const tableParser: ContentNodeParser = (node, options) => {

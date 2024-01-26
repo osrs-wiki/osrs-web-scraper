@@ -6,7 +6,8 @@ import {
   MediaWikiLink,
   MediaWikiText,
   MediaWikiTOC,
-} from "../../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+
 import NewsImageCaptionTransformer from "../imageCaptionTransformer";
 
 describe("NewsImageCaptionTransformer", () => {

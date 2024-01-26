@@ -5,7 +5,8 @@ import {
   MediaWikiLink,
   MediaWikiText,
   MediaWikiTOC,
-} from "../../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+
 import NewsFooterTransformer from "../footerTransformer";
 
 describe("NewsFooterTransformer", () => {

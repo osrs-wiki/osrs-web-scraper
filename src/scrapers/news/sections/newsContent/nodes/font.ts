@@ -1,7 +1,7 @@
+import { MediaWikiHeader } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import textParser from "./text";
-import { MediaWikiHeader } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 const fontSizeHeaders: { [key: number]: number } = {
