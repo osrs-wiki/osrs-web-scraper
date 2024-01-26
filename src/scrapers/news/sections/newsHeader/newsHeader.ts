@@ -29,7 +29,7 @@ const newsHeader: NewsSection = {
     const item = rss.items.find(
       (item) => getNewsUrlIdentifier(item.link) === urlIdentifier
     );
-    const category = getNewsCategory(item.categories?.[0] ?? "");
+    const category = getNewsCategory(item?.categories?.[0] ?? "");
 
     const headerRoot = parse(html);
 
