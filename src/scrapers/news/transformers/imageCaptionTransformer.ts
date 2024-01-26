@@ -25,6 +25,7 @@ class NewsImageCaptionTransformer extends MediaWikiTransformer {
           transformedContent.push(
             new MediaWikiFile(current.fileName, {
               ...current.options,
+              format: "thumb",
               caption: second,
             })
           );
