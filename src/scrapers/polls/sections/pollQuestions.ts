@@ -1,12 +1,13 @@
-import { HTMLElement } from "node-html-parser";
-
-import { PollSection } from "./types";
 import {
   MediaWikiBreak,
   MediaWikiContent,
+  // eslint-disable-next-line import/named
   PollAnswer,
   PollTemplate,
-} from "../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+import { HTMLElement } from "node-html-parser";
+
+import { PollSection } from "./types";
 
 const pollQuestions: PollSection = {
   format: async (htmlElement) => {

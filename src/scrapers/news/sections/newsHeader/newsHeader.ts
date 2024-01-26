@@ -1,3 +1,11 @@
+import {
+  MediaWikiBreak,
+  MediaWikiContent,
+  MediaWikiFile,
+  MediaWikiTOC,
+  MediaWikiTemplate,
+  UpdateTemplate,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { parse } from "node-html-parser";
 import Parser from "rss-parser";
@@ -12,14 +20,6 @@ import {
   formatFileName,
   getFileExtension,
 } from "../../../../utils/file";
-import {
-  MediaWikiBreak,
-  MediaWikiContent,
-  MediaWikiFile,
-  MediaWikiTOC,
-  MediaWikiTemplate,
-  UpdateTemplate,
-} from "../../../../utils/mediawiki";
 import { NewsSection } from "../types";
 
 const newsHeader: NewsSection = {

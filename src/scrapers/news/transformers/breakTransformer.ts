@@ -3,7 +3,7 @@ import {
   MediaWikiContent,
   MediaWikiHeader,
   MediaWikiTransformer,
-} from "../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
 
 class NewsBreakTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {

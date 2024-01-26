@@ -4,7 +4,7 @@ import {
   MediaWikiHeader,
   MediaWikiText,
   MediaWikiTransformer,
-} from "../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
 
 class NewsHeaderTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {

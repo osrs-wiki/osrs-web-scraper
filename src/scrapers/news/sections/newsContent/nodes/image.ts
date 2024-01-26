@@ -1,13 +1,13 @@
+import {
+  MediaWikiBreak,
+  MediaWikiComment,
+  MediaWikiFile,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import sizeOf from "image-size";
 import { HTMLElement } from "node-html-parser";
 
 import { formatFileName, getFileExtension } from "../../../../../utils/file";
-import {
-  MediaWikiBreak,
-  MediaWikiComment,
-  MediaWikiFile,
-} from "../../../../../utils/mediawiki";
 import { ContentContext } from "../newsContent";
 import { ContentNodeParser } from "../types";
 

@@ -4,7 +4,8 @@ import {
   MediaWikiContent,
   MediaWikiText,
   MediaWikiTOC,
-} from "../../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+
 import NewsHeaderTransformer from "../headerTransformer";
 
 describe("NewsHeaderTransformer", () => {

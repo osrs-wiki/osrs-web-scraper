@@ -4,7 +4,7 @@ import {
   MediaWikiFile,
   MediaWikiText,
   MediaWikiTransformer,
-} from "../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
 
 class NewsImageCaptionTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {

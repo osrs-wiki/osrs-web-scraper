@@ -1,9 +1,6 @@
+import { LetterTemplate, NewsPollTemplate } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
-import {
-  LetterTemplate,
-  NewsPollTemplate,
-} from "../../../../../../utils/mediawiki";
 import { formatText } from "../../../../../../utils/text";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";

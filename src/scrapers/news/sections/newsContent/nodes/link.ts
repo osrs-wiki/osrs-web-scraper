@@ -1,10 +1,10 @@
-import { HTMLElement } from "node-html-parser";
-
-import nodeParser from "./parser";
 import {
   MediaWikiExternalLink,
   MediaWikiLink,
-} from "../../../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+import { HTMLElement } from "node-html-parser";
+
+import nodeParser from "./parser";
 import { ContentNodeParser } from "../types";
 
 export const linkParser: ContentNodeParser = (node, options) => {

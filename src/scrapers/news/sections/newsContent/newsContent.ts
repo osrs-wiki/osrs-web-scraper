@@ -1,3 +1,4 @@
+import { MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { parse } from "node-html-parser";
 
@@ -7,7 +8,6 @@ import {
   formatFileName,
   getFileExtension,
 } from "../../../../utils/file";
-import { MediaWikiContent } from "../../../../utils/mediawiki";
 import { getNodeTagName } from "../../../../utils/nodes";
 import { NewsSection } from "../types";
 

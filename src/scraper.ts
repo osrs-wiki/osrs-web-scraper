@@ -1,3 +1,4 @@
+import { MediaWikiBuilder } from "@osrs-wiki/mediawiki-builder";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 import { ScrapingService } from "./scrapers";
@@ -9,7 +10,7 @@ class Scraper {
 
   page: Page;
 
-  scrape = async (url: string, scraper: ScrapingService<any>) => {
+  scrape = async (url: string, scraper: ScrapingService<MediaWikiBuilder>) => {
     this.browser = await puppeteer.launch();
     this.page = await this.browser.newPage();
 

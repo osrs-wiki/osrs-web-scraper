@@ -1,13 +1,13 @@
+import {
+  MediaWikiBuilder,
+  MediaWikiTemplate,
+  PollWrapperTemplate,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import parse from "node-html-parser";
 
 import { pollHeader, pollQuestions } from "./sections";
 import { formatFileName } from "../../utils/file";
-import {
-  MediaWikiBuilder,
-  MediaWikiTemplate,
-  PollWrapperTemplate,
-} from "../../utils/mediawiki";
 import { ScrapingService } from "../types";
 
 const polls: ScrapingService<MediaWikiBuilder> = {

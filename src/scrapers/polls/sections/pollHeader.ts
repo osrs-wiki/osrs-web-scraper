@@ -1,14 +1,14 @@
-import { format, parse } from "date-fns";
-import { HTMLElement } from "node-html-parser";
-
-import { PollSection } from "./types";
 import {
   MediaWikiBreak,
   MediaWikiContent,
   MediaWikiTemplate,
   PollNoticeTemplate,
   PollWrapperTemplate,
-} from "../../../utils/mediawiki";
+} from "@osrs-wiki/mediawiki-builder";
+import { format, parse } from "date-fns";
+import { HTMLElement } from "node-html-parser";
+
+import { PollSection } from "./types";
 
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {

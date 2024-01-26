@@ -1,8 +1,8 @@
+import { MediaWikiListItem } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
-import { MediaWikiListItem } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const listItemParser: ContentNodeParser = (node, options) => {

@@ -1,10 +1,7 @@
+import { MediaWikiContent, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
-import {
-  MediaWikiContent,
-  MediaWikiText,
-} from "../../../../../utils/mediawiki";
 import { formatText } from "../../../../../utils/text";
 import { ContentNodeParser } from "../types";
 

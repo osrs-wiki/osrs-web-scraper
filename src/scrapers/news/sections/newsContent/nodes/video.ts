@@ -1,7 +1,7 @@
+import { MediaWikiComment } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import imageParser from "./image";
-import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const videoParser: ContentNodeParser = (node, { title }) => {

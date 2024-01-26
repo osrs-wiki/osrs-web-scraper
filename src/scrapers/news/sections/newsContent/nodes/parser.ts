@@ -1,3 +1,5 @@
+import { MediaWikiComment } from "@osrs-wiki/mediawiki-builder";
+
 import audioParser from "./audio";
 import boldParser from "./bold";
 import breakParser from "./break";
@@ -15,7 +17,6 @@ import paragraphParser from "./paragraph";
 import tableParser from "./table";
 import underlineParser from "./underline";
 import videoParser from "./video";
-import { MediaWikiComment } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 const ignoredTags = ["script"];

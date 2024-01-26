@@ -1,6 +1,6 @@
+import { MediaWikiVideo } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
-import { MediaWikiVideo } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const iframeParser: ContentNodeParser = (node) => {

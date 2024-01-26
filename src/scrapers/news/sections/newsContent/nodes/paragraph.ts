@@ -1,5 +1,6 @@
+import { MediaWikiBreak } from "@osrs-wiki/mediawiki-builder";
+
 import textParser from "./text";
-import { MediaWikiBreak } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 export const paragraphParser: ContentNodeParser = (node, options) => {
