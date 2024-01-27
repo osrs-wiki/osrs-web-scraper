@@ -5,7 +5,7 @@ import {
   PollNoticeTemplate,
   PollWrapperTemplate,
 } from "@osrs-wiki/mediawiki-builder";
-import { format, parse } from "date-fns";
+import { format, isBefore, parse } from "date-fns";
 import { HTMLElement } from "node-html-parser";
 
 import { PollSection } from "./types";
@@ -24,7 +24,7 @@ const pollHeader: PollSection = {
     );
     const total = htmlElement
       .querySelector("div")
-      .textContent.match(/(\d)*/g)?.[0];
+      .textContent.match(/(\d)+/g)?.[0];
 
     const content: MediaWikiContent[] = [];
 
@@ -54,10 +54,9 @@ const pollHeader: PollSection = {
     content.push(descriptionTemplate);
 
     content.push(new MediaWikiBreak());
-    content.push(new MediaWikiBreak());
 
     const totalTemplate = new MediaWikiTemplate("PollTotal");
-    totalTemplate.add("", total);
+    totalTemplate.add("", isBefore(new Date(), endDateFormatted) ? "" : total);
     content.push(totalTemplate);
 
     return content;
