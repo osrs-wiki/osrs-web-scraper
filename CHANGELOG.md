@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.14.0
+
+### Minor Changes
+
+- 4b08836: Migrate to @osrs-wiki/mediawiki-builder
+
+### Patch Changes
+
+- 24359a2: Add thumb format to images in image caption transformer
+- 91940ce: Fix poll total parsing
+- 91940ce: Include poll total if current date is after or equal to poll end date
+
 ## 0.13.0
 
 ### Minor Changes
