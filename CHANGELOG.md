@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.14.1
+
+### Patch Changes
+
+- 4f7d8b3: Gracefully handle news post category fetching failures
+- 55893c5: Update @osrs-wiki/mediawiki-builder
+- 24ff306: Add Events to supported update categories
+- 62a9d51: Add support for strong parsing as bold formatted text
+- 55893c5: Update table node parser to support new mediawiki-builder table format
+
 ## 0.14.0
 
 ### Minor Changes
