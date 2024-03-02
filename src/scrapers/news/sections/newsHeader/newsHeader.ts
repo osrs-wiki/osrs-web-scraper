@@ -8,14 +8,8 @@ import {
 } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { parse } from "node-html-parser";
-import Parser from "rss-parser";
 
-import {
-  NEWS_RSS_LINK,
-  getLatestRSSCateogry,
-  getNewsCategory,
-  getNewsUrlIdentifier,
-} from "./newsHeader.utils";
+import { getLatestRSSCateogry, getNewsCategory } from "./newsHeader.utils";
 import {
   downloadFile,
   formatFileName,
