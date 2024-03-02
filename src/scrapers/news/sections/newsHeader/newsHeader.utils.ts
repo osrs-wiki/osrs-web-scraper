@@ -8,7 +8,7 @@ export type NewsCategory =
   | "community"
   | "competitions"
   | "devblog"
-  | "event"
+  | "events"
   | "game"
   | "future"
   | "forum"
@@ -31,8 +31,9 @@ const updateCategories: { [key: string]: NewsCategory } = {
   "Developer Blog": "devblog",
   "Dev Blog": "devblog",
   "Dev Blogs": "devblog",
-  "Event updates": "event",
-  "Event update": "event",
+  "Event updates": "events",
+  "Event update": "events",
+  "Events": "events",
   "Game updates": "game",
   "Game update": "game",
   "Future Updates": "future",
