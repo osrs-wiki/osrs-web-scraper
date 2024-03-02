@@ -12,6 +12,7 @@ import Parser from "rss-parser";
 
 import {
   NEWS_RSS_LINK,
+  getLatestRSSCateogry,
   getNewsCategory,
   getNewsUrlIdentifier,
 } from "./newsHeader.utils";
@@ -24,12 +25,8 @@ import { NewsSection } from "../types";
 
 const newsHeader: NewsSection = {
   format: async (html, url, title) => {
-    const rss = await new Parser().parseURL(NEWS_RSS_LINK);
-    const urlIdentifier = getNewsUrlIdentifier(url);
-    const item = rss.items.find(
-      (item) => getNewsUrlIdentifier(item.link) === urlIdentifier
-    );
-    const category = getNewsCategory(item?.categories?.[0] ?? "");
+    const rssCategory = await getLatestRSSCateogry(url);
+    const category = getNewsCategory(rssCategory ?? "");
 
     const headerRoot = parse(html);
 

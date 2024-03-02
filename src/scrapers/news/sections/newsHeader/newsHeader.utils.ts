@@ -1,3 +1,5 @@
+import Parser from "rss-parser";
+
 export const NEWS_RSS_LINK =
   "https://secure.runescape.com/m=news/a=1/latest_news.rss?oldschool=true";
 
@@ -49,6 +51,19 @@ const updateCategories: { [key: string]: NewsCategory } = {
   "Website update": "website",
   "Your Feedback updates": "yourfeedback",
   "Your Feedback": "yourfeedback",
+};
+
+export const getLatestRSSCateogry = async (url: string) => {
+  try {
+    const rss = await new Parser().parseURL(NEWS_RSS_LINK);
+    const urlIdentifier = getNewsUrlIdentifier(url);
+    const item = rss?.items?.find(
+      (item) => getNewsUrlIdentifier(item?.link) === urlIdentifier
+    );
+    return item?.categories?.[0];
+  } catch (error) {
+    return undefined;
+  }
 };
 
 export const getNewsCategory = (rawCategory: string) =>
