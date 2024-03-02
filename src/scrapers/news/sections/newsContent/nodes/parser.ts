@@ -36,6 +36,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   li: listItemParser,
   ol: listParser,
   p: paragraphParser,
+  strong: boldParser,
   table: tableParser,
   u: underlineParser,
   ul: listParser,
