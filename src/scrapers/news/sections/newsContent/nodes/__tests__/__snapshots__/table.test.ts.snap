@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`table node A basic table should render 1`] = `
+"{| style=\\"text-align: center;\\" class=\\"wikitable\\"
+|-
+! test
+! test
+|-
+| test
+| test
+|}"
+`;
