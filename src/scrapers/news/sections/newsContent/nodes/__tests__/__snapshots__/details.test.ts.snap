@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`summary node summary elements should parse and render 1`] = `
+"{{Collapsed section|18|test}}
+'''test'''{{Collapsed section end}}
+"
+`;
