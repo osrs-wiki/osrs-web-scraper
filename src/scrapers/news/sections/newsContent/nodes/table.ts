@@ -12,9 +12,13 @@ import { ContentNodeParser } from "../types";
 export const tableParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const table = node as HTMLElement;
+    const thead = table.querySelector("thead");
     const tbody = table.querySelector("tbody");
     const rowNodes = tbody.querySelectorAll("tr");
-    const headerRowNodes = rowNodes.shift().querySelectorAll("td");
+    const headerNodes = thead?.querySelectorAll("tr") ?? [];
+    const headerRowNodes = (headerNodes?.length > 0 ? headerNodes : rowNodes)
+      .shift()
+      .querySelectorAll("td");
     const headers: MediaWikiTableCell[] =
       headerRowNodes.map<MediaWikiTableCell>((node) => ({
         content: [new MediaWikiText(node.textContent.trim())],
@@ -39,8 +43,8 @@ export const tableParser: ContentNodeParser = (node, options) => {
 
     return new MediaWikiTable({
       options: {
-        style: "text-align: center;",
         class: "wikitable",
+        style: "text-align: center;",
       },
       rows: [
         {
