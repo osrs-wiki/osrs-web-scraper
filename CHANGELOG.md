@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.14.2
+
+### Patch Changes
+
+- b9178ea: Re-order table option params
+- b9178ea: Add support to table parser for parsing thead
+
 ## 0.14.1
 
 ### Patch Changes
