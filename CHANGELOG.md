@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.14.3
+
+### Patch Changes
+
+- 88b3e00: Add cache option to github actions
+- e01c779: Add tests for various node parsers.
+
 ## 0.14.2
 
 ### Patch Changes
