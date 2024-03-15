@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`div node poll-box class should parse and render 1`] = `
+"{{News Poll|1|If While Guthix Sleeps is added to the game, should we continue to explore the idea of offering the Rites of Balance as a rewards from the quest? This question is for developer consideration and not binding.}}
+"
+`;

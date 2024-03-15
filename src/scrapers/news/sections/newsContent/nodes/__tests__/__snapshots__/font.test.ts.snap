@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`font node Font node should parse and render a 2-level header 1`] = `"==test=="`;
+
+exports[`font node Font node should parse and render a 3-level header 1`] = `"===test==="`;
