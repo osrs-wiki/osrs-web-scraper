@@ -2,4 +2,4 @@
 
 exports[`span node Span should parse and render 1`] = `"'''test'''"`;
 
-exports[`span node Span with font color should parse and render 1`] = `"<span color=\\"#ffff00\\">'''test'''</span>"`;
+exports[`span node Span with font color should parse and render 1`] = `"<span style=\\"color: #ffff00\\">'''test'''</span>"`;

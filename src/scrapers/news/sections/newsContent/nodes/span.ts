@@ -17,7 +17,7 @@ export const spanParser: ContentNodeParser = (node, options) => {
         "span",
         spanNodes,
         {
-          color: `#${fontColorRaw}`,
+          style: `color: #${fontColorRaw}`,
         },
         { collapsed: true }
       );
