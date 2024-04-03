@@ -10,4 +10,11 @@ describe("span node", () => {
     builder.addContents([spanParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("Span with font color should parse and render", () => {
+    const root = parse("<span style='color: #ffff00'><b>test</b></span>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([spanParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });

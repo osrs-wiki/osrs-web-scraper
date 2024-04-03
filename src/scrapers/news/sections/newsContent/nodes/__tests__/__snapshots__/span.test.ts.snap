@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`span node Span should parse and render 1`] = `"'''test'''"`;
+
+exports[`span node Span with font color should parse and render 1`] = `"<span color=\\"#ffff00\\">'''test'''</span>"`;
