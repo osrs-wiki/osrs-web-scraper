@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.15.0
+
+### Minor Changes
+
+- 67a9341: Add support for the span tag
+
 ## 0.14.3
 
 ### Patch Changes
