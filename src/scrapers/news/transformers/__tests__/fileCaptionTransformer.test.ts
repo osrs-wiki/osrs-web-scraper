@@ -8,16 +8,16 @@ import {
   MediaWikiTOC,
 } from "@osrs-wiki/mediawiki-builder";
 
-import NewsImageCaptionTransformer from "../imageCaptionTransformer";
+import NewsFileCaptionTransformer from "../fileCaptionTransformer";
 
-describe("NewsImageCaptionTransformer", () => {
+describe("NewsFileCaptionTransformer", () => {
   it("should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiFile("image"),
       new MediaWikiBreak(),
       new MediaWikiText("caption", { italics: true }),
     ];
-    const transformed = new NewsImageCaptionTransformer().transform(
+    const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
     );
     expect(
@@ -38,7 +38,7 @@ describe("NewsImageCaptionTransformer", () => {
       new MediaWikiText("You can also discuss this update on our"),
       new MediaWikiBreak(),
     ];
-    const transformed = new NewsImageCaptionTransformer().transform(
+    const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
     );
     expect(
@@ -59,7 +59,7 @@ describe("NewsImageCaptionTransformer", () => {
       new MediaWikiBreak(),
       new MediaWikiText("The Old School Team.", { italics: true }),
     ];
-    const transformed = new NewsImageCaptionTransformer().transform(
+    const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
     );
     expect(

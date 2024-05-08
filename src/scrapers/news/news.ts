@@ -6,7 +6,7 @@ import {
   NewsBreakTransformer,
   NewsFooterTransformer,
   NewsHeaderTransformer,
-  NewsImageCaptionTransformer,
+  NewsFileCaptionTransformer,
 } from "./transformers";
 import { formatFileName } from "../../utils/file";
 import { ScrapingService } from "../types";
@@ -38,7 +38,7 @@ const news: ScrapingService<MediaWikiBuilder> = {
         )
         .addTransformer(new NewsHeaderTransformer())
         .addTransformer(new NewsBreakTransformer())
-        .addTransformer(new NewsImageCaptionTransformer())
+        .addTransformer(new NewsFileCaptionTransformer())
         .addTransformer(new NewsFooterTransformer());
 
       console.info("Writing newspost results to file...");
