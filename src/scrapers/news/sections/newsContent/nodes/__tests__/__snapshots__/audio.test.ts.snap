@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`audio node audio node should parse and render 1`] = `
+"[[File:test title narration.mp3|center]]
+"
+`;

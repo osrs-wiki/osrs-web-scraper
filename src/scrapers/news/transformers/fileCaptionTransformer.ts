@@ -6,7 +6,7 @@ import {
   MediaWikiTransformer,
 } from "@osrs-wiki/mediawiki-builder";
 
-class NewsImageCaptionTransformer extends MediaWikiTransformer {
+class NewsFileCaptionTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {
     if (content.length < 3) {
       return content;
@@ -42,4 +42,4 @@ class NewsImageCaptionTransformer extends MediaWikiTransformer {
   }
 }
 
-export default NewsImageCaptionTransformer;
+export default NewsFileCaptionTransformer;

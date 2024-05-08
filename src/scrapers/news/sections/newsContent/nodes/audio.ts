@@ -1,4 +1,8 @@
-import { ListenTemplate, MediaWikiComment } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiComment,
+  MediaWikiFile,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { HTMLElement } from "node-html-parser";
 
@@ -25,10 +29,12 @@ export const audioParser: ContentNodeParser = (node, { title }) => {
 
     downloadFile(audioLink, `${audioDirectory}/${outputFileName}`);
 
-    return new ListenTemplate(outputFileName, {
-      align: "center",
-      title: "Audio reading",
-    }).build();
+    return [
+      new MediaWikiFile(outputFileName, {
+        horizontalAlignment: "center",
+      }),
+      new MediaWikiBreak(),
+    ];
   }
   return new MediaWikiComment("Invalid audio node");
 };
