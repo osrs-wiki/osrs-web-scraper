@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.16.0
+
+### Minor Changes
+
+- 8765240: Rename NewsImageCaptionTransformer to NewsFileCaptionTransformer
+- 8765240: Replace Listen template with MediaWikiFile in audio node parsing
+
 ## 0.15.0
 
 ### Minor Changes
