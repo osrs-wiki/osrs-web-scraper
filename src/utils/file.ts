@@ -49,11 +49,21 @@ export const getFileExtension = (fileUrl: string) => {
   return fileUrl.split(/[#?]/)[0].split(".").pop().trim();
 };
 
+const fileCharsReplaceMap: { [key: string]: string } = {
+  ":": "-",
+  "|": "-",
+  "&nbsp;": "",
+};
+
 /**
  * Format a file name to ensure it is valid.
  * @param fileName The file name
  * @returns
  */
 export const formatFileName = (fileName: string) => {
-  return formatText(fileName.replaceAll(":", "-").replaceAll("&nbsp;", ""));
+  const cleanedFileName = Object.keys(fileCharsReplaceMap).reduce(
+    (name, find) => name.replaceAll(find, fileCharsReplaceMap[find]),
+    fileName
+  );
+  return formatText(cleanedFileName);
 };
