@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.16.1
+
+### Patch Changes
+
+- 5609968: Replace "|" in file names with "-".
+- ea3bbeb: Add try-catch to image size detection
+
 ## 0.16.0
 
 ### Minor Changes
