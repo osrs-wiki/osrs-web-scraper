@@ -39,8 +39,18 @@ export const imageParser: ContentNodeParser = (
     const imageExtension = getFileExtension(imageLink);
     const imagePath = `${imageDirectory}/${imageName}.${imageExtension}`;
     let dimensions;
-    if (imageExtensions.includes(imageExtension) && fs.existsSync(imagePath)) {
-      dimensions = sizeOf(`${imageDirectory}/${imageName}.${imageExtension}`);
+    try {
+      if (
+        imageExtensions.includes(imageExtension) &&
+        fs.existsSync(imagePath)
+      ) {
+        dimensions = sizeOf(`${imageDirectory}/${imageName}.${imageExtension}`);
+      }
+    } catch (error) {
+      console.error(
+        `Error retrieving image size: ${imageDirectory}/${imageName}.${imageExtension}`,
+        error
+      );
     }
 
     return [
