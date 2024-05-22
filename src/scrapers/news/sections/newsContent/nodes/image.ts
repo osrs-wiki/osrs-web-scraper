@@ -40,11 +40,17 @@ export const imageParser: ContentNodeParser = (
     const imagePath = `${imageDirectory}/${imageName}.${imageExtension}`;
     let dimensions;
     try {
-      if (
-        imageExtensions.includes(imageExtension) &&
-        fs.existsSync(imagePath)
-      ) {
-        dimensions = sizeOf(`${imageDirectory}/${imageName}.${imageExtension}`);
+      if (image.attributes.width) {
+        dimensions = { width: parseInt(image.attributes.width) };
+      } else {
+        if (
+          imageExtensions.includes(imageExtension) &&
+          fs.existsSync(imagePath)
+        ) {
+          dimensions = sizeOf(
+            `${imageDirectory}/${imageName}.${imageExtension}`
+          );
+        }
       }
     } catch (error) {
       console.error(

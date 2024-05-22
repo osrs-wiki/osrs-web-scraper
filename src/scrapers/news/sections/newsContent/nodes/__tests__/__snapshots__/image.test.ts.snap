@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`image node Image node should parse and render 1`] = `
+"[[File:test-title (1).png|200px]]
+"
+`;
