@@ -6,8 +6,12 @@ import imageParser from "../image";
 
 describe("image node", () => {
   test("Image node should parse and render", () => {
-    const existsSyncSpy = jest.spyOn(fs, "existsSync");
-    const mkdirSyncSpy = jest.spyOn(fs, "mkdirSync");
+    const existsSyncSpy = jest
+      .spyOn(fs, "existsSync")
+      .mockImplementationOnce(() => false);
+    const mkdirSyncSpy = jest
+      .spyOn(fs, "mkdirSync")
+      .mockImplementationOnce(() => "");
 
     const root = parse(
       '<image href="https://test.com/image.png" width="200" />'
