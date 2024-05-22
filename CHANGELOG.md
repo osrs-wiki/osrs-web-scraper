@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.16.2
+
+### Patch Changes
+
+- 67bc3e7: Trim header content
+- 643ba20: Add support for parsing image node width
+
 ## 0.16.1
 
 ### Patch Changes
