@@ -24,7 +24,7 @@ class NewsHeaderTransformer extends MediaWikiTransformer {
           before instanceof MediaWikiBreak &&
           after instanceof MediaWikiBreak
         ) {
-          transformedContent.push(new MediaWikiHeader(current.value, 3));
+          transformedContent.push(new MediaWikiHeader(current.value.trim(), 3));
         } else {
           transformedContent.push(current);
         }

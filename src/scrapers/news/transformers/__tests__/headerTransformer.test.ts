@@ -13,7 +13,7 @@ describe("NewsHeaderTransformer", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiTOC(),
       new MediaWikiBreak(),
-      new MediaWikiText("You can also discuss this update on our", {
+      new MediaWikiText(" You can also discuss this update on our ", {
         bold: true,
       }),
       new MediaWikiBreak(),
