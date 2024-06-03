@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.16.3
+
+### Patch Changes
+
+- 8b38438: Fix poll end date parsing
+
 ## 0.16.2
 
 ### Patch Changes
