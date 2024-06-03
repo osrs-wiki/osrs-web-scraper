@@ -35,13 +35,16 @@ const pollHeader: PollSection = {
       .replaceAll(/(\()*(\))*/g, "");
 
     const endDate = description.match(/This poll will close on (.*)\./)?.[1];
-    const endDateFormatted = parse(endDate, "EEEE do MMMM", new Date());
+    let endDateFormatted = parse(endDate, "EEEE, MMMM do", new Date());
+    if (!endDateFormatted) {
+      endDateFormatted = parse(endDate, "EEEE do MMMM", new Date());
+    }
 
     content.push(
       new PollNoticeTemplate(
         parseInt(number),
         format(new Date(startDate), "d MMMM yyyy"),
-        format(endDateFormatted, "d MMMM yyyy")
+        format(endDateFormatted ?? new Date(), "d MMMM yyyy")
       ).build()
     );
     content.push(new MediaWikiBreak());
