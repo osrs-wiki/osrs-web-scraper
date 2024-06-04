@@ -10,6 +10,8 @@ import { HTMLElement } from "node-html-parser";
 
 import { PollSection } from "./types";
 
+const END_DATE_FORMATS = ["EEEE, MMMM do", "EEEE MMMM do", "EEEE do MMMM"];
+
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {
     const title = htmlElement.querySelector("h2").textContent;
@@ -35,9 +37,16 @@ const pollHeader: PollSection = {
       .replaceAll(/(\()*(\))*/g, "");
 
     const endDate = description.match(/This poll will close on (.*)\./)?.[1];
-    let endDateFormatted = parse(endDate, "EEEE, MMMM do", new Date());
-    if (!endDateFormatted) {
-      endDateFormatted = parse(endDate, "EEEE do MMMM", new Date());
+    let endDateFormatted;
+    let endDateFormatIndex = 0;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore It is a valid type
+    while (!endDateFormatted || isNaN(endDateFormatted)) {
+      endDateFormatted = parse(
+        endDate,
+        END_DATE_FORMATS[endDateFormatIndex++],
+        new Date()
+      );
     }
 
     content.push(
