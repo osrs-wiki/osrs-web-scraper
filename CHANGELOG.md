@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.16.4
+
+### Patch Changes
+
+- f524e61: Support multiple end date formats for polls
+
 ## 0.16.3
 
 ### Patch Changes
