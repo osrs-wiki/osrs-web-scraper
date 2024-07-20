@@ -1,28 +1,37 @@
 # osrs-web-scraper
-Scrape information from the Oldschool Runescape website.
+
+Scrape information from the Oldschool Runescape website and convert it to MediaWiki format.
 
 ## Setup
 
 ### Install dependencies
+
 ```
 yarn install
 ```
 
-### Setup environment
-```
-NODE_ENV=development
-NEWS_LINK=https://secure.runescape.com/m=news/a=1/desert-treasure-ii---the-fallen-empire?oldschool=1
-```
+### Usage
 
-### Run the scraper
 ```
-yarn start
+Usage: OSRS Web Scraper [options] [command]
+
+Options:
+  -V, --version   output the version number
+  -h, --help      display help for command
+
+Commands:
+  news <string>   Scrape an OSRS news posts.
+  poll <string>   Scrape an OSRS poll.
+  worlds          Scrape the OSRS world list.
+  help [command]  display help for command
 ```
 
 ## Releasing
 
 ### Create a changeset
+
 Create a changeset file by running the following command:
+
 ```
 yarn changeset
 ```
