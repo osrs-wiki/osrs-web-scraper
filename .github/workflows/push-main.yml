@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: yarn
-          node-version: 16.x
+          node-version: 21.x
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -41,12 +41,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Use Node.js 16
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           always-auth: true
           cache: yarn
-          node-version: 16
+          node-version: 21
 
       - name: Install yarn packages
         run: yarn install --frozen-lockfile
