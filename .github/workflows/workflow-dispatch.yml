@@ -3,12 +3,17 @@ name: Run News Scraper
 on:
   workflow_dispatch:
     inputs:
-      newsLink:
-        description: "News Link"
-        required: false
-
-      pollLink:
-        description: "Poll Link"
+      task:
+        description: "Task to run"
+        required: true
+        default: "news"
+        type: choice
+        options:
+          - news
+          - poll
+          - worlds
+      link:
+        description: "Link"
         required: false
 
 jobs:
@@ -22,7 +27,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: yarn
-          node-version: 16.x
+          node-version: 21.x
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -30,19 +35,11 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Scrape News Post
-        run: export NEWS_LINK=${{ github.event.inputs.newsLink }} && export POLL_LINK=${{ github.event.inputs.pollLink }} && yarn start:node
+      - name: OSRS Web Scraper
+        run: yarn start:node ${{ github.event.inputs.task }} "${{ github.event.inputs.link }}"
 
-      - name: Upload News Results
-        if: "${{ github.event.inputs.newsLink != '' }}"
+      - name: Upload Output
         uses: actions/upload-artifact@v3
         with:
-          name: newspost-${{ github.run_id }}-${{ github.run_attempt }}
-          path: out/news/
-
-      - name: Upload Poll Results
-        if: "${{ github.event.inputs.pollLink != '' }}"
-        uses: actions/upload-artifact@v3
-        with:
-          name: poll-${{ github.run_id }}-${{ github.run_attempt }}
-          path: out/polls/
+          name: ${{ github.event.inputs.task }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: out/${{ github.event.inputs.task }}/
