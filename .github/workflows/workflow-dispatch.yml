@@ -1,4 +1,4 @@
-name: Run News Scraper
+name: Run OSRS Web Scraper
 
 on:
   workflow_dispatch:
