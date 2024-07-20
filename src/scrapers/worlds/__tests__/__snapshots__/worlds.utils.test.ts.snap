@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`world scraper utils getWorldLines 1`] = `
-"{{WorldLine|101|United States|mems=deadman|111-126 Deadman}}
+"{{WorldLine|401|United States|mems=deadman|111-126 Deadman}}
 "
 `;
