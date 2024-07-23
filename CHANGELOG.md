@@ -1,5 +1,20 @@
 # osrs-web-scraper
 
+## 0.17.0
+
+### Minor Changes
+
+- bc845dd: Update workflow dispatch to allow choiced tasks
+- bc845dd: Add commander for cli parsing
+- bc845dd: Add world list scraping
+
+### Patch Changes
+
+- 395253a: Sort output of world scraping
+- bc845dd: Update all workflows to use Node 21
+- ab396cc: Fix start:node command
+- e835205: Fix poll task output directory
+
 ## 0.16.4
 
 ### Patch Changes
