@@ -36,8 +36,8 @@ const polls: ScrapingService<MediaWikiBuilder> = {
 
       console.info("Writing poll results to file...");
       try {
-        if (!fs.existsSync("out/polls")) {
-          fs.mkdirSync("out/polls", { recursive: true });
+        if (!fs.existsSync("out/poll")) {
+          fs.mkdirSync("out/poll", { recursive: true });
         }
         const fileName = formatFileName(
           results.title.replaceAll(/\((.)*\)/g, "")
