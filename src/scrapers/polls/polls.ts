@@ -42,7 +42,7 @@ const polls: ScrapingService<MediaWikiBuilder> = {
         const fileName = formatFileName(
           results.title.replaceAll(/\((.)*\)/g, "")
         );
-        await fs.writeFileSync(`out/polls/${fileName}.txt`, builder.build());
+        await fs.writeFileSync(`out/poll/${fileName}.txt`, builder.build());
         console.info("Successfully created poll file");
       } catch (err) {
         console.error(err);
