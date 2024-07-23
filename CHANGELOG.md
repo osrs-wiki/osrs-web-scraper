@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.17.1
+
+### Patch Changes
+
+- 781407b: Correct the writeFileSync poll folder path
+
 ## 0.17.0
 
 ### Minor Changes
