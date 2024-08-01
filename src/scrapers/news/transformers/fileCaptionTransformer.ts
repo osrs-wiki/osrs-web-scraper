@@ -1,6 +1,7 @@
 import {
   MediaWikiBreak,
   MediaWikiContent,
+  MediaWikiExternalLink,
   MediaWikiFile,
   MediaWikiText,
   MediaWikiTransformer,
@@ -22,15 +23,27 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
           second instanceof MediaWikiText &&
           second.styling?.italics
         ) {
+          const captionContents = [second];
+          let captionIndex = index + 3;
+          do {
+            if (!(content[captionIndex] instanceof MediaWikiBreak)) {
+              captionContents.push(content[captionIndex]);
+            }
+            captionIndex++;
+          } while (
+            content[captionIndex] instanceof MediaWikiBreak ||
+            content[captionIndex] instanceof MediaWikiText ||
+            content[captionIndex] instanceof MediaWikiExternalLink
+          );
           transformedContent.push(
             new MediaWikiFile(current.fileName, {
               ...current.options,
               format: "thumb",
-              caption: second,
+              caption: captionContents,
             })
           );
           transformedContent.push(new MediaWikiBreak());
-          index += 2;
+          index += captionIndex - index - 2;
         } else {
           transformedContent.push(current);
         }
