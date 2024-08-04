@@ -15,7 +15,8 @@ class NewsHeaderTransformer extends MediaWikiTransformer {
         index > 0 &&
         index < content.length - 1 &&
         current instanceof MediaWikiText &&
-        current.value.length <= 70 &&
+        typeof current.children === "string" &&
+        current.children.length <= 70 &&
         current.styling?.bold
       ) {
         const before = content[index - 1];
@@ -24,7 +25,9 @@ class NewsHeaderTransformer extends MediaWikiTransformer {
           before instanceof MediaWikiBreak &&
           after instanceof MediaWikiBreak
         ) {
-          transformedContent.push(new MediaWikiHeader(current.value.trim(), 3));
+          transformedContent.push(
+            new MediaWikiHeader(current.children.trim(), 3)
+          );
         } else {
           transformedContent.push(current);
         }

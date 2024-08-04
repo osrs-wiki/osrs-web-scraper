@@ -11,8 +11,9 @@ class NewsFooterTransformer extends MediaWikiTransformer {
     const footerStartContent = content.filter((content) => {
       return (
         content instanceof MediaWikiText &&
-        (content.value.startsWith("You can also discuss") ||
-          content.value.startsWith("The Old School Team"))
+        typeof content.children === "string" &&
+        (content.children.startsWith("You can also discuss") ||
+          content.children.startsWith("The Old School Team"))
       );
     });
     const footerStart = footerStartContent?.[0];
