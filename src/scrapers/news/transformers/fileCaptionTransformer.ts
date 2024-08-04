@@ -24,17 +24,21 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
           second.styling?.italics
         ) {
           const captionContents = [second];
-          let captionIndex = index + 3;
-          do {
-            if (!(content[captionIndex] instanceof MediaWikiBreak)) {
-              captionContents.push(content[captionIndex]);
-            }
-            captionIndex++;
-          } while (
-            content[captionIndex] instanceof MediaWikiBreak ||
-            content[captionIndex] instanceof MediaWikiText ||
-            content[captionIndex] instanceof MediaWikiExternalLink
-          );
+          let captionIndex = index + 4;
+          if (index < content.length - 3) {
+            captionIndex--;
+            do {
+              if (!(content[captionIndex] instanceof MediaWikiBreak)) {
+                captionContents.push(content[captionIndex]);
+              }
+              captionIndex++;
+            } while (
+              content[captionIndex] instanceof MediaWikiBreak ||
+              content[captionIndex] instanceof MediaWikiExternalLink ||
+              (content[captionIndex] instanceof MediaWikiText &&
+                (content[captionIndex] as MediaWikiText).styling?.italics)
+            );
+          }
           transformedContent.push(
             new MediaWikiFile(current.fileName, {
               ...current.options,
