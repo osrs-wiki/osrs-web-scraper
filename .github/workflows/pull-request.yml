@@ -9,13 +9,11 @@ jobs:
     if: github.head_ref != 'changeset-release/main'
     name: Test for presence of new Changeset files
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
       - name: Get .changeset changes
         id: changeset-files
-        uses: tj-actions/changed-files@v35
+        uses: tj-actions/changed-files@v41
         with:
           files: .changeset/*.md
 
@@ -26,30 +24,5 @@ jobs:
           test -n "${{ steps.changeset-files.outputs.added_files }}"
 
   lint_build_test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          always-auth: true
-          cache: yarn
-          node-version: 21
-
-      - name: Install yarn packages
-        run: yarn install --frozen-lockfile
-
-      - name: Lint
-        run: yarn lint
-
-      - name: Build
-        run: yarn build
-
-      - name: Test
-        run: yarn test
-
-      - name: Persist build output as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build
+    name: "Lint, Built, & Test"
+    uses: ./.github/workflows/action-lint-build-test.yml
