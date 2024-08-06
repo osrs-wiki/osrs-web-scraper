@@ -1,6 +1,6 @@
 {
   "name": "osrs-web-scraper",
-  "version": "0.17.1",
+  "version": "0.17.2",
   "description": "Tools to scrape the osrs website.",
   "main": "index.js",
   "scripts": {

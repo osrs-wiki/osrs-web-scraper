@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.17.2
+
+### Patch Changes
+
+- 70a6da4: Bump word-wrap from 1.2.3 to 1.2.5
+- 830f739: Bump @babel/traverse from 7.18.6 to 7.25.3
+- 2af7394: Bump braces from 3.0.2 to 3.0.3
+- e3e94b7: Combine elements in NewsFileCaptionTransformer
+- cf3278c: Fixes to Github workflow action versions
+
 ## 0.17.1
 
 ### Patch Changes
