@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.18.0
+
+### Minor Changes
+
+- 8ae1b18: Replace yarn with npm
+
 ## 0.17.2
 
 ### Patch Changes
