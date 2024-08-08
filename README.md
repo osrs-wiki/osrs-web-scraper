@@ -7,7 +7,7 @@ Scrape information from the Oldschool Runescape website and convert it to MediaW
 ### Install dependencies
 
 ```
-yarn install
+npm install
 ```
 
 ### Usage
@@ -33,7 +33,7 @@ Commands:
 Create a changeset file by running the following command:
 
 ```
-yarn changeset
+npx changeset
 ```
 
 Upon merging a PR, a changeset "Release" PR will be created which consumes all changeset files to build a change log. Merging this "Release" PR will create a new Github Release.

@@ -26,17 +26,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: 20
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Build
-        run: yarn build
+        run: npm run build
 
       - name: OSRS Web Scraper
-        run: yarn start:node ${{ github.event.inputs.task }} "${{ github.event.inputs.link }}"
+        run: npm run start:node ${{ github.event.inputs.task }} "${{ github.event.inputs.link }}"
 
       - name: Upload Output
         uses: actions/upload-artifact@v3
