@@ -24,11 +24,11 @@ jobs:
         run: git config --global url."https://".insteadOf git://
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           always-auth: true
           cache: npm
-          node-version: 20
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
