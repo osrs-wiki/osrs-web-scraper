@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.18.0
+
+### Minor Changes
+
+- 8ae1b18: Replace yarn with npm
+
+### Patch Changes
+
+- 0a4c2b4: Bump word-wrap from 1.2.3 to 1.2.5
+- 33eae6c: Bump json5 from 1.0.1 to 1.0.2
+- 2a84668: Bump braces from 3.0.2 to 3.0.3
+
 ## 0.17.2
 
 ### Patch Changes
