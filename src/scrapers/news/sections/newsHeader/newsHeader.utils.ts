@@ -50,6 +50,7 @@ const updateCategories: { [key: string]: NewsCategory } = {
   "Technical": "technical",
   "Website updates": "website",
   "Website update": "website",
+  "Website": "website",
   "Your Feedback updates": "yourfeedback",
   "Your Feedback": "yourfeedback",
 };
@@ -67,8 +68,14 @@ export const getLatestRSSCateogry = async (url: string) => {
   }
 };
 
-export const getNewsCategory = (rawCategory: string) =>
-  updateCategories[rawCategory] ?? "game";
+export const getNewsCategory = (rawCategory: string) => {
+  const formattedRawCategory = rawCategory.toLocaleLowerCase().trim();
+  const categoryKey =
+    Object.keys(updateCategories).find(
+      (category) => category.toLocaleLowerCase() === formattedRawCategory
+    ) ?? "Game update";
+  return updateCategories[categoryKey];
+};
 
 export const getNewsUrlIdentifier = (url: string) => {
   const linkSections = url.split("/");
