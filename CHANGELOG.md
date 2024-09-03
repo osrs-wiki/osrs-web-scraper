@@ -1,5 +1,13 @@
 # osrs-web-scraper
 
+## 0.18.1
+
+### Patch Changes
+
+- a727f28: Add "Website" to news category list
+- 2679d06: Upgrade puppeteer to 23.2.1
+- a727f28: Add case insensitive news category detection
+
 ## 0.18.0
 
 ### Minor Changes
