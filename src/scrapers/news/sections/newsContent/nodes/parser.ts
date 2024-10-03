@@ -7,6 +7,7 @@ import centerParser from "./center";
 import detailsParser from "./details";
 import divParser from "./div";
 import fontParser from "./font";
+import htmlParser from "./html";
 import iframeParser from "./iframe";
 import imageParser from "./image";
 import italicsParser from "./italics";
@@ -37,6 +38,8 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   li: listItemParser,
   ol: listParser,
   p: paragraphParser,
+  sub: htmlParser,
+  sup: htmlParser,
   span: spanParser,
   strong: boldParser,
   table: tableParser,

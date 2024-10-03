@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`html node Tag should parse and render MediaWikiHTML 1`] = `"<sub>test</sub>"`;
