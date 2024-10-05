@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pollBox poll-box with no poll question returns letter 1`] = `
+"{{Letter|''header''
+'''here is the content'''}}
+"
+`;
+
+exports[`pollBox poll-box with question returns news poll 1`] = `
+"{{News Poll|3|here is the question}}
+"
+`;

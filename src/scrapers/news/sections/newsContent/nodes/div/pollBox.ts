@@ -1,6 +1,12 @@
-import { LetterTemplate, NewsPollTemplate } from "@osrs-wiki/mediawiki-builder";
+import {
+  LetterTemplate,
+  MediaWikiBreak,
+  MediaWikiContent,
+  NewsPollTemplate,
+} from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
+import { trim } from "../../../../../../utils/mediawiki";
 import { formatText } from "../../../../../../utils/text";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
@@ -8,31 +14,32 @@ import nodeParser from "../parser";
 export const pollBoxParser: ContentNodeParser = (node) => {
   if (node instanceof HTMLElement) {
     const divElement = node as HTMLElement;
-    const pollNodes = divElement.childNodes.filter(
+    const isPollQuestion = node.textContent?.includes("Question #");
+    const childNodes = divElement.childNodes.filter(
       (childNode) =>
-        (childNode instanceof HTMLElement &&
-          (childNode as HTMLElement).rawTagName === "p") ||
-        (childNode as HTMLElement).rawTagName === "b"
+        childNode instanceof HTMLElement &&
+        ["p", "b", "i"].includes(
+          (childNode as HTMLElement).rawTagName.toLocaleLowerCase()
+        )
     );
-    const letterNodes = divElement.childNodes.filter(
-      (childNode) =>
-        (childNode instanceof HTMLElement &&
-          (childNode as HTMLElement).rawTagName === "p") ||
-        (childNode as HTMLElement).rawTagName === "i"
-    );
-    if (pollNodes?.length > 0) {
+    if (isPollQuestion) {
       let parsedNumber;
       let question = "";
-      if (pollNodes?.length > 1) {
-        const number = pollNodes?.[0]?.textContent?.replaceAll(/[^0-9]+/g, "");
+      if (childNodes?.length > 1) {
+        const number = childNodes?.[0]?.textContent?.replaceAll(/[^0-9]+/g, "");
         parsedNumber = parseInt(number ? number : "1");
-        question = formatText(pollNodes?.[1]?.textContent);
+        question = formatText(childNodes?.[1]?.textContent);
       } else {
-        question = formatText(pollNodes?.[0]?.textContent);
+        question = formatText(childNodes?.[0]?.textContent);
       }
       return new NewsPollTemplate(question, parsedNumber).build();
-    } else if (letterNodes?.length > 0) {
-      const letter = nodeParser(letterNodes?.[0]);
+    } else if (childNodes?.length > 0) {
+      const letter = trim(
+        divElement.childNodes
+          .map((node) => nodeParser(node))
+          .flat()
+          .filter((node) => node instanceof MediaWikiContent)
+      );
       return new LetterTemplate(letter).build();
     }
   }
