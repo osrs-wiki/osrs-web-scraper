@@ -1,5 +1,13 @@
 # osrs-web-scraper
 
+## 0.19.0
+
+### Minor Changes
+
+- e89600e: Add support for sup and sub hmtl tags
+- cf550c9: Add support for parsing poll-box Letter template
+- bcc9215: Add support for Youtube template in iframe parser
+
 ## 0.18.1
 
 ### Patch Changes
