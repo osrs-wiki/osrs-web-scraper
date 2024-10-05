@@ -1,7 +1,6 @@
 import { MediaWikiBuilder } from "@osrs-wiki/mediawiki-builder";
 import parse from "node-html-parser";
 
-import htmlParser from "../html";
 import iframeParser from "../iframe";
 
 describe("iframe node", () => {

@@ -2,7 +2,6 @@ import {
   MediaWikiExternalLink,
   MediaWikiHTML,
   MediaWikiTemplate,
-  MediaWikiVideo,
 } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
