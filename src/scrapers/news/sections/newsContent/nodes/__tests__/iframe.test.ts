@@ -21,4 +21,11 @@ describe("iframe node", () => {
     builder.addContents([iframeParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("iframe link should be parsed from src attribute", () => {
+    const root = parse('<iframe src="https://example.com">blah</iframe>');
+    const builder = new MediaWikiBuilder();
+    builder.addContents([iframeParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });

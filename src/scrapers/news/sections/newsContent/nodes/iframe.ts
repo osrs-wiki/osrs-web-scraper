@@ -9,8 +9,9 @@ import { ContentNodeParser } from "../types";
 
 export const iframeParser: ContentNodeParser = (node) => {
   const htmlNode = node as HTMLElement;
-  const link = htmlNode.attributes["data-cookieblock-src"];
-  const videoId = link.includes("youtube.com") && link?.split("embed/")?.pop();
+  const link =
+    htmlNode.attributes["data-cookieblock-src"] ?? htmlNode.attributes["src"];
+  const videoId = link?.includes("youtube.com") && link?.split("embed/")?.pop();
   if (videoId) {
     const youtubeTemplate = new MediaWikiTemplate("Youtube", {
       collapsed: true,
