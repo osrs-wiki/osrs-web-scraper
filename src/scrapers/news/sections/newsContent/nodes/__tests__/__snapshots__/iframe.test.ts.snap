@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`iframe node iframe link should be parsed from src attribute 1`] = `"<center><big>[https://example.com title]</big></center>"`;
+
 exports[`iframe node iframe with non-youtube link should use center tag 1`] = `"<center><big>[https://example.com title]</big></center>"`;
 
 exports[`iframe node iframe with youtube link should use Youtube template 1`] = `
