@@ -36,7 +36,9 @@ const pollHeader: PollSection = {
       .match(/\(([^)]+)\)/g)?.[0]
       .replaceAll(/(\()*(\))*/g, "");
 
-    const endDate = description.match(/This poll will close on (.*)\./)?.[1];
+    const endDate = description.match(
+      /This poll (will close on|closes) (.*)\./
+    )?.[2];
     let endDateFormatted;
     let endDateFormatIndex = 0;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
