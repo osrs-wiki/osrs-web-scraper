@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.19.1
+
+### Patch Changes
+
+- 81775d4: Fix poll header scraping to account for new end date sentence format
+- 632bf6b: Add support for pulling iframe link from src attribute
+
 ## 0.19.0
 
 ### Minor Changes
