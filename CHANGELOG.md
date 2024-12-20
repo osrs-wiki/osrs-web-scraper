@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.19.2
+
+### Patch Changes
+
+- c50f3aa: Upgrade puppeteer to 23.11.1 and use no-sandbox args
+
 ## 0.19.1
 
 ### Patch Changes
