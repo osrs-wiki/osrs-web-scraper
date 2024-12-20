@@ -11,7 +11,9 @@ class Scraper {
   page: Page;
 
   scrape = async (url: string, scraper: ScrapingService<MediaWikiBuilder>) => {
-    this.browser = await puppeteer.launch();
+    this.browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disabled-setupid-sandbox"],
+    });
     this.page = await this.browser.newPage();
 
     await this.page.goto(url, { waitUntil: "networkidle2" });
