@@ -16,7 +16,7 @@ const textParser: ContentNodeParser = (node, options) => {
   return node.childNodes
     .map<MediaWikiContent | MediaWikiContent[]>((childNode) => {
       if (childNode instanceof HTMLElement) {
-        return nodeParser(childNode);
+        return nodeParser(childNode, options);
       } else {
         return new MediaWikiText(formatText(childNode.rawText), {
           bold: options?.bold as boolean,
