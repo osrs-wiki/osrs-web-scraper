@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.19.3
+
+### Patch Changes
+
+- 41330a5: Pass options to children nodes in text parser
+- 6205004: Upgrade actions/upload-artifact to v4
+
 ## 0.19.2
 
 ### Patch Changes
