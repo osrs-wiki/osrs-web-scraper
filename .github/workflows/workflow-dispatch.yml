@@ -39,7 +39,7 @@ jobs:
         run: npm run start:node ${{ github.event.inputs.task }} "${{ github.event.inputs.link }}"
 
       - name: Upload Output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.inputs.task }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: out/${{ github.event.inputs.task }}/
