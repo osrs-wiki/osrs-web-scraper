@@ -17,29 +17,9 @@ on:
         required: false
 
 jobs:
-  scrapeNews:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: OSRS Web Scraper
-        run: npm run start:node ${{ github.event.inputs.task }} "${{ github.event.inputs.link }}"
-
-      - name: Upload Output
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.event.inputs.task }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: out/${{ github.event.inputs.task }}/
+  run-scraper:
+    name: "Run OSRS Web Scraper"
+    uses: ./.github/workflows/action-run-scraper.yml
+    with:
+      task: ${{ github.event.inputs.task }}
+      link: ${{ github.event.inputs.link }}
