@@ -1,0 +1,12 @@
+name: Scheduled update-day news post
+
+on:
+  schedule:
+    - cron: "47 10 * * 3"
+
+jobs:
+  run-scraper:
+    name: "Scrape update-day news post"
+    uses: ./.github/workflows/action-run-scraper.yml
+    with:
+      task: "news"

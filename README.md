@@ -21,7 +21,7 @@ Options:
 
 Commands:
   news <string>   Scrape an OSRS news posts.
-  poll <string>   Scrape an OSRS poll.
+  poll [string]   Scrape an OSRS poll.
   worlds          Scrape the OSRS world list.
   help [command]  display help for command
 ```
