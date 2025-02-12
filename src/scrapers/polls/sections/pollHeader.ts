@@ -5,12 +5,11 @@ import {
   PollNoticeTemplate,
   PollWrapperTemplate,
 } from "@osrs-wiki/mediawiki-builder";
-import { format, isBefore, parse } from "date-fns";
+import { format, isBefore } from "date-fns";
 import { HTMLElement } from "node-html-parser";
 
+import { getPollEndDate } from "./polls.utils";
 import { PollSection } from "./types";
-
-const END_DATE_FORMATS = ["EEEE, MMMM do", "EEEE MMMM do", "EEEE do MMMM"];
 
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {
@@ -36,26 +35,13 @@ const pollHeader: PollSection = {
       .match(/\(([^)]+)\)/g)?.[0]
       .replaceAll(/(\()*(\))*/g, "");
 
-    const endDate = description.match(
-      /This poll (will close on|closes) (.*)\./
-    )?.[2];
-    let endDateFormatted;
-    let endDateFormatIndex = 0;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore It is a valid type
-    while (!endDateFormatted || isNaN(endDateFormatted)) {
-      endDateFormatted = parse(
-        endDate,
-        END_DATE_FORMATS[endDateFormatIndex++],
-        new Date()
-      );
-    }
+    const endDate = getPollEndDate(description);
 
     content.push(
       new PollNoticeTemplate(
         parseInt(number),
         format(new Date(startDate), "d MMMM yyyy"),
-        format(endDateFormatted ?? new Date(), "d MMMM yyyy")
+        format(endDate ?? new Date(), "d MMMM yyyy")
       ).build()
     );
     content.push(new MediaWikiBreak());
@@ -70,7 +56,7 @@ const pollHeader: PollSection = {
     content.push(new MediaWikiBreak());
 
     const totalTemplate = new MediaWikiTemplate("PollTotal");
-    totalTemplate.add("", isBefore(new Date(), endDateFormatted) ? "" : total);
+    totalTemplate.add("", isBefore(new Date(), endDate) ? "" : total);
     content.push(totalTemplate);
 
     return content;
