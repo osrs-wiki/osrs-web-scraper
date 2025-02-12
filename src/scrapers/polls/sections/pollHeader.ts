@@ -37,7 +37,7 @@ const pollHeader: PollSection = {
       .replaceAll(/(\()*(\))*/g, "");
 
     const endDate = description.match(
-      /This poll (will close on|closes) (.*)\./
+      /This poll (will close on|closes on|closes) (.*)\./
     )?.[2];
     let endDateFormatted;
     let endDateFormatIndex = 0;
