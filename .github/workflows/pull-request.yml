@@ -13,7 +13,7 @@ jobs:
 
       - name: Get .changeset changes
         id: changeset-files
-        uses: tj-actions/changed-files@v41
+        uses: tj-actions/changed-files@v46
         with:
           files: .changeset/*.md
 
