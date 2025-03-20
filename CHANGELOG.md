@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.20.0
+
+### Minor Changes
+
+- 6d30431: Add scheduled news post scrape for update post
+- 6d30431: Refactor command line interface commands
+- 6d30431: Add support for fetching latest news post from rss feed
+
+### Patch Changes
+
+- 3ca6241: Add support for additional poll end date format
+
 ## 0.19.3
 
 ### Patch Changes
