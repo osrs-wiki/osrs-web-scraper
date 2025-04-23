@@ -15,15 +15,16 @@ const textParser: ContentNodeParser = (node, options) => {
   }
   return node.childNodes
     .map<MediaWikiContent | MediaWikiContent[]>((childNode) => {
-      if (childNode instanceof HTMLElement) {
-        return nodeParser(childNode, options);
-      } else {
-        return new MediaWikiText(formatText(childNode.rawText), {
+      return new MediaWikiText(
+        childNode instanceof HTMLElement
+          ? nodeParser(childNode)
+          : formatText(childNode.rawText),
+        {
           bold: options?.bold as boolean,
           italics: options?.italics as boolean,
           underline: options?.underline as boolean,
-        });
-      }
+        }
+      );
     })
     .flat();
 };

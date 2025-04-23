@@ -3,7 +3,7 @@
 exports[`NewsHeaderTransformer should change bold text to header-3 1`] = `
 "__TOC__
 
-===You can also discuss this update on our===
+====You can also discuss this update on our====
 ''The Old School Team.''"
 `;
 

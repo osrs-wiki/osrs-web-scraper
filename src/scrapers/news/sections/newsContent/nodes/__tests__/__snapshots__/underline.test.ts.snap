@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`underline node Underlined text should parse and render 1`] = `"'''test'''"`;
+
+exports[`underline node Underlined text should parse and render with a link 1`] = `"'''testing this [https://example.com link]'''"`;
+
+exports[`underline node Underlined text should parse and render with a link and bold 1`] = `"'''testing this [https://example.com link] and <!-- Unsupported tag: b -->'''"`;
+
+exports[`underline node Underlined text should parse and render with a link and italics 1`] = `"'''testing this [https://example.com link] and ''italics'''''"`;
