@@ -6,6 +6,8 @@ import {
   MediaWikiTransformer,
 } from "@osrs-wiki/mediawiki-builder";
 
+import { getFirstStringContent } from "../../../utils/mediawiki";
+
 class NewsHeaderTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {
     const transformedContent = [];
@@ -14,20 +16,28 @@ class NewsHeaderTransformer extends MediaWikiTransformer {
       if (
         index > 0 &&
         index < content.length - 1 &&
-        current instanceof MediaWikiText &&
-        typeof current.children === "string" &&
-        current.children.length <= 70 &&
-        current.styling?.bold
+        current instanceof MediaWikiText
       ) {
-        const before = content[index - 1];
-        const after = content[index + 1];
+        const firstContent = getFirstStringContent(current);
         if (
-          before instanceof MediaWikiBreak &&
-          after instanceof MediaWikiBreak
+          firstContent &&
+          firstContent instanceof MediaWikiText &&
+          firstContent.styling?.bold &&
+          typeof firstContent.children === "string" &&
+          firstContent.children.length < 70
         ) {
-          transformedContent.push(
-            new MediaWikiHeader(current.children.trim(), 3)
-          );
+          const before = content[index - 1];
+          const after = content[index + 1];
+          if (
+            before instanceof MediaWikiBreak &&
+            after instanceof MediaWikiBreak
+          ) {
+            transformedContent.push(
+              new MediaWikiHeader(firstContent.children, 4)
+            );
+          } else {
+            transformedContent.push(current);
+          }
         } else {
           transformedContent.push(current);
         }

@@ -45,4 +45,22 @@ describe("NewsFooterTransformer", () => {
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
   });
+
+  it("should insert the separator if the text is in children", () => {
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiTOC(),
+      new MediaWikiBreak(),
+      new MediaWikiLink("test", "test"),
+      new MediaWikiBreak(),
+      new MediaWikiText("test", { bold: true }),
+      new MediaWikiBreak(),
+      new MediaWikiText([
+        new MediaWikiText("The Old School Team.", { italics: true }),
+      ]),
+    ];
+    const transformed = new NewsFooterTransformer().transform(originalContent);
+    expect(
+      new MediaWikiBuilder().addContents(transformed).build()
+    ).toMatchSnapshot();
+  });
 });

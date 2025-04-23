@@ -6,14 +6,15 @@ import {
   MediaWikiTransformer,
 } from "@osrs-wiki/mediawiki-builder";
 
+import { startsWith } from "../../../utils/mediawiki";
+
 class NewsFooterTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {
     const footerStartContent = content.filter((content) => {
       return (
         content instanceof MediaWikiText &&
-        typeof content.children === "string" &&
-        (content.children.startsWith("You can also discuss") ||
-          content.children.startsWith("The Old School Team"))
+        (startsWith(content, "You can also discuss") ||
+          startsWith(content, "The Old School Team"))
       );
     });
     const footerStart = footerStartContent?.[0];
