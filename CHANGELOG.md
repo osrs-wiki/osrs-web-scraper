@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.21.0
+
+### Minor Changes
+
+- a6fc424: Update transformers to support new text-children changes
+- a6fc424: Update bold, italic, and underline parsers to wrap in MediaWikiText
+
 ## 0.20.0
 
 ### Minor Changes
