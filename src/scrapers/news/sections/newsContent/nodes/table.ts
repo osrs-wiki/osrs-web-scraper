@@ -18,7 +18,7 @@ export const tableParser: ContentNodeParser = (node, options) => {
     const headerNodes = thead?.querySelectorAll("tr") ?? [];
     const headerRowNodes = (headerNodes?.length > 0 ? headerNodes : rowNodes)
       .shift()
-      .querySelectorAll("td");
+      .querySelectorAll("td, th");
     const headers: MediaWikiTableCell[] =
       headerRowNodes.map<MediaWikiTableCell>((node) => ({
         content: [new MediaWikiText(node.textContent.trim())],
