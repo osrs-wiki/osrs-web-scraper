@@ -1,6 +1,6 @@
 {
   "name": "osrs-web-scraper",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Tools to scrape the osrs website.",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "commander": "^13.1.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
-    "image-size": "^1.1.1",
+    "image-size": "^1.2.1",
     "node-html-parser": "^6.1.10",
     "puppeteer": "^23.11.1",
     "rss-parser": "^3.13.0",

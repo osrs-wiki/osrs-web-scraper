@@ -15,12 +15,12 @@ You can also discuss this update on our
 "
 `;
 
-exports[`NewsFileCaptionTransformer should not combine non-adjacent MediaWikiFile, MediaWikiBreak and MediaWikiText 1`] = `
+exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage with surrounding italics content 1`] = `
 "__TOC__
 
-[[File:image]]
-test
+[[test|test]]
+[[File:image|thumb|caption[[linkText|linkTarget]]]]
 
-''testitalics''
-''The Old School Team.''"
+''You can also discuss this update on our''
+"
 `;

@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`italics node Italic text should parse and render 1`] = `"''test''"`;
+
+exports[`italics node Italic text should parse and render with a link 1`] = `"''testing this [https://example.com link]''"`;
+
+exports[`italics node Italic text should parse and render with a link and bold 1`] = `"''testing this [https://example.com link] and '''bold'''''"`;

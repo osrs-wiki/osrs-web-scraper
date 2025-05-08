@@ -15,7 +15,7 @@ describe("NewsFileCaptionTransformer", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiFile("image"),
       new MediaWikiBreak(),
-      new MediaWikiText("caption", { italics: true }),
+      new MediaWikiText([new MediaWikiText("caption", { italics: true })]),
     ];
     const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
@@ -33,7 +33,7 @@ describe("NewsFileCaptionTransformer", () => {
       new MediaWikiBreak(),
       new MediaWikiFile("image"),
       new MediaWikiBreak(),
-      new MediaWikiText("caption", { italics: true }),
+      new MediaWikiText([new MediaWikiText("caption", { italics: true })]),
       new MediaWikiBreak(),
       new MediaWikiText("You can also discuss this update on our"),
       new MediaWikiBreak(),
@@ -46,18 +46,29 @@ describe("NewsFileCaptionTransformer", () => {
     ).toMatchSnapshot();
   });
 
-  it("should not combine non-adjacent MediaWikiFile, MediaWikiBreak and MediaWikiText", () => {
+  it("should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage with surrounding italics content", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiTOC(),
       new MediaWikiBreak(),
+      new MediaWikiLink("test", "test"),
+      new MediaWikiBreak(),
       new MediaWikiFile("image"),
       new MediaWikiBreak(),
-      new MediaWikiText("test"),
+      new MediaWikiText(
+        [
+          new MediaWikiText("caption"),
+          new MediaWikiLink("linkText", "linkTarget"),
+          new MediaWikiBreak(),
+        ],
+        {
+          italics: true,
+        }
+      ),
       new MediaWikiBreak(),
+      new MediaWikiText("You can also discuss this update on our", {
+        italics: true,
+      }),
       new MediaWikiBreak(),
-      new MediaWikiText("testitalics", { italics: true }),
-      new MediaWikiBreak(),
-      new MediaWikiText("The Old School Team.", { italics: true }),
     ];
     const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
