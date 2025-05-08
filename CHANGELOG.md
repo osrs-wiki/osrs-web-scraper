@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.21.1
+
+### Patch Changes
+
+- f571254: Bump tar-fs from 3.0.6 to 3.0.8
+- 7af6db7: Bump @babel/runtime from 7.22.10 to 7.27.0
+- 4411ebb: Bump tj-actions/changed-files from 41 to 46 in /.github/workflows
+- 06e1e4f: Fix table header parsing
+- 7c32de5: Bumps image-size from 1.1.1 to 1.2.1.
+
 ## 0.21.0
 
 ### Minor Changes
