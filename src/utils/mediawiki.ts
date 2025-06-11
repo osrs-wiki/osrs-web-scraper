@@ -1,6 +1,4 @@
 import { MediaWikiBreak, MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
-import { is } from "date-fns/locale";
-
 /**
  * Trims the leading and trailing MediaWikiBreak elements from the contents.
  *
