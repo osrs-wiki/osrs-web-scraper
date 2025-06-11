@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.22.0
+
+### Minor Changes
+
+- dd457ff: Add Youtube playlist support to iframe parser
+
+### Patch Changes
+
+- e0e69c9: Disallow question marks in newspost title directories
+- 9d3813e: Bump tar-fs from 3.0.8 to 3.0.9
+- e0e69c9: Fix empty contents parsing in mediawiki getFirstStringContent and startsWith
+
 ## 0.21.1
 
 ### Patch Changes
