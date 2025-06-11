@@ -8,3 +8,8 @@ exports[`iframe node iframe with youtube link should use Youtube template 1`] = 
 "{{Youtube|test}}
 "
 `;
+
+exports[`iframe node iframe with youtube playlist link should use Youtube template with type=playlist 1`] = `
+"{{Youtube|type=playlist|PLRs68iqW7gYvSyTqu12WFMMXYZM-2regV}}
+"
+`;
