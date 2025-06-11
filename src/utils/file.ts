@@ -53,6 +53,7 @@ const fileCharsReplaceMap: { [key: string]: string } = {
   ":": "-",
   "|": "-",
   "&nbsp;": "",
+  "?": "",
 };
 
 /**
@@ -65,5 +66,5 @@ export const formatFileName = (fileName: string) => {
     (name, find) => name.replaceAll(find, fileCharsReplaceMap[find]),
     fileName
   );
-  return formatText(cleanedFileName);
+  return formatText(cleanedFileName).trim();
 };
