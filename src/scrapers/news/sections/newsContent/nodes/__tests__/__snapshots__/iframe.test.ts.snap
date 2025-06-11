@@ -5,7 +5,7 @@ exports[`iframe node iframe link should be parsed from src attribute 1`] = `"<ce
 exports[`iframe node iframe with non-youtube link should use center tag 1`] = `"<center><big>[https://example.com title]</big></center>"`;
 
 exports[`iframe node iframe with youtube link should use Youtube template 1`] = `
-"{{Youtube|test}}
+"{{Youtube|80pYF2u-lJo}}
 "
 `;
 

@@ -25,7 +25,7 @@ export const iframeParser: ContentNodeParser = (node) => {
         return youtubeTemplate;
       }
     } else {
-      const videoId = link?.split("embed/")?.pop()?.split("?")?.[0];
+      const videoId = parsedUrl.pathname.match(/\/embed\/([^\/?]+)/)?.[1];
       if (videoId) {
         const youtubeTemplate = new MediaWikiTemplate("Youtube", {
           collapsed: true,

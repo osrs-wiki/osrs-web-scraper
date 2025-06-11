@@ -6,7 +6,7 @@ import iframeParser from "../iframe";
 describe("iframe node", () => {
   test("iframe with youtube link should use Youtube template", () => {
     const root = parse(
-      '<iframe data-cookieblock-src="https://youtube.com/embed/test">blah</iframe>'
+      '<iframe data-cookieblock-src="https://www.youtube.com/embed/80pYF2u-lJo?si=eQouUlth2Sko8b46">blah</iframe>'
     );
     const builder = new MediaWikiBuilder();
     builder.addContents([iframeParser(root.firstChild)].flat());
