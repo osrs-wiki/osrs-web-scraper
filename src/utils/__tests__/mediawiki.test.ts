@@ -1,6 +1,6 @@
 import { MediaWikiBreak, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
 
-import { getFirstStringContent, startsWith, trim } from "../mediawiki";
+import { getFirstStringContent, isEmpty, startsWith, trim } from "../mediawiki";
 
 describe("mediawiki utils", () => {
   describe("trim", () => {
@@ -93,6 +93,72 @@ describe("mediawiki utils", () => {
       ];
       const result = startsWith(contents, "content");
       expect(result).toBe(false);
+    });
+  });
+
+  describe("isEmpty", () => {
+    test("should return true for an empty string", () => {
+      expect(isEmpty("")).toBe(true);
+    });
+
+    test("should return true for a string with only whitespace", () => {
+      expect(isEmpty("   ")).toBe(true);
+    });
+
+    test("should return false for a non-empty string", () => {
+      expect(isEmpty("content")).toBe(false);
+    });
+
+    test("should return true for an empty array", () => {
+      expect(isEmpty([])).toBe(true);
+    });
+
+    test("should return true for an array of empty MediaWikiText objects", () => {
+      expect(isEmpty([new MediaWikiText("")])).toBe(true);
+    });
+
+    test("should return true for an array of MediaWikiText objects with empty strings", () => {
+      expect(isEmpty([new MediaWikiText(""), new MediaWikiText("   ")])).toBe(
+        true
+      );
+    });
+
+    test("should return false for an array with a non-empty MediaWikiText object", () => {
+      expect(isEmpty([new MediaWikiText("content")])).toBe(false);
+    });
+
+    test("should return false for an array with mixed empty and non-empty MediaWikiText objects", () => {
+      expect(
+        isEmpty([new MediaWikiText(""), new MediaWikiText("content")])
+      ).toBe(false);
+    });
+
+    test("should return false for a single non-array MediaWikiContent object (MediaWikiText)", () => {
+      // This hits the final `return false` in isEmpty, as it's not a string or array.
+      expect(isEmpty(new MediaWikiText("content"))).toBe(false);
+    });
+
+    test("should return true for an empty MediaWikiContent", () => {
+      expect(isEmpty(new MediaWikiText(""))).toBe(true);
+    });
+
+    test("should return true for an array of MediaWikiContent where all are recursively empty strings", () => {
+      const contents = [new MediaWikiText(""), new MediaWikiText("   ")];
+      expect(isEmpty(contents)).toBe(true);
+    });
+
+    test("should return false for an array of MediaWikiContent where at least one is not an empty string", () => {
+      const contents = [
+        new MediaWikiText(""),
+        new MediaWikiText("hello"),
+        new MediaWikiText("   "),
+      ];
+      expect(isEmpty(contents)).toBe(false);
+    });
+
+    test("should return true for an array of MediaWikiContent where all are recursively empty strings", () => {
+      const contents = [new MediaWikiText(""), new MediaWikiText("   ")];
+      expect(isEmpty(contents)).toBe(true);
     });
   });
 

@@ -1,4 +1,5 @@
 import { MediaWikiBreak, MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
+import { is } from "date-fns/locale";
 
 /**
  * Trims the leading and trailing MediaWikiBreak elements from the contents.
@@ -28,6 +29,24 @@ export const trim = (contents: MediaWikiContent[]): MediaWikiContent[] => {
 };
 
 /**
+ * Checks if the contents are empty.
+ * @param contents The contents to check.
+ * @returns True if the contents are empty, otherwise false.
+ */
+export const isEmpty = (
+  contents: string | MediaWikiContent | MediaWikiContent[]
+): boolean => {
+  if (typeof contents === "string") {
+    return contents.trim().length === 0;
+  } else if (Array.isArray(contents)) {
+    return contents.length === 0 || contents.every(isEmpty);
+  } else if (contents instanceof MediaWikiContent) {
+    return isEmpty(contents.children);
+  }
+  return false;
+};
+
+/**
  * Checks if the first child of the contents starts with the given string.
  *
  * @param contents The contents to check.
@@ -38,6 +57,9 @@ export const startsWith = (
   contents: string | MediaWikiContent | MediaWikiContent[],
   str: string
 ): boolean => {
+  if (isEmpty(contents)) {
+    return false;
+  }
   if (typeof contents === "string") {
     return contents.startsWith(str);
   }
@@ -61,7 +83,7 @@ export const getFirstStringContent = (
     return contents;
   } else if (contents.children instanceof MediaWikiContent) {
     return getFirstStringContent(contents.children);
-  } else if (Array.isArray(contents.children)) {
+  } else if (Array.isArray(contents.children) && contents.children.length > 0) {
     return getFirstStringContent(contents.children[0]);
   }
   return undefined;
