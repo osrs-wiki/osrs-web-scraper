@@ -2,4 +2,4 @@
 "osrs-web-scraper": patch
 ---
 
-Add support for a mising u1 parser
+Add support for a missing u1 parser
