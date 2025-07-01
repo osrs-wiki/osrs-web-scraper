@@ -1,4 +1,8 @@
-import { MediaWikiTable, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiTable,
+  MediaWikiText,
+} from "@osrs-wiki/mediawiki-builder";
 import type {
   MediaWikiTableCell,
   MediaWikiTableRow,
@@ -41,19 +45,22 @@ export const tableParser: ContentNodeParser = (node, options) => {
       }
     );
 
-    return new MediaWikiTable({
-      options: {
-        class: "wikitable",
-        style: "text-align: center;",
-      },
-      rows: [
-        {
-          header: true,
-          cells: headers,
+    return [
+      new MediaWikiTable({
+        options: {
+          class: "wikitable",
+          style: "text-align: center;",
         },
-        ...tableRows,
-      ],
-    });
+        rows: [
+          {
+            header: true,
+            cells: headers,
+          },
+          ...tableRows,
+        ],
+      }),
+      new MediaWikiBreak(),
+    ];
   }
 };
 

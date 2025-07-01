@@ -10,4 +10,11 @@ describe("list node", () => {
     builder.addContents([listParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("list should ignore breaks", () => {
+    const root = parse("<ul><li>test1</li><br/><li>test2</li><br/></ul>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([listParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
