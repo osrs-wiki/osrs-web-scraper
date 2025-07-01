@@ -8,7 +8,8 @@ exports[`table node A table with no thead should render 1`] = `
 |-
 | test
 | test
-|}"
+|}
+"
 `;
 
 exports[`table node A table with thead should render 1`] = `
@@ -22,5 +23,6 @@ exports[`table node A table with thead should render 1`] = `
 |-
 | test
 | test
-|}"
+|}
+"
 `;

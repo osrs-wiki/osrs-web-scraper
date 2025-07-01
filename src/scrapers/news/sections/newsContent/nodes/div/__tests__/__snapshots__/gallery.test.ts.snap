@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gallery node Gallery should parse and render 1`] = `
+"<gallery mode=\\"packed\\", heights=\\"180\\", style=\\"text-align:center\\">
+test-title (1).png
+test-title (2).jpg
+</gallery>
+"
+`;

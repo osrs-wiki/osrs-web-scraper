@@ -10,7 +10,7 @@ export const galleryParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement && node.childNodes.length > 0) {
     const divElement = node as HTMLElement;
     const imageNodes = divElement.querySelectorAll("img");
-    const content = imageNodes.map((imageNode) => {
+    const content = imageNodes.map((imageNode, index) => {
       const image = imageNode as HTMLElement;
       const imageLink = image.attributes.src;
 
@@ -23,7 +23,9 @@ export const galleryParser: ContentNodeParser = (node, options) => {
       const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
       const imageExtension = getFileExtension(imageLink);
 
-      return new MediaWikiText(`\n${imageName}.${imageExtension}`);
+      return new MediaWikiText(
+        `${index === 0 ? "" : "\n"}${imageName}.${imageExtension}`
+      );
     });
     return new MediaWikiHTML("gallery", content, {
       mode: "packed",
