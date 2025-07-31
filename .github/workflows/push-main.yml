@@ -32,7 +32,7 @@ jobs:
 
       - name: Create Release Pull Request or Release
         id: changeset
-        uses: changesets/action@v1
+        uses: changesets/action@v1.4.10
         with:
           publish: echo Release && echo "New tag:"
           title: Release
