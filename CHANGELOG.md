@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.22.1
+
+### Patch Changes
+
+- 3e4e8fe: Remove spacing between bulleted points
+- 3e4e8fe: Add support for a missing u1 parser
+- 3e4e8fe: Remove blank new line from gallery
+- 3e4e8fe: Add new line after a table
+- 204e805: Update changeset action to version v1.4.10 in push-main workflow
+
 ## 0.22.0
 
 ### Minor Changes
