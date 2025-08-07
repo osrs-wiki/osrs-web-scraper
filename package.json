@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/allenkinzalow/osrs-web-scraper#readme",
   "dependencies": {
-    "@osrs-wiki/mediawiki-builder": "^1.6.0",
+    "@osrs-wiki/mediawiki-builder": "^1.8.2",
     "commander": "^13.1.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
