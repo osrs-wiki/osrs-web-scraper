@@ -94,6 +94,18 @@ describe("mediawiki utils", () => {
       const result = startsWith(contents, "content");
       expect(result).toBe(false);
     });
+
+    test("should handle empty array without throwing error", () => {
+      const contents: MediaWikiText[] = [];
+      const result = startsWith(contents, "content");
+      expect(result).toBe(false);
+    });
+
+    test("should handle array with undefined elements without throwing error", () => {
+      const contents = [undefined] as unknown as MediaWikiText[];
+      const result = startsWith(contents, "content");
+      expect(result).toBe(false);
+    });
   });
 
   describe("isEmpty", () => {
