@@ -62,6 +62,9 @@ export const startsWith = (
     return contents.startsWith(str);
   }
   const childContents = Array.isArray(contents) ? contents[0] : contents;
+  if (!childContents) {
+    return false;
+  }
   if (typeof childContents.children === "string") {
     return childContents.children.startsWith(str);
   }
