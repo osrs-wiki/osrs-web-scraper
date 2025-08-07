@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.22.2
+
+### Patch Changes
+
+- 2190844: Fix footer transformer index comparison bug and add undefined element filtering to prevent build errors.
+- 35b076d: Fix TypeError: Cannot read properties of undefined (reading 'children') in MediaWiki startsWith function. Added null/undefined check before accessing children property when processing MediaWiki content arrays containing undefined elements.
+
 ## 0.22.1
 
 ### Patch Changes
