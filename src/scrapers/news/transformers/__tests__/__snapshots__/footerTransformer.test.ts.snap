@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`NewsFooterTransformer should filter out undefined elements from the result 1`] = `
+"__TOC__
+
+----
+
+You can also discuss this update on our"
+`;
+
+exports[`NewsFooterTransformer should handle content with no footer text 1`] = `
+"__TOC__
+
+[[test|test]]
+'''test'''"
+`;
+
+exports[`NewsFooterTransformer should handle footer text at index 0 1`] = `
+"----
+
+You can also discuss this update on our
+[[test|test]]
+'''test'''"
+`;
+
 exports[`NewsFooterTransformer should insert the separator if the text is in children 1`] = `
 "__TOC__
 
