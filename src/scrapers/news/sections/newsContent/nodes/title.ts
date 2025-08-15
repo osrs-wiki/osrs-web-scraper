@@ -11,13 +11,13 @@ const tagNameMap: { [key: string]: number } = {
 
 export const titleParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     const tagName: string = node.rawTagName;
     const textContent = textParser(node, options);
-    
+
     if (tagNameMap[tagName]) {
       return new MediaWikiHeader(textContent, tagNameMap[tagName]);
+    } else {
+      return textContent;
     }
   }
 };

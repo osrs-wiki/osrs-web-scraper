@@ -31,4 +31,27 @@ describe("title node", () => {
     builder.addContents([titleParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("Unrecognized tag should return text content", () => {
+    const root = parse("<customtag>Test content</customtag>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([titleParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Unrecognized tag with complex content should return text content", () => {
+    const root = parse(
+      "<randomtag>Test with <b>bold</b> and <i>italic</i> text</randomtag>"
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([titleParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Empty unrecognized tag should return empty text content", () => {
+    const root = parse("<unknowntag></unknowntag>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([titleParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
