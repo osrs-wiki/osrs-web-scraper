@@ -17,6 +17,7 @@ import listItemParser from "./listItem";
 import paragraphParser from "./paragraph";
 import spanParser from "./span";
 import tableParser from "./table";
+import titleParser from "./title";
 import underlineParser from "./underline";
 import videoParser from "./video";
 import { ContentNodeParser } from "../types";
@@ -27,6 +28,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,
   audio: audioParser,
   b: boldParser,
+  bigtitle: titleParser,
   details: detailsParser,
   div: divParser,
   i: italicsParser,
@@ -38,6 +40,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   li: listItemParser,
   ol: listParser,
   p: paragraphParser,
+  smalltitle: titleParser,
   sub: htmlParser,
   sup: htmlParser,
   span: spanParser,
