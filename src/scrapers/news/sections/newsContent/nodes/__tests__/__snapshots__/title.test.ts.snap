@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`title node Bigtitle tag should parse and render as level 2 header 1`] = `"==Test=="`;
+
+exports[`title node Bigtitle with complex content should parse correctly 1`] = `"==Test with ''italic'' text=="`;
+
+exports[`title node Smalltitle tag should parse and render as level 3 header 1`] = `"===Test==="`;
+
+exports[`title node Smalltitle with complex content should parse correctly 1`] = `"===Test with '''bold''' text==="`;
