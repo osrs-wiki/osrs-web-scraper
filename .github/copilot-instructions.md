@@ -19,11 +19,11 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 - Production mode: `npm run start:node` -- requires build first.
 
 ### CLI Usage
-- Get help: `node dist/src/index.js --help`
-- Scrape latest news: `node dist/src/index.js news`
-- Scrape specific news: `node dist/src/index.js news <news-url>`
-- Scrape poll: `node dist/src/index.js poll <poll-url>`
-- Scrape worlds: `node dist/src/index.js worlds`
+- Get help: `npm run start --help`
+- Scrape latest news: `npm run start news`
+- Scrape specific news: `npm run start news <news-url>`
+- Scrape poll: `npm run start poll <poll-url>`
+- Scrape worlds: `npm run start worlds`
 
 ### Browser Requirements for Scraping
 - **IMPORTANT**: Scraping commands require Chrome/Chromium to be installed for Puppeteer.
@@ -45,7 +45,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 - **DO NOT** modify tests to make them pass unless fixing actual bugs.
 
 ### Manual Validation Scenarios
-- **CLI Help**: Run `node dist/src/index.js --help` to verify CLI structure.
+- **CLI Help**: Run `npm run start --help` to verify CLI structure.
 - **Development Mode**: Start `npm run start` and verify nodemon works correctly.
 - **Build Output**: Check `dist/` directory is created after build.
 - **Linting**: Verify no new ESLint errors are introduced.
@@ -133,6 +133,6 @@ src/
 
 - Check build output in `dist/` directory after compilation
 - Use `npm run start` for development with hot reload
-- Test individual commands: `node dist/src/index.js <command> --help`
+- Test individual commands: `npm run start <command> --help`
 - View comprehensive logs during scraping operations
 - Use Jest watch mode for iterative test development
