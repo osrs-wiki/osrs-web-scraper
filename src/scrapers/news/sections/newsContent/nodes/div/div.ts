@@ -19,6 +19,12 @@ export const divParser: ContentNodeParser = (node, options) => {
     const element = node as HTMLElement;
     const className = element.classNames.trim().toLowerCase();
     const parse = classParserMap[className];
+    
+    // Check for slideshow-container by ID or class
+    if (element.id === "slideshow-container" || className === "slideshow-container") {
+      return galleryParser(node, options);
+    }
+    
     if (parse) {
       return parse(node, options);
     } else if (!ignoredClasses.includes(className)) {

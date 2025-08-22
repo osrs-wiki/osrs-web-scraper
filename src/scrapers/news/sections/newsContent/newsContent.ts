@@ -3,6 +3,7 @@ import fs from "fs";
 import { parse } from "node-html-parser";
 
 import { nodeParser } from "./nodes";
+import { extractBackgroundImageUrl } from "../../../../utils/css";
 import {
   downloadFile,
   formatFileName,
@@ -26,6 +27,7 @@ const newsContent: NewsSection = {
   format: async (html, url, title) => {
     const contentRoot = parse(html);
 
+    // Download regular images from img and video source tags
     const images = contentRoot.querySelectorAll("img, video > source");
     let downloadedImages = 0;
     const downloadQueue = [];
@@ -54,6 +56,33 @@ const newsContent: NewsSection = {
         )
       );
     }
+
+    // Also download background images from figure elements and div.divisor elements
+    const figureElements = contentRoot.querySelectorAll("figure, div.divisor");
+    for (let index = 0; index < figureElements.length; index++) {
+      const element = figureElements[index];
+      const style = element.attributes?.style;
+      
+      if (style) {
+        const backgroundImageUrl = extractBackgroundImageUrl(style);
+        if (backgroundImageUrl) {
+          const formattedTitle = formatFileName(title);
+          const imageDirectory = `./out/news/${formattedTitle}`;
+          if (!fs.existsSync(imageDirectory)) {
+            fs.mkdirSync(imageDirectory, { recursive: true });
+          }
+
+          const imageName = `${formattedTitle} (${++downloadedImages})`;
+          downloadQueue.push(
+            downloadFile(
+              backgroundImageUrl,
+              `${imageDirectory}/${imageName}.${getFileExtension(backgroundImageUrl)}`
+            )
+          );
+        }
+      }
+    }
+
     try {
       await Promise.all(downloadQueue);
     } catch (error) {
