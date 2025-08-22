@@ -1,6 +1,6 @@
 import { MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
-import { parse } from "node-html-parser";
+import { parse, HTMLElement } from "node-html-parser";
 
 import { nodeParser } from "./nodes";
 import { extractBackgroundImageUrl } from "../../../../utils/css";
@@ -18,6 +18,20 @@ export type ContentSection = NewsSection & {
 
 const ignoredTags = ["style", "script"];
 const ignoredImageClasses: string[] = ["demo cursor", "demo cursor active"];
+
+/**
+ * Check if an element is within a thumbnails section
+ */
+function isWithinThumbnails(element: HTMLElement): boolean {
+  let current = element.parentNode;
+  while (current) {
+    if (current.attributes?.id === "thumbnails") {
+      return true;
+    }
+    current = current.parentNode;
+  }
+  return false;
+}
 
 export const ContentContext = {
   imageCount: 0,
@@ -41,6 +55,12 @@ const newsContent: NewsSection = {
     
     for (let index = 0; index < imageElements.length; index++) {
       const element = imageElements[index];
+      
+      // Skip images within thumbnail sections to avoid duplicates
+      if (isWithinThumbnails(element)) {
+        continue;
+      }
+      
       let imageUrl: string | undefined;
       
       // Handle regular img and video source tags
