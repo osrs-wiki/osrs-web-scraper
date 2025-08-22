@@ -11,7 +11,6 @@ const ignoredClasses = ["myslides"];
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
   "row": galleryParser,
-  "slideshow-container": galleryParser,
 };
 
 export const divParser: ContentNodeParser = (node, options) => {
