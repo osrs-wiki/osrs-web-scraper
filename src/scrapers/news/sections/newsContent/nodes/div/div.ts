@@ -20,8 +20,8 @@ export const divParser: ContentNodeParser = (node, options) => {
     const className = element.classNames.trim().toLowerCase();
     const parse = classParserMap[className];
     
-    // Check for slideshow-container by ID or class
-    if (element.id === "slideshow-container" || className === "slideshow-container") {
+    // Check for slideshow-container by ID (not already in classParserMap)
+    if (element.id === "slideshow-container") {
       return galleryParser(node, options);
     }
     
