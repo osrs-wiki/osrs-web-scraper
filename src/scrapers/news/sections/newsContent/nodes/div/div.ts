@@ -13,16 +13,16 @@ const classParserMap: { [key: string]: ContentNodeParser } = {
   "row": galleryParser,
 };
 
+const idParserMap: { [key: string]: ContentNodeParser } = {
+  "slideshow-container": galleryParser,
+};
+
 export const divParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const element = node as HTMLElement;
     const className = element.classNames.trim().toLowerCase();
-    const parse = classParserMap[className];
-    
-    // Check for slideshow-container by ID (not already in classParserMap)
-    if (element.id === "slideshow-container") {
-      return galleryParser(node, options);
-    }
+    const id = element.id;
+    const parse = classParserMap[className] ?? idParserMap[id];
     
     if (parse) {
       return parse(node, options);

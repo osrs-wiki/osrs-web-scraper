@@ -21,4 +21,16 @@ describe("div node", () => {
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("slideshow-container id should parse as gallery", () => {
+    const root = parse(
+      '<div id="slideshow-container"><div class="mySlides"><figure style="background-image: url(&quot;https://example.com/image1.png&quot;);"></figure></div></div>'
+    );
+    const result = divParser(root.firstChild, { title: "Test Post" });
+    expect(result).toBeDefined();
+    // The result should be a gallery parser result with the tag "gallery"
+    expect(result).toEqual(expect.objectContaining({
+      tag: "gallery"
+    }));
+  });
 });
