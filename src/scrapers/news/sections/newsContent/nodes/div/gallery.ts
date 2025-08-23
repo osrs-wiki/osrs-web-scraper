@@ -7,52 +7,45 @@ import { formatFileName, getFileExtension } from "../../../../../../utils/file";
 import { ContentContext } from "../../newsContent";
 import { ContentNodeParser } from "../../types";
 
+// Helper function to process background image elements and add them to content
+const processBackgroundImageElement = (
+  element: HTMLElement | null,
+  formattedTitle: string,
+  content: MediaWikiText[]
+): void => {
+  if (element && element.attributes?.style) {
+    const imageUrl = extractBackgroundImageUrl(element.attributes.style);
+    if (imageUrl) {
+      const imageDirectory = `./out/news/${formattedTitle}`;
+      if (!fs.existsSync(imageDirectory)) {
+        fs.mkdirSync(imageDirectory, { recursive: true });
+      }
+
+      const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
+      const imageExtension = getFileExtension(imageUrl);
+      
+      content.push(new MediaWikiText(
+        `${content.length === 0 ? "" : "\n"}${imageName}.${imageExtension}`
+      ));
+    }
+  }
+};
+
 // Handler for slideshow container galleries with background images
 const handleSlideshowGallery = (divElement: HTMLElement, options: { [key: string]: string | boolean | number }): MediaWikiText[] => {
   const content: MediaWikiText[] = [];
   const slides = divElement.querySelectorAll(".mySlides");
+  const formattedTitle = formatFileName(options.title as string);
   
   slides.forEach((slide) => {
     const figureElement = slide.querySelector("figure");
     const divisorElement = slide.querySelector("div.divisor");
     
     // Extract background image from figure element (SD version)
-    if (figureElement && figureElement.attributes?.style) {
-      const figureUrl = extractBackgroundImageUrl(figureElement.attributes.style);
-      if (figureUrl) {
-        const formattedTitle = formatFileName(options.title as string);
-        const imageDirectory = `./out/news/${formattedTitle}`;
-        if (!fs.existsSync(imageDirectory)) {
-          fs.mkdirSync(imageDirectory, { recursive: true });
-        }
-
-        const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
-        const imageExtension = getFileExtension(figureUrl);
-        
-        content.push(new MediaWikiText(
-          `${content.length === 0 ? "" : "\n"}${imageName}.${imageExtension}`
-        ));
-      }
-    }
+    processBackgroundImageElement(figureElement, formattedTitle, content);
 
     // Extract background image from divisor element (HD version)
-    if (divisorElement && divisorElement.attributes?.style) {
-      const divisorUrl = extractBackgroundImageUrl(divisorElement.attributes.style);
-      if (divisorUrl) {
-        const formattedTitle = formatFileName(options.title as string);
-        const imageDirectory = `./out/news/${formattedTitle}`;
-        if (!fs.existsSync(imageDirectory)) {
-          fs.mkdirSync(imageDirectory, { recursive: true });
-        }
-
-        const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
-        const imageExtension = getFileExtension(divisorUrl);
-        
-        content.push(new MediaWikiText(
-          `${content.length === 0 ? "" : "\n"}${imageName}.${imageExtension}`
-        ));
-      }
-    }
+    processBackgroundImageElement(divisorElement, formattedTitle, content);
   });
 
   return content;
