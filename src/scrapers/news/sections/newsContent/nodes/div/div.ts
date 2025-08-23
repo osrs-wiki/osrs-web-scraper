@@ -6,7 +6,7 @@ import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
 
-const ignoredClasses = ["myslides"];
+const ignoredClasses = ["myslides", "thumb-row"];
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,

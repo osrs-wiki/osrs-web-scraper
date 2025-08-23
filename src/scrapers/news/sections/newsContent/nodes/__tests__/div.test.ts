@@ -12,4 +12,13 @@ describe("div node", () => {
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("thumb-row class should be ignored and not render", () => {
+    const root = parse(
+      '<div class="thumb-row" id="thumbnails"><img src="image1.png" alt="thumbnail 1"><img src="image2.png" alt="thumbnail 2"></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
