@@ -184,6 +184,22 @@ describe("CLI E2E Tests", () => {
       });
 
       expect(result.exitCode).toBe(0);
+      
+      // Check that output files were created
+      const fs = require("fs");
+      const outDir = "./out/worlds";
+      expect(fs.existsSync(outDir)).toBe(true);
+      
+      // Check that the worlds.txt file was created
+      const worldsFile = "worlds.txt";
+      const filePath = `${outDir}/${worldsFile}`;
+      expect(fs.existsSync(filePath)).toBe(true);
+      
+      const content = fs.readFileSync(filePath, "utf-8");
+      
+      // Verify it contains MediaWiki world list content
+      expect(content).toContain("!");
+      expect(content).toMatchSnapshot("worlds.txt");
     });
   });
 });
