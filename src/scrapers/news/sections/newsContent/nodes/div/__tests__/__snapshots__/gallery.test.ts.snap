@@ -7,3 +7,13 @@ test-title (2).jpg
 </gallery>
 "
 `;
+
+exports[`gallery node Image slider should parse figure background images and render gallery 1`] = `
+"<gallery mode=\\"packed\\", heights=\\"180\\", style=\\"text-align:center\\">
+HD & Plugin API Progress Update (1).png
+HD & Plugin API Progress Update (2).png
+HD & Plugin API Progress Update (3).png
+HD & Plugin API Progress Update (4).png
+</gallery>
+"
+`;

@@ -2,7 +2,9 @@ import { MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { parse } from "node-html-parser";
 
+import { isWithinThumbnails } from "./newsContent.utils";
 import { nodeParser } from "./nodes";
+import { extractBackgroundImageUrl } from "../../../../utils/css";
 import {
   downloadFile,
   formatFileName,
@@ -26,34 +28,58 @@ const newsContent: NewsSection = {
   format: async (html, url, title) => {
     const contentRoot = parse(html);
 
-    const images = contentRoot.querySelectorAll("img, video > source");
+    // Download images in the order they appear on the page
+    // This includes both regular img/video tags and elements with background images
+    const imageElements = contentRoot.querySelectorAll("img, video > source, figure, div.divisor");
     let downloadedImages = 0;
     const downloadQueue = [];
-    for (let index = 0; index < images.length; index++) {
-      const image = images[index];
-      const imageLink = image.attributes.src ?? image.attributes.href;
-
-      if (
-        imageLink.endsWith("hr.png") ||
-        ignoredImageClasses.includes(image.classNames.trim().toLowerCase())
-      ) {
+    
+    const formattedTitle = formatFileName(title);
+    const imageDirectory = `./out/news/${formattedTitle}`;
+    if (!fs.existsSync(imageDirectory)) {
+      fs.mkdirSync(imageDirectory, { recursive: true });
+    }
+    
+    for (let index = 0; index < imageElements.length; index++) {
+      const element = imageElements[index];
+      
+      // Skip images within thumbnail sections to avoid duplicates
+      if (isWithinThumbnails(element)) {
         continue;
       }
-
-      const formattedTitle = formatFileName(title);
-      const imageDirectory = `./out/news/${formattedTitle}`;
-      if (!fs.existsSync(imageDirectory)) {
-        fs.mkdirSync(imageDirectory, { recursive: true });
+      
+      let imageUrl: string | undefined;
+      
+      // Handle regular img and video source tags
+      if (element.tagName === "IMG" || element.tagName === "SOURCE") {
+        imageUrl = element.attributes.src ?? element.attributes.href;
+        
+        if (
+          imageUrl?.endsWith("hr.png") ||
+          ignoredImageClasses.includes(element.classNames.trim().toLowerCase())
+        ) {
+          continue;
+        }
       }
-
-      const imageName = `${formattedTitle} (${++downloadedImages})`;
-      downloadQueue.push(
-        downloadFile(
-          imageLink,
-          `${imageDirectory}/${imageName}.${getFileExtension(imageLink)}`
-        )
-      );
+      // Handle elements with background images (figure and div.divisor)
+      else if (element.tagName === "FIGURE" || (element.tagName === "DIV" && element.classNames.includes("divisor"))) {
+        const style = element.attributes?.style;
+        if (style) {
+          imageUrl = extractBackgroundImageUrl(style);
+        }
+      }
+      
+      if (imageUrl) {
+        const imageName = `${formattedTitle} (${++downloadedImages})`;
+        downloadQueue.push(
+          downloadFile(
+            imageUrl,
+            `${imageDirectory}/${imageName}.${getFileExtension(imageUrl)}`
+          )
+        );
+      }
     }
+
     try {
       await Promise.all(downloadQueue);
     } catch (error) {

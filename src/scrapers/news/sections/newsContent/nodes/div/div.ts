@@ -6,11 +6,14 @@ import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
 
-const ignoredClasses = ["myslides"];
+const ignoredClasses = ["myslides", "thumb-row"];
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
   "row": galleryParser,
+};
+
+const idParserMap: { [key: string]: ContentNodeParser } = {
   "slideshow-container": galleryParser,
 };
 
@@ -18,7 +21,9 @@ export const divParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const element = node as HTMLElement;
     const className = element.classNames.trim().toLowerCase();
-    const parse = classParserMap[className];
+    const id = element.id;
+    const parse = classParserMap[className] ?? idParserMap[id];
+    
     if (parse) {
       return parse(node, options);
     } else if (!ignoredClasses.includes(className)) {
