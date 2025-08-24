@@ -24,6 +24,23 @@ npm run test:e2e:update
 npm run test:e2e -- cli.e2e.ts
 ```
 
+### Running with Chrome/Chromium (for full scraping tests)
+
+To run the full scraping tests, first install Chrome:
+
+```bash
+# Install Chrome for Puppeteer
+npx puppeteer browsers install chrome
+
+# Or install Chromium system-wide (Ubuntu/Debian)
+sudo apt-get install chromium-browser
+
+# Then run the tests
+npm run test:e2e
+```
+
+**Note**: When Chrome/Chromium is available, the scraping tests will run and generate snapshot files in `e2e/__snapshots__/`.
+
 ## Test Structure
 
 ### CLI Tests (`cli.e2e.ts`)
