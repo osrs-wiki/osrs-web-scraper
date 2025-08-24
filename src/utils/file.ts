@@ -120,6 +120,28 @@ const fileCharsReplaceMap: { [key: string]: string } = {
 };
 
 /**
+ * Find a file by its base name, ignoring extension. Useful when extension might have been corrected.
+ * @param directory The directory to search in
+ * @param baseName The base name without extension
+ * @returns The actual filename if found, undefined otherwise
+ */
+export const findFileByBaseName = (directory: string, baseName: string): string | undefined => {
+  if (!fs.existsSync(directory)) {
+    return undefined;
+  }
+  
+  const files = fs.readdirSync(directory);
+  
+  // Look for files that start with the base name followed by a dot
+  const matchingFile = files.find(file => {
+    const withoutExt = file.substring(0, file.lastIndexOf('.'));
+    return withoutExt === baseName;
+  });
+  
+  return matchingFile;
+};
+
+/**
  * Format a file name to ensure it is valid.
  * @param fileName The file name
  * @returns
