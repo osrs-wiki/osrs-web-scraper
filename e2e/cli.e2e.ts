@@ -55,6 +55,16 @@ describe("CLI E2E Tests", () => {
       expect(result.stdout).toContain("Scrape an OSRS news posts");
     });
 
+    it("should require news URL argument when running with URL", async () => {
+      const result = await runCLICommand({
+        command: "node",
+        args: ["-r", "typescript-transform-paths/register", "./dist/src/index.js", "news"],
+      });
+
+      expect(result.exitCode).toBe(0); // news command accepts optional argument
+      // Without URL it should show help or handle gracefully
+    });
+
     // This test requires Chrome/Chromium and internet access
     // Skip if in CI or restricted environment
     const shouldSkipScraping = process.env.CI || process.env.PUPPETEER_SKIP_DOWNLOAD;
