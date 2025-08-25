@@ -13,6 +13,8 @@
     "start:node": "node -r typescript-transform-paths/register ./dist/src/index.js",
     "test": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=.env.test jest --passWithNoTests",
     "test:watch": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=.env.test jest --watch",
+    "test:e2e": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=.env.test jest --config e2e/jest.config.js",
+    "test:e2e:update": "npm run test:e2e -- -u",
     "release": "changeset publish",
     "prepare": "husky install && ts-patch install -s"
   },

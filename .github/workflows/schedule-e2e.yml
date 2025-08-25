@@ -1,0 +1,10 @@
+name: Scheduled E2E Tests
+
+on:
+  schedule:
+    - cron: "0 18 * * 2" # Every Tuesday at 6:00 PM UTC
+
+jobs:
+  e2e-tests:
+    name: "Run scheduled E2E tests"
+    uses: ./.github/workflows/action-run-e2e-tests.yml

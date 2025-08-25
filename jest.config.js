@@ -10,4 +10,5 @@ module.exports = {
   }),
   testEnvironment: "node",
   testMatch: ["**/src/**/*.test.ts"],
+  testPathIgnorePatterns: ["<rootDir>/e2e/"],
 };
