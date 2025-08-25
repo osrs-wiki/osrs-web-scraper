@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.24.0
+
+### Minor Changes
+
+- 86a2e2f: Add comprehensive e2e snapshot tests for CLI commands with GitHub Actions workflows
+- 3029967: Add support for image sliders with background image extraction
+
 ## 0.23.0
 
 ### Minor Changes
