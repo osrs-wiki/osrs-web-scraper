@@ -10,6 +10,7 @@ import {
   downloadFile,
   formatFileName,
   getFileExtension,
+  findFileByBaseName,
 } from "../../../../../utils/file";
 import { ContentNodeParser } from "../types";
 
@@ -25,12 +26,17 @@ export const audioParser: ContentNodeParser = (node, { title }) => {
     }
 
     const audioExtension = getFileExtension(audioLink);
-    const outputFileName = `${formattedTitle} narration.${audioExtension}`;
+    const baseName = `${formattedTitle} narration`;
+    const outputFileName = `${baseName}.${audioExtension}`;
 
     downloadFile(audioLink, `${audioDirectory}/${outputFileName}`);
 
+    // Check if the file exists with a different extension (due to MIME type correction)
+    const actualFileName = findFileByBaseName(audioDirectory, baseName);
+    const fileNameToUse = actualFileName || outputFileName;
+
     return [
-      new MediaWikiFile(outputFileName, {
+      new MediaWikiFile(fileNameToUse, {
         horizontalAlignment: "center",
       }),
       new MediaWikiBreak(),

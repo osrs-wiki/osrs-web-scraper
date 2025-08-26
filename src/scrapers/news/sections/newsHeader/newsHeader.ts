@@ -14,6 +14,7 @@ import {
   downloadFile,
   formatFileName,
   getFileExtension,
+  findFileByBaseName,
 } from "../../../../utils/file";
 import { NewsSection } from "../types";
 
@@ -33,10 +34,15 @@ const newsHeader: NewsSection = {
       fs.mkdirSync(newsDirectory, { recursive: true });
     }
 
-    const newspostImageName = `${formattedTitle} newspost.${getFileExtension(
-      image.attributes.src
-    )}`;
+    const newspostImageBaseName = `${formattedTitle} newspost`;
+    const newspostImageExtension = getFileExtension(image.attributes.src);
+    const newspostImageName = `${newspostImageBaseName}.${newspostImageExtension}`;
+    
     downloadFile(image.attributes.src, `${newsDirectory}/${newspostImageName}`);
+
+    // Check if the file exists with a different extension (due to MIME type correction)
+    const actualFileName = findFileByBaseName(newsDirectory, newspostImageBaseName);
+    const fileNameToUse = actualFileName || newspostImageName;
 
     const content: MediaWikiContent[] = [];
 
@@ -48,7 +54,7 @@ const newsHeader: NewsSection = {
       }).build()
     );
     content.push(
-      new MediaWikiFile(newspostImageName, {
+      new MediaWikiFile(fileNameToUse, {
         horizontalAlignment: "right",
       })
     );

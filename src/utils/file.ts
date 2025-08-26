@@ -5,21 +5,84 @@ import path from "path";
 import { formatText } from "./text";
 
 /**
+ * Get the correct file extension based on MIME type
+ * @param mimeType The MIME type
+ * @returns The correct file extension
+ */
+export const getCorrectExtensionFromMimeType = (mimeType: string): string => {
+  const mimeToExtensionMap: { [key: string]: string } = {
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg", 
+    "image/png": "png",
+    "image/gif": "gif",
+    "image/webp": "webp",
+    "image/bmp": "bmp",
+    "image/tiff": "tiff",
+    "image/svg+xml": "svg",
+    "audio/mpeg": "mp3",
+    "audio/wav": "wav",
+    "audio/ogg": "ogg",
+    "video/mp4": "mp4",
+    "video/webm": "webm",
+    "video/ogg": "ogv"
+  };
+  
+  return mimeToExtensionMap[mimeType] || mimeType.split('/')[1] || "bin";
+};
+
+/**
  * Download a file from a url
  * @param url The url of the file to download
  * @param filepath The filepath of the downloaded file
- * @returns
+ * @returns Promise resolving to the actual filepath (may differ from input if extension was corrected)
  */
-export const downloadFile = async (url: string, filepath: string) => {
+export const downloadFile = async (url: string, filepath: string): Promise<string> => {
   console.info(`Attempting file download: ${url}`);
+  
   return new Promise((resolve, reject) => {
     client.get(url, (res) => {
       if (res.statusCode === 200) {
+        const writeStream = fs.createWriteStream(filepath);
         res
-          .pipe(fs.createWriteStream(filepath))
+          .pipe(writeStream)
           .on("error", reject)
-          .once("close", () => resolve(filepath));
-        console.info(`Downloaded file ${filepath}`);
+          .once("close", async () => {
+            try {
+              // Check the actual MIME type of the downloaded file using dynamic import
+              const { fileTypeFromFile } = await import("file-type");
+              const fileType = await fileTypeFromFile(filepath);
+              
+              if (fileType) {
+                const actualExtension = getCorrectExtensionFromMimeType(fileType.mime);
+                const currentExtension = getFileExtension(filepath);
+                
+                // If the extensions don't match, rename the file
+                if (actualExtension !== currentExtension) {
+                  const dir = path.dirname(filepath);
+                  const basename = path.basename(filepath, `.${currentExtension}`);
+                  const correctedFilepath = path.join(dir, `${basename}.${actualExtension}`);
+                  
+                  // Rename the file to have the correct extension
+                  fs.renameSync(filepath, correctedFilepath);
+                  
+                  console.info(`Downloaded file ${filepath} and corrected extension to ${correctedFilepath}`);
+                  resolve(correctedFilepath);
+                } else {
+                  console.info(`Downloaded file ${filepath}`);
+                  resolve(filepath);
+                }
+              } else {
+                // If we can't detect the file type, use the original filepath
+                console.info(`Downloaded file ${filepath} (could not detect file type)`);
+                resolve(filepath);
+              }
+            } catch (error) {
+              // If file type detection fails, just use the original filepath
+              console.warn(`File type detection failed for ${filepath}:`, error);
+              console.info(`Downloaded file ${filepath}`);
+              resolve(filepath);
+            }
+          });
       } else {
         res.resume();
         reject(
@@ -54,6 +117,28 @@ const fileCharsReplaceMap: { [key: string]: string } = {
   "|": "-",
   "&nbsp;": "",
   "?": "",
+};
+
+/**
+ * Find a file by its base name, ignoring extension. Useful when extension might have been corrected.
+ * @param directory The directory to search in
+ * @param baseName The base name without extension
+ * @returns The actual filename if found, undefined otherwise
+ */
+export const findFileByBaseName = (directory: string, baseName: string): string | undefined => {
+  if (!fs.existsSync(directory)) {
+    return undefined;
+  }
+  
+  const files = fs.readdirSync(directory);
+  
+  // Look for files that start with the base name followed by a dot
+  const matchingFile = files.find(file => {
+    const withoutExt = file.substring(0, file.lastIndexOf('.'));
+    return withoutExt === baseName;
+  });
+  
+  return matchingFile;
 };
 
 /**

@@ -7,7 +7,7 @@ import fs from "fs";
 import sizeOf from "image-size";
 import { HTMLElement } from "node-html-parser";
 
-import { formatFileName, getFileExtension } from "../../../../../utils/file";
+import { formatFileName, getFileExtension, findFileByBaseName } from "../../../../../utils/file";
 import { ContentContext } from "../newsContent";
 import { ContentNodeParser } from "../types";
 
@@ -37,30 +37,31 @@ export const imageParser: ContentNodeParser = (
 
     const imageName = `${formattedTitle} (${++ContentContext.imageCount})`;
     const imageExtension = getFileExtension(imageLink);
-    const imagePath = `${imageDirectory}/${imageName}.${imageExtension}`;
+    
+    // Check if the file exists with a different extension (due to MIME type correction)
+    const actualFileName = findFileByBaseName(imageDirectory, imageName);
+    const fileNameToUse = actualFileName || `${imageName}.${imageExtension}`;
+    
     let dimensions;
     try {
       if (image.attributes.width) {
         dimensions = { width: parseInt(image.attributes.width) };
       } else {
-        if (
-          imageExtensions.includes(imageExtension) &&
-          fs.existsSync(imagePath)
-        ) {
-          dimensions = sizeOf(
-            `${imageDirectory}/${imageName}.${imageExtension}`
-          );
+        // Try to find the image file, which might have a corrected extension
+        if (actualFileName && imageExtensions.some(ext => actualFileName.endsWith(`.${ext}`))) {
+          const actualFilePath = `${imageDirectory}/${actualFileName}`;
+          dimensions = sizeOf(actualFilePath);
         }
       }
     } catch (error) {
       console.error(
-        `Error retrieving image size: ${imageDirectory}/${imageName}.${imageExtension}`,
+        `Error retrieving image size for ${imageName}:`,
         error
       );
     }
 
     return [
-      new MediaWikiFile(`${imageName}.${imageExtension}`, {
+      new MediaWikiFile(fileNameToUse, {
         resizing: {
           width:
             (width as number) ??
