@@ -50,7 +50,7 @@ Tests the CLI functionality including:
 - **Help text display**: Validates CLI help output and command structure
 - **Version information**: Tests version display
 - **News scraping**: Tests news post scraping with the specified URL
-- **Poll scraping**: Tests poll scraping with the specified URL  
+- **Poll scraping**: Tests poll scraping with the specified URL
 - **Worlds scraping**: Tests the worlds list scraping
 - **Parameter validation**: Ensures commands require proper arguments
 - **Error handling**: Validates error messages and exit codes
@@ -82,8 +82,6 @@ The scraping tests require Chrome/Chromium to be installed for Puppeteer:
 - Install Chrome: `npx puppeteer browsers install chrome`
 - Alternative: `sudo apt-get install chromium-browser`
 
-**Note**: In restricted environments or CI, scraping tests will be automatically skipped if `PUPPETEER_SKIP_DOWNLOAD` is set or `CI` environment variable is present.
-
 ## Test URLs
 
 The e2e tests use these specific URLs as requested in the issue:
@@ -109,6 +107,7 @@ e2e/
 When tests run successfully, they validate:
 
 1. **CLI Help Output**:
+
    ```
    Usage: OSRS Web Scraper [options] [command]
    Commands:
@@ -118,10 +117,12 @@ When tests run successfully, they validate:
    ```
 
 2. **File Creation**:
+
    - `./out/news/Sailing - Resources & Skilling Activities Poll.txt`
    - `./out/poll/Poll 1708.txt`
 
 3. **MediaWiki Content**:
+
    ```
    {{Update
    |url = https://...
