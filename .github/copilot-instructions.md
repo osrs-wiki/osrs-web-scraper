@@ -7,7 +7,8 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 ## Working Effectively
 
 ### Bootstrap, Build, and Test the Repository
-- Install dependencies: `PUPPETEER_SKIP_DOWNLOAD=true npm install` -- takes 15 seconds. Chrome/Chromium download may fail in restricted networks.
+
+- Install dependencies: npm install`
 - Build the project: `npm run build` -- takes 7 seconds. NEVER CANCEL.
 - Run linting: `npm run lint` -- takes 2 seconds.
 - Run tests: `npm run test` -- takes 8 seconds. NEVER CANCEL. Set timeout to 30+ seconds.
@@ -15,10 +16,12 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 - Format code: `npm run prettier:fix`
 
 ### Development Mode
+
 - Development with hot reload: `npm run start` -- starts nodemon with TypeScript support.
 - Production mode: `npm run start:node` -- requires build first.
 
 ### CLI Usage
+
 - Get help: `npm run start -- --help`
 - Scrape latest news: `npm run start news`
 - Scrape specific news: `npm run start news <news-url>`
@@ -26,6 +29,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 - Scrape worlds: `npm run start worlds`
 
 ### Browser Requirements for Scraping
+
 - **IMPORTANT**: Scraping commands require Chrome/Chromium to be installed for Puppeteer.
 - Install Chrome: `npx puppeteer browsers install chrome` -- may fail in restricted networks.
 - Alternative: `sudo apt-get install chromium-browser` -- may fail due to snap dependency issues.
@@ -34,17 +38,20 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 ## Validation
 
 ### Code Quality
+
 - **ALWAYS** run `npm run lint` and `npm run prettier:fix` before committing or CI will fail.
 - Pre-commit hooks automatically run lint-staged via Husky.
 - All linting issues must be resolved before CI passes.
 
 ### Testing
+
 - Run all tests: `npm run test` -- 84 tests in 27 suites with snapshot testing.
 - Watch mode for development: `npm run test:watch` -- press 'a' to run all tests, 'q' to quit.
 - Tests include comprehensive coverage of HTML parsing, MediaWiki transformers, and utilities.
 - **DO NOT** modify tests to make them pass unless fixing actual bugs.
 
 ### Manual Validation Scenarios
+
 - **CLI Help**: Run `npm run start -- --help` to verify CLI structure.
 - **Development Mode**: Start `npm run start` and verify nodemon works correctly.
 - **Build Output**: Check `dist/` directory is created after build.
@@ -52,7 +59,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 
 ## Command Timeouts and Timing Expectations
 
-- `npm install`: 15 seconds (with PUPPETEER_SKIP_DOWNLOAD=true)
+- `npm install`: 15 seconds
 - `npm run build`: 7 seconds -- NEVER CANCEL
 - `npm run lint`: 2 seconds
 - `npm run test`: 8 seconds -- NEVER CANCEL, set timeout to 30+ seconds
@@ -62,12 +69,14 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 ## CI/CD Information
 
 ### GitHub Actions Workflows
+
 - **Pull Request**: Requires changeset file + lint/build/test
 - **Push to Main**: Runs lint/build/test + creates release PR via changesets
 - **CI Command**: All workflows use `npm ci` for dependency installation
 - **Node Version**: Uses Node.js 20 in CI
 
 ### Changeset Workflow
+
 - Create changeset: `npx changeset`
 - Merging PR with changeset creates release PR
 - Merging release PR publishes new version
@@ -75,6 +84,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 ## Common Tasks
 
 ### Repository Structure
+
 ```
 src/
 ├── cli/                 # Command-line interface
@@ -91,6 +101,7 @@ src/
 ```
 
 ### Key Files
+
 - `package.json` -- contains all npm scripts and dependencies
 - `tsconfig.json` -- TypeScript configuration with path mapping
 - `jest.config.js` -- Jest test configuration with ts-jest
@@ -99,6 +110,7 @@ src/
 - `.husky/pre-commit` -- Git hook for running lint-staged
 
 ### Dependencies Overview
+
 - **Runtime**: Commander.js (CLI), Puppeteer (scraping), node-html-parser (parsing)
 - **Build**: TypeScript, ts-patch, typescript-transform-paths
 - **Testing**: Jest, ts-jest
@@ -106,6 +118,7 @@ src/
 - **Releases**: Changesets
 
 ### Adding New Commands
+
 1. Create command file in `src/cli/commands/`
 2. Implement using Commander.js pattern
 3. Add scraper logic in `src/scrapers/`
@@ -113,11 +126,13 @@ src/
 5. Export from appropriate index files
 
 ### Working with MediaWiki Content
+
 - Uses `@osrs-wiki/mediawiki-builder` package for content creation
 - Transformers convert HTML to MediaWiki format
 - Output includes templates, files, and formatted text
 
 ### Environment Variables
+
 - `NODE_ENV` -- Set to 'test' for testing
 - `PUPPETEER_SKIP_DOWNLOAD` -- Skip Chrome download during npm install
 - Uses `.env.test` for test configuration
