@@ -1,0 +1,571 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`News Command E2E Tests should scrape news post and generate MediaWiki content: news-sailing-poll.txt 1`] = `
+"{{Update|date=07 August 2025|url=https://secure.runescape.com/m=news/a=13/sailing---resources--skilling-activities-poll?oldschool=1|category=community}}
+[[File:Sailing - Resources & Skilling Activities Poll newspost.png|right]]
+{{clear}}
+__TOC__
+<!-- Unsupported tag: style --><!-- Unsupported tag: style -->'''Feedback Changes - Thursday 7th August'''
+
+Thank you for leaving your feedback on our latest Sailing poll blog! We've read through loads of comments and we really appreciate everyone who took the time to read through this blog. After careful review of the survey responses, here's what we're changing:
+
+
+
+* Although there was general support for our approach to Cannon XP in the survey, many players still feel engaging in Combat should award Combat XP instead of Sailing XP. Firing Cannons on your ship will now award Sailing and Ranged XP. However, we'll give players the option to use a Crewmate to fire a Cannon, which will only award Sailing XP. Crewmates firing Cannons won't scale with your Ranged level.  This is consistent with how we plan for crewmates to work across Sailing as a whole.
+* Players suggested that we explore using more existing resources to give them better uses. We're making a slight adjustment to Extreme Energy Potions in response. They will now use Super Energy Potions instead of Umbral Coral.
+* Players noted that the new Blowpipes don't have a clear use case, especially for irons, due to their relatively high Woodcutting and Fletching requirement in comparison to the Toxic Blowpipe. We're making several changes in response to this feedback:
+** Camphor Blowpipe increased from +1 Ranged Strength to +2
+** Ironwood Blowpipe increased from +2 Ranged Strength to +4
+** Rosewood Blowpipe increased from +4 Ranged Strength to +6
+** Added a special attack to the Rosewood Blowpipe: Rapid burst. Fire two darts in rapid succession with 20% reduced accuracy and 10% increased damage. (25% special attack energy). This means it will function similarly to a 'budget' Dragon Knife for enemies with low Defence or content which has guaranteed accuracy.
+** We will also include all three new logs rarely from a couple of high level shipwrecks in our balancing pass to allow players to get materials for the blowpipe, but not sustainably for all ship uses.
+* Some of the poll questions have been split out individually.
+* The Anti-Bleed Tonic has been adjusted to only heal when used to cure bleed, to avoid encroaching upon the current use case for Guthix Rest. We're also exploring changing its name so that \\"Anti\\" continues to be used for preventative potions.
+
+We'd also like to congratulate Kijkwijzer, JackScape, Naleek and GentleTractor for making it to the final four designs for the Sailing Skillcape. You can check their work out here. So now it's over to you to vote for your favourite! You'll get your chance to vote in the Sailing Poll 2, dropping on August 8th and closing August 14th.
+
+
+[[File:Sailing - Resources & Skilling Activities Poll (1).jpg|600px|center]]
+
+Ahoy, adventurers! It’s time for our second major Sailing poll blog! Your incredible support from the [https://secure.runescape.com/m=news/sailing-poll-1-area-expansion-quests--hybrid-training-method?oldschool=1 first poll] has set us on course, and now it’s time to navigate through new skilling content, rewards, and a couple of burning questions.
+
+{{Youtube|wW_Y2OZGqE0}}
+
+
+''If you can't see the video above, click [https://www.youtube.com/embed/wW_Y2OZGqE0?si=p2B1ONdsx1v92PlQ here ]to watch it!''
+
+
+==Before We Set Sail...==
+This blog’s pretty hefty. You might be wondering why we’ve introduced so many new resources, rewards, and ideas all at once.
+
+Sailing isn’t just a new skill, it’s also a new way to explore the world of Old School RuneScape. Just like how Varlamore brought new quests and skilling activities to the game, the islands and oceans you’ll explore in Sailing are packed with new content.
+
+Previous skills have come hand-in-hand with the resources required to support their unique gameplay. We’ve strived to make Sailing feel authentically Old School by leaning into this same kind of progression and adding new, thematic resources. Wood to craft hulls and sails, metals for sturdy keels and cannons, and fish and bait for long sea voyages. While it may feel like we're adding a lot, we've been careful to find a good balance. Alongside these new resources, we're also making sure to incorporate existing materials - nails, traditional planks, and other items you already know well from your adventures.
+
+Some of you have also been wondering why we aren’t reusing existing but unloved resources like Arctic Pine or Redwood Logs. It’s a good idea, but we like to add a bit of realism to the game wherever possible. Arctic Pine and Redwood are softwoods, whereas in real life, you’d want to use strong hardwoods for boatbuilding – so we’ve carefully selected some new hardwood resources that are perfect for building and upgrading your ships. Wherever possible, we’ve done the research and aimed for authenticity!
+
+On a similar note, we're also using this opportunity to fill existing logical gaps. For example – we’ve got flax, and we’ve got linen, but weaving linen isn’t something you can currently do. Now that we have sails it’s the perfect opportunity to showcase that logical relationship and add more depth to crafting within the game.
+
+Many of the materials mentioned in this blog will be introduced as core parts of the new skill for which you already voted, but it's up to you, the community, how they should affect other parts of the game. We think they'd add value to existing skills like Mining and Woodcutting, so we'd like to offer them as updates to those skills. However they could be obtained in other ways, such as purely via Sailing activities.
+
+Without further ado, let’s dive into what’s coming next! Weigh anchor and prepare to cast your votes!
+
+==CONTENTS==
+'''[#Logs Woodcutting, Firemaking and More: New Logs!]
+''''''[#Mining Mining: New Ores!]
+''''''[#Fishing Fishing: Lantern Fishing and Deep Sea Trawling!]
+''''''[#Hunter Hunter: Crab Hunting Expeditions!]
+''''''[#Farming Farming: Coral Nurseries and New Crops!]
+''''''[#Crafting Crafting and Fletching: Fabrics and Blowpipes!]
+''''''[#Cooking Herblore and Cooking: Potions and Foods!]
+''''''[#Construction Smithing and Construction: Shipbuilding Essentials!]
+''''''[#Cannons Cannons: Sailing or Ranged-Based?]
+''''''[#Utility Utility Skills: Constructing Your Sailing Experience!]
+''''''[#Thieving Thieving: Pirate Plunder and Merchant Stalls!]
+'''
+
+==Woodcutting, Firemaking and More: New Logs!==
+We touched briefly on this above, but as part of Sailing you’ll be exploring vibrant new islands teeming with exotic hardwood trees – just the thing to build and upgrade your mighty ships with!
+
+In introducing these new tree types and logs, we’ve been careful to ensure that they complement existing training methods without overshadowing the meta. Don’t worry, your Teaks are in safe hands. Each new hardwood offers unique XP rates and versatile uses in shipbuilding, Fletching, and high-tier pyres.
+
+* '''Jatoba Logs:''' Native to the sunny shores of the Great Conch, this particular hardwood is no good for boats - but it might come in handy for questing. Comparable to a lower XP Maple tree.
+* '''Camphor Logs:''' Fragrant and resilient, Camphor logs provide excellent wood for constructing seaworthy vessels fit for mid-tier voyages. Used in ship building as a hardwood tree above Mahogany. Will give slightly more XP/HR than Mahogany trees but less logs per hour. Hardwood tree patch variants respawn slower to reduce effectiveness of 1.5t methods.
+* '''Ironwood Logs:''' These dense, hardy logs ensure your ship withstands even the harshest storms, bridging the gap between skilled craftsmanship and adventurous spirit. Used in ship building as a hardwood tree above Camphor. Will give slightly more XP/HR than Camphor trees but less logs per hour. Hardwood tree patch variants respawn slower to reduce effectiveness of 1.5t methods.
+* '''Rosewood Logs:''' Reserved for master sailors, Rosewood offers unmatched durability and prestige, ideal for elite vessels. Used in ship building as a hardwood tree above Ironwood. Will give slightly more XP/HR than Ironwood trees but less logs per hour. Hardwood tree patch variants respawn slower to reduce effectiveness of 1.5t methods.
+
+[[File:Sailing - Resources & Skilling Activities Poll (2).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/wood.jpg click here!]'']]
+
+{{Letter|'''Poll Question: Should the new trees be added to the game to let players chop and burn the new logs?'''
+}}
+
+==Mining: New Ores!==
+These uncharted waters are also full of rare and precious minerals - perfect for reinforcing our ships and crafting powerful naval weaponry. These new ores include stackable Rubium dust for cannonballs and valuable nickel ores. Each aims to cater to specific niches, too!
+
+* '''Lead Ore:''' Offers early-game adventurers an alternative to Iron. Once mined, can be used for reinforcing hulls and building sturdy structures.
+* '''Rubium Ore:''' Mined from regular ol' rocks, Rubium produces incendiary cannonballs perfect for tactical naval warfare.
+* '''Nickel Ore:''' Gathered similarly to Motherlode Mine paydirt, this versatile metal combines with copper to create Cupronickel, a key component in advanced nautical creations.
+
+[[File:Sailing - Resources & Skilling Activities Poll (3).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/mine.jpg click here!]'']]
+
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Ore
+! Level Requirement
+! Smithing Product
+! Overview
+|-
+| Lead
+|  25
+|  Lead Bar (2 lead ore)
+| Slightly higher XP per hour than iron rocks outside of the mining guild.
+ Less XP per hour than iron rocks inside the mining guild as these respawn faster.
+ An interesting alternative to those willing to train their sailing on their early game mining journey.
+ Lead bars are used in shipbuilding and thematically keep ships watertight.
+|-
+| Rubium
+|  48 - Splinters (Stackable) 68 - Geodes
+|  NA
+|  Two variants of mining unlocked at different levels. Neither method has a focus on XP with Rubium splinters being the main resource to create incendiary cannonballs (ships only).
+ Rubium splinters are minable similar to Volcanic Ash but with two guaranteed rolls before a random chance to deplete. Splinter quantities scale with mining level.
+ Rubium geodes are mined similarly to \\"Infernal Shale deposits\\" in the chasm of fire. A slower more AFK alternative for less splinters and XP per hour than mining splinters. Geodes can be smashed into splinters with a hammer quantity scaling with mining level.
+|-
+| Nickel
+|  74
+|  Cupronickel Bar (1 nickel ore & 2 copper ore)
+|  Mined similar to paydirt in MLM or Barronite in Camdozaal.
+ Focus is on nickel as a resource for cupronickel reasonably AFK but lower XP per hour than MLM. Should be profitable.
+ Higher level version of lead used in ship building.
+|}
+
+{{Letter|'''Poll Question: Should the new rocks be added to the game to let players mine the new ores?'''
+}}
+
+
+==Fishing: Lantern Fishing and Deep Sea Trawling!==
+[[File:Sailing - Resources & Skilling Activities Poll (4).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Fish.png click here!]'']]
+
+Fishing gets richer with Lantern Fishing and Deep Sea Trawling, providing squid and other unique fish with special uses in Herblore, Cooking, and even Fletching. These methods are profitable but shouldn’t overly compete with traditional Fishing methods.
+
+====Lantern Fishing====
+Master the art of deep-sea harpooning by lanternlight and you could catch rare squid varieties for use in new recipes and weapons.
+
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Squid
+! Fishing Requirement
+! Products
+! Overview
+|-
+| Swordtip squid
+|  52
+|  Squid paste (Pestle & Mortar)
+ Fish offcuts (Knife)
+ Squid beak (Knife rarely)
+|  A new harpoon fishing spot similar to tuna/swordfish. If you are below 69 fishing you will only obtain swordtip squid.
+
+|-
+| Jumbo squid
+| 69
+|  Squid paste (Pestle & Mortar)
+ Fine fish offcuts (Knife)
+ Squid beak (Knife rarely)
+|  A new harpoon fishing spot similar to tuna/swordfish. If you are at least 69 fishing you will start to obtain Jumbo squid.
+
+|}
+
+{{Letter|'''Poll Question: Should Lantern Fishing be added to the game with Sailing?'''
+}}
+
+===Deep Sea Trawling===
+We polled Deep Sea Trawling, an immersive new activity blending Sailing and Fishing to provide unique and rewarding gameplay experiences, in our previous Sailing poll blog. Unlike traditional Fishing methods, Deep Sea Trawling focuses on exploring vast ocean expanses to encounter large shoals teeming with exotic marine life.
+
+
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Facility
+! Sailing Level
+! Construction Level
+! Material
+! Depth of Net
+|-
+| Basic Trawling Net
+|  56
+|  45
+|  Rope
+|  Surface
+|-
+| Linen Trawling Net
+|  65
+|  53
+|  Linen Yarn
+|  Mid-depth
+|-
+| Hemp Trawling Net
+|  76
+|  65
+|  Hemp Yarn
+|  Deep
+|-
+| Cotton Trawling Net
+|  84
+|  73
+|  Cotton Yarn
+|  Deep
+|}
+
+====Types of Fish====
+Deep Sea Trawling introduces various new fish types, each with distinctive benefits, effects, or Herblore applications:
+
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Fish Type
+! Cooking Level
+! HP Healed
+! Special Effect
+! Herblore Use
+|-
+| Giant Krill
+| 69
+| 17
+| -
+| -
+|-
+| Haddock
+| 73
+| 18
+| Overheals up to 10 HP
+| Super Fishing Potion
+|-
+| Yellowfin Tuna
+| 79
+| 19
+| Restores 20% Energy
+| Extreme Energy Potion
+|-
+| Halibut
+| 83
+| 20
+| Combo food like Karambwan
+| -
+|-
+| Bluefin Tuna
+| 87
+| 22
+| Restores 5 Prayer points
+| -
+|-
+| Marlin
+| 93
+| 24
+|  -
+| Extended Stamina Potion
+|}
+
+'''The poll for different types of fish from Deep Sea Trawling is covered below under \\"Herblore & Cooking – Potions & Foods!\\"'''
+
+==Hunter: Crab Hunting Expeditions!==
+At last. Crab rave real. Crab hunting is an engaging new Hunter activity which introduces an entirely different rhythm to your Hunter skill.
+
+Here's how it works:
+
+
+* Place your traps at set locations and bait them with a Fish Offcut. Tasty!
+* After a set amount of time, crabs will make a dash for the baited trap. Red and blue crabs will move after 15 ticks, and rainbow crabs will move after 25 ticks.
+* With precise timing, you can achieve smooth cycles of setting, baiting and harvesting traps, resulting in consistent Hunter XP.
+
+[[File:Sailing - Resources & Skilling Activities Poll (5).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/hunt.jpg click here!]'']]
+Each crab type offers both a unique culinary delight and an opportunity to create specialised pastes, useful in Herblore recipes. The crabs you catch scale nicely with your Hunter level, offering better rewards as you progress. To maintain rhythm and avoid idle downtime, lower-level crabs have faster catch times, meaning smoother gameplay, especially for newer hunters.
+
+====Important Gameplay Notes:====
+We've intentionally structured crab hunting to be understandable and highly predictable. The consistent spawning intervals ensure you’re rewarded for skilful gameplay:
+
+* '''Trap Setting:''' 2-ticks (manual), 3-ticks (automatic)
+* '''Harvesting:''' 1-tick
+* '''Moving between traps:''' 2-ticks
+Each crab type appears in a fixed cycle, giving you a clear goal and rhythm. Lower-level crabs will appear slightly faster, keeping you busy and engaged.
+
+A significant benefit here is predictability! XP rates are stable and fixed. This means that crab hunting will be much more relevant when you unlock it and when you gain access to higher quantities of traps, but will fall off over time compared to training methods where XP is determined by Hunter level.
+
+Note that the gathering rates above assume you’ve already processed your crabs or banked them efficiently between trap cycles. Crab Paste isn’t stackable, but there’ll be Banks nearby.
+
+{{Letter|'''Poll Question: Should Crab Hunting be introduced as a Hunter training method?'''
+}}
+
+
+==Farming: Coral Nurseries and New Crops!==
+[[File:Sailing - Resources & Skilling Activities Poll (6).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/farm.jpg click here!]'']]
+
+Sailing brings with it new Farming options, in the form of coral nurseries and additional hops patches. Cultivate coral for Herblore or grow new plants like hemp and cotton for shipbuilding materials!
+
+====Coral Nurseries:====
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Frags
+! Farming Requirement
+! Growth Time
+! Protection payment
+! Resource harvested
+|-
+| Elkhorn frags
+| 28
+| 4 x 40 minutes (2 hours 40 minutes)
+| 5 Giant Seaweed
+| Mature elkhorn
+|-
+| Pillar frags
+| 52
+| 4 x 40 minutes (2 hours 40 minutes)
+| 5 Mature Elkhorn
+| Mature pillar
+|-
+| Umbral frags
+| 77
+| 4 x 40 minutes (2 hours 40 minutes)
+| 5 Mature Pillar
+| Mature umbral
+|}
+
+[[File:Sailing - Resources & Skilling Activities Poll (7).png|thumb|300px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/2.png click here!]'']]
+
+====New Hops Crops:====
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Seed
+! Farming Requirement
+! Growth Time
+! Protection payment
+! Resource harvested
+! Average yield
+|-
+| Flax seed
+| 18
+| 3 x 20 minutes (1 hour)
+| 6 Grain
+| Flax
+| ~35
+|-
+| Hemp seed
+| 37
+| 4 x 20 minutes (1 hour 20 minutes)
+| 6 Flax
+| Hemp
+| ~25
+|-
+| Cotton seed
+| 71
+| 5 x 20 minutes (1 hour 40 minutes)
+| 6 Hemp
+| Cotton boll
+| ~15
+|}
+
+[[File:Sailing - Resources & Skilling Activities Poll (8).png|thumb|300px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/3.png click here!]'']]
+
+====Hardwood Patches:====
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Seed
+! Farming Requirement
+! Growth Time
+! Protection payment
+|-
+| Camphor seed
+| 66
+| 8 × 640 mins (85 hours 20 minutes)
+| 10 White berries
+|-
+| Ironwood seed
+| 80
+| 8 × 640 mins (85 hours 20 minutes)
+| 10 Curry leaf
+|-
+| Rosewood seed
+| 92
+| 9 × 640 mins (96 hours)
+| 8 Dragonfruit
+|}
+
+{{Letter|'''Poll Question: Should Coral Nurseries and new Hops Patch expansions be integrated into Farming?'''
+}}
+
+==Crafting and Fletching: Fabrics and Blowpipes!==
+Time to spin a yarn... literally! Use freshly farmed materials to weave fabrics for your sails, or carve sturdy Blowpipes from island hardwoods. An ideal upgrade until you get your hands on a Toxic Blowpipe!
+
+====Crafting:====
+[[File:Sailing - Resources & Skilling Activities Poll (9).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/craft1.jpg click here!]'']]
+
+====Fletching:====
+[[File:Sailing - Resources & Skilling Activities Poll (10).png|thumb|450px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/4.png click here!]'']]
+
+[[File:Sailing - Resources & Skilling Activities Poll (11).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Fletch2.png click here!]'']]
+
+
+[[File:Sailing - Resources & Skilling Activities Poll (12).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/RW.png click here!]'']]
+
+
+{{Letter|'''Poll Question: Should new crafting materials be added as described?'''
+}}
+
+{{Letter|'''Poll Question: Should new Blowpipes be added as described?'''
+}}
+
+{{Letter|'''Poll Question: If the new Blowpipes are added, should the Rosewood Blowpipe receive a Special Attack as described?'''
+}}
+
+
+==Herblore and Cooking: Potions and Foods!==
+====New Potions:====
+[[File:Sailing - Resources & Skilling Activities Poll (13).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Herb2.png click here!]'']]
+
+{{Letter|'''Poll Question: Should Anti-odour salt be added to the game?'''
+'''Poll Question: Should Anti-bleed tonic be added to the game?'''
+'''Poll Question: Should Super fishing potion be added to the game?'''
+'''Poll Question: Should Extreme energy potion be added to the game?'''
+'''Poll Question: Should Super hunter potion be added to the game?'''
+'''Poll Question: Should Extended stamina potion be added to the game?'''
+'''Poll Question: Should Armadyl brew be added to the game?'''
+}}
+
+'''Cooking:''' We’ve also got some delectable marine delights for you to sink your teeth into!
+
+* '''Basic Foods:''' Crab, squid, and more is all cookable – and (hopefully) edible!
+* '''Advanced Foods:''' These fresh fish dishes promise to shake up the meta, in a similar fashion to the new Hunter meats introduced with Varlamore.
+
+[[File:Sailing - Resources & Skilling Activities Poll (14).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/cook.jpg click here!]'']]
+
+{{Letter|'''Poll Question: Should Red crab be added to the game?'''
+'''Poll Question: Should Blue crab be added to the game?'''
+'''Poll Question: Should Swordtip squid be added to the game?'''
+'''Poll Question: Should Giant krill be added to the game?'''
+'''Poll Question: Should Haddock be added to the game?'''
+'''Poll Question: Should Rainbow crab be added to the game?'''
+'''Poll Question: Should Yellowfin tuna be added to the game?'''
+'''Poll Question: Should Halibut be added to the game?'''
+'''Poll Question: Should Bluefin tuna be added to the game?'''
+'''Poll Question: Should Marlin be added to the game?'''
+}}
+
+==Smithing and Construction: Shipbuilding Essentials!==
+Hammers at the ready! We’re Smithing everything from sturdy keel parts to explosive cannonballs. Upgrade your ships from Bronze to Dragon, and master unique weaponry like chainshot and incendiary cannonballs.
+
+In case you’re wondering, these new ammo types are not available for the landlubbin’ Dwarf Multicannon. While we’re keen to open up new PvM possibilities at sea, we’re responsibly maintaining the balance back on land.
+
+* '''Keel and Hull Parts:''' Craft Bronze to Dragon-tier parts and add new planks, to build stronger and more versatile ships.
+* '''New Cannonballs:''' We’re adding loads of new cannonballs. Some of them can be Smithed in the same way as your bog-standard cannonballs, while others will be exclusive drops from mobs at sea.
+
+[[File:Sailing - Resources & Skilling Activities Poll (15).jpg|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/smith.jpg click here!]'']]
+
+====Improved Cannonball Smithing====
+On Brittle Island (requiring 81 Sailing) there is a special furnace. Almost snowed under, this furnace of dwarven make is much better at Smithing cannonballs.
+
+Effectively, the forge reduces the time it takes to smith one set of cannonballs from 8 ticks to 4 ticks. This includes the Smithing of Steel cannonballs for the Dwarf Multicannon. Additionally, the Double Mould from Giant's Foundry can also be used here.
+
+The furnace will be located on a remote island, but very close to a docking point. With the help of your Teleport to Boat spell, you could easily teleport to your Bank of choice and then return in a snap. While you’ll save time, you’ll want to consider the Rune cost of such an endeavor – cannonballs with lower profit margins are unlikely to be worth your time.
+
+The eagle-eyed among you might have spotted that we’ve renamed cannonballs ‘Steel Cannonballs’, to avoid confusion. Your boat cannon is a nifty bit of hardware that will accept any kind of cannonball, whereas your trusty Dwarf Multicannon only takes Steel Cannonballs. While we’re mindful of balancing, we’re open to exploring future upgrades to the Dwarf Multicannon which will allow it to use some fancy new ordinance – so let us know what you think!
+
+New cannonballs come in two flavours. Chainshot cannonballs have the same max hit as the corresponding basic cannonball and will stop your enemies in their tracks, to boot. Incendiary cannonballs also deal the same max hit as their basic counterparts, but also apply a burn effect to the target. Spicy.
+
+The new cannonballs will be created by taking the relevant components to an anvil. Chainshots, of course, use chain, whereas incendiary cannonballs use those Rubium Splinters you’ll be Mining.
+
+{{Letter|'''Poll Question: Should new Smithing additions for Cannonballs be added to the game?'''
+}}
+
+==Cannons: Sailing or Ranged-Based?==
+[[File:Sailing - Resources & Skilling Activities Poll (16).png|thumb|250px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/5.png click here!]'']]
+
+Cannons are one of the most exciting aspects of Sailing, letting you engage foes at sea and even take potshots at creatures ashore! However, an important question has surfaced about how they should function. Should they remain linked to your Sailing skill, or should they instead utilise your Ranged skill?
+
+Let's take a quick look at the debate.
+'''Considerations:'''
+'''Combat Implications:'''
+
+* With cannons able to target enemies on land, level 3 skillers can now train Slayer more easily by luring creatures close to shore.
+* Non-ranged monsters can be more easily safe-spotted from boats.
+'''Existing Precedents:'''
+
+* The existing Dwarven Multicannon relies on your Ranged skill.
+* Cannons in Tempoross and Barbarian Assault, however, are not Ranged-based, meaning skillers already have cannon access without using Ranged.
+'''Integration and Narrative:'''
+
+* Making cannons Ranged-based could seamlessly integrate Sailing with an existing combat skill.Conversely, cannons are facilities aboard your ship. It makes sense that your skill in Sailing would influence your accuracy and effectiveness while using one.
+'''Impact on Metas:'''
+
+* New training methods for skillers could open exciting gameplay options, just as Chambers of Xeric created fresh avenues for skill-based accounts.
+
+
+
+'''Update - Thursday 7th August'''
+
+
+
+* Firing Cannons will award Sailing and Ranged XP. However, you'll also have the option to use a Crewmate to fire a Cannon, which will only award Sailing XP.
+
+
+
+ ==Utility Skills: Constructing Your Sailing Experience!==
+[[File:Sailing - Resources & Skilling Activities Poll (17).png|600px|center]]
+''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Cons.png click here!]''
+
+'''Shipbuilding'''
+
+Construction is taking to the high seas! Aboard ship, you’ll be building everything from sturdy ship hulls to intricate components, setting the stage for countless epic voyages.
+
+First up, we’ve got new planks to go with those new hardwoods. You’ll notice that you can’t yet use these to construct anything in your POH, and that’s because we don’t want to create new Construction methods that exceed the XP/HR you get from building Teak and Mahogany furniture.
+
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Plank
+! Cost
+! Construction XP per plank
+|-
+| Camphor Plank
+| 2,500
+| 160
+|-
+| Ironwood Plank
+| 5,000
+| 175
+|-
+| Rosewood Plank
+| 7,500
+| 190
+|}
+
+Alongside the new planks, shipbuilding will also see the addition of ship components. These are new items that are created and then used in Shipbuilding. Some of these items are made from planks using Construction, a hammer, and saw, at the workbenches near shipwrights.
+
+To allow us to utilize large amounts of planks in the construction of higher-level boats, you’ll be able to combine Hull Parts into Large Hull Parts.
+
+{{Letter|'''Poll Question: Should new planks for shipbuilding be added as described?'''
+}}
+
+
+==Thieving: Pirate Plunder and Merchant Stalls!==
+[[File:Sailing - Resources & Skilling Activities Poll (18).png|600px|center]]
+''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Thiev.png click here!]''
+
+'''Thieving: Pirate Plunder and Merchant Stalls!'''
+
+We know you all plan to sail the seven seas in an orderly and lawful manner. Just between us though, we do plan to introduce some opportunities for sticky-fingered sailors.
+
+Sneak through bustling markets or plunder pirate strongholds with nothing but your Thieving skills! In this case crime does pay, in the form of balanced XP rates and enticing loot like coral frags and cannonballs.
+
+'''Pirate NPCs & Chests:''' Pickpocket swashbucklers or unlock pirate chests to earn clues, cannonballs, coral, and other nautical treasures.
+
+'''Merchant Stalls:'''These bustling market stalls may look familiar, but unlike the ones you’re used to, they don’t deplete when stolen from – although you’ll still need to watch out for the guards.
+
+To compensate, these stalls provide reduced XP rates and have revised loot tables.
+
+{{Letter|'''Poll Question: Should the new Thieving methods and related rewards be added to the game?'''
+}}
+
+
+
+==What's Next & Future Polls!==
+All the content we’ve proposed is designed to enrich the game world without overshadowing existing training methods. We’re aiming to give you loads of fun new ways to switch things up while you’re training your skills – but we’re not stopping there.
+
+After our proposals pass the poll, we’ll be doing some rigorous reviews to make sure that XP rates, spawn timings and yields are well-balanced and slide right in alongside existing skill activities. 
+ 
+You can help us by sharing your feedback and letting us know ''your'' priorities. We’re sailing ahead, together!
+
+We’d also appreciate if you’d fill out the '''official survey''' linked below.
+
+[[File:Sailing - Resources & Skilling Activities Poll (19).png|199px|center|link=https://jagex.questionpro.eu/t/AB3u6d0ZB3wHvk]]
+
+
+Lastly, you can join our special '''Livestream Q&A on August 6th at 16:00 BST''' over on '''YouTube''' and '''Twitch''' , where we'll answer your questions directly.
+
+You can also discuss this update on the [https://www.reddit.com/r/2007scape/ 2007Scape subreddit], the [https://steamcommunity.com/app/1343370/discussions/ Steam forums], or the community-led [http://discord.gg/OSRS OSRS Discord] in the #gameupdate channel. For more info on the above content, check out the official [[Old School Wiki]].
+
+Thank you once again for your unwavering support and enthusiasm – together, you all put wind in our sails. Anchors aweigh!
+
+
+'''Mods Abe, Abyss, Acorn, Arcane, Archie, Argo, Ash, Ayiza, BigRig, Blossom, Boko, Bruno, Chilly, Criminal, Crystal, Curse, Daizong, Donkey, Ed, Elena, Enigma, Entropi, Errol, Freddie, Fuzz, Gecko, Gengis, Gizmo, Goblin, Grace, Grub, Halo, Harold, Hend, Hornet, Husky, Ivory, Jalo, Jamesy, Jerv, Keyser, Kieren, Kirby, Kurotou, Leebleh, Lenny, Light, Liron, Lykos, Mack, Manked, Markos, Maylea, Mobius, Moogle, Morty, Moz, Necro, Nin, Nixon, Nox, Nylu, Ori, Other, Philomel, Pork, Pumpkin, Puppi, Rach, Redfield, Rice, Roq, Roy, Ry, Saiyan, Sarnie, Schmidt, Shogun, Shroom, Sigma, Skylark, Smithy, Sova, Squid, Starry, Suharun, Surma, Sween, Tide, Titania, Titus, TJ, Tomb, Tsourorf, Tyran, Veda, Vegard, West, Wolfy & Yume'''
+
+''The Old School Team.''
+
+
+''The Old School Team.''
+"
+`;

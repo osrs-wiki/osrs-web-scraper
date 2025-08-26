@@ -2,4 +2,4 @@
 "osrs-web-scraper": patch
 ---
 
-Remove obsolete e2e test snapshots to fix failing CI tests
+Restore e2e test snapshots - snapshots should be regenerated with `npm run test:e2e -- -u` when Chrome is available
