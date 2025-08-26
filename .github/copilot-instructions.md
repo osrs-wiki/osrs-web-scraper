@@ -8,7 +8,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 
 ### Bootstrap, Build, and Test the Repository
 
-- Install dependencies: npm install`
+- Install dependencies: `npm install`
 - Build the project: `npm run build` -- takes 7 seconds. NEVER CANCEL.
 - Run linting: `npm run lint` -- takes 2 seconds.
 - Run tests: `npm run test` -- takes 8 seconds. NEVER CANCEL. Set timeout to 30+ seconds.
