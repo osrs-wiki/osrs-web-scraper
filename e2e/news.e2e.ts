@@ -40,13 +40,7 @@ describe("News Command E2E Tests", () => {
     // Without URL it should show help or handle gracefully
   });
 
-  // This test requires Chrome/Chromium and internet access
-  // Skip if in CI or restricted environment
-  const shouldSkipScraping =
-    process.env.CI || process.env.PUPPETEER_SKIP_DOWNLOAD;
-
-  (shouldSkipScraping ? it.skip : it)(
-    "should scrape news post and generate MediaWiki content",
+  it("should scrape news post and generate MediaWiki content",
     async () => {
       const newsUrl =
         "https://secure.runescape.com/m=news/a=13/sailing---resources--skilling-activities-poll?oldschool=1";
@@ -103,6 +97,5 @@ describe("News Command E2E Tests", () => {
         expect(content).toContain("{{Update");
         expect(content).toMatchSnapshot("news-sailing-poll.txt");
       }
-    }
-  );
+    });
 });
