@@ -42,12 +42,7 @@ describe("Poll Command E2E Tests", () => {
     );
   });
 
-  // This test requires Chrome/Chromium and internet access
-  const shouldSkipScraping =
-    process.env.CI || process.env.PUPPETEER_SKIP_DOWNLOAD;
-
-  (shouldSkipScraping ? it.skip : it)(
-    "should scrape poll and generate MediaWiki content",
+  it("should scrape poll and generate MediaWiki content",
     async () => {
       const pollUrl =
         "https://secure.runescape.com/m=poll/a=13/oldschool/results?id=1708";
@@ -86,6 +81,5 @@ describe("Poll Command E2E Tests", () => {
         expect(content).toContain("{{PollWrapper|bottom}}");
         expect(content).toMatchSnapshot("poll-1708.txt");
       }
-    }
-  );
+    });
 });

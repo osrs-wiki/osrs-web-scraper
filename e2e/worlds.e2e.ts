@@ -25,11 +25,7 @@ describe("Worlds Command E2E Tests", () => {
     expect(result.stdout).toContain("Scrape the OSRS world list");
   });
 
-  // This test requires Chrome/Chromium and internet access
-  const shouldSkipScraping =
-    process.env.CI || process.env.PUPPETEER_SKIP_DOWNLOAD;
-
-  (shouldSkipScraping ? it.skip : it)("should scrape worlds list", async () => {
+  it("should scrape worlds list", async () => {
     const result = await runCLICommand({
       command: "node",
       args: [
