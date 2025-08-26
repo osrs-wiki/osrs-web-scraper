@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poll Command E2E Tests should scrape poll and generate MediaWiki content: poll-1708.txt 1`] = `
+"{{PollNotice|1708|8 August 2025|14 August 2025}}
+
+
+{{PollWrapper|top}}
+{{PollDescription|Previous skills have come with resources that support their unique gameplay. We've striven to make Sailing feel authentically Old School with this same kind of progression and new, thematic resources.
+
+Many materials will be introduced as core parts of the new skill for which you already voted, but it's up to you how they should affect other parts of the game.
+
+We think they'd add value to existing skills like Mining and Woodcutting, so we'd like to offer them as updates to those skills. However they could be obtained in other ways, such as purely via Sailing activities.
+
+Some content may be delivered after the initial launch depending on development time, player feedback, and overall project scope.
+
+This poll closes on Thursday 14th August.}}
+
+{{PollTotal|113652}}
+{{Poll
+|Question = Which skillcape and icon should be added for Sailing?
+|Answer1 = A
+|Votes1 = 23851
+|Answer2 = B
+|Votes2 = 20227
+|Answer3 = C
+|Votes3 = 26105
+|Answer4 = D
+|Votes4 = 32826
+|Answer5 = Skip question
+|Votes5 = 10643
+}}
+{{Poll
+|Question = Should the new trees be added to the game to let players chop and burn the new logs?
+|Answer1 = Yes
+|Votes1 = 100080
+|Answer2 = No
+|Votes2 = 10128
+|Answer3 = Skip question
+|Votes3 = 3444
+}}
+{{Poll
+|Question = Should the new rocks be added to the game to let players mine the new ores?
+|Answer1 = Yes
+|Votes1 = 99755
+|Answer2 = No
+|Votes2 = 10504
+|Answer3 = Skip question
+|Votes3 = 3393
+}}
+{{Poll
+|Question = Should Lantern Fishing be added to the game with Sailing?
+|Answer1 = Yes
+|Votes1 = 98962
+|Answer2 = No
+|Votes2 = 9680
+|Answer3 = Skip question
+|Votes3 = 5010
+}}
+{{Poll
+|Question = Should Crab Hunting be introduced as a Hunter training method?
+|Answer1 = Yes
+|Votes1 = 100308
+|Answer2 = No
+|Votes2 = 9439
+|Answer3 = Skip question
+|Votes3 = 3905
+}}
+{{Poll
+|Question = Should Coral Nurseries and new Hops Patch expansions be integrated into Farming?
+|Answer1 = Yes
+|Votes1 = 93310
+|Answer2 = No
+|Votes2 = 13123
+|Answer3 = Skip question
+|Votes3 = 7219
+}}
+{{Poll
+|Question = Should new Crafting materials be added as described?
+|Answer1 = Yes
+|Votes1 = 98300
+|Answer2 = No
+|Votes2 = 9340
+|Answer3 = Skip question
+|Votes3 = 6012
+}}
+{{Poll
+|Question = Should new blowpipes be added as described?
+|Answer1 = Yes
+|Votes1 = 89850
+|Answer2 = No
+|Votes2 = 16585
+|Answer3 = Skip question
+|Votes3 = 7217
+}}
+{{Poll
+|Question = If the new blowpipes are added, should the Rosewood Blowpipe receive a Special Attack as described?
+|Answer1 = Yes
+|Votes1 = 85551
+|Answer2 = No
+|Votes2 = 17484
+|Answer3 = Skip question
+|Votes3 = 10617
+}}
+{{Poll
+|Question = Should Anti-odour salt be added to the game?
+|Answer1 = Yes
+|Votes1 = 78528
+|Answer2 = No
+|Votes2 = 17907
+|Answer3 = Skip question
+|Votes3 = 17217
+}}
+{{Poll
+|Question = Should Anti-bleed tonic be added to the game?
+|Answer1 = Yes
+|Votes1 = 81901
+|Answer2 = No
+|Votes2 = 17929
+|Answer3 = Skip question
+|Votes3 = 13822
+}}
+{{Poll
+|Question = Should Super fishing potion be added to the game?
+|Answer1 = Yes
+|Votes1 = 90435
+|Answer2 = No
+|Votes2 = 17009
+|Answer3 = Skip question
+|Votes3 = 6208
+}}
+{{Poll
+|Question = Should Extreme energy potion be added to the game?
+|Answer1 = Yes
+|Votes1 = 90611
+|Answer2 = No
+|Votes2 = 17585
+|Answer3 = Skip question
+|Votes3 = 5456
+}}
+{{Poll
+|Question = Should Super hunter potion be added to the game?
+|Answer1 = Yes
+|Votes1 = 86614
+|Answer2 = No
+|Votes2 = 19433
+|Answer3 = Skip question
+|Votes3 = 7605
+}}
+{{Poll
+|Question = Should Extended stamina potion be added to the game?
+|Answer1 = Yes
+|Votes1 = 96701
+|Answer2 = No
+|Votes2 = 12700
+|Answer3 = Skip question
+|Votes3 = 4251
+}}
+{{Poll
+|Question = Should Armadyl brew be added to the game?
+|Answer1 = Yes
+|Votes1 = 88846
+|Answer2 = No
+|Votes2 = 13686
+|Answer3 = Skip question
+|Votes3 = 11120
+}}
+{{Poll
+|Question = Should Red crab be added to the game?
+|Answer1 = Yes
+|Votes1 = 94628
+|Answer2 = No
+|Votes2 = 10711
+|Answer3 = Skip question
+|Votes3 = 8313
+}}
+{{Poll
+|Question = Should Blue crab be added to the game?
+|Answer1 = Yes
+|Votes1 = 94651
+|Answer2 = No
+|Votes2 = 10705
+|Answer3 = Skip question
+|Votes3 = 8296
+}}
+{{Poll
+|Question = Should Swordtip squid be added to the game?
+|Answer1 = Yes
+|Votes1 = 94315
+|Answer2 = No
+|Votes2 = 10756
+|Answer3 = Skip question
+|Votes3 = 8581
+}}
+{{Poll
+|Question = Should Giant krill be added to the game?
+|Answer1 = Yes
+|Votes1 = 95235
+|Answer2 = No
+|Votes2 = 10315
+|Answer3 = Skip question
+|Votes3 = 8102
+}}
+{{Poll
+|Question = Should Haddock be added to the game?
+|Answer1 = Yes
+|Votes1 = 93676
+|Answer2 = No
+|Votes2 = 10998
+|Answer3 = Skip question
+|Votes3 = 8978
+}}
+{{Poll
+|Question = Should Rainbow crab be added to the game?
+|Answer1 = Yes
+|Votes1 = 93558
+|Answer2 = No
+|Votes2 = 12457
+|Answer3 = Skip question
+|Votes3 = 7637
+}}
+{{Poll
+|Question = Should Yellowfin be added to the game?
+|Answer1 = Yes
+|Votes1 = 95153
+|Answer2 = No
+|Votes2 = 10617
+|Answer3 = Skip question
+|Votes3 = 7882
+}}
+{{Poll
+|Question = Should Halibut be added to the game?
+|Answer1 = Yes
+|Votes1 = 94686
+|Answer2 = No
+|Votes2 = 11099
+|Answer3 = Skip question
+|Votes3 = 7867
+}}
+{{Poll
+|Question = Should Bluefin be added to the game?
+|Answer1 = Yes
+|Votes1 = 95208
+|Answer2 = No
+|Votes2 = 10836
+|Answer3 = Skip question
+|Votes3 = 7608
+}}
+{{Poll
+|Question = Should Marlin be added to the game?
+|Answer1 = Yes
+|Votes1 = 96244
+|Answer2 = No
+|Votes2 = 10239
+|Answer3 = Skip question
+|Votes3 = 7169
+}}
+{{Poll
+|Question = Should new Smithing additions for Cannonballs be added to the game?
+|Answer1 = Yes
+|Votes1 = 99294
+|Answer2 = No
+|Votes2 = 10301
+|Answer3 = Skip question
+|Votes3 = 4057
+}}
+{{Poll
+|Question = Should new planks for shipbuilding be added as described?
+|Answer1 = Yes
+|Votes1 = 94689
+|Answer2 = No
+|Votes2 = 13315
+|Answer3 = Skip question
+|Votes3 = 5648
+}}
+{{Poll
+|Question = Should the new Thieving methods and related rewards be added to the game?
+|Answer1 = Yes
+|Votes1 = 102504
+|Answer2 = No
+|Votes2 = 7435
+|Answer3 = Skip question
+|Votes3 = 3713
+}}
+
+{{PollFooter}}
+{{PollWrapper|bottom}}
+"
+`;
