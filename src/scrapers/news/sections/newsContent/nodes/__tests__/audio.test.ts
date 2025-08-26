@@ -8,7 +8,7 @@ describe("audio node", () => {
   test("audio node should parse and render", () => {
     const downloadFileSpy = jest
       .spyOn(fileUtils, "downloadFile")
-      .mockImplementationOnce(() => Promise.resolve(true));
+      .mockImplementationOnce(() => Promise.resolve("./out/news/test title/test title narration.mp3"));
 
     const root = parse(
       '<audio controls=""><source src="test.mp3" type="audio/wav"></audio>'
