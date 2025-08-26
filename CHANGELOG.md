@@ -1,5 +1,18 @@
 # osrs-web-scraper
 
+## 0.24.0
+
+### Minor Changes
+
+- f84e169: Add copilot-setup-steps for setting up the Github Copilot agent environment
+- 3a0d204: Save images with extensions matching their MIME type
+- 86a2e2f: Add comprehensive e2e snapshot tests for CLI commands with GitHub Actions workflows
+- 3029967: Add support for image sliders with background image extraction
+
+### Patch Changes
+
+- 24685ba: Restore e2e test snapshots - snapshots should be regenerated with `npm run test:e2e -- -u` when Chrome is available
+
 ## 0.23.0
 
 ### Minor Changes
