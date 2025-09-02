@@ -17,7 +17,8 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 
 ### Development Mode
 
-- Development with hot reload: `npm run start` -- starts nodemon with TypeScript support.
+- Development with hot reload: `npm run start:debug` -- starts tsx with TypeScript support and watch mode.
+- Single run development: `npm run start` -- starts tsx with TypeScript support without watch mode.
 - Production mode: `npm run start:node` -- requires build first.
 
 ### CLI Usage
@@ -53,7 +54,7 @@ TypeScript Node.js CLI application that scrapes the Old School RuneScape website
 ### Manual Validation Scenarios
 
 - **CLI Help**: Run `npm run start -- --help` to verify CLI structure.
-- **Development Mode**: Start `npm run start` and verify nodemon works correctly.
+- **Development Mode**: Start `npm run start:debug` for watch mode or `npm run start` for single run and verify tsx works correctly.
 - **Build Output**: Check `dist/` directory is created after build.
 - **Linting**: Verify no new ESLint errors are introduced.
 

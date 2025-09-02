@@ -7,6 +7,9 @@ import { ContentNodeParser } from "../types";
 
 const textParser: ContentNodeParser = (node, options) => {
   if (node.childNodes.length === 0) {
+    if (node.rawText.trim().length === 0) {
+      return undefined;
+    }
     return new MediaWikiText(formatText(node.rawText), {
       bold: options?.bold as boolean,
       italics: options?.italics as boolean,
