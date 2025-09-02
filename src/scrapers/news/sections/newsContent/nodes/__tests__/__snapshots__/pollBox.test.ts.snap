@@ -7,7 +7,22 @@ exports[`pollBox poll-box with no poll question returns letter 1`] = `
 "
 `;
 
+exports[`pollBox poll-box with question number and text in same paragraph separated by br tag 1`] = `
+"{{News Poll|3|Should we add the Login Screen Chapel Cosmetics as tradeable cosmetics into the main game. This would be purchased using points accumulated through the Grid Master event.}}
+"
+`;
+
 exports[`pollBox poll-box with question returns news poll 1`] = `
 "{{News Poll|3|here is the question}}
+"
+`;
+
+exports[`pollBox poll-box with single node containing number and question 1`] = `
+"{{News Poll|1|Here is the example question?}}
+"
+`;
+
+exports[`pollBox poll-box with single node containing number and question with proper spacing 1`] = `
+"{{News Poll|2|Should this feature be added?}}
 "
 `;
