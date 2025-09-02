@@ -1,5 +1,16 @@
 # osrs-web-scraper
 
+## 0.25.0
+
+### Minor Changes
+
+- 391d138: Replace nodemon with tsx for improved TypeScript development experience with faster startup times and better hot reloading.
+
+### Patch Changes
+
+- 391d138: Fix poll question parsing to properly handle spacing between question numbers and text when they are in separate HTML elements.
+- 391d138: Improve text parser to return undefined for empty text nodes instead of creating unnecessary empty MediaWikiText elements.
+
 ## 0.24.0
 
 ### Minor Changes
