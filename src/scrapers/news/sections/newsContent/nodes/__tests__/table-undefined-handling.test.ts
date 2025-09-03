@@ -6,70 +6,7 @@ import parse from "node-html-parser";
 
 import tableParser from "../table";
 
-describe("table node", () => {
-  test("A table with no thead should render", () => {
-    const root = parse(
-      "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td>test</td><td>test</td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with thead should render", () => {
-    const root = parse(
-      "<table><thead><tr><td>header1</td><td>header2</td></tr></thead><tbody><tr><td>test</td><td>test</td></tr><tr><td>test</td><td>test</td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with empty cells should render without errors", () => {
-    const root = parse(
-      "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td></td><td>test</td></tr><tr><td>test</td><td></td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with whitespace-only cells should render without errors", () => {
-    const root = parse(
-      "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td>   </td><td>test</td></tr><tr><td>test</td><td>  \n  </td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with mixed content including unsupported tags should render", () => {
-    const root = parse(
-      "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td><b>bold</b></td><td><script>alert('test')</script>content</td></tr><tr><td>test<br/></td><td><unsupported>ignored</unsupported>more content</td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with complex nested HTML should render correctly", () => {
-    const root = parse(
-      "<table><tbody><tr><td>Name</td><td>Description</td></tr><tr><td><i>Item Name</i></td><td>Some <b>bold</b> and <i>italic</i> text with <br/>line breaks</td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
-  test("A table with cells containing only ignored elements should render with empty content", () => {
-    const root = parse(
-      "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td><script>ignored</script><style>ignored</style></td><td>visible content</td></tr></tbody></table>"
-    );
-    const builder = new MediaWikiBuilder();
-    builder.addContents([tableParser(root.firstChild)].flat());
-    expect(builder.build()).toMatchSnapshot();
-  });
-
+describe("table parser - undefined content handling", () => {
   test("should handle tables without throwing 'Cannot read properties of undefined' error", () => {
     // This HTML structure simulates the conditions that caused the original error
     const problemHTML = `
@@ -101,6 +38,33 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
 
     // The main test: this should not throw an error
+    expect(() => {
+      const tableContent = tableParser(tableNode);
+      const builder = new MediaWikiBuilder();
+      if (Array.isArray(tableContent)) {
+        builder.addContents(tableContent);
+      } else if (tableContent) {
+        builder.addContent(tableContent);
+      }
+      builder.build();
+    }).not.toThrow();
+  });
+
+  test("should handle completely empty table cells gracefully", () => {
+    const htmlWithEmptyCells = `
+      <table>
+        <tbody>
+          <tr><td>Header 1</td><td>Header 2</td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td>   </td><td>  \n  </td></tr>
+          <tr><td><script></script><style></style></td><td><unknown></unknown></td></tr>
+        </tbody>
+      </table>
+    `;
+
+    const root = parse(htmlWithEmptyCells);
+    const tableNode = root.querySelector("table");
+
     expect(() => {
       const tableContent = tableParser(tableNode);
       const builder = new MediaWikiBuilder();

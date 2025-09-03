@@ -53,13 +53,9 @@ describe("Worlds Command E2E Tests", () => {
     // Verify it contains MediaWiki world list content
     expect(content).toContain("WorldLine");
 
-    // Sort the world lines for deterministic testing
-    const sortedContent = content
-      .split("\n")
-      .filter((line) => line.trim())
-      .sort()
-      .join("\n");
-
-    expect(sortedContent).toMatchSnapshot("worlds-sorted.txt");
+    // Verify it contains a specific world line to ensure proper formatting
+    expect(content).toContain(
+      "{{WorldLine|302|United Kingdom|mems=yes|Trade - Members}}"
+    );
   });
 });

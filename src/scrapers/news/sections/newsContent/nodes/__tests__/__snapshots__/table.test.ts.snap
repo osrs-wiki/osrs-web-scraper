@@ -1,5 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`table node A table with cells containing only ignored elements should render with empty content 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! header1
+! header2
+|-
+| <!-- Unsupported tag: style -->
+| visible content
+|}
+"
+`;
+
+exports[`table node A table with complex nested HTML should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Name
+! Description
+|-
+| ''Item Name''
+| Some '''bold''' and ''italic'' text with 
+line breaks
+|}
+"
+`;
+
+exports[`table node A table with empty cells should render without errors 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! header1
+! header2
+|-
+| 
+| test
+|-
+| test
+| 
+|}
+"
+`;
+
+exports[`table node A table with mixed content including unsupported tags should render 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! header1
+! header2
+|-
+| '''bold'''
+| content
+|-
+| test
+
+| <!-- Unsupported tag: unsupported -->more content
+|}
+"
+`;
+
 exports[`table node A table with no thead should render 1`] = `
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
@@ -23,6 +79,21 @@ exports[`table node A table with thead should render 1`] = `
 |-
 | test
 | test
+|}
+"
+`;
+
+exports[`table node A table with whitespace-only cells should render without errors 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! header1
+! header2
+|-
+| 
+| test
+|-
+| test
+| 
 |}
 "
 `;
