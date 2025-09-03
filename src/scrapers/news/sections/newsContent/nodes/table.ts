@@ -31,16 +31,22 @@ export const tableParser: ContentNodeParser = (node, options) => {
       (trNode) => {
         const tdNodes = trNode.querySelectorAll("td");
         return {
-          cells: tdNodes.map<MediaWikiTableCell>((tdNode) => ({
-            content: tdNode.childNodes
+          cells: tdNodes.map<MediaWikiTableCell>((tdNode) => {
+            const content = tdNode.childNodes
               .map((childNode) => {
                 if (childNode instanceof HTMLElement) {
                   return nodeParser(childNode, options);
                 }
                 return textParser(childNode, options);
               })
-              .flat(),
-          })),
+              .flat()
+              .filter((content) => content != null);
+
+            // Ensure we always have at least some content, even if it's empty
+            return {
+              content: content.length > 0 ? content : [new MediaWikiText("")],
+            };
+          }),
         };
       }
     );

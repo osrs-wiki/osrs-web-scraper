@@ -99,22 +99,22 @@ These uncharted waters are also full of rare and precious minerals - perfect for
 |  25
 |  Lead Bar (2 lead ore)
 | Slightly higher XP per hour than iron rocks outside of the mining guild.
- Less XP per hour than iron rocks inside the mining guild as these respawn faster.
- An interesting alternative to those willing to train their sailing on their early game mining journey.
+Less XP per hour than iron rocks inside the mining guild as these respawn faster.
+An interesting alternative to those willing to train their sailing on their early game mining journey.
  Lead bars are used in shipbuilding and thematically keep ships watertight.
 |-
 | Rubium
 |  48 - Splinters (Stackable) 68 - Geodes
 |  NA
-|  Two variants of mining unlocked at different levels. Neither method has a focus on XP with Rubium splinters being the main resource to create incendiary cannonballs (ships only).
- Rubium splinters are minable similar to Volcanic Ash but with two guaranteed rolls before a random chance to deplete. Splinter quantities scale with mining level.
+| Two variants of mining unlocked at different levels. Neither method has a focus on XP with Rubium splinters being the main resource to create incendiary cannonballs (ships only).
+Rubium splinters are minable similar to Volcanic Ash but with two guaranteed rolls before a random chance to deplete. Splinter quantities scale with mining level.
  Rubium geodes are mined similarly to \\"Infernal Shale deposits\\" in the chasm of fire. A slower more AFK alternative for less splinters and XP per hour than mining splinters. Geodes can be smashed into splinters with a hammer quantity scaling with mining level.
 |-
 | Nickel
 |  74
 |  Cupronickel Bar (1 nickel ore & 2 copper ore)
-|  Mined similar to paydirt in MLM or Barronite in Camdozaal.
- Focus is on nickel as a resource for cupronickel reasonably AFK but lower XP per hour than MLM. Should be profitable.
+| Mined similar to paydirt in MLM or Barronite in Camdozaal.
+Focus is on nickel as a resource for cupronickel reasonably AFK but lower XP per hour than MLM. Should be profitable.
  Higher level version of lead used in ship building.
 |}
 
@@ -127,7 +127,8 @@ These uncharted waters are also full of rare and precious minerals - perfect for
 
 Fishing gets richer with Lantern Fishing and Deep Sea Trawling, providing squid and other unique fish with special uses in Herblore, Cooking, and even Fletching. These methods are profitable but shouldn’t overly compete with traditional Fishing methods.
 
-====Lantern Fishing====
+'''Lantern Fishing'''
+
 Master the art of deep-sea harpooning by lanternlight and you could catch rare squid varieties for use in new recipes and weapons.
 
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"
@@ -139,16 +140,16 @@ Master the art of deep-sea harpooning by lanternlight and you could catch rare s
 |-
 | Swordtip squid
 |  52
-|  Squid paste (Pestle & Mortar)
- Fish offcuts (Knife)
+| Squid paste (Pestle & Mortar)
+Fish offcuts (Knife)
  Squid beak (Knife rarely)
 |  A new harpoon fishing spot similar to tuna/swordfish. If you are below 69 fishing you will only obtain swordtip squid.
 
 |-
 | Jumbo squid
 | 69
-|  Squid paste (Pestle & Mortar)
- Fine fish offcuts (Knife)
+| Squid paste (Pestle & Mortar)
+Fine fish offcuts (Knife)
  Squid beak (Knife rarely)
 |  A new harpoon fishing spot similar to tuna/swordfish. If you are at least 69 fishing you will start to obtain Jumbo squid.
 
@@ -194,7 +195,8 @@ We polled Deep Sea Trawling, an immersive new activity blending Sailing and Fish
 |  Deep
 |}
 
-====Types of Fish====
+'''Types of Fish'''
+
 Deep Sea Trawling introduces various new fish types, each with distinctive benefits, effects, or Herblore applications:
 
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"
@@ -257,7 +259,8 @@ Here's how it works:
 [[File:Sailing - Resources & Skilling Activities Poll (5).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/hunt.jpg click here!]'']]
 Each crab type offers both a unique culinary delight and an opportunity to create specialised pastes, useful in Herblore recipes. The crabs you catch scale nicely with your Hunter level, offering better rewards as you progress. To maintain rhythm and avoid idle downtime, lower-level crabs have faster catch times, meaning smoother gameplay, especially for newer hunters.
 
-====Important Gameplay Notes:====
+'''Important Gameplay Notes:'''
+
 We've intentionally structured crab hunting to be understandable and highly predictable. The consistent spawning intervals ensure you’re rewarded for skilful gameplay:
 
 * '''Trap Setting:''' 2-ticks (manual), 3-ticks (automatic)
@@ -278,7 +281,8 @@ Note that the gathering rates above assume you’ve already processed your crabs
 
 Sailing brings with it new Farming options, in the form of coral nurseries and additional hops patches. Cultivate coral for Herblore or grow new plants like hemp and cotton for shipbuilding materials!
 
-====Coral Nurseries:====
+'''Coral Nurseries:''' Cultivate Elkhorn, Pillar, and Umbral Coral in specialised underwater plots, crucial for potent Herblore concoctions.
+
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! Frags
@@ -308,7 +312,8 @@ Sailing brings with it new Farming options, in the form of coral nurseries and a
 
 [[File:Sailing - Resources & Skilling Activities Poll (7).png|thumb|300px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/2.png click here!]'']]
 
-====New Hops Crops:====
+'''New Hops Crops:''' Grow versatile new crops like Flax, Hemp, and Cotton, perfect for crafting ship sails, fabrics, and useful textiles.
+
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! Seed
@@ -342,7 +347,8 @@ Sailing brings with it new Farming options, in the form of coral nurseries and a
 
 [[File:Sailing - Resources & Skilling Activities Poll (8).png|thumb|300px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/3.png click here!]'']]
 
-====Hardwood Patches:====
+'''Hardwood Patches:''' Plant the newly-introduced hardwoods in specialised tree patches.
+
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! Seed
@@ -372,10 +378,12 @@ Sailing brings with it new Farming options, in the form of coral nurseries and a
 ==Crafting and Fletching: Fabrics and Blowpipes!==
 Time to spin a yarn... literally! Use freshly farmed materials to weave fabrics for your sails, or carve sturdy Blowpipes from island hardwoods. An ideal upgrade until you get your hands on a Toxic Blowpipe!
 
-====Crafting:====
+'''Crafting:''' Bolts of durable Linen, Canvas, and Cotton to keep your sails ship-shape!
+
 [[File:Sailing - Resources & Skilling Activities Poll (9).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/craft1.jpg click here!]'']]
 
-====Fletching:====
+'''Fletching:''' Carve new Blowpipes from Camphor, Ironwood, and Rosewood, providing powerful Ranged weaponry for mid-level adventurers.
+
 [[File:Sailing - Resources & Skilling Activities Poll (10).png|thumb|450px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/4.png click here!]'']]
 
 [[File:Sailing - Resources & Skilling Activities Poll (11).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Fletch2.png click here!]'']]
@@ -395,7 +403,8 @@ Time to spin a yarn... literally! Use freshly farmed materials to weave fabrics 
 
 
 ==Herblore and Cooking: Potions and Foods!==
-====New Potions:====
+'''New Potions:''' We’re mixing up powerful new potions like Anti-bleed Tonics and Armadyl Brews, each of which has a unique and potent effect.
+
 [[File:Sailing - Resources & Skilling Activities Poll (13).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Herb2.png click here!]'']]
 
 {{Letter|'''Poll Question: Should Anti-odour salt be added to the game?'''
@@ -436,7 +445,8 @@ In case you’re wondering, these new ammo types are not available for the landl
 
 [[File:Sailing - Resources & Skilling Activities Poll (15).png|thumb|600px|center|''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-24/smith.jpg click here!]'']]
 
-====Improved Cannonball Smithing====
+'''Improved Cannonball Smithing'''
+
 On Brittle Island (requiring 81 Sailing) there is a special furnace. Almost snowed under, this furnace of dwarven make is much better at Smithing cannonballs.
 
 Effectively, the forge reduces the time it takes to smith one set of cannonballs from 8 ticks to 4 ticks. This includes the Smithing of Steel cannonballs for the Dwarf Multicannon. Additionally, the Double Mould from Giant's Foundry can also be used here.
@@ -484,7 +494,7 @@ Let's take a quick look at the debate.
 
 
 
- ==Utility Skills: Constructing Your Sailing Experience!==
+==Utility Skills: Constructing Your Sailing Experience!==
 [[File:Sailing - Resources & Skilling Activities Poll (17).png|600px|center]]
 ''If you want a higher resolution look at the image above, [https://cdn.runescape.com/assets/img/external/oldschool/2025/newsposts/2025-07-28/Cons.png click here!]''
 
@@ -546,7 +556,7 @@ To compensate, these stalls provide reduced XP rates and have revised loot table
 All the content we’ve proposed is designed to enrich the game world without overshadowing existing training methods. We’re aiming to give you loads of fun new ways to switch things up while you’re training your skills – but we’re not stopping there.
 
 After our proposals pass the poll, we’ll be doing some rigorous reviews to make sure that XP rates, spawn timings and yields are well-balanced and slide right in alongside existing skill activities. 
- 
+
 You can help us by sharing your feedback and letting us know ''your'' priorities. We’re sailing ahead, together!
 
 We’d also appreciate if you’d fill out the '''official survey''' linked below.

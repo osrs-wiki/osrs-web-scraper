@@ -18,18 +18,17 @@ const textParser: ContentNodeParser = (node, options) => {
   }
   return node.childNodes
     .map<MediaWikiContent | MediaWikiContent[]>((childNode) => {
-      return new MediaWikiText(
-        childNode instanceof HTMLElement
-          ? nodeParser(childNode)
-          : formatText(childNode.rawText),
-        {
-          bold: options?.bold as boolean,
-          italics: options?.italics as boolean,
-          underline: options?.underline as boolean,
-        }
-      );
+      if (childNode instanceof HTMLElement) {
+        return nodeParser(childNode, options);
+      }
+      return new MediaWikiText(formatText(childNode.rawText), {
+        bold: options?.bold as boolean,
+        italics: options?.italics as boolean,
+        underline: options?.underline as boolean,
+      });
     })
-    .flat();
+    .flat()
+    .filter((content) => content != null);
 };
 
 export default textParser;
