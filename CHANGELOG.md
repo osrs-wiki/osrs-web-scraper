@@ -1,5 +1,12 @@
 # osrs-web-scraper
 
+## 0.25.1
+
+### Patch Changes
+
+- d2aa555: Filter out undefined content in table and text parsing
+- d2aa555: Update worlds e2e test to not use snapshots
+
 ## 0.25.0
 
 ### Minor Changes
