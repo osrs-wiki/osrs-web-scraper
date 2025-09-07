@@ -23,32 +23,43 @@ class NewsBoldQuoteTransformer extends MediaWikiTransformer {
       for (let index = 0; index < content.length; index++) {
         const current = content[index];
         
-        // Look for pattern: quote + bold text + quote
-        if (
-          index > 0 &&
-          index < content.length - 1 &&
-          current instanceof MediaWikiText &&
-          current.styling?.bold
-        ) {
-          const before = content[index - 1];
-          const after = content[index + 1];
+        // Check if this is bold text that needs transformation
+        if (current instanceof MediaWikiText && current.styling?.bold) {
+          let shouldTransform = false;
+          let transformedText = current;
           
-          // Check if the bold text is surrounded by single quotes
-          if (
-            before instanceof MediaWikiText &&
-            after instanceof MediaWikiText &&
-            typeof before.children === "string" &&
-            typeof after.children === "string" &&
-            before.children.endsWith("'") &&
-            after.children.startsWith("'")
-          ) {
+          // Case 1: Bold text surrounded by separate quote elements
+          if (index > 0 && index < content.length - 1) {
+            const before = content[index - 1];
+            const after = content[index + 1];
+            
+            if (
+              before instanceof MediaWikiText &&
+              after instanceof MediaWikiText &&
+              typeof before.children === "string" &&
+              typeof after.children === "string" &&
+              before.children.endsWith("'") &&
+              after.children.startsWith("'")
+            ) {
+              shouldTransform = true;
+            }
+          }
+          
+          // Case 2: Bold text that itself contains surrounding quotes
+          if (!shouldTransform) {
+            const textContent = extractTextContent(current);
+            if (textContent.startsWith("'") && textContent.endsWith("'") && textContent.length > 2) {
+              shouldTransform = true;
+            }
+          }
+          
+          if (shouldTransform) {
             // Replace the bold MediaWiki formatting with HTML <b> tags
             const boldContent = extractTextContent(current);
-            const htmlBoldText = new MediaWikiText(`<b>${boldContent}</b>`);
-            transformedContent.push(htmlBoldText);
-          } else {
-            transformedContent.push(current);
+            transformedText = new MediaWikiText(`<b>${boldContent}</b>`);
           }
+          
+          transformedContent.push(transformedText);
         } else {
           transformedContent.push(current);
         }

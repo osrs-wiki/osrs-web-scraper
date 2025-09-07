@@ -99,4 +99,57 @@ describe("NewsBoldQuoteTransformer", () => {
     const output = new MediaWikiBuilder().addContents(transformed).build();
     expect(output).toBe("'<b>bold text</b>'");
   });
+
+  it("should handle bold text that itself contains surrounding quotes", () => {
+    // This tests the case mentioned in the comment: MediaWikiText with bold: true and content 'text'
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("'text'", { bold: true }),
+    ];
+    
+    // Without the transformer, this would produce ''''text'''' (problematic) 
+    const untransformed = new MediaWikiBuilder().addContents(originalContent).build();
+    expect(untransformed).toBe("''''text''''");
+    
+    // With the transformer, it should produce <b>'text'</b> (correct)
+    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("<b>'text'</b>");
+  });
+
+  it("should handle bold text with quotes only at start", () => {
+    // Test case where only the start has a quote
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("'text", { bold: true }),
+    ];
+    
+    // Should not transform since it doesn't have quotes on both sides
+    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("''''text'''");
+  });
+
+  it("should handle bold text with quotes only at end", () => {
+    // Test case where only the end has a quote
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("text'", { bold: true }),
+    ];
+    
+    // Should not transform since it doesn't have quotes on both sides
+    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("'''text''''");
+  });
+
+  it("should handle single quote as bold text", () => {
+    // Edge case: just a single quote as bold text
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("'", { bold: true }),
+    ];
+    
+    // Should not transform since it doesn't have content between quotes
+    // Output should be '''(content)''' = ''''''
+    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("'''''''");
+  });
 });
