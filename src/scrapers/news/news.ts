@@ -4,6 +4,7 @@ import fs from "fs";
 import { newsContent, newsHeader } from "./sections";
 import {
   NewsBreakTransformer,
+  NewsBoldQuoteTransformer,
   NewsFooterTransformer,
   NewsHeaderTransformer,
   NewsFileCaptionTransformer,
@@ -37,6 +38,7 @@ const news: ScrapingService<MediaWikiBuilder> = {
           await newsContent.format(results.content, page.url(), results.title)
         )
         .addTransformer(new NewsHeaderTransformer())
+        .addTransformer(new NewsBoldQuoteTransformer())
         .addTransformer(new NewsBreakTransformer())
         .addTransformer(new NewsFileCaptionTransformer())
         .addTransformer(new NewsFooterTransformer());
