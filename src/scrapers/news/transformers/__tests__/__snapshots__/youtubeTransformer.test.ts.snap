@@ -2,25 +2,37 @@
 
 exports[`NewsYoutubeTransformer should handle mixed content correctly 1`] = `
 "Some text before
-<center>{{Youtube|ZNePfBmCZbM}}
+<center>
+{{Youtube|ZNePfBmCZbM}}
 
-YouTube caption</center>
+YouTube caption
+</center>
+
 {{OtherTemplate}}
 Text after"
 `;
 
 exports[`NewsYoutubeTransformer should wrap YouTube playlist template in center tags 1`] = `
-"<center>{{Youtube|type=playlist|PLRs68iqW7gYvSyTqu12WFMMXYZM-2regV}}
-</center>"
+"<center>
+{{Youtube|type=playlist|PLRs68iqW7gYvSyTqu12WFMMXYZM-2regV}}
+
+</center>
+"
 `;
 
 exports[`NewsYoutubeTransformer should wrap YouTube template with following caption in center tags 1`] = `
-"<center>{{Youtube|ZNePfBmCZbM}}
+"<center>
+{{Youtube|ZNePfBmCZbM}}
 
-If you can't see the fantastic video by [https://x.com/_amentos Amentos] above, [https://www.youtube.com/watch?v=ZNePfBmCZbM click here].</center>"
+If you can't see the fantastic video by [https://x.com/_amentos Amentos] above, [https://www.youtube.com/watch?v=ZNePfBmCZbM click here].
+</center>
+"
 `;
 
 exports[`NewsYoutubeTransformer should wrap a standalone YouTube template in center tags 1`] = `
-"<center>{{Youtube|ZNePfBmCZbM}}
-</center>"
+"<center>
+{{Youtube|ZNePfBmCZbM}}
+
+</center>
+"
 `;

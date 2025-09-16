@@ -33,7 +33,7 @@ class NewsYoutubeTransformer extends MediaWikiTransformer {
                 "center",
                 [current, nextBreak, nextText],
                 {},
-                { collapsed: true }
+                { collapsed: false }
               )
             );
             index += 2; // Skip the break and text we just processed
@@ -44,7 +44,7 @@ class NewsYoutubeTransformer extends MediaWikiTransformer {
                 "center",
                 [current],
                 {},
-                { collapsed: true }
+                { collapsed: false }
               )
             );
           }
