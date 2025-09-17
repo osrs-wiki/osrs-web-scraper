@@ -110,10 +110,10 @@ describe("NewsBoldQuoteTransformer", () => {
     const untransformed = new MediaWikiBuilder().addContents(originalContent).build();
     expect(untransformed).toBe("''''text''''");
     
-    // With the transformer, it should produce <b>'text'</b> (correct)
+    // With the transformer, it should produce '<b>text</b>' (correct - quotes outside)
     const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    expect(output).toBe("<b>'text'</b>");
+    expect(output).toBe("'<b>text</b>'");
   });
 
   it("should handle bold text with quotes only at start", () => {
@@ -151,5 +151,24 @@ describe("NewsBoldQuoteTransformer", () => {
     const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
     const output = new MediaWikiBuilder().addContents(transformed).build();
     expect(output).toBe("'''''''");
+  });
+
+  it("should handle MediaWikiText with children containing quoted bold text", () => {
+    // This tests the specific case mentioned in the comment: a MediaWikiText with children
+    // where one child has 'text' with bold styling
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText([
+        new MediaWikiText("The PvP Arena is using "),
+        new MediaWikiText("'Zerker'", { bold: true }),
+        new MediaWikiText(" loadouts in Ranked Duels and Tournaments this week."),
+        new MediaWikiText(undefined),
+      ]),
+    ];
+    
+    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    
+    // The 'Zerker' should become <b>Zerker</b> with quotes preserved
+    expect(output).toBe("The PvP Arena is using '<b>Zerker</b>' loadouts in Ranked Duels and Tournaments this week.");
   });
 });
