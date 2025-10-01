@@ -223,5 +223,8 @@ describe("table node", () => {
     expect(result).toContain("* Troubled Tortugans (45 Sailing required)");
     expect(result).toContain("* Vannaka: 30 - 80");
     expect(result).toContain("* Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.");
+    
+    // Also verify the full output structure
+    expect(result).toMatchSnapshot();
   });
 });
