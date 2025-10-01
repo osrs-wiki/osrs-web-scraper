@@ -227,4 +227,38 @@ describe("table node", () => {
     // Also verify the full output structure
     expect(result).toMatchSnapshot();
   });
+
+  test("should handle tables with multiple tbody elements", () => {
+    const multiTbodyHTML = `
+      <table>
+        <tbody>
+          <tr><th>Header 1</th><th>Header 2</th></tr>
+        </tbody>
+        <tbody>
+          <tr><td>Row 1 Col 1</td><td>Row 1 Col 2</td></tr>
+          <tr><td>Row 2 Col 1</td><td>Row 2 Col 2</td></tr>
+        </tbody>
+      </table>
+    `;
+
+    const root = parse(multiTbodyHTML);
+    const tableNode = root.querySelector("table");
+    const tableContent = tableParser(tableNode);
+    const builder = new MediaWikiBuilder();
+    
+    if (Array.isArray(tableContent)) {
+      builder.addContents(tableContent);
+    } else if (tableContent) {
+      builder.addContent(tableContent);
+    }
+    
+    const result = builder.build();
+    
+    // Should contain both data rows
+    expect(result).toContain("Row 1 Col 1");
+    expect(result).toContain("Row 1 Col 2");
+    expect(result).toContain("Row 2 Col 1");
+    expect(result).toContain("Row 2 Col 2");
+    expect(result).toMatchSnapshot();
+  });
 });
