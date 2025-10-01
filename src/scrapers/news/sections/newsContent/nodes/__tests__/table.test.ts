@@ -177,4 +177,51 @@ describe("table node", () => {
       builder.build();
     }).not.toThrow();
   });
+
+  test("should handle table cells with li elements without ul/ol wrapper", () => {
+    // This reproduces the issue from https://github.com/osrs-wiki/osrs-web-scraper/issues/XXX
+    const problemHTML = `
+      <table>
+        <tbody><tr><th>Creature</th><th> Slayer Unlock Requirements</th><th> Quantities</th><th> Weightings</th><th> Slayer Point Unlock</th>
+        </tr>
+        </tbody><tbody>
+          <tr><td>Gryphons</td>
+            <td>
+              <li>51 Slayer</li>
+              <li>Troubled Tortugans (45 Sailing required)</li>
+              <li>60 Combat (only relevant if your settings filter tasks by combat level)</li>
+            </td>
+            <td> 
+              <li>Vannaka: 30 - 80</li> 
+              <li>Chaeldar: 60 - 100</li> 
+              <li>Nieve: 110 - 170</li> 
+              <li>Duradel: 100 - 210</li></td>
+            <td><li>Vannaka: 5</li> 
+              <li>Chaeldar: 5</li> 
+              <li>Nieve: 7</li> 
+              <li>Duradel: 7</li></td>
+            <td> <li>Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.</li></td></tr>
+        </tbody>
+      </table>
+    `;
+
+    const root = parse(problemHTML);
+    const tableNode = root.querySelector("table");
+    const tableContent = tableParser(tableNode);
+    const builder = new MediaWikiBuilder();
+    
+    if (Array.isArray(tableContent)) {
+      builder.addContents(tableContent);
+    } else if (tableContent) {
+      builder.addContent(tableContent);
+    }
+    
+    const result = builder.build();
+    
+    // The result should contain the list items as bullet points
+    expect(result).toContain("* 51 Slayer");
+    expect(result).toContain("* Troubled Tortugans (45 Sailing required)");
+    expect(result).toContain("* Vannaka: 30 - 80");
+    expect(result).toContain("* Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.");
+  });
 });
