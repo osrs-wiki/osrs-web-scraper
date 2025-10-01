@@ -179,7 +179,6 @@ describe("table node", () => {
   });
 
   test("should handle table cells with li elements without ul/ol wrapper", () => {
-    // This reproduces the issue from https://github.com/osrs-wiki/osrs-web-scraper/issues/XXX
     const problemHTML = `
       <table>
         <tbody><tr><th>Creature</th><th> Slayer Unlock Requirements</th><th> Quantities</th><th> Weightings</th><th> Slayer Point Unlock</th>
