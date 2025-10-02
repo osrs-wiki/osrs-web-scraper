@@ -18,8 +18,8 @@ export const listItemParser: ContentNodeParser = (node, options) => {
       })
       .flat();
     return new MediaWikiListItem(childNodes, {
-      ordered: options.ordered as boolean,
-      level: options.level as number,
+      ordered: (options?.ordered as boolean) ?? false, // Default to unordered (bullet point)
+      level: (options?.level as number) ?? 1, // Default to level 1
     });
   }
 };

@@ -97,3 +97,48 @@ exports[`table node A table with whitespace-only cells should render without err
 |}
 "
 `;
+
+exports[`table node should handle table cells with li elements without ul/ol wrapper 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Creature
+! Slayer Unlock Requirements
+! Quantities
+! Weightings
+! Slayer Point Unlock
+|-
+| Gryphons
+| 
+* 51 Slayer
+* Troubled Tortugans (45 Sailing required)
+* 60 Combat (only relevant if your settings filter tasks by combat level)
+| 
+* Vannaka: 30 - 80
+* Chaeldar: 60 - 100
+* Nieve: 110 - 170
+* Duradel: 100 - 210
+| 
+* Vannaka: 5
+* Chaeldar: 5
+* Nieve: 7
+* Duradel: 7
+| 
+* Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.
+|}
+"
+`;
+
+exports[`table node should handle tables with multiple tbody elements 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Header 1
+! Header 2
+|-
+| Row 1 Col 1
+| Row 1 Col 2
+|-
+| Row 2 Col 1
+| Row 2 Col 2
+|}
+"
+`;

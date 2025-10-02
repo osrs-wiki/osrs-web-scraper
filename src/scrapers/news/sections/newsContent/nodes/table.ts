@@ -17,17 +17,24 @@ export const tableParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const table = node as HTMLElement;
     const thead = table.querySelector("thead");
-    const tbody = table.querySelector("tbody");
-    const rowNodes = tbody.querySelectorAll("tr");
+    
+    // Get all tbody elements and all their tr elements
+    const tbodyElements = table.querySelectorAll("tbody");
+    const allRowNodes: HTMLElement[] = [];
+    tbodyElements.forEach((tbody) => {
+      const rows = tbody.querySelectorAll("tr");
+      allRowNodes.push(...rows);
+    });
+    
     const headerNodes = thead?.querySelectorAll("tr") ?? [];
-    const headerRowNodes = (headerNodes?.length > 0 ? headerNodes : rowNodes)
+    const headerRowNodes = (headerNodes?.length > 0 ? headerNodes : allRowNodes)
       .shift()
       .querySelectorAll("td, th");
     const headers: MediaWikiTableCell[] =
       headerRowNodes.map<MediaWikiTableCell>((node) => ({
         content: [new MediaWikiText(node.textContent.trim())],
       }));
-    const tableRows: MediaWikiTableRow[] = rowNodes.map<MediaWikiTableRow>(
+    const tableRows: MediaWikiTableRow[] = allRowNodes.map<MediaWikiTableRow>(
       (trNode) => {
         const tdNodes = trNode.querySelectorAll("td");
         return {
