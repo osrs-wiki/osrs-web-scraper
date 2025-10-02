@@ -1,5 +1,15 @@
 # osrs-web-scraper
 
+## 0.25.2
+
+### Patch Changes
+
+- fc28b90: Center YouTube templates and their captions
+- 791a34e: Fix table parsing error with multiple tbody elements and orphan li elements
+- db6ba13: Bump brace-expansion from 1.1.11 to 1.1.12
+- 8dd98da: Fix bold text surrounded by single quotes MediaWiki formatting issues
+- 3f35317: Bump tar-fs from 3.0.9 to 3.1.1
+
 ## 0.25.1
 
 ### Patch Changes
