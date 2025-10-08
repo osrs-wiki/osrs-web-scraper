@@ -48,6 +48,9 @@ describe("Poll Command E2E Tests", () => {
       // See GitHub Actions run #18321911697 where this test failed because
       // the poll scraper completed successfully but didn't create output files,
       // suggesting the poll content couldn't be scraped.
+      //
+      // To find active polls, visit: https://secure.runescape.com/m=poll/oldschool/
+      // and select a poll with results available (e.g., /results?id=XXXX)
       const pollUrl =
         "https://secure.runescape.com/m=poll/a=13/oldschool/results?id=1708";
 
