@@ -20,6 +20,15 @@ exports[`NewsYoutubeTransformer should wrap YouTube playlist template in center 
 "
 `;
 
+exports[`NewsYoutubeTransformer should wrap YouTube template with caption inside paragraph (from HTML <p><i>) 1`] = `
+"<center>
+{{Youtube|-0e4IyRtPwY}}
+''''If you can't see the video above, click ''''[https://www.youtube.com/watch?v=-0e4IyRtPwY here]''''!''
+''
+</center>
+"
+`;
+
 exports[`NewsYoutubeTransformer should wrap YouTube template with following caption in center tags 1`] = `
 "<center>
 {{Youtube|ZNePfBmCZbM}}

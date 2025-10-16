@@ -103,4 +103,42 @@ describe("NewsYoutubeTransformer", () => {
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
   });
+
+  it("should wrap YouTube template with caption inside paragraph (from HTML <p><i>)", () => {
+    const youtubeTemplate = new MediaWikiTemplate("Youtube", {
+      collapsed: true,
+    });
+    youtubeTemplate.add("", "-0e4IyRtPwY");
+
+    // This simulates what happens when parsing <p><i>caption</i></p>
+    // The paragraph parser creates a MediaWikiText with the italic text and a break as children
+    const paragraphText = new MediaWikiText([
+      new MediaWikiText("If you can't see the video above, click ", { italics: true }),
+      new MediaWikiText("[https://www.youtube.com/watch?v=-0e4IyRtPwY here]", { italics: true }),
+      new MediaWikiText("!", { italics: true }),
+      new MediaWikiBreak(),
+    ], { italics: true });
+
+    const originalContent: MediaWikiContent[] = [
+      youtubeTemplate,
+      paragraphText,
+    ];
+    
+    const transformed = new NewsYoutubeTransformer().transform(originalContent);
+    
+    const result = new MediaWikiBuilder().addContents(transformed).build();
+    
+    // The caption should be inside the center tags, not outside
+    expect(result).toContain("<center>");
+    expect(result).toContain("{{Youtube|-0e4IyRtPwY}}");
+    expect(result).toContain("If you can't see the video above");
+    expect(result).toContain("</center>");
+    
+    // Check that caption comes before closing center tag
+    const centerCloseIndex = result.indexOf("</center>");
+    const captionIndex = result.indexOf("If you can't see the video above");
+    expect(captionIndex).toBeLessThan(centerCloseIndex);
+    
+    expect(result).toMatchSnapshot();
+  });
 });
