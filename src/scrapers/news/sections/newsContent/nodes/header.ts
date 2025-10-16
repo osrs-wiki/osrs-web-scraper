@@ -3,7 +3,6 @@ import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
-import { formatText } from "../../../../../utils/text";
 import { ContentNodeParser } from "../types";
 
 const tagNameMap: { [key: string]: number | "bold" | "italic" } = {
@@ -24,25 +23,7 @@ export const headerParser: ContentNodeParser = (node, options) => {
       return textParser(node, options);
     }
 
-    // Handle simple text content
-    if (
-      node.childNodes.length === 1 &&
-      !(node.childNodes[0] instanceof HTMLElement)
-    ) {
-      if (typeof headerLevel === "number") {
-        return new MediaWikiHeader(formatText(node.rawText), headerLevel);
-      } else if (headerLevel === "bold") {
-        return new MediaWikiText(formatText(node.rawText), {
-          bold: true,
-        });
-      } else if (headerLevel === "italic") {
-        return new MediaWikiText(formatText(node.rawText), {
-          italics: true,
-        });
-      }
-    }
-
-    // Handle complex content with child nodes
+    // Parse child nodes
     const childContent = node.childNodes
       .map((childNode) => {
         if (childNode instanceof HTMLElement) {
