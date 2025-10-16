@@ -97,7 +97,7 @@ describe("table parser - undefined content handling", () => {
 
     if (Array.isArray(tableContent)) {
       const table = tableContent.find(
-        (item: MediaWikiContent) => item.constructor.name === "MediaWikiTable" || item.constructor.name === "ExtendedMediaWikiTable"
+        (item: MediaWikiContent) => item.constructor.name === "MediaWikiTable"
       );
       expect(table).toBeDefined();
 
