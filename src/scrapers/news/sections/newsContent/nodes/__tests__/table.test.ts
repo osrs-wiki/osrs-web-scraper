@@ -133,7 +133,7 @@ describe("table node", () => {
 
     if (Array.isArray(tableContent)) {
       const table = tableContent.find(
-        (item: MediaWikiContent) => item.constructor.name === "MediaWikiTable"
+        (item: MediaWikiContent) => item.constructor.name === "MediaWikiTable" || item.constructor.name === "ExtendedMediaWikiTable"
       );
       expect(table).toBeDefined();
 
