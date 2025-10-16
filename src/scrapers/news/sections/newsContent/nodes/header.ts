@@ -24,80 +24,43 @@ export const headerParser: ContentNodeParser = (node, options) => {
       return textParser(node, options);
     }
 
-    // For h1-h4, return MediaWikiHeader
-    if (typeof headerLevel === "number") {
-      // Handle simple text content
-      if (
-        node.childNodes.length === 1 &&
-        !(node.childNodes[0] instanceof HTMLElement)
-      ) {
+    // Handle simple text content
+    if (
+      node.childNodes.length === 1 &&
+      !(node.childNodes[0] instanceof HTMLElement)
+    ) {
+      if (typeof headerLevel === "number") {
         return new MediaWikiHeader(formatText(node.rawText), headerLevel);
-      }
-
-      // Handle complex content with child nodes
-      const childContent = node.childNodes
-        .map((childNode) => {
-          if (childNode instanceof HTMLElement) {
-            return nodeParser(childNode, options);
-          }
-          return textParser(childNode, options);
-        })
-        .flat()
-        .filter((content) => content != null);
-
-      return new MediaWikiHeader(childContent, headerLevel);
-    }
-
-    // For h5 and h6, return formatted MediaWikiText
-    if (headerLevel === "bold") {
-      // Handle simple text content
-      if (
-        node.childNodes.length === 1 &&
-        !(node.childNodes[0] instanceof HTMLElement)
-      ) {
+      } else if (headerLevel === "bold") {
         return new MediaWikiText(formatText(node.rawText), {
           bold: true,
         });
-      }
-
-      // Handle complex content with child nodes
-      const childContent = node.childNodes
-        .map((childNode) => {
-          if (childNode instanceof HTMLElement) {
-            return nodeParser(childNode, options);
-          }
-          return textParser(childNode, options);
-        })
-        .flat()
-        .filter((content) => content != null);
-
-      return new MediaWikiText(childContent, {
-        bold: true,
-      });
-    }
-
-    if (headerLevel === "italic") {
-      // Handle simple text content
-      if (
-        node.childNodes.length === 1 &&
-        !(node.childNodes[0] instanceof HTMLElement)
-      ) {
+      } else if (headerLevel === "italic") {
         return new MediaWikiText(formatText(node.rawText), {
           italics: true,
         });
       }
+    }
 
-      // Handle complex content with child nodes
-      const childContent = node.childNodes
-        .map((childNode) => {
-          if (childNode instanceof HTMLElement) {
-            return nodeParser(childNode, options);
-          }
-          return textParser(childNode, options);
-        })
-        .flat()
-        .filter((content) => content != null);
+    // Handle complex content with child nodes
+    const childContent = node.childNodes
+      .map((childNode) => {
+        if (childNode instanceof HTMLElement) {
+          return nodeParser(childNode, options);
+        }
+        return textParser(childNode, options);
+      })
+      .flat()
+      .filter((content) => content != null);
 
+    // Return appropriate MediaWiki element based on header level
+    if (typeof headerLevel === "number") {
+      return new MediaWikiHeader(childContent, headerLevel);
+    } else if (headerLevel === "bold") {
+      return new MediaWikiText(childContent, {
+        bold: true,
+      });
+    } else if (headerLevel === "italic") {
       return new MediaWikiText(childContent, {
         italics: true,
       });
