@@ -2,4 +2,4 @@
 "osrs-web-scraper": minor
 ---
 
-Add MediaWikiBreak to header parsers for better spacing
+Add MediaWikiBreak to header, paragraph, and list parsers for proper spacing
