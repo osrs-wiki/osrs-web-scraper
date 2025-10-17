@@ -1,31 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`header node Empty h1 should handle correctly 1`] = `"===="`;
+exports[`header node Empty h1 should handle correctly 1`] = `
+"====
+"
+`;
 
-exports[`header node Empty h5 should handle correctly 1`] = `""`;
+exports[`header node Empty h5 should handle correctly 1`] = `
+"
+"
+`;
 
-exports[`header node Empty h6 should handle correctly 1`] = `""`;
+exports[`header node Empty h6 should handle correctly 1`] = `
+"
+"
+`;
 
-exports[`header node h1 tag should parse and render as level 2 header 1`] = `"==Test Header=="`;
+exports[`header node h1 tag should parse and render as level 2 header 1`] = `
+"==Test Header==
+"
+`;
 
-exports[`header node h1 with bold content should parse correctly 1`] = `"==Test with '''bold''' text=="`;
+exports[`header node h1 with bold content should parse correctly 1`] = `
+"==Test with '''bold''' text==
+"
+`;
 
-exports[`header node h2 tag should parse and render as level 2 header 1`] = `"==Test Header=="`;
+exports[`header node h2 tag should parse and render as level 2 header 1`] = `
+"==Test Header==
+"
+`;
 
-exports[`header node h2 with italic content should parse correctly 1`] = `"==Test with ''italic'' text=="`;
+exports[`header node h2 with italic content should parse correctly 1`] = `
+"==Test with ''italic'' text==
+"
+`;
 
-exports[`header node h3 tag should parse and render as level 3 header 1`] = `"===Test Header==="`;
+exports[`header node h3 tag should parse and render as level 3 header 1`] = `
+"===Test Header===
+"
+`;
 
-exports[`header node h3 with complex content should parse correctly 1`] = `"===Test with '''bold''' and ''italic''==="`;
+exports[`header node h3 with complex content should parse correctly 1`] = `
+"===Test with '''bold''' and ''italic''===
+"
+`;
 
-exports[`header node h4 tag should parse and render as level 4 header 1`] = `"====Test Header===="`;
+exports[`header node h4 tag should parse and render as level 4 header 1`] = `
+"====Test Header====
+"
+`;
 
-exports[`header node h4 with link should parse correctly 1`] = `"====Test with [https://example.com link]===="`;
+exports[`header node h4 with link should parse correctly 1`] = `
+"====Test with [https://example.com link]====
+"
+`;
 
-exports[`header node h5 tag should parse and render as bold text 1`] = `"'''Test Header'''"`;
+exports[`header node h5 tag should parse and render as bold text 1`] = `
+"'''Test Header'''
+"
+`;
 
-exports[`header node h5 with complex content should parse correctly 1`] = `"'''Test with ''italic'' and '''bold''''''"`;
+exports[`header node h5 with complex content should parse correctly 1`] = `
+"'''Test with ''italic'' and '''bold''''''
+"
+`;
 
-exports[`header node h6 tag should parse and render as italic text 1`] = `"''Test Header''"`;
+exports[`header node h6 tag should parse and render as italic text 1`] = `
+"''Test Header''
+"
+`;
 
-exports[`header node h6 with complex content should parse correctly 1`] = `"''Test with '''bold''' nested content''"`;
+exports[`header node h6 with complex content should parse correctly 1`] = `
+"''Test with '''bold''' nested content''
+"
+`;

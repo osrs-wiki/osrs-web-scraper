@@ -1,4 +1,8 @@
-import { MediaWikiHeader, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiHeader,
+  MediaWikiText,
+} from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
@@ -36,15 +40,21 @@ export const headerParser: ContentNodeParser = (node, options) => {
 
     // Return appropriate MediaWiki element based on header level
     if (typeof headerLevel === "number") {
-      return new MediaWikiHeader(childContent, headerLevel);
+      return [new MediaWikiHeader(childContent, headerLevel), new MediaWikiBreak()];
     } else if (headerLevel === "bold") {
-      return new MediaWikiText(childContent, {
-        bold: true,
-      });
+      return [
+        new MediaWikiText(childContent, {
+          bold: true,
+        }),
+        new MediaWikiBreak(),
+      ];
     } else if (headerLevel === "italic") {
-      return new MediaWikiText(childContent, {
-        italics: true,
-      });
+      return [
+        new MediaWikiText(childContent, {
+          italics: true,
+        }),
+        new MediaWikiBreak(),
+      ];
     }
   }
 };
