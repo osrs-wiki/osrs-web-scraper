@@ -1,4 +1,4 @@
-import { MediaWikiListItem } from "@osrs-wiki/mediawiki-builder";
+import { MediaWikiBreak, MediaWikiListItem } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
@@ -17,10 +17,13 @@ export const listItemParser: ContentNodeParser = (node, options) => {
         return textParser(childNode, { ...options, ordered });
       })
       .flat();
-    return new MediaWikiListItem(childNodes, {
-      ordered: (options?.ordered as boolean) ?? false, // Default to unordered (bullet point)
-      level: (options?.level as number) ?? 1, // Default to level 1
-    });
+    return [
+      new MediaWikiListItem(childNodes, {
+        ordered: (options?.ordered as boolean) ?? false, // Default to unordered (bullet point)
+        level: (options?.level as number) ?? 1, // Default to level 1
+      }),
+      new MediaWikiBreak(),
+    ];
   }
 };
 

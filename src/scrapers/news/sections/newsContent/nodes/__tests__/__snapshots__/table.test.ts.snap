@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`table node A table with all data cells should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Row 1 Col 1
+! Row 1 Col 2
+|-
+| Row 2 Col 1
+| Row 2 Col 2
+|}
+"
+`;
+
 exports[`table node A table with cells containing only ignored elements should render with empty content 1`] = `
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
@@ -56,6 +68,20 @@ exports[`table node A table with mixed content including unsupported tags should
 "
 `;
 
+exports[`table node A table with mixed th and td in rows should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Header 1
+! Header 2
+! Header 3
+|-
+! Row Header
+| Data 1
+| Data 2
+|}
+"
+`;
+
 exports[`table node A table with no thead should render 1`] = `
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
@@ -64,6 +90,42 @@ exports[`table node A table with no thead should render 1`] = `
 |-
 | test
 | test
+|}
+"
+`;
+
+exports[`table node A table with row headers (<th> in table body) should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! 
+! EU
+! UK
+! US East
+|-
+! F2P
+| 456, 455
+| 498, 499
+| 417, 648
+|-
+! Members
+| 335, 384
+| 380, 382
+| 629, 630
+|}
+"
+`;
+
+exports[`table node A table with thead and tbody row headers should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Column 1
+! Column 2
+|-
+! Row 1
+| Value 1
+|-
+! Row 2
+| Value 2
 |}
 "
 `;
@@ -110,20 +172,32 @@ exports[`table node should handle table cells with li elements without ul/ol wra
 | Gryphons
 | 
 * 51 Slayer
+
 * Troubled Tortugans (45 Sailing required)
+
 * 60 Combat (only relevant if your settings filter tasks by combat level)
+
 | 
 * Vannaka: 30 - 80
+
 * Chaeldar: 60 - 100
+
 * Nieve: 110 - 170
+
 * Duradel: 100 - 210
+
 | 
 * Vannaka: 5
+
 * Chaeldar: 5
+
 * Nieve: 7
+
 * Duradel: 7
+
 | 
 * Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.
+
 |}
 "
 `;
@@ -139,68 +213,6 @@ exports[`table node should handle tables with multiple tbody elements 1`] = `
 |-
 | Row 2 Col 1
 | Row 2 Col 2
-|}
-"
-`;
-
-exports[`table node A table with row headers (<th> in table body) should render correctly 1`] = `
-"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
-|-
-! 
-! EU
-! UK
-! US East
-|-
-! F2P
-| 456, 455
-| 498, 499
-| 417, 648
-|-
-! Members
-| 335, 384
-| 380, 382
-| 629, 630
-|}
-"
-`;
-
-exports[`table node A table with all data cells should render correctly 1`] = `
-"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
-|-
-! Row 1 Col 1
-! Row 1 Col 2
-|-
-| Row 2 Col 1
-| Row 2 Col 2
-|}
-"
-`;
-
-exports[`table node A table with mixed th and td in rows should render correctly 1`] = `
-"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
-|-
-! Header 1
-! Header 2
-! Header 3
-|-
-! Row Header
-| Data 1
-| Data 2
-|}
-"
-`;
-
-exports[`table node A table with thead and tbody row headers should render correctly 1`] = `
-"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
-|-
-! Column 1
-! Column 2
-|-
-! Row 1
-| Value 1
-|-
-! Row 2
-| Value 2
 |}
 "
 `;

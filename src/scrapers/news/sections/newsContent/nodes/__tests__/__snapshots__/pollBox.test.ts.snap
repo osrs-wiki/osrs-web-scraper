@@ -2,8 +2,7 @@
 
 exports[`pollBox poll-box with no poll question returns letter 1`] = `
 "{{Letter|''header''
-'''here is the content'''
-}}
+'''here is the content'''}}
 "
 `;
 

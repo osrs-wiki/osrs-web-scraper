@@ -6,8 +6,7 @@ import { ContentNodeParser } from "../types";
 export const paragraphParser: ContentNodeParser = (node, options) => {
   const children = textParser(node, options);
   const childrenNodes = Array.isArray(children) ? children : [children];
-  childrenNodes.push(new MediaWikiBreak());
-  return new MediaWikiText(childrenNodes);
+  return [new MediaWikiText(childrenNodes), new MediaWikiBreak()];
 };
 
 export default paragraphParser;

@@ -3,13 +3,17 @@
 exports[`list node list should ignore breaks 1`] = `
 "
 * test1
+
 * test2
+
 "
 `;
 
 exports[`list node list should parse and render 1`] = `
 "
 * test1
+
 * test2
+
 "
 `;
