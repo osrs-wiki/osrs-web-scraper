@@ -142,3 +142,65 @@ exports[`table node should handle tables with multiple tbody elements 1`] = `
 |}
 "
 `;
+
+exports[`table node A table with row headers (<th> in table body) should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! 
+! EU
+! UK
+! US East
+|-
+! F2P
+| 456, 455
+| 498, 499
+| 417, 648
+|-
+! Members
+| 335, 384
+| 380, 382
+| 629, 630
+|}
+"
+`;
+
+exports[`table node A table with all data cells should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Row 1 Col 1
+! Row 1 Col 2
+|-
+| Row 2 Col 1
+| Row 2 Col 2
+|}
+"
+`;
+
+exports[`table node A table with mixed th and td in rows should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Header 1
+! Header 2
+! Header 3
+|-
+! Row Header
+| Data 1
+| Data 2
+|}
+"
+`;
+
+exports[`table node A table with thead and tbody row headers should render correctly 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! Column 1
+! Column 2
+|-
+! Row 1
+| Value 1
+|-
+! Row 2
+| Value 2
+|}
+"
+`;
