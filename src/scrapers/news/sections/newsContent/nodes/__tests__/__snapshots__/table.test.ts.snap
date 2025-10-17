@@ -172,32 +172,20 @@ exports[`table node should handle table cells with li elements without ul/ol wra
 | Gryphons
 | 
 * 51 Slayer
-
 * Troubled Tortugans (45 Sailing required)
-
 * 60 Combat (only relevant if your settings filter tasks by combat level)
-
 | 
 * Vannaka: 30 - 80
-
 * Chaeldar: 60 - 100
-
 * Nieve: 110 - 170
-
 * Duradel: 100 - 210
-
 | 
 * Vannaka: 5
-
 * Chaeldar: 5
-
 * Nieve: 7
-
 * Duradel: 7
-
 | 
 * Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.
-
 |}
 "
 `;
