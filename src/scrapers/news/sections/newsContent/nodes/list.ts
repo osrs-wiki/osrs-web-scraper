@@ -26,10 +26,8 @@ export const listParser: ContentNodeParser = (node, options) => {
         return textParser(childNode, { ...options, ordered, level });
       })
       .flat();
-    if (!options?.level) {
-      content.push(new MediaWikiBreak());
-    }
-    return content;
+    // Always add break after lists
+    return [...content, new MediaWikiBreak()];
   }
 };
 
