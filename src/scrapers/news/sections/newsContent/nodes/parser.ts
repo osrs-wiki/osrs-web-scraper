@@ -7,6 +7,7 @@ import centerParser from "./center";
 import detailsParser from "./details";
 import divParser from "./div";
 import fontParser from "./font";
+import headerParser from "./header";
 import htmlParser from "./html";
 import iframeParser from "./iframe";
 import imageParser from "./image";
@@ -37,6 +38,12 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   img: imageParser,
   iframe: iframeParser,
   font: fontParser,
+  h1: headerParser,
+  h2: headerParser,
+  h3: headerParser,
+  h4: headerParser,
+  h5: headerParser,
+  h6: headerParser,
   li: listItemParser,
   ol: listParser,
   p: paragraphParser,
