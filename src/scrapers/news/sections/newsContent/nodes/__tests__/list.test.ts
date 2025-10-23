@@ -17,4 +17,18 @@ describe("list node", () => {
     builder.addContents([listParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("ordered list should parse and render with numbered items", () => {
+    const root = parse("<ol><li>test1</li><li>test2</li></ol>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([listParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("ordered list should ignore breaks", () => {
+    const root = parse("<ol><li>test1</li><br/><li>test2</li><br/></ol>");
+    const builder = new MediaWikiBuilder();
+    builder.addContents([listParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
