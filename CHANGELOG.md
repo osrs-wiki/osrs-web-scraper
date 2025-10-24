@@ -1,5 +1,18 @@
 # osrs-web-scraper
 
+## 0.26.0
+
+### Minor Changes
+
+- 9f202d8: Add support for parsing HTML header tags (h1-h6) in news posts
+- 7d9ad4d: Add MediaWikiBreak to header, paragraph, and list parsers for proper spacing
+
+### Patch Changes
+
+- 07366a1: Fix ordered lists being converted to unordered lists
+- 95158e4: Fix YouTube transformer to correctly place captions inside center tags
+- da20a33: Add support for parsing table row headers with mixed th and td elements
+
 ## 0.25.2
 
 ### Patch Changes
