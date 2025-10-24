@@ -7,8 +7,7 @@ import { ContentNodeParser } from "../types";
 
 export const listItemParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
-    const list = node as HTMLElement;
-    const ordered = list.tagName === "ol";
+    const ordered = (options?.ordered as boolean) ?? false;
     const childNodes = node.childNodes
       .map((childNode) => {
         if (childNode instanceof HTMLElement) {
@@ -18,7 +17,7 @@ export const listItemParser: ContentNodeParser = (node, options) => {
       })
       .flat();
     return new MediaWikiListItem(childNodes, {
-      ordered: (options?.ordered as boolean) ?? false, // Default to unordered (bullet point)
+      ordered, // Use the ordered value from parent list
       level: (options?.level as number) ?? 1, // Default to level 1
     });
   }

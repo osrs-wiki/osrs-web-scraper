@@ -8,7 +8,7 @@ import { ContentNodeParser } from "../types";
 export const listParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const list = node as HTMLElement;
-    const ordered = list.tagName === "ol";
+    const ordered = list.rawTagName === "ol";
     const level = ((options?.level as number) ?? 0) + 1;
     const content = node.childNodes
       .filter(
