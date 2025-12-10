@@ -29,8 +29,40 @@ describe("div node", () => {
     const result = divParser(root.firstChild, { title: "Test Post" });
     expect(result).toBeDefined();
     // The result should be a gallery parser result with the tag "gallery"
-    expect(result).toEqual(expect.objectContaining({
-      tag: "gallery"
-    }));
+    expect(result).toEqual(
+      expect.objectContaining({
+        tag: "gallery",
+      })
+    );
+  });
+
+  test("osrs-title class should parse as level 2 header", () => {
+    const root = parse('<div class="osrs-title">Main Title</div>');
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("osrs-subtitle class should parse as level 3 header", () => {
+    const root = parse('<div class="osrs-subtitle">Subtitle Text</div>');
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("osrs-title with nested content should parse correctly", () => {
+    const root = parse(
+      '<div class="osrs-title">Title with <b>bold</b> and <i>italic</i></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("osrs-subheading class should parse as level 4 header", () => {
+    const root = parse('<div class="osrs-subheading">Subheading Text</div>');
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
   });
 });
