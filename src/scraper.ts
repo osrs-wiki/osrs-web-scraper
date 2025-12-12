@@ -16,7 +16,9 @@ class Scraper {
     });
     this.page = await this.browser.newPage();
 
-    await this.page.goto(url, { waitUntil: "networkidle2" });
+    await this.page.goto(url, {
+      waitUntil: ["domcontentloaded", "networkidle2"],
+    });
     await this.page.addScriptTag({
       url: JQUERY_URL,
     });

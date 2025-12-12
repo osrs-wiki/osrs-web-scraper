@@ -1,6 +1,7 @@
 import { HTMLElement } from "node-html-parser";
 
 import galleryParser from "./gallery";
+import imageCaptionParser from "./imageCaption";
 import osrsHeaderParser from "./osrsHeader";
 import pollBoxParser from "./pollBox";
 import { ContentNodeParser } from "../../types";
@@ -15,6 +16,7 @@ const classParserMap: { [key: string]: ContentNodeParser } = {
   "osrs-title": osrsHeaderParser,
   "osrs-subtitle": osrsHeaderParser,
   "osrs-subheading": osrsHeaderParser,
+  "image-caption": imageCaptionParser,
 };
 
 const idParserMap: { [key: string]: ContentNodeParser } = {

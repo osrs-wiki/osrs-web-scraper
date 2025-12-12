@@ -6,34 +6,31 @@ import {
   MediaWikiTransformer,
 } from "@osrs-wiki/mediawiki-builder";
 
-import { trim } from "../../../utils/mediawiki";
+import { getNextContent, trim } from "../../../utils/mediawiki";
 
 class NewsFileCaptionTransformer extends MediaWikiTransformer {
   transform(content: MediaWikiContent[]): MediaWikiContent[] {
-    if (content.length < 3) {
+    if (content.length < 2) {
       return content;
     }
     try {
       const transformedContent = [];
       for (let index = 0; index < content.length; index++) {
         const current = content[index];
-        if (current instanceof MediaWikiFile && index < content.length - 2) {
-          const first = content[index + 1];
-          const second = content[index + 2];
+        if (current instanceof MediaWikiFile && !current.options?.caption) {
+          const next = getNextContent(content, index + 1);
           if (
-            first instanceof MediaWikiBreak &&
-            second instanceof MediaWikiText &&
-            Array.isArray(second.children)
+            next.content instanceof MediaWikiText &&
+            Array.isArray(next.content.children)
           ) {
             transformedContent.push(
               new MediaWikiFile(current.fileName, {
                 ...current.options,
                 format: "thumb",
-                caption: new MediaWikiText(trim(second.children)),
+                caption: new MediaWikiText(trim(next.content.children)),
               })
             );
-            transformedContent.push(new MediaWikiBreak());
-            index += 2;
+            index = next.index;
           } else {
             transformedContent.push(current);
           }

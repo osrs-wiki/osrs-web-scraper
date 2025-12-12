@@ -2,5 +2,18 @@
 
 exports[`image node Image node should parse and render 1`] = `
 "[[File:test-title (1).png|200px]]
+
+"
+`;
+
+exports[`image node Image with both data-caption-text and data-caption-link 1`] = `
+"[[File:test-title (3).png|thumb|600px|center|''Custom caption text.''|link=https://example.com/]]
+
+"
+`;
+
+exports[`image node Image with data-caption-text should include italic caption 1`] = `
+"[[File:test-title (2).png|thumb|500px|center|''This is a test caption.'']]
+
 "
 `;
