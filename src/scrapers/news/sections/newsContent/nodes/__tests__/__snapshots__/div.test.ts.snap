@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`div node osrs-subheading class should parse as level 4 header 1`] = `
+"====Subheading Text====
+"
+`;
+
+exports[`div node osrs-subtitle class should parse as level 3 header 1`] = `
+"===Subtitle Text===
+"
+`;
+
+exports[`div node osrs-title class should parse as level 2 header 1`] = `
+"==Main Title==
+"
+`;
+
+exports[`div node osrs-title with nested content should parse correctly 1`] = `
+"==Title with '''bold''' and ''italic''==
+"
+`;
+
 exports[`div node poll-box class should parse and render 1`] = `
 "{{News Poll|1|If While Guthix Sleeps is added to the game, should we continue to explore the idea of offering the Rites of Balance as a rewards from the quest? This question is for developer consideration and not binding.}}
 "

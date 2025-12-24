@@ -89,3 +89,30 @@ export const getFirstStringContent = (
   }
   return undefined;
 };
+
+/**
+ * Get the next non-break, non-whitespace content after a given index.
+ * Skips over MediaWikiBreak elements and empty MediaWikiText elements.
+ *
+ * @param content The content array to search through
+ * @param startIndex The index to start searching from
+ * @returns An object with the found content (or null) and its index (-1 if not found)
+ */
+export const getNextContent = (
+  content: MediaWikiContent[],
+  startIndex: number
+): { content: MediaWikiContent | null; index: number } => {
+  for (let i = startIndex; i < content.length; i++) {
+    const item = content[i];
+    // Skip breaks
+    if (item instanceof MediaWikiBreak) {
+      continue;
+    }
+    // Skip empty/whitespace text
+    if (item instanceof MediaWikiContent && isEmpty(item.children)) {
+      continue;
+    }
+    return { content: item, index: i };
+  }
+  return { content: null, index: -1 };
+};

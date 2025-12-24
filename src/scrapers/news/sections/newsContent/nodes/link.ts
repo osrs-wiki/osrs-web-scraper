@@ -14,6 +14,7 @@ export const linkParser: ContentNodeParser = (node, options) => {
     if (!link) {
       return;
     }
+
     if (
       element.childNodes.length > 1 ||
       element.firstChild instanceof HTMLElement
@@ -22,10 +23,18 @@ export const linkParser: ContentNodeParser = (node, options) => {
         .map((childNode) => nodeParser(childNode, { ...options, link }))
         .flat();
     }
+
+    const text = element.rawText.trim();
+
+    // Skip empty anchor tags - they don't produce any content
+    if (!text && element.childNodes.length === 0) {
+      return;
+    }
+
     if (link.endsWith("oldschool.runescape.wiki/")) {
       return new MediaWikiLink("Old School Wiki");
     }
-    return new MediaWikiExternalLink(element.rawText, link);
+    return new MediaWikiExternalLink(text, link);
   }
 };
 

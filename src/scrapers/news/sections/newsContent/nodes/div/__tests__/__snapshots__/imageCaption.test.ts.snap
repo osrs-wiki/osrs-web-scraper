@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`imageCaptionParser should parse image caption with link 1`] = `"''If you can't see the asset above, [https://survey.alchemer.eu/s3/90920540/Jagex-Support-Update?chl=np&game=OSRS click here].''"`;
+
+exports[`imageCaptionParser should parse image caption with multiple elements 1`] = `"''Visit [https://example.com our site] or [https://other.com this one] for more info.''"`;
+
+exports[`imageCaptionParser should parse image caption with plain text 1`] = `"''This is a caption.''"`;

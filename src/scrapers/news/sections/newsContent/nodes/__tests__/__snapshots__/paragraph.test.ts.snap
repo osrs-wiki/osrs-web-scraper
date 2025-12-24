@@ -2,5 +2,6 @@
 
 exports[`p node Paragraph should parse and render 1`] = `
 "'''test'''
+
 "
 `;

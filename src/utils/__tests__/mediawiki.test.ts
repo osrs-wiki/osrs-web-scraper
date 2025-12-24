@@ -1,6 +1,16 @@
-import { MediaWikiBreak, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiFile,
+  MediaWikiText,
+} from "@osrs-wiki/mediawiki-builder";
 
-import { getFirstStringContent, isEmpty, startsWith, trim } from "../mediawiki";
+import {
+  getFirstStringContent,
+  getNextContent,
+  isEmpty,
+  startsWith,
+  trim,
+} from "../mediawiki";
 
 describe("mediawiki utils", () => {
   describe("trim", () => {
@@ -211,6 +221,83 @@ describe("mediawiki utils", () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore Ignore any for testing
       expect(result).toEqual(contents[0].children[0].children[0]);
+    });
+  });
+
+  describe("getNextContent", () => {
+    test("should return the next non-break content", () => {
+      const contents = [
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiText("caption"),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBe(contents[2]);
+      expect(result.index).toBe(2);
+    });
+
+    test("should skip multiple breaks", () => {
+      const contents = [
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiBreak(),
+        new MediaWikiBreak(),
+        new MediaWikiText("caption"),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBe(contents[4]);
+      expect(result.index).toBe(4);
+    });
+
+    test("should skip empty text content", () => {
+      const contents = [
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiText(""),
+        new MediaWikiText("   "),
+        new MediaWikiText("caption"),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBe(contents[4]);
+      expect(result.index).toBe(4);
+    });
+
+    test("should return null when no content found", () => {
+      const contents = [
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiBreak(),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBeNull();
+      expect(result.index).toBe(-1);
+    });
+
+    test("should return first content after startIndex", () => {
+      const contents = [
+        new MediaWikiText("first"),
+        new MediaWikiBreak(),
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiText("caption"),
+      ];
+      const result = getNextContent(contents, 3);
+      expect(result.content).toBe(contents[4]);
+      expect(result.index).toBe(4);
+    });
+
+    test("should skip breaks and empty text in complex scenario", () => {
+      const contents = [
+        new MediaWikiFile("image"),
+        new MediaWikiBreak(),
+        new MediaWikiBreak(),
+        new MediaWikiText(""),
+        new MediaWikiBreak(),
+        new MediaWikiText([new MediaWikiText("caption", { italics: true })]),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBe(contents[5]);
+      expect(result.index).toBe(5);
     });
   });
 });

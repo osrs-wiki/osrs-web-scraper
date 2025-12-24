@@ -1,6 +1,8 @@
 import { HTMLElement } from "node-html-parser";
 
 import galleryParser from "./gallery";
+import imageCaptionParser from "./imageCaption";
+import osrsHeaderParser from "./osrsHeader";
 import pollBoxParser from "./pollBox";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
@@ -11,6 +13,10 @@ const ignoredClasses = ["myslides", "thumb-row"];
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
   "row": galleryParser,
+  "osrs-title": osrsHeaderParser,
+  "osrs-subtitle": osrsHeaderParser,
+  "osrs-subheading": osrsHeaderParser,
+  "image-caption": imageCaptionParser,
 };
 
 const idParserMap: { [key: string]: ContentNodeParser } = {
@@ -23,7 +29,7 @@ export const divParser: ContentNodeParser = (node, options) => {
     const className = element.classNames.trim().toLowerCase();
     const id = element.id;
     const parse = classParserMap[className] ?? idParserMap[id];
-    
+
     if (parse) {
       return parse(node, options);
     } else if (!ignoredClasses.includes(className)) {
