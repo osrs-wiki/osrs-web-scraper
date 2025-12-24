@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage 1`] = `
-"[[File:image|thumb|''caption'']]
-"
-`;
+exports[`NewsFileCaptionTransformer should combine file and caption with breaks and empty text in between 1`] = `"[[File:image|thumb|''caption'']]"`;
+
+exports[`NewsFileCaptionTransformer should combine file and caption with multiple breaks in between 1`] = `"[[File:image|thumb|''caption'']]"`;
+
+exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage 1`] = `"[[File:image|thumb|''caption'']]"`;
 
 exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, MediaWikiBreak and MediaWikiImage with surrounding content 1`] = `
 "__TOC__
 
 [[test|test]]
 [[File:image|thumb|''caption'']]
-
 You can also discuss this update on our
 "
 `;
@@ -20,7 +20,11 @@ exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, M
 
 [[test|test]]
 [[File:image|thumb|caption[[linkText|linkTarget]]]]
-
 ''You can also discuss this update on our''
 "
+`;
+
+exports[`NewsFileCaptionTransformer should skip files that already have captions 1`] = `
+"[[File:image|''existing caption'']]
+''another caption''"
 `;
