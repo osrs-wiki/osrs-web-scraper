@@ -1,5 +1,19 @@
 # osrs-web-scraper
 
+## 0.27.0
+
+### Minor Changes
+
+- 6efc180: Add support for new div titles in news scraper
+- b898610: Add support for image-caption class div
+
+### Patch Changes
+
+- 949c2b7: Bump js-yaml from 4.1.0 to 4.1.1
+- b898610: Remove leftover new line from file caption transformer
+- b898610: Do not render empty a tags
+- b898610: Add new line to paragraph tags
+
 ## 0.26.0
 
 ### Minor Changes
