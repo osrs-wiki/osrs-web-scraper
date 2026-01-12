@@ -1,5 +1,6 @@
 import {
   LetterTemplate,
+  MediaWikiBreak,
   MediaWikiContent,
   NewsPollTemplate,
 } from "@osrs-wiki/mediawiki-builder";
@@ -49,7 +50,10 @@ export const pollBoxParser: ContentNodeParser = (node) => {
           question = fullText.replace(/Question\s*#?\d*\s*:?\s*/i, "").trim();
         }
       }
-      return new NewsPollTemplate(question, parsedNumber).build();
+      return [
+        new NewsPollTemplate(question, parsedNumber).build(),
+        new MediaWikiBreak(),
+      ];
     } else if (childNodes?.length > 0) {
       const letter = trim(
         divElement.childNodes
