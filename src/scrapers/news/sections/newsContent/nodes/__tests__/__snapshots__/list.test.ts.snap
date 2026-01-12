@@ -1,32 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`list node list should ignore breaks 1`] = `
-"
-* test1
+"* test1
 * test2
 
 "
 `;
 
 exports[`list node list should parse and render 1`] = `
-"
-* test1
+"* test1
 * test2
 
 "
 `;
 
 exports[`list node ordered list should ignore breaks 1`] = `
-"
-# test1
+"# test1
 # test2
 
 "
 `;
 
 exports[`list node ordered list should parse and render with numbered items 1`] = `
-"
-# test1
+"# test1
 # test2
 
 "
