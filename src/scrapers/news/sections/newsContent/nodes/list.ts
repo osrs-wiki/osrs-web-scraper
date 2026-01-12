@@ -30,11 +30,11 @@ export const listParser: ContentNodeParser = (node, options) => {
     // For top-level lists, convert the first MediaWikiListItem to MediaWikiText
     // to avoid the automatic leading newline that MediaWikiListItem adds
     if (!options?.level && content.length > 0 && content[0] instanceof MediaWikiListItem) {
-      const firstItem = content[0] as MediaWikiListItem;
+      const firstItem = content[0];
       // Build the first item to get its content, then create a MediaWikiText
       const firstItemText = firstItem.build();
       // Remove the leading newline from the built text
-      const textContent = firstItemText.startsWith("\n") ? firstItemText.substring(1) : firstItemText;
+      const textContent = firstItemText.startsWith("\n") ? firstItemText.slice(1) : firstItemText;
       content[0] = new MediaWikiText(textContent);
     }
     
