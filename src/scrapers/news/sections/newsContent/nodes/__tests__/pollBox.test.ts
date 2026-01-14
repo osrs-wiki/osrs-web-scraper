@@ -41,7 +41,7 @@ describe("pollBox", () => {
     const builder = new MediaWikiBuilder();
     builder.addContents([pollBoxParser(root.firstChild)].flat());
     const result = builder.build();
-    expect(result).toBe("{{News Poll|1|Here is the example question?}}\n");
+    expect(result).toBe("{{News Poll|1|Here is the example question?}}\n\n");
     // Verify the question text doesn't include "Question 1:" prefix
     expect(result).not.toContain("Question 1:Here is the example question?");
   });
