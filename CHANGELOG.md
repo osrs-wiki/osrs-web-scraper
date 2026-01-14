@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.27.1
+
+### Patch Changes
+
+- 2296d1b: Add trailing newline to News Poll template output
+
 ## 0.27.0
 
 ### Minor Changes
