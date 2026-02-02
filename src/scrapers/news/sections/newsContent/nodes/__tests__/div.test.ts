@@ -13,6 +13,15 @@ describe("div node", () => {
     expect(builder.build()).toMatchSnapshot();
   });
 
+  test("poll-box2 class should parse and render", () => {
+    const root = parse(
+      '<div class="poll-box2">Question:<br><b>Should we add a new facility to collect cannonballs used at sea, as explained in the blog?</b></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
   test("thumb-row class should be ignored and not render", () => {
     const root = parse(
       '<div class="thumb-row" id="thumbnails"><img src="image1.png" alt="thumbnail 1"><img src="image2.png" alt="thumbnail 2"></div>'

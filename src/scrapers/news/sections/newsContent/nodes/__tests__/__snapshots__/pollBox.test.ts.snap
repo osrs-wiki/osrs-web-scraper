@@ -30,3 +30,9 @@ exports[`pollBox poll-box with single node containing number and question with p
 
 "
 `;
+
+exports[`pollBox poll-box2 with question text after Question: label 1`] = `
+"{{News Poll|1|Should we add a new facility to collect cannonballs used at sea, as explained in the blog?}}
+
+"
+`;
