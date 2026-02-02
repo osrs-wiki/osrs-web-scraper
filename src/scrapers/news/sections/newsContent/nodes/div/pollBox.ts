@@ -26,7 +26,7 @@ export const pollBoxParser: ContentNodeParser = (node) => {
     // or the entire div text content (for cases like poll-box2)
     const isPollQuestion =
       childNodes.some((child) =>
-        child.textContent?.match(/Question\s*#?[\dX]+\s*:?/i)
+        child.textContent?.match(/Question\s*#?[\dX]*\s*:?/i)
       ) ||
       divElement.textContent?.match(/Question\s*#?[\dX]*\s*:/i);
 
