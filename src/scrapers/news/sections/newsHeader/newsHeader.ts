@@ -35,7 +35,7 @@ const newsHeader: NewsSection = {
     }
 
     const newspostImageBaseName = `${formattedTitle} newspost`;
-    const imageSrc = image?.attributes?.src;
+    const imageSrc = image?.attributes?.src || image?.attributes?.["data-src"];
 
     const content: MediaWikiContent[] = [];
 
