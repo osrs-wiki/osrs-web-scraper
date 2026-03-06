@@ -35,14 +35,7 @@ const newsHeader: NewsSection = {
     }
 
     const newspostImageBaseName = `${formattedTitle} newspost`;
-    const newspostImageExtension = getFileExtension(image.attributes.src);
-    const newspostImageName = `${newspostImageBaseName}.${newspostImageExtension}`;
-    
-    downloadFile(image.attributes.src, `${newsDirectory}/${newspostImageName}`);
-
-    // Check if the file exists with a different extension (due to MIME type correction)
-    const actualFileName = findFileByBaseName(newsDirectory, newspostImageBaseName);
-    const fileNameToUse = actualFileName || newspostImageName;
+    const imageSrc = image?.attributes?.src;
 
     const content: MediaWikiContent[] = [];
 
@@ -53,11 +46,24 @@ const newsHeader: NewsSection = {
         category,
       }).build()
     );
-    content.push(
-      new MediaWikiFile(fileNameToUse, {
-        horizontalAlignment: "right",
-      })
-    );
+
+    if (imageSrc) {
+      const newspostImageExtension = getFileExtension(imageSrc);
+      const newspostImageName = `${newspostImageBaseName}.${newspostImageExtension}`;
+
+      downloadFile(imageSrc, `${newsDirectory}/${newspostImageName}`);
+
+      // Check if the file exists with a different extension (due to MIME type correction)
+      const actualFileName = findFileByBaseName(newsDirectory, newspostImageBaseName);
+      const fileNameToUse = actualFileName || newspostImageName;
+
+      content.push(
+        new MediaWikiFile(fileNameToUse, {
+          horizontalAlignment: "right",
+        })
+      );
+    }
+
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiTemplate("clear"));
     content.push(new MediaWikiTOC());
