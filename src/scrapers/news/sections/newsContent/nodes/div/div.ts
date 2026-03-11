@@ -12,6 +12,7 @@ const ignoredClasses = ["myslides", "thumb-row"];
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
+  "poll-box2": pollBoxParser,
   "row": galleryParser,
   "osrs-title": osrsHeaderParser,
   "osrs-subtitle": osrsHeaderParser,

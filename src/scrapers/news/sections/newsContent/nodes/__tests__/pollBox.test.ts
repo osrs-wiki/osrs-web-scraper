@@ -63,4 +63,13 @@ describe("pollBox", () => {
     builder.addContents([pollBoxParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("poll-box2 with question text after Question: label", () => {
+    const root = parse(
+      '<div class="poll-box2">Question:<br><b>Should we add a new facility to collect cannonballs used at sea, as explained in the blog?</b></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([pollBoxParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
