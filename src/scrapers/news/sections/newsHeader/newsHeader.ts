@@ -8,13 +8,13 @@ import {
 } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { parse } from "node-html-parser";
+import path from "path";
 
 import { getLatestRSSCateogry, getNewsCategory } from "./newsHeader.utils";
 import {
   downloadFile,
   formatFileName,
   getFileExtension,
-  findFileByBaseName,
 } from "../../../../utils/file";
 import { NewsSection } from "../types";
 
@@ -51,11 +51,8 @@ const newsHeader: NewsSection = {
       const newspostImageExtension = getFileExtension(imageSrc);
       const newspostImageName = `${newspostImageBaseName}.${newspostImageExtension}`;
 
-      downloadFile(imageSrc, `${newsDirectory}/${newspostImageName}`);
-
-      // Check if the file exists with a different extension (due to MIME type correction)
-      const actualFileName = findFileByBaseName(newsDirectory, newspostImageBaseName);
-      const fileNameToUse = actualFileName || newspostImageName;
+      const actualFilePath = await downloadFile(imageSrc, `${newsDirectory}/${newspostImageName}`);
+      const fileNameToUse = path.basename(actualFilePath);
 
       content.push(
         new MediaWikiFile(fileNameToUse, {

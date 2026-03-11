@@ -8,10 +8,10 @@ jest.mock("../newsHeader.utils", () => ({
 
 jest.mock("../../../../../utils/file", () => ({
   ...jest.requireActual("../../../../../utils/file"),
-  downloadFile: jest.fn().mockResolvedValue("/some/path.png"),
-  findFileByBaseName: jest.fn().mockReturnValue(undefined),
+  downloadFile: jest.fn().mockResolvedValue("/out/news/Test Article/Test Article newspost.png"),
 }));
 
+import * as fileUtils from "../../../../../utils/file";
 import newsHeader from "../newsHeader";
 
 describe("newsHeader", () => {
@@ -51,6 +51,24 @@ describe("newsHeader", () => {
     const result = await newsHeader.format(html, url, title);
     const fileItem = result.find((item) => item instanceof MediaWikiFile);
     expect(fileItem).toBeInstanceOf(MediaWikiFile);
+  });
+
+  test("should use the filename returned by downloadFile (extension may be corrected)", async () => {
+    jest.mocked(fileUtils.downloadFile).mockResolvedValueOnce(
+      "/out/news/Test Article/Test Article newspost.jpg"
+    );
+
+    const html = `
+      <div class="news-article-header__date">06 March 2026</div>
+      <div id="osrsSummaryImage">
+        <img src="https://cdn.runescape.com/image.png" alt="Test" />
+      </div>
+    `;
+
+    const result = await newsHeader.format(html, url, title);
+    const fileItem = result.find((item) => item instanceof MediaWikiFile) as MediaWikiFile;
+    expect(fileItem).toBeInstanceOf(MediaWikiFile);
+    expect(fileItem.fileName).toBe("Test Article newspost.jpg");
   });
 
   test("should not crash and should omit image when neither src nor data-src is present", async () => {
