@@ -1,5 +1,14 @@
 # osrs-web-scraper
 
+## 0.27.1
+
+### Patch Changes
+
+- a67258e: Add support for poll-box2 class in news content parser. Poll questions with the poll-box2 class are now correctly parsed and formatted as News Poll templates instead of being treated as letters.
+- 289a5ba: Fix centered videos to include center param in MediaWiki output
+- 6839bf6: Fix news scraper crash when news post summary image lacks a usable URL (missing src / only data-src)
+- 2296d1b: Add trailing newline to News Poll template output
+
 ## 0.27.0
 
 ### Minor Changes
