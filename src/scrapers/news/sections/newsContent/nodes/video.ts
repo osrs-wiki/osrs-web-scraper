@@ -4,7 +4,7 @@ import { HTMLElement } from "node-html-parser";
 import imageParser from "./image";
 import { ContentNodeParser } from "../types";
 
-export const videoParser: ContentNodeParser = (node, { title }) => {
+export const videoParser: ContentNodeParser = (node, options) => {
   const firstNode = node.childNodes.filter(
     (node) => node instanceof HTMLElement
   )?.[0];
@@ -13,7 +13,7 @@ export const videoParser: ContentNodeParser = (node, { title }) => {
     const width = node.attributes.width
       ? parseInt(node.attributes.width)
       : undefined;
-    return imageParser(source, { title, width });
+    return imageParser(source, { ...options, width });
   }
   return new MediaWikiComment("Invalid video node");
 };
