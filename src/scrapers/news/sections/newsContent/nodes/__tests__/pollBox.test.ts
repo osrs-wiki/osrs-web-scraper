@@ -1,9 +1,14 @@
 import { MediaWikiBuilder } from "@osrs-wiki/mediawiki-builder";
+import fs from "fs";
 import parse from "node-html-parser";
 
 import pollBoxParser from "../div/pollBox";
 
 describe("pollBox", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   test("poll-box with question returns news poll", () => {
     const root = parse(
       '<div class="poll-box"><p>Question #3</p><p><b>here is the question</b></p></div>'
@@ -71,5 +76,20 @@ describe("pollBox", () => {
     const builder = new MediaWikiBuilder();
     builder.addContents([pollBoxParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("poll-box passes title options to nested image parser", () => {
+    jest.spyOn(fs, "existsSync").mockImplementation(() => false);
+    jest.spyOn(fs, "mkdirSync").mockImplementation(() => "");
+
+    const root = parse(
+      '<div class="poll-box"><p><center><a href="https://example.com/"><img src="https://test.com/image.png" width="200" /></a></center></p></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents(
+      [pollBoxParser(root.firstChild, { title: "test-title" })].flat()
+    );
+
+    expect(builder.build()).toContain("File:test-title");
   });
 });

@@ -11,7 +11,7 @@ import { formatText } from "../../../../../../utils/text";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 
-export const pollBoxParser: ContentNodeParser = (node) => {
+export const pollBoxParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const divElement = node as HTMLElement;
     const childNodes = divElement.childNodes.filter(
@@ -60,7 +60,7 @@ export const pollBoxParser: ContentNodeParser = (node) => {
     } else if (childNodes?.length > 0) {
       const letter = trim(
         divElement.childNodes
-          .map((node) => nodeParser(node))
+          .map((node) => nodeParser(node, options))
           .flat()
           .filter((node) => node instanceof MediaWikiContent)
       );
