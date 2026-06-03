@@ -1,5 +1,11 @@
 # osrs-web-scraper
 
+## 0.27.2
+
+### Patch Changes
+
+- 02dc931: Fix a news scraping crash by preserving parser context/options in `poll-box` nested node parsing so nested images still receive the page title during filename formatting.
+
 ## 0.27.1
 
 ### Patch Changes
