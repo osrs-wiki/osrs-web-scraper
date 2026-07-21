@@ -17,3 +17,15 @@ exports[`image node Image with data-caption-text should include italic caption 1
 
 "
 `;
+
+exports[`image node Image with data-width attribute should use that width 1`] = `
+"[[File:test-title (4).png|200px]]
+
+"
+`;
+
+exports[`image node Image with inline style width should use that width 1`] = `
+"[[File:test-title (5).png|300px]]
+
+"
+`;

@@ -64,4 +64,51 @@ describe("image node", () => {
     builder.addContents(content);
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("Image with data-width attribute should use that width", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="200" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.resizing?.width).toBe(200);
+
+    const builder = new MediaWikiBuilder();
+    builder.addContents(content);
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Image with inline style width should use that width", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" style="width: 300px;" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.resizing?.width).toBe(300);
+
+    const builder = new MediaWikiBuilder();
+    builder.addContents(content);
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("width attribute takes priority over data-width", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" width="150" data-width="400" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.resizing?.width).toBe(150);
+  });
 });

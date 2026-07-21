@@ -19,6 +19,7 @@ import { ContentNodeParser } from "../types";
 
 const ignoredClasses = ["demo cursor"];
 const imageExtensions = ["png", "jpg", "gif"];
+const REGEX_STYLE_WIDTH = /width\s*:\s*([0-9]+)/i;
 
 export const imageParser: ContentNodeParser = (
   node,
@@ -50,8 +51,12 @@ export const imageParser: ContentNodeParser = (
 
     let dimensions;
     try {
-      if (image.attributes.width) {
-        dimensions = { width: parseInt(image.attributes.width) };
+      const styleWidth = image.attributes.style?.match(REGEX_STYLE_WIDTH)?.[1];
+      const explicitWidth =
+        image.attributes.width ?? image.attributes["data-width"] ?? styleWidth;
+
+      if (explicitWidth) {
+        dimensions = { width: parseInt(explicitWidth) };
       } else {
         // Try to find the image file, which might have a corrected extension
         if (
