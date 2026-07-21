@@ -111,4 +111,60 @@ describe("image node", () => {
     const file = content[0] as MediaWikiFile;
     expect(file.options?.resizing?.width).toBe(150);
   });
+
+  test("Image with data-link-href attribute should use that as the file link", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="200" data-link-href="https://example.com/platform" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.link).toBe("https://example.com/platform");
+
+    const builder = new MediaWikiBuilder();
+    builder.addContents(content);
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Image with data-caption-href attribute should use that as the file link", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="200" data-caption-href="https://example.com/caption-link" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.link).toBe("https://example.com/caption-link");
+  });
+
+  test("data-caption-link takes priority over data-caption-href", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="200" data-caption-link="https://example.com/link" data-caption-href="https://example.com/href" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.link).toBe("https://example.com/link");
+  });
+
+  test("data-caption-href takes priority over data-link-href", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="200" data-caption-href="https://example.com/caption" data-link-href="https://example.com/link-href" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.link).toBe("https://example.com/caption");
+  });
 });

@@ -18,6 +18,12 @@ exports[`image node Image with data-caption-text should include italic caption 1
 "
 `;
 
+exports[`image node Image with data-link-href attribute should use that as the file link 1`] = `
+"[[File:test-title (7).png|200px|link=https://example.com/platform]]
+
+"
+`;
+
 exports[`image node Image with data-width attribute should use that width 1`] = `
 "[[File:test-title (4).png|200px]]
 

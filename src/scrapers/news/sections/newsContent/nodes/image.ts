@@ -71,7 +71,9 @@ export const imageParser: ContentNodeParser = (
       console.error(`Error retrieving image size for ${imageName}:`, error);
     }
 
-    const captionLink = image.attributes["data-caption-link"];
+    const captionLink =
+      image.attributes["data-caption-link"] ??
+      image.attributes["data-caption-href"];
     const captionText = image.attributes["data-caption-text"]; /* ?? [
       new MediaWikiText("If you can't see the asset above, "),
       new MediaWikiExternalLink("click here", imageLink),
@@ -79,12 +81,15 @@ export const imageParser: ContentNodeParser = (
     ]*/
     const hasCaption = !!captionText;
 
-    // Use link from context if available (from preceding <a> tag), otherwise Button.png check, otherwise undefined
+    // Use link from context if available (from preceding <a> tag), otherwise Button.png check,
+    // otherwise a caption link, otherwise a data-link-href attribute, otherwise undefined
     const fileLink =
       imageLink.includes("Button.png") && link
         ? (link as string)
         : captionLink
         ? captionLink
+        : image.attributes["data-link-href"]
+        ? image.attributes["data-link-href"]
         : undefined;
 
     const caption = captionText
