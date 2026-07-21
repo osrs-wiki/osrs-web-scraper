@@ -92,4 +92,17 @@ describe("pollBox", () => {
 
     expect(builder.build()).toContain("File:test-title");
   });
+
+  test("poll-box preserves youtube fallback caption text", () => {
+    const root = parse(
+      '<div class="poll-box"><div class="osrs-embed osrs-embed--video" data-src="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb" data-fallback="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb"><div class="osrs-embed__frame"><iframe src="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb"></iframe></div></div><div class="osrs-embed__fallback">If you can\'t see the embedded content above, <a href="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb">click here</a>.</div><p>Follow-up text outside centered caption.</p></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([pollBoxParser(root.firstChild)].flat());
+    const result = builder.build();
+
+    expect(result).toContain("{{Youtube|5PwrxOzH5P4}}");
+    expect(result).toContain("If you can't see the embedded content above");
+    expect(result).toContain("Follow-up text outside centered caption.");
+  });
 });

@@ -74,4 +74,13 @@ describe("div node", () => {
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("osrs-embed__fallback class should preserve text around link", () => {
+    const root = parse(
+      '<div class="osrs-embed__fallback">If you can\'t see the embedded content above, <a href="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb">click here</a>.</div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
 });
