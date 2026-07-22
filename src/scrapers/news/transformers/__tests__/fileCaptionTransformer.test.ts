@@ -25,7 +25,7 @@ describe("NewsFileCaptionTransformer", () => {
     ).toMatchSnapshot();
   });
 
-  it("should skip files that already have captions", () => {
+  it("should override an existing (e.g. truncated data-caption-text) caption with the full following caption", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiFile("image", {
         caption: new MediaWikiText("existing caption", { italics: true }),
@@ -39,8 +39,8 @@ describe("NewsFileCaptionTransformer", () => {
       originalContent
     );
 
-    // Should not combine since file already has caption
-    expect(transformed).toHaveLength(3);
+    // Should combine, with the following full caption taking precedence
+    expect(transformed).toHaveLength(1);
     expect(transformed[0]).toBeInstanceOf(MediaWikiFile);
     const file = transformed[0] as MediaWikiFile;
     expect(file.options?.caption).toBeInstanceOf(MediaWikiText);
