@@ -19,7 +19,7 @@ import { ContentNodeParser } from "../types";
 
 const ignoredClasses = ["demo cursor"];
 const imageExtensions = ["png", "jpg", "gif"];
-const REGEX_STYLE_WIDTH = /width\s*:\s*([0-9]+)/i;
+const REGEX_WIDTH_DECLARATION = /^width\s*:\s*([0-9]+)/i;
 
 export const imageParser: ContentNodeParser = (
   node,
@@ -51,7 +51,12 @@ export const imageParser: ContentNodeParser = (
 
     let dimensions;
     try {
-      const styleWidth = image.attributes.style?.match(REGEX_STYLE_WIDTH)?.[1];
+      // Only match a `width` declaration itself, not `max-width`/`min-width`/`border-width` etc.
+      const styleWidth = image.attributes.style
+        ?.split(";")
+        .map((declaration) => declaration.trim())
+        .find((declaration) => REGEX_WIDTH_DECLARATION.test(declaration))
+        ?.match(REGEX_WIDTH_DECLARATION)?.[1];
       const explicitWidth =
         image.attributes.width ?? image.attributes["data-width"] ?? styleWidth;
 
@@ -81,7 +86,7 @@ export const imageParser: ContentNodeParser = (
     ]*/
     const hasCaption = !!captionText;
 
-    // Use link from context if available (from preceding <a> tag), otherwise Button.png check,
+    // Use link from context only for Button.png images (link from a preceding <a> tag),
     // otherwise a caption link, otherwise a data-link-href attribute, otherwise undefined
     const fileLink =
       imageLink.includes("Button.png") && link

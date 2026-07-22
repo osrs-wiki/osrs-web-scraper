@@ -2,10 +2,12 @@ import { MediaWikiBuilder, MediaWikiFile } from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import parse from "node-html-parser";
 
+import { ContentContext } from "../../newsContent";
 import imageParser from "../image";
 
 describe("image node", () => {
   beforeEach(() => {
+    ContentContext.imageCount = 0;
     jest.spyOn(fs, "existsSync").mockImplementation(() => false);
     jest.spyOn(fs, "mkdirSync").mockImplementation(() => "");
   });
@@ -97,6 +99,34 @@ describe("image node", () => {
     const builder = new MediaWikiBuilder();
     builder.addContents(content);
     expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Image with style containing max-width should not be mistaken for width", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" style="max-width: 800px; width: 300px;" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.resizing?.width).toBe(300);
+  });
+
+  test("Image with only max-width in style should fall back to sizeOf/default", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" style="max-width: 800px;" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    // No usable width source (no width/data-width/style width, and no real file on disk),
+    // so it should fall back to the default of 600, not the max-width value of 800.
+    expect(file.options?.resizing?.width).toBe(600);
   });
 
   test("width attribute takes priority over data-width", () => {
