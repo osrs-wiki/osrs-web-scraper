@@ -45,6 +45,20 @@ describe("div node", () => {
     );
   });
 
+  test("osrs-carousel class should parse as gallery", () => {
+    const root = parse(
+      '<div class="osrs-carousel" data-carousel=""><div class="osrs-carousel__slide"><img src="https://example.com/image1.png"><div class="osrs-carousel__caption">Caption text</div></div></div>'
+    );
+    const result = divParser(root.firstChild, { title: "Test Post" });
+    expect(result).toBeDefined();
+    // The result should be a gallery parser result with the tag "gallery"
+    expect(result).toEqual(
+      expect.objectContaining({
+        tag: "gallery",
+      })
+    );
+  });
+
   test("osrs-title class should parse as level 2 header", () => {
     const root = parse('<div class="osrs-title">Main Title</div>');
     const builder = new MediaWikiBuilder();

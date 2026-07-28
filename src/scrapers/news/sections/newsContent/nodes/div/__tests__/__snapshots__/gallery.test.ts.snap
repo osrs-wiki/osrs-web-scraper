@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`gallery node Carousel gallery (osrs-carousel) should parse img slides and render gallery 1`] = `
+"<gallery mode=\\"packed\\", heights=\\"180\\", style=\\"text-align:center\\">
+test-title (1).jpg|[https://x.com/Legend_Arts Legend Arts] has captured the true majesty of ''Lord Drakan''!
+test-title (2).jpg|MissyTheBaker cooked up this stunning Ironman trio.
+test-title (3).png
+</gallery>
+"
+`;
+
 exports[`gallery node Gallery should parse and render 1`] = `
 "<gallery mode=\\"packed\\", heights=\\"180\\", style=\\"text-align:center\\">
 test-title (1).png
