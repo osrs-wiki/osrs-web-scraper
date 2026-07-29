@@ -36,7 +36,7 @@ const buildCaptionText = (
     return undefined;
   }
 
-  const caption = new MediaWikiText(childContent).build();
+  const caption = new MediaWikiText(childContent).build().trim();
   return caption === "" ? undefined : caption;
 };
 
@@ -135,15 +135,15 @@ const handleCarouselGallery = (
   const imageDirectory = `./out/news/${formattedTitle}`;
   const slides = divElement.querySelectorAll(".osrs-carousel__slide");
 
+  if (!fs.existsSync(imageDirectory)) {
+    fs.mkdirSync(imageDirectory, { recursive: true });
+  }
+
   slides.forEach((slide) => {
     const imageNode = slide.querySelector("img");
     // Video slides (osrs-carousel__video) have no <img> tag and aren't downloaded, so skip them
     if (!imageNode) {
       return;
-    }
-
-    if (!fs.existsSync(imageDirectory)) {
-      fs.mkdirSync(imageDirectory, { recursive: true });
     }
 
     const imageLink = imageNode.attributes.src;
