@@ -24,7 +24,4 @@ exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, M
 "
 `;
 
-exports[`NewsFileCaptionTransformer should skip files that already have captions 1`] = `
-"[[File:image|''existing caption'']]
-''another caption''"
-`;
+exports[`NewsFileCaptionTransformer should override an existing (e.g. truncated data-caption-text) caption with the full following caption 1`] = `"[[File:image|thumb|''another caption'']]"`;
