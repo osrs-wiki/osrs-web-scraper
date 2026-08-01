@@ -1,4 +1,8 @@
-import { MediaWikiHTML, MediaWikiText } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiHTML,
+  MediaWikiText,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import { HTMLElement } from "node-html-parser";
 
@@ -201,11 +205,14 @@ export const galleryParser: ContentNodeParser = (node, options) => {
     const handler = galleryHandlers[galleryType];
     const content = handler(divElement, options);
 
-    return new MediaWikiHTML("gallery", content, {
-      mode: "packed",
-      heights: "180",
-      style: "text-align:center",
-    });
+    return [
+      new MediaWikiHTML("gallery", content, {
+        mode: "packed",
+        heights: "180",
+        style: "text-align:center",
+      }),
+      new MediaWikiBreak(),
+    ];
   }
 };
 

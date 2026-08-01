@@ -39,9 +39,11 @@ describe("div node", () => {
     expect(result).toBeDefined();
     // The result should be a gallery parser result with the tag "gallery"
     expect(result).toEqual(
-      expect.objectContaining({
-        tag: "gallery",
-      })
+      expect.arrayContaining([
+        expect.objectContaining({
+          tag: "gallery",
+        }),
+      ])
     );
   });
 
@@ -53,9 +55,11 @@ describe("div node", () => {
     expect(result).toBeDefined();
     // The result should be a gallery parser result with the tag "gallery"
     expect(result).toEqual(
-      expect.objectContaining({
-        tag: "gallery",
-      })
+      expect.arrayContaining([
+        expect.objectContaining({
+          tag: "gallery",
+        }),
+      ])
     );
   });
 

@@ -6,6 +6,7 @@ test-title (1).jpg|[https://x.com/Legend_Arts Legend Arts] has captured the true
 test-title (2).jpg|MissyTheBaker cooked up this stunning Ironman trio.
 test-title (3).png
 </gallery>
+
 "
 `;
 
@@ -14,6 +15,7 @@ exports[`gallery node Gallery should parse and render 1`] = `
 test-title (1).png
 test-title (2).jpg
 </gallery>
+
 "
 `;
 
@@ -24,5 +26,6 @@ HD & Plugin API Progress Update (2).png
 HD & Plugin API Progress Update (3).png
 HD & Plugin API Progress Update (4).png
 </gallery>
+
 "
 `;
