@@ -2,6 +2,7 @@ import {
   MediaWikiBreak,
   MediaWikiBuilder,
   MediaWikiContent,
+  MediaWikiExternalLink,
   MediaWikiTemplate,
   MediaWikiText,
 } from "@osrs-wiki/mediawiki-builder";
@@ -16,9 +17,9 @@ describe("NewsYoutubeTransformer", () => {
     youtubeTemplate.add("", "ZNePfBmCZbM");
 
     const originalContent: MediaWikiContent[] = [youtubeTemplate];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     expect(
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
@@ -37,9 +38,9 @@ describe("NewsYoutubeTransformer", () => {
         "If you can't see the fantastic video by [https://x.com/_amentos Amentos] above, [https://www.youtube.com/watch?v=ZNePfBmCZbM click here]."
       ),
     ];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     expect(
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
@@ -53,9 +54,9 @@ describe("NewsYoutubeTransformer", () => {
     youtubeTemplate.add("", "PLRs68iqW7gYvSyTqu12WFMMXYZM-2regV");
 
     const originalContent: MediaWikiContent[] = [youtubeTemplate];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     expect(
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
@@ -72,9 +73,9 @@ describe("NewsYoutubeTransformer", () => {
       new MediaWikiBreak(),
       new MediaWikiText("Some text"),
     ];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     expect(transformed).toEqual(originalContent);
   });
 
@@ -96,9 +97,9 @@ describe("NewsYoutubeTransformer", () => {
       otherTemplate,
       new MediaWikiText("Text after"),
     ];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     expect(
       new MediaWikiBuilder().addContents(transformed).build()
     ).toMatchSnapshot();
@@ -112,33 +113,73 @@ describe("NewsYoutubeTransformer", () => {
 
     // This simulates what happens when parsing <p><i>caption</i></p>
     // The paragraph parser creates a MediaWikiText with the italic text and a break as children
-    const paragraphText = new MediaWikiText([
-      new MediaWikiText("If you can't see the video above, click ", { italics: true }),
-      new MediaWikiText("[https://www.youtube.com/watch?v=-0e4IyRtPwY here]", { italics: true }),
-      new MediaWikiText("!", { italics: true }),
-      new MediaWikiBreak(),
-    ], { italics: true });
+    const paragraphText = new MediaWikiText(
+      [
+        new MediaWikiText("If you can't see the video above, click ", {
+          italics: true,
+        }),
+        new MediaWikiText(
+          "[https://www.youtube.com/watch?v=-0e4IyRtPwY here]",
+          { italics: true }
+        ),
+        new MediaWikiText("!", { italics: true }),
+        new MediaWikiBreak(),
+      ],
+      { italics: true }
+    );
 
     const originalContent: MediaWikiContent[] = [
       youtubeTemplate,
       paragraphText,
     ];
-    
+
     const transformed = new NewsYoutubeTransformer().transform(originalContent);
-    
+
     const result = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     // The caption should be inside the center tags, not outside
     expect(result).toContain("<center>");
     expect(result).toContain("{{Youtube|-0e4IyRtPwY}}");
     expect(result).toContain("If you can't see the video above");
     expect(result).toContain("</center>");
-    
+
     // Check that caption comes before closing center tag
     const centerCloseIndex = result.indexOf("</center>");
     const captionIndex = result.indexOf("If you can't see the video above");
     expect(captionIndex).toBeLessThan(centerCloseIndex);
-    
+
+    expect(result).toMatchSnapshot();
+  });
+
+  it("should wrap YouTube template with a text/link/text fallback caption in center tags", () => {
+    // This simulates the parsed output of:
+    // <div class="osrs-embed__fallback">If you can't see the embedded content
+    // above, <a href="...">click here</a>.</div>
+    const youtubeTemplate = new MediaWikiTemplate("Youtube", {
+      collapsed: true,
+    });
+    youtubeTemplate.add("", "5PwrxOzH5P4");
+
+    const originalContent: MediaWikiContent[] = [
+      youtubeTemplate,
+      new MediaWikiText("If you can't see the embedded content above, "),
+      new MediaWikiExternalLink(
+        "click here",
+        "https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb"
+      ),
+      new MediaWikiText("."),
+    ];
+
+    const transformed = new NewsYoutubeTransformer().transform(originalContent);
+    const result = new MediaWikiBuilder().addContents(transformed).build();
+
+    expect(result).toContain("<center>");
+    expect(result).toContain("{{Youtube|5PwrxOzH5P4}}");
+    expect(result).toContain(
+      "If you can't see the embedded content above, [https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb click here]."
+    );
+    expect(result).toContain("</center>");
+
     expect(result).toMatchSnapshot();
   });
 });

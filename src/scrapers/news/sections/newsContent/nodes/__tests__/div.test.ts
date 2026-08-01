@@ -39,9 +39,11 @@ describe("div node", () => {
     expect(result).toBeDefined();
     // The result should be a gallery parser result with the tag "gallery"
     expect(result).toEqual(
-      expect.objectContaining({
-        tag: "gallery",
-      })
+      expect.arrayContaining([
+        expect.objectContaining({
+          tag: "gallery",
+        }),
+      ])
     );
   });
 
@@ -70,6 +72,15 @@ describe("div node", () => {
 
   test("osrs-subheading class should parse as level 4 header", () => {
     const root = parse('<div class="osrs-subheading">Subheading Text</div>');
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("osrs-embed__fallback class should preserve text around link", () => {
+    const root = parse(
+      '<div class="osrs-embed__fallback">If you can\'t see the embedded content above, <a href="https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb">click here</a>.</div>'
+    );
     const builder = new MediaWikiBuilder();
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();

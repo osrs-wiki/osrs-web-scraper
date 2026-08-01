@@ -5,6 +5,7 @@ exports[`gallery node Gallery should parse and render 1`] = `
 test-title (1).png
 test-title (2).jpg
 </gallery>
+
 "
 `;
 
@@ -15,5 +16,6 @@ HD & Plugin API Progress Update (2).png
 HD & Plugin API Progress Update (3).png
 HD & Plugin API Progress Update (4).png
 </gallery>
+
 "
 `;
