@@ -35,7 +35,14 @@ export const divParser: ContentNodeParser = (node, options) => {
     if (parse) {
       return parse(node, options);
     } else if (!ignoredClasses.includes(className)) {
-      return node.childNodes.map((child) => nodeParser(child, options)).flat();
+      return node.childNodes
+        .map((childNode) => {
+          if (childNode instanceof HTMLElement) {
+            return nodeParser(childNode, options);
+          }
+          return textParser(childNode, options);
+        })
+        .flat();
     }
   } else {
     return textParser(node, options);

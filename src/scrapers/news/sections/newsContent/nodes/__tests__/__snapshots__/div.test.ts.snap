@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`div node osrs-embed__fallback class should preserve text around link 1`] = `"If you can't see the embedded content above, [https://www.youtube.com/embed/5PwrxOzH5P4?si=0G50ueNJQugoBmpb click here]."`;
+
 exports[`div node osrs-subheading class should parse as level 4 header 1`] = `
 "====Subheading Text====
 "
