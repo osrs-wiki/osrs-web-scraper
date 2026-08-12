@@ -38,3 +38,10 @@ jobs:
         with:
           name: ${{ inputs.task }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: out/${{ inputs.task }}/
+
+      - name: Reldo archive
+        run: |
+          curl -X POST https://reldo.runescape.wiki/api/archive \
+            -H "Content-Type: application/json" \
+            -d '{"url": "${{ inputs.link }}"}' \
+            -A wiki-news-scraper
