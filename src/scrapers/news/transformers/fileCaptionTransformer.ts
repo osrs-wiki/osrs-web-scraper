@@ -16,12 +16,15 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
       const transformedContent = [];
       for (let index = 0; index < content.length; index++) {
         const current = content[index];
-        if (current instanceof MediaWikiFile && !current.options?.caption) {
+        if (current instanceof MediaWikiFile) {
           const next = getNextContent(content, index + 1);
           if (
             next.content instanceof MediaWikiText &&
             Array.isArray(next.content.children)
           ) {
+            // A fully-formed caption (e.g. from an "image-caption" div) follows the
+            // file, so it takes precedence over any caption already set on the file
+            // (which may be a truncated `data-caption-text` attribute value).
             transformedContent.push(
               new MediaWikiFile(current.fileName, {
                 ...current.options,
