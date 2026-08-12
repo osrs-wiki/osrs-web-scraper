@@ -1,4 +1,6 @@
 import { Command } from "commander";
+import fs from "fs";
+import { EOL } from "os";
 
 import { getLatestNewsTitle } from "./news.utils";
 import scraper from "../../../scraper";
@@ -14,6 +16,9 @@ const news = new Command("news")
     }
     if (newsLink) {
       scraper.scrape(newsLink, newsScraper);
+      if (process.env.GITHUB_ENV) {
+        fs.appendFileSync(process.env.GITHUB_ENV, `NEWS_LINK=${newsLink}${EOL}`, "utf8");
+      }
     } else {
       console.warn("No news post found.");
     }
