@@ -18,6 +18,7 @@ import listItemParser from "./listItem";
 import paragraphParser from "./paragraph";
 import spanParser from "./span";
 import tableParser from "./table";
+import timeParser from "./time";
 import titleParser from "./title";
 import underlineParser from "./underline";
 import videoParser from "./video";
@@ -53,6 +54,7 @@ const nodeParserMap: { [key: string]: ContentNodeParser } = {
   span: spanParser,
   strong: boldParser,
   table: tableParser,
+  time: timeParser,
   u: underlineParser,
   ul: listParser,
   u1: listParser,
