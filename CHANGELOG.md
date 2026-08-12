@@ -1,5 +1,17 @@
 # osrs-web-scraper
 
+## 0.28.0
+
+### Minor Changes
+
+- dc76fab: Upload news posts to reldo after scraping
+
+### Patch Changes
+
+- 4f183a9: Fix div and youtubeTransformer parsing for YouTube video captions
+- 2145a8a: Fix galleries not parsing correctly when using the new `osrs-carousel` markup, causing them to render as a flat list of `[[File:...]]` images instead of a `<gallery>` block; also fix gallery entries not referencing the actual downloaded filename when its extension was corrected based on MIME type
+- 8f5dbfd: Fix news image widths not respecting `data-width` or inline `style="width: ..."` attributes (causing them to default to 600px), add support for `data-link-href`/`data-caption-href` as image link sources, and fix duplicated/truncated image captions where the file's caption (from a truncated `data-caption-text` attribute) was not being replaced by the full caption from a following `image-caption` div
+
 ## 0.27.2
 
 ### Patch Changes
