@@ -14,6 +14,7 @@ const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
   "poll-box2": pollBoxParser,
   "row": galleryParser,
+  "osrs-carousel": galleryParser,
   "osrs-title": osrsHeaderParser,
   "osrs-subtitle": osrsHeaderParser,
   "osrs-subheading": osrsHeaderParser,
