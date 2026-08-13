@@ -5,3 +5,15 @@ exports[`p node Paragraph should parse and render 1`] = `
 
 "
 `;
+
+exports[`p node Paragraph with leading/trailing indentation whitespace should trim to avoid a stray leading space 1`] = `
+"There's plenty to learn before we let the recruits loose in the Wilderness!
+
+"
+`;
+
+exports[`p node Paragraph with mixed inline content should preserve interior spacing while trimming edges 1`] = `
+"Well, that's exactly what [https://www.twitch.tv/katerena Katerena] is hoping to prove.
+
+"
+`;
