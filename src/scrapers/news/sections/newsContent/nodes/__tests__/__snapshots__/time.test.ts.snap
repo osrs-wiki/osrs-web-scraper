@@ -2,6 +2,10 @@
 
 exports[`time node Time with data-utc-original should format as 12h UTC 1`] = `"3:00 PM UTC"`;
 
+exports[`time node Time with invalid hour falls back to raw text 1`] = `"12:00 AM UTC"`;
+
+exports[`time node Time with invalid minutes falls back to raw text 1`] = `"12:00 PM UTC"`;
+
 exports[`time node Time with midnight UTC should format correctly 1`] = `"12:00 AM UTC"`;
 
 exports[`time node Time with noon UTC should format correctly 1`] = `"12:00 PM UTC"`;

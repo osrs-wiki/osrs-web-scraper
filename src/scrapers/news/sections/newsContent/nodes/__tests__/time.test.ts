@@ -31,6 +31,24 @@ describe("time node", () => {
     expect(builder.build()).toMatchSnapshot();
   });
 
+  test("Time with invalid hour falls back to raw text", () => {
+    const root = parse(
+      `<time data-utc-original="24:00 UTC" datetime="2026-07-22T00:00:00.000Z">12:00 AM UTC</time>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([timeParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Time with invalid minutes falls back to raw text", () => {
+    const root = parse(
+      `<time data-utc-original="12:60 UTC" datetime="2026-07-22T12:00:00.000Z">12:00 PM UTC</time>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([timeParser(root.firstChild)].flat());
+    expect(builder.build()).toMatchSnapshot();
+  });
+
   test("Time without data-utc-original falls back to raw text", () => {
     const root = parse(`<time>3:00 PM UTC</time>`);
     const builder = new MediaWikiBuilder();

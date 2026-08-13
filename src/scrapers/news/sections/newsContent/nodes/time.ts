@@ -10,7 +10,11 @@ function formatUtcTime(utcOriginal: string): string | null {
   if (!match) return null;
 
   let hours = parseInt(match[1], 10);
+  const minutesNum = parseInt(match[2], 10);
   const minutes = match[2];
+
+  if (hours > 23 || minutesNum > 59) return null;
+
   const suffix = hours >= 12 ? "PM" : "AM";
 
   if (hours > 12) {
