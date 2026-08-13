@@ -6,6 +6,5 @@
 export const formatText = (text?: string) =>
   text
     ?.replaceAll("&amp;", "&")
-    ?.replaceAll("\t", "")
-    ?.replaceAll("\n", "")
-    ?.replaceAll("\r", "");
+    ?.replace(/[\t\r\n]+/g, " ")
+    ?.replace(/ {2,}/g, " ");
