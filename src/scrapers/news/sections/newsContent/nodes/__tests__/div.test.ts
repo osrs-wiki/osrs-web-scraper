@@ -101,4 +101,26 @@ describe("div node", () => {
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("table-scroll-notice class should be ignored and not render", () => {
+    const root = parse(
+      '<div class="table-scroll-notice" aria-hidden="true">↔ Scroll horizontally to view all columns</div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toBe("");
+  });
+
+  test("table-scroll wrapper div should unwrap and render its table child", () => {
+    const root = parse(
+      '<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table"><table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td>test</td><td>test</td></tr></tbody></table></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    const result = builder.build();
+
+    expect(result).not.toContain("Scroll horizontally");
+    expect(result).toContain('{| class="wikitable"');
+    expect(result).toMatchSnapshot();
+  });
 });

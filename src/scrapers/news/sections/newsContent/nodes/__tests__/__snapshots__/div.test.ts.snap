@@ -34,4 +34,17 @@ exports[`div node poll-box2 class should parse and render 1`] = `
 "
 `;
 
+exports[`div node table-scroll wrapper div should unwrap and render its table child 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! header1
+! header2
+|-
+| test
+| test
+|}
+
+"
+`;
+
 exports[`div node thumb-row class should be ignored and not render 1`] = `""`;
