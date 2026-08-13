@@ -25,6 +25,19 @@ describe("table node", () => {
     expect(builder.build()).toMatchSnapshot();
   });
 
+  test("A table whose first row becomes the header should preserve links inside cells", () => {
+    const root = parse(
+      `<table><tbody><tr><td><b>Jessy</b><br><a href="https://www.twitch.tv/jessy" rel="noopener noreferrer" target="_blank">Twitch</a><br/><a href="https://www.kick.com/jessy" rel="noopener noreferrer" target="_blank">Kick</a></td></tr><tr><td><b>Jillyfish</b><br><a href="https://www.twitch.tv/jillyfish" rel="noopener noreferrer" target="_blank">Twitch</a></td></tr></tbody></table>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([tableParser(root.firstChild)].flat());
+    const result = builder.build();
+
+    expect(result).toContain("[https://www.twitch.tv/jessy Twitch]");
+    expect(result).toContain("[https://www.kick.com/jessy Kick]");
+    expect(result).toMatchSnapshot();
+  });
+
   test("A table with empty cells should render without errors", () => {
     const root = parse(
       "<table><tbody><tr><td>header1</td><td>header2</td></tr><tr><td></td><td>test</td></tr><tr><td>test</td><td></td></tr></tbody></table>"
@@ -208,21 +221,23 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     const tableContent = tableParser(tableNode);
     const builder = new MediaWikiBuilder();
-    
+
     if (Array.isArray(tableContent)) {
       builder.addContents(tableContent);
     } else if (tableContent) {
       builder.addContent(tableContent);
     }
-    
+
     const result = builder.build();
-    
+
     // The result should contain the list items as bullet points
     expect(result).toContain("* 51 Slayer");
     expect(result).toContain("* Troubled Tortugans (45 Sailing required)");
     expect(result).toContain("* Vannaka: 30 - 80");
-    expect(result).toContain("* Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.");
-    
+    expect(result).toContain(
+      "* Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points."
+    );
+
     // Also verify the full output structure
     expect(result).toMatchSnapshot();
   });
@@ -244,15 +259,15 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     const tableContent = tableParser(tableNode);
     const builder = new MediaWikiBuilder();
-    
+
     if (Array.isArray(tableContent)) {
       builder.addContents(tableContent);
     } else if (tableContent) {
       builder.addContent(tableContent);
     }
-    
+
     const result = builder.build();
-    
+
     // Should contain both data rows
     expect(result).toContain("Row 1 Col 1");
     expect(result).toContain("Row 1 Col 2");
@@ -290,12 +305,12 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     builder.addContents([tableParser(tableNode)].flat());
     const result = builder.build();
-    
+
     // Check that the result has the correct header markers
     expect(result).toContain("! \n! EU");
     expect(result).toContain("! F2P\n| 456, 455");
     expect(result).toContain("! Members\n| 335, 384");
-    
+
     expect(result).toMatchSnapshot();
   });
 
@@ -318,14 +333,14 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     builder.addContents([tableParser(tableNode)].flat());
     const result = builder.build();
-    
+
     // First row becomes header row
     expect(result).toContain("! Row 1 Col 1");
     expect(result).toContain("! Row 1 Col 2");
     // Second row should be data cells
     expect(result).toContain("| Row 2 Col 1");
     expect(result).toContain("| Row 2 Col 2");
-    
+
     expect(result).toMatchSnapshot();
   });
 
@@ -350,17 +365,17 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     builder.addContents([tableParser(tableNode)].flat());
     const result = builder.build();
-    
+
     // All cells in first row should be headers
     expect(result).toContain("! Header 1");
     expect(result).toContain("! Header 2");
     expect(result).toContain("! Header 3");
-    
+
     // Second row should have mixed cell types
     expect(result).toContain("! Row Header");
     expect(result).toContain("| Data 1");
     expect(result).toContain("| Data 2");
-    
+
     expect(result).toMatchSnapshot();
   });
 
@@ -389,19 +404,19 @@ describe("table node", () => {
     const tableNode = root.querySelector("table");
     builder.addContents([tableParser(tableNode)].flat());
     const result = builder.build();
-    
+
     // thead cells should be headers
     expect(result).toContain("! Column 1");
     expect(result).toContain("! Column 2");
-    
+
     // tbody row headers should be headers
     expect(result).toContain("! Row 1");
     expect(result).toContain("! Row 2");
-    
+
     // tbody data cells should be data
     expect(result).toContain("| Value 1");
     expect(result).toContain("| Value 2");
-    
+
     expect(result).toMatchSnapshot();
   });
 });

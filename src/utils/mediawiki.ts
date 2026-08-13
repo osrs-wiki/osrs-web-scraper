@@ -1,4 +1,8 @@
-import { MediaWikiBreak, MediaWikiContent } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBreak,
+  MediaWikiContent,
+  MediaWikiText,
+} from "@osrs-wiki/mediawiki-builder";
 /**
  * Trims the leading and trailing MediaWikiBreak elements from the contents.
  *
@@ -88,6 +92,45 @@ export const getFirstStringContent = (
     return getFirstStringContent(contents.children[0]);
   }
   return undefined;
+};
+
+/**
+ * Recursively trims leading/trailing whitespace-only text at the edge of a content
+ * tree, without disturbing interior spacing (e.g. text surrounding an inline link).
+ *
+ * @param content The content to trim.
+ * @param edge Which edge to trim.
+ */
+export const trimContentEdge = (
+  content: MediaWikiContent,
+  edge: "start" | "end"
+): void => {
+  if (!(content instanceof MediaWikiText)) {
+    return;
+  }
+  if (typeof content.children === "string") {
+    content.children =
+      edge === "start"
+        ? content.children.replace(/^\s+/, "")
+        : content.children.replace(/\s+$/, "");
+  } else if (Array.isArray(content.children) && content.children.length > 0) {
+    const index = edge === "start" ? 0 : content.children.length - 1;
+    trimContentEdge(content.children[index], edge);
+  }
+};
+
+/**
+ * Trims leading whitespace from the first element and trailing whitespace from the
+ * last element of a content array (a single-element array is trimmed on both edges).
+ *
+ * @param contents The content array to trim.
+ */
+export const trimContentEdges = (contents: MediaWikiContent[]): void => {
+  if (!contents || contents.length === 0) {
+    return;
+  }
+  trimContentEdge(contents[0], "start");
+  trimContentEdge(contents[contents.length - 1], "end");
 };
 
 /**

@@ -2,6 +2,12 @@
 
 exports[`time node Time with data-utc-original should format as 12h UTC 1`] = `"3:00 PM UTC"`;
 
+exports[`time node Time with full date data-utc-original should always show UTC 1`] = `"Sunday, August 30th at 9:00 PM UTC"`;
+
+exports[`time node Time with full date data-utc-original should compute correct weekday and ordinal suffix 1`] = `"Tuesday, September 1st at 7:00 AM UTC"`;
+
+exports[`time node Time with invalid full date data-utc-original falls back to raw text 1`] = `"30 August 2026, 9:00 PM UTC"`;
+
 exports[`time node Time with invalid hour falls back to raw text 1`] = `"12:00 AM UTC"`;
 
 exports[`time node Time with invalid minutes falls back to raw text 1`] = `"12:00 PM UTC"`;
