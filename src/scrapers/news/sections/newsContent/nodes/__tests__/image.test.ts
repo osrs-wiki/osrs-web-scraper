@@ -185,6 +185,39 @@ describe("image node", () => {
     expect(file.options?.link).toBe("https://example.com/link");
   });
 
+  test("Image with asset-auto-sized class should be centered even without a caption or center wrapper", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" data-width="255px" class="asset-auto-sized" style="width: 255px; max-width: 100%; height: auto;" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.horizontalAlignment).toBe("center");
+    expect(file.options?.resizing?.width).toBe(255);
+
+    const builder = new MediaWikiBuilder();
+    builder.addContents(content);
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Image wrapped in an asset-link anchor should be centered", () => {
+    const root = parse(
+      '<a class="asset-link" href="https://test.com/image.png" target="_blank" rel="noopener noreferrer"><img src="https://test.com/image.png" data-width="450px" class="asset-auto-sized" style="width: 450px; max-width: 100%; height: auto;"></a>'
+    );
+    const img = root.querySelector("img");
+
+    const result = imageParser(img, { title: "test-title" });
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content[0]).toBeInstanceOf(MediaWikiFile);
+    const file = content[0] as MediaWikiFile;
+    expect(file.options?.horizontalAlignment).toBe("center");
+    expect(file.options?.link).toBeUndefined();
+  });
+
   test("data-caption-href takes priority over data-link-href", () => {
     const root = parse(
       '<img src="https://test.com/image.png" data-width="200" data-caption-href="https://example.com/caption" data-link-href="https://example.com/link-href" />'

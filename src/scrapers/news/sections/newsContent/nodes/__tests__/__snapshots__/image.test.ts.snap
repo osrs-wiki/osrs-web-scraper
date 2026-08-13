@@ -6,6 +6,12 @@ exports[`image node Image node should parse and render 1`] = `
 "
 `;
 
+exports[`image node Image with asset-auto-sized class should be centered even without a caption or center wrapper 1`] = `
+"[[File:test-title (1).png|255px|center]]
+
+"
+`;
+
 exports[`image node Image with both data-caption-text and data-caption-link 1`] = `
 "[[File:test-title (1).png|thumb|600px|center|''Custom caption text.''|link=https://example.com/]]
 
