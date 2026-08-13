@@ -1,5 +1,21 @@
 # osrs-web-scraper
 
+## 0.29.0
+
+### Minor Changes
+
+- e98fb21: Add support for `<time>` tag parsing in OSRS news content
+
+### Patch Changes
+
+- 16a0516: Filter out \r\n in raw text parsing in paragraph tags
+- 16a0516: Correctly parse nodes in table header rows rather than showing raw text
+- 16a0516: Trim content ends in paragraph tags
+- 16a0516: Add support for date & time parsing in the time tag
+- 16a0516: trim leading and trailing whitespace in table and paragraph content
+- 051b60c: Fix news post images not being centered when the source page no longer wraps them in a `<center>` tag, by detecting the `asset-auto-sized` image class and `asset-link` anchor wrapper that Jagex now uses for standalone, auto-sized images.
+- 16a0516: Add table-scroll-notice to ignored div classes
+
 ## 0.28.0
 
 ### Minor Changes
