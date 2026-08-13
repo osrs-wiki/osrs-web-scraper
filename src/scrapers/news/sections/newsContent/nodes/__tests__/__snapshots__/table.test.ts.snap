@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`table node A table whose first row becomes the header should preserve links inside cells 1`] = `
+"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! '''Jessy'''
+[https://www.twitch.tv/jessy Twitch]
+[https://www.kick.com/jessy Kick]
+|-
+| '''Jillyfish'''
+[https://www.twitch.tv/jillyfish Twitch]
+|}
+
+"
+`;
+
 exports[`table node A table with all data cells should render correctly 1`] = `
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
@@ -9,6 +23,7 @@ exports[`table node A table with all data cells should render correctly 1`] = `
 | Row 2 Col 1
 | Row 2 Col 2
 |}
+
 "
 `;
 
@@ -21,6 +36,7 @@ exports[`table node A table with cells containing only ignored elements should r
 | <!-- Unsupported tag: style -->
 | visible content
 |}
+
 "
 `;
 
@@ -34,6 +50,7 @@ exports[`table node A table with complex nested HTML should render correctly 1`]
 | Some '''bold''' and ''italic'' text with 
 line breaks
 |}
+
 "
 `;
 
@@ -49,6 +66,7 @@ exports[`table node A table with empty cells should render without errors 1`] = 
 | test
 | 
 |}
+
 "
 `;
 
@@ -65,6 +83,7 @@ exports[`table node A table with mixed content including unsupported tags should
 
 | <!-- Unsupported tag: unsupported -->more content
 |}
+
 "
 `;
 
@@ -79,6 +98,7 @@ exports[`table node A table with mixed th and td in rows should render correctly
 | Data 1
 | Data 2
 |}
+
 "
 `;
 
@@ -91,6 +111,7 @@ exports[`table node A table with no thead should render 1`] = `
 | test
 | test
 |}
+
 "
 `;
 
@@ -112,6 +133,7 @@ exports[`table node A table with row headers (<th> in table body) should render 
 | 380, 382
 | 629, 630
 |}
+
 "
 `;
 
@@ -127,6 +149,7 @@ exports[`table node A table with thead and tbody row headers should render corre
 ! Row 2
 | Value 2
 |}
+
 "
 `;
 
@@ -142,6 +165,7 @@ exports[`table node A table with thead should render 1`] = `
 | test
 | test
 |}
+
 "
 `;
 
@@ -157,6 +181,7 @@ exports[`table node A table with whitespace-only cells should render without err
 | test
 | 
 |}
+
 "
 `;
 
@@ -164,10 +189,10 @@ exports[`table node should handle table cells with li elements without ul/ol wra
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! Creature
-! Slayer Unlock Requirements
-! Quantities
-! Weightings
-! Slayer Point Unlock
+!  Slayer Unlock Requirements
+!  Quantities
+!  Weightings
+!  Slayer Point Unlock
 |-
 | Gryphons
 | 
@@ -187,6 +212,7 @@ exports[`table node should handle table cells with li elements without ul/ol wra
 | 
 * Wings Spread - Allows Nieve and Duradel to assign Gryphon tasks. Costs 80 Slayer Points.
 |}
+
 "
 `;
 
@@ -202,5 +228,6 @@ exports[`table node should handle tables with multiple tbody elements 1`] = `
 | Row 2 Col 1
 | Row 2 Col 2
 |}
+
 "
 `;
