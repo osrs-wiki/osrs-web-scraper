@@ -10,6 +10,8 @@ import {
   isEmpty,
   startsWith,
   trim,
+  trimContentEdge,
+  trimContentEdges,
 } from "../mediawiki";
 
 describe("mediawiki utils", () => {
@@ -298,6 +300,85 @@ describe("mediawiki utils", () => {
       const result = getNextContent(contents, 1);
       expect(result.content).toBe(contents[5]);
       expect(result.index).toBe(5);
+    });
+  });
+
+  describe("trimContentEdge", () => {
+    test("should trim leading whitespace from a string child when edge is start", () => {
+      const content = new MediaWikiText("   leading space");
+      trimContentEdge(content, "start");
+      expect(content.children).toBe("leading space");
+    });
+
+    test("should trim trailing whitespace from a string child when edge is end", () => {
+      const content = new MediaWikiText("trailing space   ");
+      trimContentEdge(content, "end");
+      expect(content.children).toBe("trailing space");
+    });
+
+    test("should not affect interior whitespace", () => {
+      const content = new MediaWikiText("  has   interior spaces  ");
+      trimContentEdge(content, "start");
+      trimContentEdge(content, "end");
+      expect(content.children).toBe("has   interior spaces");
+    });
+
+    test("should recurse into the first nested MediaWikiText when edge is start", () => {
+      const inner = new MediaWikiText("   nested leading space");
+      const content = new MediaWikiText([inner, new MediaWikiText("other")]);
+      trimContentEdge(content, "start");
+      expect(inner.children).toBe("nested leading space");
+    });
+
+    test("should recurse into the last nested MediaWikiText when edge is end", () => {
+      const inner = new MediaWikiText("nested trailing space   ");
+      const content = new MediaWikiText([new MediaWikiText("other"), inner]);
+      trimContentEdge(content, "end");
+      expect(inner.children).toBe("nested trailing space");
+    });
+
+    test("should not modify content that is not a MediaWikiText", () => {
+      const content = new MediaWikiBreak();
+      expect(() => trimContentEdge(content, "start")).not.toThrow();
+    });
+
+    test("should not throw for an empty array of children", () => {
+      const content = new MediaWikiText([]);
+      expect(() => trimContentEdge(content, "start")).not.toThrow();
+      expect(content.children).toEqual([]);
+    });
+  });
+
+  describe("trimContentEdges", () => {
+    test("should trim leading whitespace from the first element and trailing whitespace from the last element", () => {
+      const contents = [
+        new MediaWikiText("   leading"),
+        new MediaWikiText("middle"),
+        new MediaWikiText("trailing   "),
+      ];
+      trimContentEdges(contents);
+      expect(contents[0].children).toBe("leading");
+      expect(contents[1].children).toBe("middle");
+      expect(contents[2].children).toBe("trailing");
+    });
+
+    test("should trim both edges of a single-element array", () => {
+      const contents = [new MediaWikiText("   both edges   ")];
+      trimContentEdges(contents);
+      expect(contents[0].children).toBe("both edges");
+    });
+
+    test("should not throw for an empty array", () => {
+      expect(() => trimContentEdges([])).not.toThrow();
+    });
+
+    test("should not throw for a null or undefined array", () => {
+      expect(() =>
+        trimContentEdges(null as unknown as MediaWikiText[])
+      ).not.toThrow();
+      expect(() =>
+        trimContentEdges(undefined as unknown as MediaWikiText[])
+      ).not.toThrow();
     });
   });
 });

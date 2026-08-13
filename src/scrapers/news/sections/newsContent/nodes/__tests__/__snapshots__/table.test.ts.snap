@@ -189,10 +189,10 @@ exports[`table node should handle table cells with li elements without ul/ol wra
 "{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! Creature
-!  Slayer Unlock Requirements
-!  Quantities
-!  Weightings
-!  Slayer Point Unlock
+! Slayer Unlock Requirements
+! Quantities
+! Weightings
+! Slayer Point Unlock
 |-
 | Gryphons
 | 

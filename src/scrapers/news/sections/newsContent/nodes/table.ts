@@ -11,6 +11,7 @@ import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
+import { trimContentEdges } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
 const buildCellContent = (
@@ -26,6 +27,8 @@ const buildCellContent = (
     })
     .flat()
     .filter((content) => content != null);
+
+  trimContentEdges(content);
 
   // Ensure we always have at least some content, even if it's empty
   return content.length > 0 ? content : [new MediaWikiText("")];

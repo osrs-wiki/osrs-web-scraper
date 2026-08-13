@@ -72,10 +72,18 @@ export function formatUtcDateTime(utcOriginal: string): string | null {
   )
     return null;
 
-  const weekday = new Date(Date.UTC(year, monthIndex, day)).toLocaleDateString(
-    "en-US",
-    { weekday: "long", timeZone: "UTC" }
-  );
+  const date = new Date(Date.UTC(year, monthIndex, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== monthIndex ||
+    date.getUTCDate() !== day
+  )
+    return null;
+
+  const weekday = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    timeZone: "UTC",
+  });
 
   return `${weekday}, ${monthName} ${day}${ordinalSuffix(day)} at ${to12Hour(
     hours,

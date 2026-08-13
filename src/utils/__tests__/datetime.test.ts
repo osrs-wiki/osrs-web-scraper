@@ -101,6 +101,24 @@ describe("formatUtcDateTime", () => {
     expect(formatUtcDateTime("30 August 2026 | 21:60 UTC")).toBeNull();
   });
 
+  test("should return null for a day that does not exist in the given month (31 February)", () => {
+    expect(formatUtcDateTime("31 February 2026 | 21:00 UTC")).toBeNull();
+  });
+
+  test("should return null for a day of 0", () => {
+    expect(formatUtcDateTime("0 August 2026 | 21:00 UTC")).toBeNull();
+  });
+
+  test("should return null for February 29th in a non-leap year", () => {
+    expect(formatUtcDateTime("29 February 2026 | 21:00 UTC")).toBeNull();
+  });
+
+  test("should format February 29th in a leap year", () => {
+    expect(formatUtcDateTime("29 February 2028 | 21:00 UTC")).toBe(
+      "Tuesday, February 29th at 9:00 PM UTC"
+    );
+  });
+
   test("should return null for text that does not match the pattern", () => {
     expect(formatUtcDateTime("15:00 UTC")).toBeNull();
   });
