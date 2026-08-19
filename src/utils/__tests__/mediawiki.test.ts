@@ -1,7 +1,9 @@
 import {
   MediaWikiBreak,
   MediaWikiFile,
+  MediaWikiTemplate,
   MediaWikiText,
+  MediaWikiTOC,
 } from "@osrs-wiki/mediawiki-builder";
 
 import {
@@ -308,6 +310,20 @@ describe("mediawiki utils", () => {
       const result = getNextContent(contents, 1);
       expect(result.content).toBe(contents[5]);
       expect(result.index).toBe(5);
+    });
+
+    test("should NOT skip over a template or TOC (e.g. `{{clear}}`/`__TOC__` after a header image) even though they have no `children`", () => {
+      const clearTemplate = new MediaWikiTemplate("clear");
+      const contents = [
+        new MediaWikiFile("header image"),
+        new MediaWikiBreak(),
+        clearTemplate,
+        new MediaWikiTOC(),
+        new MediaWikiText([new MediaWikiText("caption", { italics: true })]),
+      ];
+      const result = getNextContent(contents, 1);
+      expect(result.content).toBe(clearTemplate);
+      expect(result.index).toBe(2);
     });
   });
 

@@ -51,7 +51,10 @@ const newsHeader: NewsSection = {
       const newspostImageExtension = getFileExtension(imageSrc);
       const newspostImageName = `${newspostImageBaseName}.${newspostImageExtension}`;
 
-      const actualFilePath = await downloadFile(imageSrc, `${newsDirectory}/${newspostImageName}`);
+      const actualFilePath = await downloadFile(
+        imageSrc,
+        `${newsDirectory}/${newspostImageName}`
+      );
       const fileNameToUse = path.basename(actualFilePath);
 
       content.push(
@@ -64,6 +67,7 @@ const newsHeader: NewsSection = {
     content.push(new MediaWikiBreak());
     content.push(new MediaWikiTemplate("clear"));
     content.push(new MediaWikiTOC());
+    content.push(new MediaWikiBreak());
 
     return content;
   },

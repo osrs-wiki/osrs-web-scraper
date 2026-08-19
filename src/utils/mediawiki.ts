@@ -154,8 +154,10 @@ export const getNextContent = (
     if (item instanceof MediaWikiBreak) {
       continue;
     }
-    // Skip empty/whitespace text
-    if (item instanceof MediaWikiContent && isEmpty(item.children)) {
+    // Skip empty/whitespace text only - other content (e.g. templates, TOC)
+    // may not have `children` set but is still meaningful and shouldn't be
+    // skipped over when looking for a file's caption.
+    if (item instanceof MediaWikiText && isEmpty(item.children)) {
       continue;
     }
     return { content: item, index: i };
