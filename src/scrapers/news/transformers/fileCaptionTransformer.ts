@@ -8,14 +8,10 @@ import {
 
 import { getNextContent, trim } from "../../../utils/mediawiki";
 
-// Videos are frequently embedded directly within narrative/interview body text,
-// where the following paragraph is ordinary prose rather than a real caption
-// (unlike standalone showcase images, e.g. "Creative Corner" art, where the
-// following paragraph is conventionally its caption). So for videos, only treat
-// the following content as a caption if it's italicised (e.g. an "image-caption"
-// div or a `<center><i>` block) rather than merging any plain paragraph.
-const videoFileExtensionPattern = /\.(mp4|mov|webm|avi)$/i;
-
+// A following plain (non-italicised) paragraph is often just the next paragraph
+// of body text rather than a real caption - true for both images and videos (per
+// issue #291) - so only treat it as a caption if it's italicised (e.g. a
+// non-empty "image-caption" div or a `<center><i>` block).
 const isItalicCaption = (content: MediaWikiText): boolean => {
   if (content.styling?.italics) {
     return true;
@@ -62,9 +58,7 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
             index = next.index + 2;
           } else if (
             next.content instanceof MediaWikiText &&
-            Array.isArray(next.content.children) &&
-            (isItalicCaption(next.content) ||
-              !videoFileExtensionPattern.test(current.fileName))
+            isItalicCaption(next.content)
           ) {
             // A fully-formed caption (e.g. from an "image-caption" div) follows the
             // file, so it takes precedence over any caption already set on the file
@@ -72,12 +66,16 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
             // Preserve any styling (e.g. italics) on the caption content itself, in
             // case it isn't wrapped in an unstyled outer MediaWikiText (e.g. a
             // top-level `<center>` caption not nested inside a `<p>`).
+            // `children` may be a plain string (e.g. a link-free `<i>` caption)
+            // rather than an array, so only trim when it's actually an array.
             transformedContent.push(
               new MediaWikiFile(current.fileName, {
                 ...current.options,
                 format: "thumb",
                 caption: new MediaWikiText(
-                  trim(next.content.children),
+                  Array.isArray(next.content.children)
+                    ? trim(next.content.children)
+                    : next.content.children,
                   next.content.styling
                 ),
               })
