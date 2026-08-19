@@ -26,6 +26,13 @@ describe("text parser", () => {
     expect(result).toBeUndefined();
   });
 
+  test("should return undefined for a decorative &nbsp; only text node", () => {
+    const root = parse(" &nbsp; &nbsp;");
+    const result = textParser(root.firstChild);
+
+    expect(result).toBeUndefined();
+  });
+
   test("should parse text with child nodes and filter out undefined content", () => {
     const root = parse(
       "<div>Text with <b>bold</b> and <script>ignored</script> content</div>"

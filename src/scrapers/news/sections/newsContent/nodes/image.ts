@@ -20,16 +20,10 @@ import { ContentNodeParser } from "../types";
 const ignoredClasses = ["demo cursor"];
 const imageExtensions = ["png", "jpg", "gif"];
 const REGEX_WIDTH_DECLARATION = /^width\s*:\s*([0-9]+)/i;
-// Class added by the news post page's own JS to standalone, auto-sized images
-// (previously these images were wrapped in a `<center>` tag, which no longer
-// appears in the rendered markup) and to the `<a class="asset-link">` wrapper
-// it adds around them.
-const autoSizedImageClass = "asset-auto-sized";
-const assetLinkClass = "asset-link";
 
 export const imageParser: ContentNodeParser = (
   node,
-  { title, center, link, width }
+  { title, link, width }
 ) => {
   if (node instanceof HTMLElement) {
     const image = node as HTMLElement;
@@ -82,11 +76,6 @@ export const imageParser: ContentNodeParser = (
       console.error(`Error retrieving image size for ${imageName}:`, error);
     }
 
-    const isAutoSizedAssetImage =
-      image.classList.contains(autoSizedImageClass) ||
-      (image.parentNode instanceof HTMLElement &&
-        image.parentNode.classList.contains(assetLinkClass));
-
     const captionLink =
       image.attributes["data-caption-link"] ??
       image.attributes["data-caption-href"];
@@ -120,8 +109,9 @@ export const imageParser: ContentNodeParser = (
             (dimensions?.width > 600 || !dimensions ? 600 : dimensions.width),
         },
         format: hasCaption ? "thumb" : undefined,
-        horizontalAlignment:
-          hasCaption || center || isAutoSizedAssetImage ? "center" : undefined,
+        // All images/videos are centered via CSS on the actual news page, rather
+        // than the `<center>` wrapper tag that used to signal this in the markup.
+        horizontalAlignment: "center",
         link: fileLink,
         caption: caption,
       }),
