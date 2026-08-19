@@ -1,4 +1,8 @@
-import { MediaWikiBuilder, MediaWikiFile } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiBuilder,
+  MediaWikiComment,
+  MediaWikiFile,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 import parse from "node-html-parser";
 
@@ -61,5 +65,16 @@ describe("video node", () => {
     const builder = new MediaWikiBuilder();
     builder.addContents(content);
     expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("Video node with no src attribute and no source child should not throw", () => {
+    const root = parse('<video controls="controls"></video>');
+
+    expect(() =>
+      videoParser(root.firstChild, { title: "test-title" })
+    ).not.toThrow();
+
+    const result = videoParser(root.firstChild, { title: "test-title" });
+    expect(result).toEqual(new MediaWikiComment("Invalid video node"));
   });
 });

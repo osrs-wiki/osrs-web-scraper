@@ -12,6 +12,9 @@ export const videoParser: ContentNodeParser = (node, options) => {
     // Some video tags carry their own `src` attribute directly (no `<source>` child)
     const source =
       firstNode instanceof HTMLElement ? firstNode : (node as HTMLElement);
+    if (!source.attributes.src && !source.attributes.href) {
+      return new MediaWikiComment("Invalid video node");
+    }
     const width = node.attributes.width
       ? parseInt(node.attributes.width)
       : undefined;
