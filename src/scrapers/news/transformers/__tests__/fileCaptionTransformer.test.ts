@@ -173,6 +173,27 @@ describe("NewsFileCaptionTransformer", () => {
     expect(file.options?.format).toBe("thumb");
   });
 
+  it("should combine a caption whose children is a plain string (e.g. a link-free top-level `<center><i>` caption)", () => {
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiFile("image (1).png"),
+      new MediaWikiBreak(),
+      new MediaWikiBreak(),
+      new MediaWikiText("A simple caption with no link.", { italics: true }),
+    ];
+    const transformed = new NewsFileCaptionTransformer().transform(
+      originalContent
+    );
+
+    expect(transformed).toHaveLength(1);
+    expect(transformed[0]).toBeInstanceOf(MediaWikiFile);
+    const file = transformed[0] as MediaWikiFile;
+    expect(file.options?.format).toBe("thumb");
+    expect(file.options?.caption).toBeInstanceOf(MediaWikiText);
+    expect((file.options?.caption as MediaWikiText).children).toBe(
+      "A simple caption with no link."
+    );
+  });
+
   it("should NOT combine a video with a plain (non-italicised) following paragraph (e.g. surrounding narrative text)", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiFile("video (1).mp4"),

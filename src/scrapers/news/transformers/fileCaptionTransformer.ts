@@ -58,7 +58,6 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
             index = next.index + 2;
           } else if (
             next.content instanceof MediaWikiText &&
-            Array.isArray(next.content.children) &&
             isItalicCaption(next.content)
           ) {
             // A fully-formed caption (e.g. from an "image-caption" div) follows the
@@ -67,12 +66,16 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
             // Preserve any styling (e.g. italics) on the caption content itself, in
             // case it isn't wrapped in an unstyled outer MediaWikiText (e.g. a
             // top-level `<center>` caption not nested inside a `<p>`).
+            // `children` may be a plain string (e.g. a link-free `<i>` caption)
+            // rather than an array, so only trim when it's actually an array.
             transformedContent.push(
               new MediaWikiFile(current.fileName, {
                 ...current.options,
                 format: "thumb",
                 caption: new MediaWikiText(
-                  trim(next.content.children),
+                  Array.isArray(next.content.children)
+                    ? trim(next.content.children)
+                    : next.content.children,
                   next.content.styling
                 ),
               })
