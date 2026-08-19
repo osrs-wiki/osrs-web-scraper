@@ -136,12 +136,32 @@ describe("NewsFileCaptionTransformer", () => {
     ).toMatchSnapshot();
   });
 
-  it("should still combine an image with a plain (non-italicised) following paragraph (e.g. Creative Corner art captions)", () => {
+  it("should NOT combine an image with a plain (non-italicised) following paragraph (e.g. the article's own next paragraph)", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiFile("image (1).png"),
       new MediaWikiBreak(),
       new MediaWikiBreak(),
-      new MediaWikiText([new MediaWikiText("A plain caption paragraph.")]),
+      new MediaWikiText([new MediaWikiText("Just the next paragraph.")]),
+    ];
+    const transformed = new NewsFileCaptionTransformer().transform(
+      originalContent
+    );
+
+    expect(transformed).toHaveLength(4);
+    expect(transformed[0]).toBeInstanceOf(MediaWikiFile);
+    const file = transformed[0] as MediaWikiFile;
+    expect(file.options?.format).toBeUndefined();
+    expect(file.options?.caption).toBeUndefined();
+  });
+
+  it("should combine an image with an italicised following paragraph (e.g. a real caption)", () => {
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiFile("image (1).png"),
+      new MediaWikiBreak(),
+      new MediaWikiBreak(),
+      new MediaWikiText([
+        new MediaWikiText("A real caption", { italics: true }),
+      ]),
     ];
     const transformed = new NewsFileCaptionTransformer().transform(
       originalContent
