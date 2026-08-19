@@ -125,6 +125,14 @@ describe("mediawiki utils", () => {
       expect(isEmpty("")).toBe(true);
     });
 
+    test("should return true for undefined", () => {
+      expect(isEmpty(undefined)).toBe(true);
+    });
+
+    test("should return true for an array containing undefined (e.g. an empty <p></p> with no parseable content)", () => {
+      expect(isEmpty([undefined])).toBe(true);
+    });
+
     test("should return true for a string with only whitespace", () => {
       expect(isEmpty("   ")).toBe(true);
     });

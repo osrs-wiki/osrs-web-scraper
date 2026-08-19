@@ -6,6 +6,12 @@ exports[`video node Video node should parse and render 1`] = `
 "
 `;
 
+exports[`video node Video node with a src on the video tag itself (no source child) should parse and render 1`] = `
+"[[File:test-title (3).mp4|600px]]
+
+"
+`;
+
 exports[`video node Video node with center option should include center param 1`] = `
 "[[File:test-title (2).mp4|600px|center]]
 

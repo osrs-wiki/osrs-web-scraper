@@ -25,11 +25,17 @@ class NewsFileCaptionTransformer extends MediaWikiTransformer {
             // A fully-formed caption (e.g. from an "image-caption" div) follows the
             // file, so it takes precedence over any caption already set on the file
             // (which may be a truncated `data-caption-text` attribute value).
+            // Preserve any styling (e.g. italics) on the caption content itself, in
+            // case it isn't wrapped in an unstyled outer MediaWikiText (e.g. a
+            // top-level `<center>` caption not nested inside a `<p>`).
             transformedContent.push(
               new MediaWikiFile(current.fileName, {
                 ...current.options,
                 format: "thumb",
-                caption: new MediaWikiText(trim(next.content.children)),
+                caption: new MediaWikiText(
+                  trim(next.content.children),
+                  next.content.styling
+                ),
               })
             );
             index = next.index;

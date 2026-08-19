@@ -6,6 +6,7 @@ exports[`YouTube template integration test should center YouTube template with c
 
 If you can't see the fantastic video by [https://x.com/_amentos Amentos] above, [https://www.youtube.com/watch?v=ZNePfBmCZbM click here].
 </center>
+
 "
 `;
 
@@ -14,5 +15,6 @@ exports[`YouTube template integration test should center standalone YouTube temp
 {{Youtube|ZNePfBmCZbM}}
 
 </center>
+
 "
 `;

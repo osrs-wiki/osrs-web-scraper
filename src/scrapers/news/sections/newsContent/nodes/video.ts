@@ -8,8 +8,10 @@ export const videoParser: ContentNodeParser = (node, options) => {
   const firstNode = node.childNodes.filter(
     (node) => node instanceof HTMLElement
   )?.[0];
-  if (node instanceof HTMLElement && firstNode instanceof HTMLElement) {
-    const source = firstNode as HTMLElement;
+  if (node instanceof HTMLElement) {
+    // Some video tags carry their own `src` attribute directly (no `<source>` child)
+    const source =
+      firstNode instanceof HTMLElement ? firstNode : (node as HTMLElement);
     const width = node.attributes.width
       ? parseInt(node.attributes.width)
       : undefined;

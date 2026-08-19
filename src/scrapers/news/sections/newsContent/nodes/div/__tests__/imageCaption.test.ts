@@ -38,4 +38,15 @@ describe("imageCaptionParser", () => {
     expect(content[0]).toBeInstanceOf(MediaWikiText);
     expect((content[0] as MediaWikiText).build()).toMatchSnapshot();
   });
+
+  test("should ignore an empty placeholder caption (image-caption--empty modifier)", () => {
+    const html =
+      '<div class="image-caption image-caption--empty" aria-hidden="true">.</div>';
+    const node = parse(html).firstChild;
+
+    const result = imageCaptionParser(node, {});
+    const content = Array.isArray(result) ? result : [result];
+
+    expect(content).toHaveLength(0);
+  });
 });

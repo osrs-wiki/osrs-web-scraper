@@ -22,6 +22,18 @@ describe("div node", () => {
     expect(builder.build()).toMatchSnapshot();
   });
 
+  test("compound class names should still match the base class parser (e.g. image-caption image-caption--empty)", () => {
+    const root = parse('<div class="image-caption">This is a caption.</div>');
+    const compoundRoot = parse(
+      '<div class="image-caption image-caption--another-modifier">This is a caption.</div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    const compoundBuilder = new MediaWikiBuilder();
+    compoundBuilder.addContents([divParser(compoundRoot.firstChild)].flat());
+    expect(compoundBuilder.build()).toBe(builder.build());
+  });
+
   test("thumb-row class should be ignored and not render", () => {
     const root = parse(
       '<div class="thumb-row" id="thumbnails"><img src="image1.png" alt="thumbnail 1"><img src="image2.png" alt="thumbnail 2"></div>'
@@ -29,6 +41,15 @@ describe("div node", () => {
     const builder = new MediaWikiBuilder();
     builder.addContents([divParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("osrsTabNavigation class should be ignored and not render", () => {
+    const root = parse(
+      '<div class="osrsTabNavigation osrsTabNavigation--sticky"><button type="button">Navigation</button><div class="osrsTabNavigation__track"><a href="#Section">Section</a></div></div>'
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    expect(builder.build()).toBe("");
   });
 
   test("slideshow-container id should parse as gallery", () => {
