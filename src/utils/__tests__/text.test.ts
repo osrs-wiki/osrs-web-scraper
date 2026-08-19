@@ -5,6 +5,10 @@ describe("formatText", () => {
     expect(formatText("Fish &amp; Chips")).toBe("Fish & Chips");
   });
 
+  test("should decode &nbsp; entities into regular spaces", () => {
+    expect(formatText(" &nbsp; &nbsp;")).toBe(" ");
+  });
+
   test("should collapse a newline followed by indentation into a single space", () => {
     const text =
       "Curious about PvP in Old School RuneScape? It can be a little intimidating to get into,\n    but with the right mentality and proper training, anyone can do it… Right?";

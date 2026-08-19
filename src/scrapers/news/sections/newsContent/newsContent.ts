@@ -30,30 +30,32 @@ const newsContent: NewsSection = {
 
     // Download images in the order they appear on the page
     // This includes both regular img/video tags and elements with background images
-    const imageElements = contentRoot.querySelectorAll("img, video > source, figure, div.divisor");
+    const imageElements = contentRoot.querySelectorAll(
+      "img, video, figure, div.divisor"
+    );
     let downloadedImages = 0;
     const downloadQueue = [];
-    
+
     const formattedTitle = formatFileName(title);
     const imageDirectory = `./out/news/${formattedTitle}`;
     if (!fs.existsSync(imageDirectory)) {
       fs.mkdirSync(imageDirectory, { recursive: true });
     }
-    
+
     for (let index = 0; index < imageElements.length; index++) {
       const element = imageElements[index];
-      
+
       // Skip images within thumbnail sections to avoid duplicates
       if (isWithinThumbnails(element)) {
         continue;
       }
-      
+
       let imageUrl: string | undefined;
-      
+
       // Handle regular img and video source tags
       if (element.tagName === "IMG" || element.tagName === "SOURCE") {
         imageUrl = element.attributes.src ?? element.attributes.href;
-        
+
         if (
           imageUrl?.endsWith("hr.png") ||
           ignoredImageClasses.includes(element.classNames.trim().toLowerCase())
@@ -61,14 +63,23 @@ const newsContent: NewsSection = {
           continue;
         }
       }
+      // Handle video tags, whether the src is on the video itself or a child source tag
+      else if (element.tagName === "VIDEO") {
+        imageUrl =
+          element.attributes.src ??
+          element.querySelector("source")?.attributes.src;
+      }
       // Handle elements with background images (figure and div.divisor)
-      else if (element.tagName === "FIGURE" || (element.tagName === "DIV" && element.classNames.includes("divisor"))) {
+      else if (
+        element.tagName === "FIGURE" ||
+        (element.tagName === "DIV" && element.classNames.includes("divisor"))
+      ) {
         const style = element.attributes?.style;
         if (style) {
           imageUrl = extractBackgroundImageUrl(style);
         }
       }
-      
+
       if (imageUrl) {
         const imageName = `${formattedTitle} (${++downloadedImages})`;
         downloadQueue.push(

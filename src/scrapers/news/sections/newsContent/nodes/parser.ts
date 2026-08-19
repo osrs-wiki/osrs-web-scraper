@@ -24,7 +24,7 @@ import underlineParser from "./underline";
 import videoParser from "./video";
 import { ContentNodeParser } from "../types";
 
-const ignoredTags = ["script"];
+const ignoredTags = ["script", "link", "button"];
 
 const nodeParserMap: { [key: string]: ContentNodeParser } = {
   a: linkParser,

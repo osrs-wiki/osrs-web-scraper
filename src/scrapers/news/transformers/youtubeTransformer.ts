@@ -53,7 +53,8 @@ class NewsYoutubeTransformer extends MediaWikiTransformer {
                 [current, nextItem, nextItem2, nextItem3],
                 {},
                 { collapsed: false }
-              )
+              ),
+              new MediaWikiBreak()
             );
             index += 3; // Skip the caption pieces we just processed
           } else if (
@@ -67,7 +68,8 @@ class NewsYoutubeTransformer extends MediaWikiTransformer {
                 [current, nextBreak, nextText],
                 {},
                 { collapsed: false }
-              )
+              ),
+              new MediaWikiBreak()
             );
             index += 2; // Skip the break and text we just processed
           } else if (nextItem instanceof MediaWikiText) {
@@ -78,13 +80,15 @@ class NewsYoutubeTransformer extends MediaWikiTransformer {
                 [current, nextItem],
                 {},
                 { collapsed: false }
-              )
+              ),
+              new MediaWikiBreak()
             );
             index += 1; // Skip the text we just processed
           } else {
             // Just wrap the YouTube template in center tags
             transformedContent.push(
-              new MediaWikiHTML("center", [current], {}, { collapsed: false })
+              new MediaWikiHTML("center", [current], {}, { collapsed: false }),
+              new MediaWikiBreak()
             );
           }
         } else {

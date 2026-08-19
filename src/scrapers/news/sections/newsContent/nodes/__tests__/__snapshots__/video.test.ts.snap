@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`video node Video node should parse and render 1`] = `
-"[[File:test-title (1).mp4|600px]]
+"[[File:test-title (1).mp4|600px|center]]
+
+"
+`;
+
+exports[`video node Video node with a src on the video tag itself (no source child) should parse and render 1`] = `
+"[[File:test-title (3).mp4|600px|center]]
 
 "
 `;

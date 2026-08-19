@@ -8,7 +8,12 @@ import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
 
-const ignoredClasses = ["myslides", "thumb-row", "table-scroll-notice"];
+const ignoredClasses = [
+  "myslides",
+  "thumb-row",
+  "table-scroll-notice",
+  "osrstabnavigation",
+];
 
 const classParserMap: { [key: string]: ContentNodeParser } = {
   "poll-box": pollBoxParser,
@@ -28,13 +33,20 @@ const idParserMap: { [key: string]: ContentNodeParser } = {
 export const divParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const element = node as HTMLElement;
-    const className = element.classNames.trim().toLowerCase();
+    // Match on individual class tokens so compound class names (e.g. a base class
+    // plus a modifier like "image-caption image-caption--empty") still resolve.
+    const classNames = element.classNames.trim().toLowerCase().split(/\s+/);
     const id = element.id;
-    const parse = classParserMap[className] ?? idParserMap[id];
+    const matchedClass = classNames.find(
+      (className) => classParserMap[className]
+    );
+    const parse = matchedClass ? classParserMap[matchedClass] : idParserMap[id];
 
     if (parse) {
       return parse(node, options);
-    } else if (!ignoredClasses.includes(className)) {
+    } else if (
+      !classNames.some((className) => ignoredClasses.includes(className))
+    ) {
       return node.childNodes
         .map((childNode) => {
           if (childNode instanceof HTMLElement) {

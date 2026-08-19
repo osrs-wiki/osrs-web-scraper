@@ -7,10 +7,13 @@ import { ContentNodeParser } from "../types";
 
 const textParser: ContentNodeParser = (node, options) => {
   if (node.childNodes.length === 0) {
-    if (node.rawText.trim().length === 0) {
+    // Decorative markup (e.g. a lone "&nbsp;" used for visual indentation) formats
+    // down to nothing, so check emptiness after formatting rather than on the raw text.
+    const formatted = formatText(node.rawText);
+    if (!formatted || formatted.trim().length === 0) {
       return undefined;
     }
-    return new MediaWikiText(formatText(node.rawText), {
+    return new MediaWikiText(formatted, {
       bold: options?.bold as boolean,
       italics: options?.italics as boolean,
       underline: options?.underline as boolean,
@@ -21,7 +24,11 @@ const textParser: ContentNodeParser = (node, options) => {
       if (childNode instanceof HTMLElement) {
         return nodeParser(childNode, options);
       }
-      return new MediaWikiText(formatText(childNode.rawText), {
+      const formatted = formatText(childNode.rawText);
+      if (!formatted || formatted.trim().length === 0) {
+        return undefined;
+      }
+      return new MediaWikiText(formatted, {
         bold: options?.bold as boolean,
         italics: options?.italics as boolean,
         underline: options?.underline as boolean,

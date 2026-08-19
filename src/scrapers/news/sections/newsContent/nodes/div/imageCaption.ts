@@ -9,6 +9,13 @@ export const imageCaptionParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const element = node as HTMLElement;
 
+    // The "--empty" modifier marks a placeholder caption (rendered as a lone ".")
+    // with no real caption text. Ignore it entirely so a real caption that follows
+    // later in the markup (e.g. after a video) can still be picked up.
+    if (element.classList.contains("image-caption--empty")) {
+      return [];
+    }
+
     // Parse child nodes (including text and links)
     const childContent = element.childNodes
       .map((childNode) => {

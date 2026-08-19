@@ -38,6 +38,9 @@ export const trim = (contents: MediaWikiContent[]): MediaWikiContent[] => {
 export const isEmpty = (
   contents: string | MediaWikiContent | MediaWikiContent[]
 ): boolean => {
+  if (contents == null) {
+    return true;
+  }
   if (typeof contents === "string") {
     return contents.trim().length === 0;
   } else if (Array.isArray(contents)) {

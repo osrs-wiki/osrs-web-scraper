@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`image node Image node should parse and render 1`] = `
-"[[File:test-title (1).png|200px]]
+"[[File:test-title (1).png|200px|center]]
 
 "
 `;
@@ -25,19 +25,19 @@ exports[`image node Image with data-caption-text should include italic caption 1
 `;
 
 exports[`image node Image with data-link-href attribute should use that as the file link 1`] = `
-"[[File:test-title (1).png|200px|link=https://example.com/platform]]
+"[[File:test-title (1).png|200px|center|link=https://example.com/platform]]
 
 "
 `;
 
 exports[`image node Image with data-width attribute should use that width 1`] = `
-"[[File:test-title (1).png|200px]]
+"[[File:test-title (1).png|200px|center]]
 
 "
 `;
 
 exports[`image node Image with inline style width should use that width 1`] = `
-"[[File:test-title (1).png|300px]]
+"[[File:test-title (1).png|300px|center]]
 
 "
 `;

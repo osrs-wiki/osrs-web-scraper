@@ -19,7 +19,7 @@ exports[`NewsFileCaptionTransformer should combine the adjacent MediaWikiFile, M
 "__TOC__
 
 [[test|test]]
-[[File:image|thumb|caption[[linkText|linkTarget]]]]
+[[File:image|thumb|''caption[[linkText|linkTarget]]'']]
 ''You can also discuss this update on our''
 "
 `;
