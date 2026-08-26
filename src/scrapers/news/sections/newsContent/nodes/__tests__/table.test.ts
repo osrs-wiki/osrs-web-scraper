@@ -145,7 +145,13 @@ describe("table node", () => {
     expect(tableContent).toBeDefined();
 
     if (Array.isArray(tableContent)) {
-      const table = tableContent.find(
+      const centerWrapper = tableContent.find(
+        (item: MediaWikiContent) => item.constructor.name === "MediaWikiHTML"
+      );
+      const children = Array.isArray(centerWrapper?.children)
+        ? centerWrapper.children
+        : [];
+      const table = children.find(
         (item: MediaWikiContent) => item.constructor.name === "MediaWikiTable"
       );
       expect(table).toBeDefined();
