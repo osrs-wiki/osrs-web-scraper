@@ -35,7 +35,8 @@ exports[`div node poll-box2 class should parse and render 1`] = `
 `;
 
 exports[`div node table-scroll wrapper div should unwrap and render its table child 1`] = `
-"{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+"<center>
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
 |-
 ! header1
 ! header2
@@ -43,6 +44,8 @@ exports[`div node table-scroll wrapper div should unwrap and render its table ch
 | test
 | test
 |}
+</center>
+
 
 "
 `;

@@ -1,5 +1,6 @@
 import {
   MediaWikiBreak,
+  MediaWikiHTML,
   MediaWikiTable,
   MediaWikiText,
 } from "@osrs-wiki/mediawiki-builder";
@@ -77,18 +78,25 @@ export const tableParser: ContentNodeParser = (node, options) => {
     );
 
     return [
-      new MediaWikiTable({
-        options: {
-          class: "wikitable",
-          style: "text-align: center;",
-        },
-        rows: [
-          {
-            cells: headers,
-          },
-          ...tableRows,
+      new MediaWikiHTML(
+        "center",
+        [
+          new MediaWikiTable({
+            options: {
+              class: "wikitable",
+              style: "text-align: center;",
+            },
+            rows: [
+              {
+                cells: headers,
+              },
+              ...tableRows,
+            ],
+          }),
         ],
-      }),
+        {},
+        { collapsed: false }
+      ),
       new MediaWikiBreak(),
       new MediaWikiBreak(),
     ];
