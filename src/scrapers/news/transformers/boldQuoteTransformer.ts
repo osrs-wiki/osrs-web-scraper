@@ -17,65 +17,81 @@ const extractTextContent = (mediaWikiText: MediaWikiText): string => {
 
 class NewsBoldQuoteTransformer extends MediaWikiTransformer {
   /**
-   * Recursively transforms bold text with quotes in nested content
+   * Recursively transforms bold text with quotes in nested content.
+   *
+   * Quotes adjacent to a bold run's ''' delimiters produce malformed wikitext
+   * (e.g. ''''text'''), so any such quote is stripped and re-emitted as a plain
+   * quote character outside a <b> tag instead. The quote can live either inside
+   * the bold node's own text (e.g. <b>'text'</b>) or in a sibling text node
+   * right next to the bold node (e.g. '<b>text</b>), and either side can be
+   * present independently of the other.
    */
-  private transformNestedContent(content: MediaWikiContent[]): MediaWikiContent[] {
-    const transformedContent = [];
-    
+  private transformNestedContent(
+    content: MediaWikiContent[]
+  ): MediaWikiContent[] {
+    const transformedContent: MediaWikiContent[] = [];
+
     for (let index = 0; index < content.length; index++) {
       const current = content[index];
-      
-      // Check if this is bold text that needs transformation
+
       if (current instanceof MediaWikiText && current.styling?.bold) {
-        let shouldTransform = false;
-        let transformedText = current;
-        
-        // Case 1: Bold text surrounded by separate quote elements
-        if (index > 0 && index < content.length - 1) {
-          const before = content[index - 1];
-          const after = content[index + 1];
-          
-          if (
-            before instanceof MediaWikiText &&
-            after instanceof MediaWikiText &&
-            typeof before.children === "string" &&
-            typeof after.children === "string" &&
-            before.children.endsWith("'") &&
-            after.children.startsWith("'")
-          ) {
-            shouldTransform = true;
+        const boldText = extractTextContent(current);
+        const before = content[index - 1];
+        const after = content[index + 1];
+
+        const internalLeading = boldText.length > 1 && boldText.startsWith("'");
+        const internalTrailing = boldText.length > 1 && boldText.endsWith("'");
+        const externalLeading =
+          !internalLeading &&
+          before instanceof MediaWikiText &&
+          typeof before.children === "string" &&
+          before.children.endsWith("'");
+        const externalTrailing =
+          !internalTrailing &&
+          after instanceof MediaWikiText &&
+          typeof after.children === "string" &&
+          after.children.startsWith("'");
+
+        if (
+          internalLeading ||
+          internalTrailing ||
+          externalLeading ||
+          externalTrailing
+        ) {
+          const innerText = boldText.slice(
+            internalLeading ? 1 : 0,
+            internalTrailing ? -1 : undefined
+          );
+
+          if (internalLeading) {
+            transformedContent.push(new MediaWikiText("'"));
           }
-        }
-        
-        // Case 2: Bold text that itself contains surrounding quotes
-        if (!shouldTransform) {
-          const textContent = extractTextContent(current);
-          if (textContent.startsWith("'") && textContent.endsWith("'") && textContent.length > 2) {
-            shouldTransform = true;
-            // For this case, we want to extract the inner content and put quotes outside
-            const innerContent = textContent.slice(1, -1); // Remove quotes from content
-            transformedText = new MediaWikiText(`'<b>${innerContent}</b>'`);
+          transformedContent.push(new MediaWikiText(`<b>${innerText}</b>`));
+          if (internalTrailing) {
+            transformedContent.push(new MediaWikiText("'"));
           }
+          continue;
         }
-        
-        // Case 1: Bold text surrounded by separate quote elements (only if not already transformed in case 2)
-        if (shouldTransform && transformedText === current) {
-          // Replace the bold MediaWiki formatting with HTML <b> tags
-          const boldContent = extractTextContent(current);
-          transformedText = new MediaWikiText(`<b>${boldContent}</b>`);
-        }
-        
-        transformedContent.push(transformedText);
-      } else if (current instanceof MediaWikiText && Array.isArray(current.children)) {
-        // Case 3: MediaWikiText with children - recursively process them
-        const transformedChildren = this.transformNestedContent(current.children);
-        const newMediaWikiText = new MediaWikiText(transformedChildren, current.styling);
+
+        transformedContent.push(current);
+      } else if (
+        current instanceof MediaWikiText &&
+        Array.isArray(current.children)
+      ) {
+        // MediaWikiText with children - recursively process them
+        const transformedChildren = this.transformNestedContent(
+          current.children
+        );
+        const newMediaWikiText = new MediaWikiText(
+          transformedChildren,
+          current.styling
+        );
         transformedContent.push(newMediaWikiText);
       } else {
         transformedContent.push(current);
       }
     }
-    
+
     return transformedContent;
   }
 

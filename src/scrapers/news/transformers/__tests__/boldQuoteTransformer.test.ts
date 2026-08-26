@@ -14,10 +14,12 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText("bold text", { bold: true }),
       new MediaWikiText("'"),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     // Should output '<b>bold text</b>' surrounded by quotes
     expect(output).toBe("'<b>bold text</b>'");
   });
@@ -28,10 +30,12 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText("bold text", { bold: true }),
       new MediaWikiText(" here."),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     // Should keep normal MediaWiki bold formatting
     expect(output).toBe("This is '''bold text''' here.");
   });
@@ -44,11 +48,15 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText("second bold", { bold: true }),
       new MediaWikiText("' text."),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
-    expect(output).toBe("Here is '<b>first bold</b>' and also '<b>second bold</b>' text.");
+
+    expect(output).toBe(
+      "Here is '<b>first bold</b>' and also '<b>second bold</b>' text."
+    );
   });
 
   it("should handle quotes without bold text normally", () => {
@@ -57,28 +65,32 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText("normal text"),
       new MediaWikiText("' here."),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     expect(output).toBe("This is 'normal text' here.");
   });
 
   it("should handle complex bold text with nested content", () => {
-    const complexBoldContent = new MediaWikiText([
-      new MediaWikiText("bold "),
-      new MediaWikiText("with nested"),
-    ], { bold: true });
-    
+    const complexBoldContent = new MediaWikiText(
+      [new MediaWikiText("bold "), new MediaWikiText("with nested")],
+      { bold: true }
+    );
+
     const originalContent: MediaWikiContent[] = [
       new MediaWikiText("Here's '"),
       complexBoldContent,
       new MediaWikiText("' text."),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     expect(output).toBe("Here's '<b>bold with nested</b>' text.");
   });
 
@@ -89,13 +101,17 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText("bold text", { bold: true }),
       new MediaWikiText("'"),
     ];
-    
+
     // Without the transformer, this would produce ''''bold text'''' (problematic)
-    const untransformed = new MediaWikiBuilder().addContents(originalContent).build();
+    const untransformed = new MediaWikiBuilder()
+      .addContents(originalContent)
+      .build();
     expect(untransformed).toBe("''''bold text''''");
-    
+
     // With the transformer, it should produce '<b>bold text</b>' (correct)
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
     expect(output).toBe("'<b>bold text</b>'");
   });
@@ -105,39 +121,77 @@ describe("NewsBoldQuoteTransformer", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiText("'text'", { bold: true }),
     ];
-    
-    // Without the transformer, this would produce ''''text'''' (problematic) 
-    const untransformed = new MediaWikiBuilder().addContents(originalContent).build();
+
+    // Without the transformer, this would produce ''''text'''' (problematic)
+    const untransformed = new MediaWikiBuilder()
+      .addContents(originalContent)
+      .build();
     expect(untransformed).toBe("''''text''''");
-    
+
     // With the transformer, it should produce '<b>text</b>' (correct - quotes outside)
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
     expect(output).toBe("'<b>text</b>'");
   });
 
-  it("should handle bold text with quotes only at start", () => {
-    // Test case where only the start has a quote
+  it("should handle bold text with a quote only at start", () => {
+    // Test case where only the start of the bold text has a quote
     const originalContent: MediaWikiContent[] = [
       new MediaWikiText("'text", { bold: true }),
     ];
-    
-    // Should not transform since it doesn't have quotes on both sides
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    // Should move the leading quote outside the <b> tag
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    expect(output).toBe("''''text'''");
+    expect(output).toBe("'<b>text</b>");
   });
 
-  it("should handle bold text with quotes only at end", () => {
-    // Test case where only the end has a quote
+  it("should handle bold text with a quote only at end", () => {
+    // Test case where only the end of the bold text has a quote
     const originalContent: MediaWikiContent[] = [
       new MediaWikiText("text'", { bold: true }),
     ];
-    
-    // Should not transform since it doesn't have quotes on both sides
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    // Should move the trailing quote outside the <b> tag
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    expect(output).toBe("'''text''''");
+    expect(output).toBe("<b>text</b>'");
+  });
+
+  it("should handle a quote outside the bold tag on one side and inside on the other", () => {
+    // Simulates '<b>content'</b> - leading quote is a separate sibling node,
+    // trailing quote lives inside the bold node's own text
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("'"),
+      new MediaWikiText("content'", { bold: true }),
+    ];
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("'<b>content</b>'");
+  });
+
+  it("should handle a quote inside the bold tag on one side and outside on the other", () => {
+    // Simulates <b>'content</b>' - leading quote lives inside the bold node's
+    // own text, trailing quote is a separate sibling node
+    const originalContent: MediaWikiContent[] = [
+      new MediaWikiText("'content", { bold: true }),
+      new MediaWikiText("'"),
+    ];
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
+    const output = new MediaWikiBuilder().addContents(transformed).build();
+    expect(output).toBe("'<b>content</b>'");
   });
 
   it("should handle single quote as bold text", () => {
@@ -145,10 +199,12 @@ describe("NewsBoldQuoteTransformer", () => {
     const originalContent: MediaWikiContent[] = [
       new MediaWikiText("'", { bold: true }),
     ];
-    
+
     // Should not transform since it doesn't have content between quotes
     // Output should be '''(content)''' = ''''''
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
     expect(output).toBe("'''''''");
   });
@@ -160,15 +216,21 @@ describe("NewsBoldQuoteTransformer", () => {
       new MediaWikiText([
         new MediaWikiText("The PvP Arena is using "),
         new MediaWikiText("'Zerker'", { bold: true }),
-        new MediaWikiText(" loadouts in Ranked Duels and Tournaments this week."),
+        new MediaWikiText(
+          " loadouts in Ranked Duels and Tournaments this week."
+        ),
         new MediaWikiText(undefined),
       ]),
     ];
-    
-    const transformed = new NewsBoldQuoteTransformer().transform(originalContent);
+
+    const transformed = new NewsBoldQuoteTransformer().transform(
+      originalContent
+    );
     const output = new MediaWikiBuilder().addContents(transformed).build();
-    
+
     // The 'Zerker' should become <b>Zerker</b> with quotes preserved
-    expect(output).toBe("The PvP Arena is using '<b>Zerker</b>' loadouts in Ranked Duels and Tournaments this week.");
+    expect(output).toBe(
+      "The PvP Arena is using '<b>Zerker</b>' loadouts in Ranked Duels and Tournaments this week."
+    );
   });
 });
