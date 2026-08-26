@@ -12,7 +12,7 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
       expect(isWithinThumbnails(imgElement)).toBe(true);
     });
 
@@ -26,7 +26,7 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
       expect(isWithinThumbnails(imgElement)).toBe(true);
     });
 
@@ -38,7 +38,7 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
       expect(isWithinThumbnails(imgElement)).toBe(false);
     });
 
@@ -50,7 +50,7 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
       expect(isWithinThumbnails(imgElement)).toBe(false);
     });
 
@@ -62,7 +62,7 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
       expect(isWithinThumbnails(imgElement)).toBe(false);
     });
 
@@ -80,7 +80,19 @@ describe("newsContent.utils", () => {
       `;
       const root = parse(html);
       const imgElement = root.querySelector("img") as HTMLElement;
-      
+
+      expect(isWithinThumbnails(imgElement)).toBe(true);
+    });
+
+    test("returns true when element is within an osrs-carousel__thumbs rail", () => {
+      const html = `
+        <div class="osrs-carousel__thumbs" data-carousel-thumbs>
+          <img src="image1.png" alt="test">
+        </div>
+      `;
+      const root = parse(html);
+      const imgElement = root.querySelector("img") as HTMLElement;
+
       expect(isWithinThumbnails(imgElement)).toBe(true);
     });
   });
