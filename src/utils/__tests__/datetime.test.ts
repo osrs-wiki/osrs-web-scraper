@@ -1,5 +1,6 @@
 import {
   formatUtcDateTime,
+  formatUtcDateTimeRange,
   formatUtcTime,
   ordinalSuffix,
   to12Hour,
@@ -121,5 +122,29 @@ describe("formatUtcDateTime", () => {
 
   test("should return null for text that does not match the pattern", () => {
     expect(formatUtcDateTime("15:00 UTC")).toBeNull();
+  });
+});
+
+describe("formatUtcDateTimeRange", () => {
+  test("should format a valid date with a start and end time", () => {
+    expect(
+      formatUtcDateTimeRange("5 September 2026 | 14:00 UTC", "19:30 UTC")
+    ).toBe("Saturday, September 5th | 02:00 PM - 07:30 PM UTC");
+  });
+
+  test("should pad single-digit hours with a leading zero", () => {
+    expect(
+      formatUtcDateTimeRange("1 September 2026 | 07:00 UTC", "09:15 UTC")
+    ).toBe("Tuesday, September 1st | 07:00 AM - 09:15 AM UTC");
+  });
+
+  test("should return null for an invalid end time", () => {
+    expect(
+      formatUtcDateTimeRange("5 September 2026 | 14:00 UTC", "25:00 UTC")
+    ).toBeNull();
+  });
+
+  test("should return null when the start time does not match the pattern", () => {
+    expect(formatUtcDateTimeRange("14:00 UTC", "19:30 UTC")).toBeNull();
   });
 });

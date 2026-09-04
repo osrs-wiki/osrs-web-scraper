@@ -90,3 +90,66 @@ export function formatUtcDateTime(utcOriginal: string): string | null {
     match[5]
   )}`;
 }
+
+function to12HourPadded(hours: number, minutes: string): string {
+  const suffix = hours >= 12 ? "PM" : "AM";
+  let hours12 = hours % 12;
+  if (hours12 === 0) hours12 = 12;
+  return `${hours12.toString().padStart(2, "0")}:${minutes} ${suffix}`;
+}
+
+export function formatUtcDateTimeRange(
+  utcOriginal: string,
+  endTime: string
+): string | null {
+  const startMatch = utcOriginal.match(REGEX_UTC_DATE_TIME);
+  const endMatch = endTime.match(REGEX_UTC_TIME);
+  if (!startMatch || !endMatch) return null;
+
+  const day = parseInt(startMatch[1], 10);
+  const monthName = startMatch[2];
+  const year = parseInt(startMatch[3], 10);
+  const startHours = parseInt(startMatch[4], 10);
+  const startMinutes = startMatch[5];
+  const endHours = parseInt(endMatch[1], 10);
+  const endMinutes = endMatch[2];
+
+  const monthIndex = MONTH_NAMES.findIndex(
+    (month) => month.toLowerCase() === monthName.toLowerCase()
+  );
+
+  if (
+    monthIndex === -1 ||
+    isNaN(day) ||
+    isNaN(year) ||
+    isNaN(startHours) ||
+    isNaN(parseInt(startMinutes, 10)) ||
+    startHours > 23 ||
+    parseInt(startMinutes, 10) > 59 ||
+    isNaN(endHours) ||
+    isNaN(parseInt(endMinutes, 10)) ||
+    endHours > 23 ||
+    parseInt(endMinutes, 10) > 59
+  )
+    return null;
+
+  const date = new Date(Date.UTC(year, monthIndex, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== monthIndex ||
+    date.getUTCDate() !== day
+  )
+    return null;
+
+  const weekday = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    timeZone: "UTC",
+  });
+
+  return `${weekday}, ${monthName} ${day}${ordinalSuffix(
+    day
+  )} | ${to12HourPadded(startHours, startMinutes)} - ${to12HourPadded(
+    endHours,
+    endMinutes
+  )} UTC`;
+}
