@@ -17,6 +17,22 @@ exports[`table node A table whose first row becomes the header should preserve l
 "
 `;
 
+exports[`table node A table with a colspan header and background-color style should render correctly 1`] = `
+"<center>
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! colspan=\\"3\\" style=\\"background-color:#78ddeb;color:#000000\\" | <u>Team Saradomin</u>
+|-
+| [https://www.twitch.tv/purpp Purpp]
+| [https://www.twitch.tv/potatohime Potatohime]
+| [https://www.twitch.tv/mr_mammal Mr Mammal]
+|}
+</center>
+
+
+"
+`;
+
 exports[`table node A table with all data cells should render correctly 1`] = `
 "<center>
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"

@@ -17,7 +17,7 @@ import {
 import { ContentContext } from "../newsContent";
 import { ContentNodeParser } from "../types";
 
-const ignoredClasses = ["demo cursor"];
+const ignoredClasses = ["demo cursor", "divider"];
 const imageExtensions = ["png", "jpg", "gif"];
 const REGEX_WIDTH_DECLARATION = /^width\s*:\s*([0-9]+)/i;
 

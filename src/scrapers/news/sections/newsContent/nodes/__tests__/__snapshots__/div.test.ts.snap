@@ -34,6 +34,32 @@ exports[`div node poll-box2 class should parse and render 1`] = `
 "
 `;
 
+exports[`div node table-container class should render one column per table-scroll-group 1`] = `
+"{|
+|-
+| 
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! colspan=\\"3\\" | <u>Team Saradomin</u>
+|-
+| Purpp
+| Potatohime
+| Mr Mammal
+|}
+| 
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! colspan=\\"3\\" | <u>Team Zamorak</u>
+|-
+| SoloMission
+| Tastylife
+| Sardaco
+|}
+|}
+
+"
+`;
+
 exports[`div node table-scroll wrapper div should unwrap and render its table child 1`] = `
 "<center>
 {| class=\\"wikitable\\" style=\\"text-align: center;\\"

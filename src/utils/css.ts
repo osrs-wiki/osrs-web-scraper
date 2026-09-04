@@ -6,22 +6,24 @@ import { HTMLElement } from "node-html-parser";
  */
 export function extractBackgroundImageUrl(style: string): string | null {
   if (!style) return null;
-  
+
   // First decode HTML entities
   const decodedStyle = style
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
-  
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+
   // Match background-image: url("...") or url('...') patterns
-  const urlMatch = decodedStyle.match(/background-image\s*:\s*url\s*\(\s*['"']?([^'"')]+)['"']?\s*\)/i);
-  
+  const urlMatch = decodedStyle.match(
+    /background-image\s*:\s*url\s*\(\s*['"']?([^'"')]+)['"']?\s*\)/i
+  );
+
   if (urlMatch && urlMatch[1]) {
     return urlMatch[1];
   }
-  
+
   return null;
 }
 
@@ -30,8 +32,8 @@ export function extractBackgroundImageUrl(style: string): string | null {
  */
 export function extractBackgroundImages(elements: HTMLElement[]): string[] {
   const imageUrls: string[] = [];
-  
-  elements.forEach(element => {
+
+  elements.forEach((element) => {
     if (element.attributes?.style) {
       const url = extractBackgroundImageUrl(element.attributes.style);
       if (url) {
@@ -39,6 +41,19 @@ export function extractBackgroundImages(elements: HTMLElement[]): string[] {
       }
     }
   });
-  
+
   return imageUrls;
+}
+
+/**
+ * Extracts background-color from a CSS style attribute (hex, rgb(...), or named colors)
+ */
+export function extractBackgroundColor(
+  style: string | undefined
+): string | null {
+  if (!style) return null;
+
+  const match = style.match(/background-color\s*:\s*([^;]+?)\s*(?:;|$)/i);
+
+  return match ? match[1].trim() : null;
 }

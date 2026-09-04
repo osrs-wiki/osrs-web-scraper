@@ -230,4 +230,32 @@ describe("image node", () => {
     const file = content[0] as MediaWikiFile;
     expect(file.options?.link).toBe("https://example.com/caption");
   });
+
+  test("Image with divider class should be ignored", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" class="divider" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+
+    expect(result).toBeUndefined();
+  });
+
+  test("Image with demo cursor class should be ignored", () => {
+    const root = parse(
+      '<img src="https://test.com/image.png" class="demo cursor" />'
+    );
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+
+    expect(result).toBeUndefined();
+  });
+
+  test("Image ending in hr.png should be ignored", () => {
+    const root = parse('<img src="https://test.com/hr.png" />');
+
+    const result = imageParser(root.firstChild, { title: "test-title" });
+
+    expect(result).toBeUndefined();
+  });
 });

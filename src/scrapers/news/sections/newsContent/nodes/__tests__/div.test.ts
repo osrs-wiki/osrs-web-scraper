@@ -144,4 +144,20 @@ describe("div node", () => {
     expect(result).toContain('{| class="wikitable"');
     expect(result).toMatchSnapshot();
   });
+
+  test("table-container class should render one column per table-scroll-group", () => {
+    const root = parse(
+      `<div class="table-container">
+        <div class="table-scroll-group"><div class="table-scroll"><table><tbody><tr><th colspan="3"><u>Team Saradomin</u></th></tr><tr><td>Purpp</td><td>Potatohime</td><td>Mr Mammal</td></tr></tbody></table></div></div>
+        <div class="table-scroll-group"><div class="table-scroll"><table><tbody><tr><th colspan="3"><u>Team Zamorak</u></th></tr><tr><td>SoloMission</td><td>Tastylife</td><td>Sardaco</td></tr></tbody></table></div></div>
+      </div>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([divParser(root.firstChild)].flat());
+    const result = builder.build();
+
+    expect(result).toContain("Team Saradomin");
+    expect(result).toContain("Team Zamorak");
+    expect(result).toMatchSnapshot();
+  });
 });

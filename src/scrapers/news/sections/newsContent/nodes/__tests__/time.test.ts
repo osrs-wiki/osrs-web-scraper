@@ -85,4 +85,26 @@ describe("time node", () => {
     builder.addContents([timeParser(root.firstChild)].flat());
     expect(builder.build()).toMatchSnapshot();
   });
+
+  test("Time with a data-end-time should format as a time range", () => {
+    const root = parse(
+      `<time class="utc-datetime local-time local-time-range local-time-toggle" data-timezone-toggle="true" data-inline="true" data-end-time="19:30 UTC" data-utc-original="5 September 2026 | 14:00 UTC" data-local-time="datetime" datetime="2026-09-05T14:00:00.000Z" data-utc-range-end="2026-09-05T19:30:00.000Z" data-utc-time-ready="true" data-showing-utc="false"><span class="local-range-text"><span class="local-range-date">Saturday, September 5th</span><span class="local-range-divider"> | </span><span class="local-range-clock">10:00 AM - 03:30 PM</span><button type="button" class="timezone-toggle" title="Click to switch to UTC">LOCAL</button></span></time>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([timeParser(root.firstChild)].flat());
+    const result = builder.build();
+
+    expect(result).toBe("Saturday, September 5th | 02:00 PM - 07:30 PM UTC");
+    expect(result).toMatchSnapshot();
+  });
+
+  test("Time with an invalid data-end-time falls back to the single time format", () => {
+    const root = parse(
+      `<time data-end-time="25:30 UTC" data-utc-original="5 September 2026 | 14:00 UTC" datetime="2026-09-05T14:00:00.000Z"></time>`
+    );
+    const builder = new MediaWikiBuilder();
+    builder.addContents([timeParser(root.firstChild)].flat());
+
+    expect(builder.build()).toBe("Saturday, September 5th at 2:00 PM UTC");
+  });
 });

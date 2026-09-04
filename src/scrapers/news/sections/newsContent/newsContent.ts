@@ -18,7 +18,11 @@ export type ContentSection = NewsSection & {
 };
 
 const ignoredTags = ["style", "script"];
-const ignoredImageClasses: string[] = ["demo cursor", "demo cursor active"];
+const ignoredImageClasses: string[] = [
+  "demo cursor",
+  "demo cursor active",
+  "divider",
+];
 
 export const ContentContext = {
   imageCount: 0,

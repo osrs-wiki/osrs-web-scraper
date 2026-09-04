@@ -425,4 +425,32 @@ describe("table node", () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  test("A table with a colspan header and background-color style should render correctly", () => {
+    const root = parse(`
+      <table>
+        <tbody><tr>
+          <th colspan="3" style="background-color: #78ddeb;"><u>Team Saradomin</u></th>
+        </tr><tr>
+        </tr><tr>
+          <td><a href="https://www.twitch.tv/purpp" target="_blank" rel="noopener noreferrer">Purpp</a></td>
+          <td><a href="https://www.twitch.tv/potatohime" target="_blank" rel="noopener noreferrer">Potatohime</a></td>
+          <td><a href="https://www.twitch.tv/mr_mammal" target="_blank" rel="noopener noreferrer">Mr Mammal</a></td>
+        </tr><tr>
+      </tr></tbody></table>
+    `);
+    const builder = new MediaWikiBuilder();
+    const tableNode = root.querySelector("table");
+    builder.addContents([tableParser(tableNode)].flat());
+    const result = builder.build();
+
+    expect(result).toContain(
+      '! colspan="3" style="background-color:#78ddeb;color:#000000" | <u>Team Saradomin</u>'
+    );
+    expect(result).toContain("[https://www.twitch.tv/purpp Purpp]");
+    // Empty <tr></tr> rows should not produce extra blank rows
+    expect(result).not.toMatch(/\|-\s*\n\|-/);
+
+    expect(result).toMatchSnapshot();
+  });
 });
