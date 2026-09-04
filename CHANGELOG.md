@@ -1,5 +1,29 @@
 # osrs-web-scraper
 
+## 0.29.1
+
+### Patch Changes
+
+- b6575ea: Always center images and videos in news posts, matching the CSS-based centering the news page now uses instead of `<center>` wrapper tags.
+- b16e3b4: Fix bold quote transformer to correctly reposition quotes that are asymmetric or live only on one side of a bold tag (e.g. `<b>'content</b>'` or `<b>content'</b>`)
+- b6575ea: Match `div` class parsers (e.g. `image-caption`) by individual class token so compound class names like `image-caption image-caption--empty` still resolve correctly.
+- b6575ea: Decode decorative `&nbsp;` entities so stray whitespace-only text nodes (e.g. before a video) no longer leak into the output as literal text.
+- 20ef70c: Do not download gallery thumbnail images for newspost images
+- d501b96: Fix `getNextContent` skipping over non-text content (e.g. `{{clear}}`/`__TOC__` after a header image), which was causing them to be dropped and the header image to incorrectly merge with an unrelated later paragraph as its caption.
+- d501b96: Stop images (not just videos) from incorrectly picking up an unrelated following paragraph as their caption; only italicised captions, fallback-embed captions, or `data-caption-text`/non-empty `image-caption` divs are merged.
+- b6575ea: Treat `undefined`/`null` content as empty in `isEmpty`, fixing a truly-empty `<p></p>` being mistaken for real content when locating a following caption.
+- d501b96: Fix a caption failing to merge into its file when the italicised caption text has no nested link (its `children` is a plain string rather than an array).
+- b6575ea: Stop videos from incorrectly picking up an unrelated following narrative paragraph as their caption, while still allowing images and italicised/fallback captions to merge as before.
+- b6575ea: Ignore the empty `image-caption--empty` placeholder caption (rendered as a lone ".") so a real caption following it isn't dropped.
+- b6575ea: Ignore the `osrsTabNavigation` div and top-level `link`/`button` tags (e.g. stylesheet links, back-to-top buttons) so they no longer render as "Unsupported tag" comments.
+- 4d8a65f: Update table parser to include center tags
+- d501b96: Add a break after `__TOC__` in the news header so it's not glued to the following content.
+- b6575ea: Preserve caption styling (e.g. italics) when merging a file's caption from a following top-level `<center>` block that isn't wrapped in an unstyled `<p>`.
+- b6575ea: Download the video asset for `<video>` news post elements during scraping, instead of skipping them.
+- b6575ea: Fix `videoParser` throwing when a `<video>` element has neither a `src` attribute nor a `<source>` child.
+- b6575ea: Support `<video>` news post elements with `src` set directly on the tag (no `<source>` child).
+- b6575ea: Add a break after center-wrapped YouTube embeds so following content isn't glued to the closing `</center>` tag.
+
 ## 0.29.0
 
 ### Minor Changes
