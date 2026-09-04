@@ -6,12 +6,14 @@ import {
 } from "@osrs-wiki/mediawiki-builder";
 import type {
   MediaWikiTableCell,
+  MediaWikiTableCellOptions,
   MediaWikiTableRow,
 } from "@osrs-wiki/mediawiki-builder";
 import { HTMLElement } from "node-html-parser";
 
 import nodeParser from "./parser";
 import textParser from "./text";
+import { extractBackgroundColor } from "../../../../../utils/css";
 import { trimContentEdges } from "../../../../../utils/mediawiki";
 import { ContentNodeParser } from "../types";
 
@@ -35,6 +37,38 @@ const buildCellContent = (
   return content.length > 0 ? content : [new MediaWikiText("")];
 };
 
+const buildCellOptions = (
+  cellNode: HTMLElement,
+  isHeader: boolean
+): MediaWikiTableCellOptions | undefined => {
+  const options: MediaWikiTableCellOptions = {};
+
+  if (isHeader) {
+    options.header = true;
+  }
+
+  const colspan = parseInt(cellNode.attributes.colspan, 10);
+  if (colspan > 1) {
+    options.colspan = colspan;
+  }
+
+  const rowspan = parseInt(cellNode.attributes.rowspan, 10);
+  if (rowspan > 1) {
+    options.rowspan = rowspan;
+  }
+
+  const backgroundColor = extractBackgroundColor(cellNode.attributes.style);
+  if (backgroundColor) {
+    options.style = `background-color:${backgroundColor};color:#000000`;
+  }
+
+  return Object.keys(options).length > 0 ? options : undefined;
+};
+
+// Rows produced by empty `<tr></tr>` markup have no cells and should be discarded
+const hasCells = (trNode: HTMLElement) =>
+  trNode.querySelectorAll("td, th").length > 0;
+
 export const tableParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
     const table = node as HTMLElement;
@@ -44,11 +78,11 @@ export const tableParser: ContentNodeParser = (node, options) => {
     const tbodyElements = table.querySelectorAll("tbody");
     const allRowNodes: HTMLElement[] = [];
     tbodyElements.forEach((tbody) => {
-      const rows = tbody.querySelectorAll("tr");
+      const rows = tbody.querySelectorAll("tr").filter(hasCells);
       allRowNodes.push(...rows);
     });
 
-    const headerNodes = thead?.querySelectorAll("tr") ?? [];
+    const headerNodes = (thead?.querySelectorAll("tr") ?? []).filter(hasCells);
     const headerRowArray =
       headerNodes?.length > 0 ? Array.from(headerNodes) : allRowNodes;
     const firstHeaderRow = headerRowArray.shift();
@@ -58,7 +92,7 @@ export const tableParser: ContentNodeParser = (node, options) => {
     const headers: MediaWikiTableCell[] =
       headerRowNodes.map<MediaWikiTableCell>((node) => ({
         content: buildCellContent(node, options),
-        options: { header: true },
+        options: buildCellOptions(node, true),
       }));
     const tableRows: MediaWikiTableRow[] = allRowNodes.map<MediaWikiTableRow>(
       (trNode) => {
@@ -70,7 +104,7 @@ export const tableParser: ContentNodeParser = (node, options) => {
             const isHeader = cellNode.tagName.toLowerCase() === "th";
             return {
               content: buildCellContent(cellNode, options),
-              options: isHeader ? { header: true } : undefined,
+              options: buildCellOptions(cellNode, isHeader),
             };
           }),
         };
