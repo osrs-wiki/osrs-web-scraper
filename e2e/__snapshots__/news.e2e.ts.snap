@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`News Command E2E Tests should scrape news post and generate MediaWiki content: news-sailing-poll.txt 1`] = `
-"{{Update|date=07 August 2025|url=https://secure.runescape.com/m=news/a=13/sailing---resources--skilling-activities-poll?oldschool=1|category=community}}
+"{{Update|date=07 August 2025|url=https://secure.runescape.com/m=news/a=13/sailing---resources--skilling-activities-poll?oldschool=1|category=game}}
 [[File:Sailing - Resources & Skilling Activities Poll newspost.png|right]]
 {{clear}}
 __TOC__
@@ -29,9 +29,11 @@ We'd also like to congratulate Kijkwijzer, JackScape, Naleek and GentleTractor f
 
 Ahoy, adventurers! It’s time for our second major Sailing poll blog! Your incredible support from the [https://secure.runescape.com/m=news/sailing-poll-1-area-expansion-quests--hybrid-training-method?oldschool=1 first poll] has set us on course, and now it’s time to navigate through new skilling content, rewards, and a couple of burning questions.
 
+<center>
 {{Youtube|wW_Y2OZGqE0}}
 
 
+</center>
 ''If you can't see the video above, click [https://www.youtube.com/embed/wW_Y2OZGqE0?si=p2B1ONdsx1v92PlQ here ]to watch it!''
 
 
