@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`table-container node should render one column per table-scroll-group with nested sub-tables 1`] = `
+"{|
+|-
+| 
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! colspan=\\"3\\" style=\\"background-color:#78ddeb;color:#000000\\" | <u>Team Saradomin</u>
+|-
+| [https://www.twitch.tv/purpp Purpp]
+| [https://www.twitch.tv/potatohime Potatohime]
+| [https://www.twitch.tv/mr_mammal Mr Mammal]
+|}
+| 
+{| class=\\"wikitable\\" style=\\"text-align: center;\\"
+|-
+! colspan=\\"3\\" style=\\"background-color:#e05858;color:#000000\\" | <u>Team Zamorak</u>
+|-
+| [https://www.youtube.com/@SoloMission SoloMission]
+| [https://www.twitch.tv/tastylife Tastylife]
+| [https://www.twitch.tv/sardaco Sardaco]
+|}
+|}
+
+"
+`;

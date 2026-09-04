@@ -69,68 +69,74 @@ const buildCellOptions = (
 const hasCells = (trNode: HTMLElement) =>
   trNode.querySelectorAll("td, th").length > 0;
 
+export const buildTable = (
+  node: HTMLElement,
+  options?: { [key: string]: string | boolean | number }
+): MediaWikiTable | undefined => {
+  const table = node;
+  const thead = table.querySelector("thead");
+
+  // Get all tbody elements and all their tr elements
+  const tbodyElements = table.querySelectorAll("tbody");
+  const allRowNodes: HTMLElement[] = [];
+  tbodyElements.forEach((tbody) => {
+    const rows = tbody.querySelectorAll("tr").filter(hasCells);
+    allRowNodes.push(...rows);
+  });
+
+  const headerNodes = (thead?.querySelectorAll("tr") ?? []).filter(hasCells);
+  const headerRowArray =
+    headerNodes?.length > 0 ? Array.from(headerNodes) : allRowNodes;
+  const firstHeaderRow = headerRowArray.shift();
+  const headerRowNodes = firstHeaderRow
+    ? firstHeaderRow.querySelectorAll("td, th")
+    : [];
+  const headers: MediaWikiTableCell[] = headerRowNodes.map<MediaWikiTableCell>(
+    (node) => ({
+      content: buildCellContent(node, options),
+      options: buildCellOptions(node, true),
+    })
+  );
+  const tableRows: MediaWikiTableRow[] = allRowNodes.map<MediaWikiTableRow>(
+    (trNode) => {
+      // Query for both td and th elements
+      const cellNodes = trNode.querySelectorAll("td, th");
+      return {
+        cells: Array.from(cellNodes).map<MediaWikiTableCell>((cellNode) => {
+          // Ensure we always have at least some content, even if it's empty
+          const isHeader = cellNode.tagName.toLowerCase() === "th";
+          return {
+            content: buildCellContent(cellNode, options),
+            options: buildCellOptions(cellNode, isHeader),
+          };
+        }),
+      };
+    }
+  );
+
+  return new MediaWikiTable({
+    options: {
+      class: "wikitable",
+      style: "text-align: center;",
+    },
+    rows: [
+      {
+        cells: headers,
+      },
+      ...tableRows,
+    ],
+  });
+};
+
 export const tableParser: ContentNodeParser = (node, options) => {
   if (node instanceof HTMLElement) {
-    const table = node as HTMLElement;
-    const thead = table.querySelector("thead");
-
-    // Get all tbody elements and all their tr elements
-    const tbodyElements = table.querySelectorAll("tbody");
-    const allRowNodes: HTMLElement[] = [];
-    tbodyElements.forEach((tbody) => {
-      const rows = tbody.querySelectorAll("tr").filter(hasCells);
-      allRowNodes.push(...rows);
-    });
-
-    const headerNodes = (thead?.querySelectorAll("tr") ?? []).filter(hasCells);
-    const headerRowArray =
-      headerNodes?.length > 0 ? Array.from(headerNodes) : allRowNodes;
-    const firstHeaderRow = headerRowArray.shift();
-    const headerRowNodes = firstHeaderRow
-      ? firstHeaderRow.querySelectorAll("td, th")
-      : [];
-    const headers: MediaWikiTableCell[] =
-      headerRowNodes.map<MediaWikiTableCell>((node) => ({
-        content: buildCellContent(node, options),
-        options: buildCellOptions(node, true),
-      }));
-    const tableRows: MediaWikiTableRow[] = allRowNodes.map<MediaWikiTableRow>(
-      (trNode) => {
-        // Query for both td and th elements
-        const cellNodes = trNode.querySelectorAll("td, th");
-        return {
-          cells: Array.from(cellNodes).map<MediaWikiTableCell>((cellNode) => {
-            // Ensure we always have at least some content, even if it's empty
-            const isHeader = cellNode.tagName.toLowerCase() === "th";
-            return {
-              content: buildCellContent(cellNode, options),
-              options: buildCellOptions(cellNode, isHeader),
-            };
-          }),
-        };
-      }
-    );
+    const table = buildTable(node, options);
+    if (!table) {
+      return undefined;
+    }
 
     return [
-      new MediaWikiHTML(
-        "center",
-        [
-          new MediaWikiTable({
-            options: {
-              class: "wikitable",
-              style: "text-align: center;",
-            },
-            rows: [
-              {
-                cells: headers,
-              },
-              ...tableRows,
-            ],
-          }),
-        ],
-        {},
-        { collapsed: false }
-      ),
+      new MediaWikiHTML("center", [table], {}, { collapsed: false }),
       new MediaWikiBreak(),
       new MediaWikiBreak(),
     ];

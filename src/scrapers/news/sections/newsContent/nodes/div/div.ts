@@ -4,6 +4,7 @@ import galleryParser from "./gallery";
 import imageCaptionParser from "./imageCaption";
 import osrsHeaderParser from "./osrsHeader";
 import pollBoxParser from "./pollBox";
+import tableContainerParser from "./tableContainer";
 import { ContentNodeParser } from "../../types";
 import nodeParser from "../parser";
 import textParser from "../text";
@@ -24,6 +25,7 @@ const classParserMap: { [key: string]: ContentNodeParser } = {
   "osrs-subtitle": osrsHeaderParser,
   "osrs-subheading": osrsHeaderParser,
   "image-caption": imageCaptionParser,
+  "table-container": tableContainerParser,
 };
 
 const idParserMap: { [key: string]: ContentNodeParser } = {
