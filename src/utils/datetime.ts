@@ -27,6 +27,18 @@ export function to12Hour(hours: number, minutes: string): string {
   return `${hours12}:${minutes} ${suffix} UTC`;
 }
 
+/**
+ * Formats an already-human-readable `data-utc` attribute value (e.g. "10:20 AM" or
+ * "Thursday, September 3rd at 01:30 PM") by appending " UTC", ignoring any
+ * local/UTC toggle state the source page may have been in at scrape time.
+ */
+export function formatUtcAttributeTimestamp(
+  utc: string | undefined | null
+): string | undefined {
+  if (!utc) return undefined;
+  return `${utc.trim()} UTC`;
+}
+
 export function ordinalSuffix(day: number): string {
   if (day % 10 === 1 && day % 100 !== 11) return "st";
   if (day % 10 === 2 && day % 100 !== 12) return "nd";

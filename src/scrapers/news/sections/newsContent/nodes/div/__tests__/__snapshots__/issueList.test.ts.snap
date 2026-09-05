@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`issueList issue title containing a literal pipe is escaped for table syntax 1`] = `
+"<center>
+{| class=\\"wikitable\\"
+|-
+! Title
+! Status
+! Raised
+! Updated
+! Description
+|-
+| TABLET {{!}} Special Attack Button Requires A Long Press
+| style=\\"background-color:#b86600;color:#000000\\" | Investigating
+| Thursday, September 3rd at 10:55 AM UTC
+| 11:20 AM UTC
+| A player has raised that the Special Attack Orb now requires a long press.
+|}
+</center>
+
+"
+`;
+
+exports[`issueList issue-list with multiple issues returns a wikitable 1`] = `
+"<center>
+{| class=\\"wikitable\\"
+|-
+! Title
+! Status
+! Raised
+! Updated
+! Description
+|-
+| Chatbox Issues
+| style=\\"background-color:#b86600;color:#000000\\" | Investigating
+| Thursday, September 3rd at 01:30 PM UTC
+| 10:20 AM UTC
+| We're aware that some players [https://discord.com/channels/324132423636090880/1545013889521946675 cannot scroll the chatbox] with their finger.
+
+We've also seen reports of the [https://discord.com/channels/324132423636090880/960550250530086993/1545014636514902106 channel buttons] not responding when being pressed.
+|-
+| Total Level Box
+| style=\\"background-color:#8b3a62;color:#000000\\" | Issue Raised
+| Thursday, September 3rd at 10:25 AM UTC
+| 10:25 AM UTC
+| Some players have raised that the [https://discord.com/channels/324132423636090880/960550250530086993/1545015850900127796 Total Level text] now appears in the top-left of the screen rather than over the appropriate skill.
+|}
+</center>
+
+"
+`;

@@ -46,14 +46,15 @@ export function extractBackgroundImages(elements: HTMLElement[]): string[] {
 }
 
 /**
- * Extracts background-color from a CSS style attribute (hex, rgb(...), or named colors)
+ * Extracts background-color from a CSS style attribute (hex, rgb(...), or named colors).
+ * Matches both `background-color:` and bare `background:` (but not `background-image:` etc).
  */
 export function extractBackgroundColor(
   style: string | undefined
 ): string | null {
   if (!style) return null;
 
-  const match = style.match(/background-color\s*:\s*([^;]+?)\s*(?:;|$)/i);
+  const match = style.match(/background(?:-color)?\s*:\s*([^;]+?)\s*(?:;|$)/i);
 
   return match ? match[1].trim() : null;
 }

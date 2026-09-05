@@ -137,6 +137,33 @@ export const trimContentEdges = (contents: MediaWikiContent[]): void => {
 };
 
 /**
+ * Source HTML indentation often leaves whitespace-only text either side of a
+ * `<br>`, so trim it there too (without disturbing other interior spacing).
+ *
+ * @param content The content array to trim around breaks in place.
+ */
+export const trimAroundBreaks = (content: MediaWikiContent[]): void => {
+  content.forEach((item, index) => {
+    if (!(item instanceof MediaWikiBreak)) {
+      return;
+    }
+    if (index > 0) {
+      trimContentEdge(content[index - 1], "end");
+    }
+    if (index < content.length - 1) {
+      trimContentEdge(content[index + 1], "start");
+    }
+  });
+};
+
+/**
+ * Escapes a literal "|" so it isn't parsed as a table cell attribute/content
+ * separator when placed in single-line wikitable cell text.
+ */
+export const escapeTablePipe = (text?: string): string | undefined =>
+  text?.replaceAll("|", "{{!}}");
+
+/**
  * Get the next non-break, non-whitespace content after a given index.
  * Skips over MediaWikiBreak elements and empty MediaWikiText elements.
  *

@@ -1,4 +1,5 @@
 import {
+  formatUtcAttributeTimestamp,
   formatUtcDateTime,
   formatUtcDateTimeRange,
   formatUtcTime,
@@ -21,6 +22,18 @@ describe("to12Hour", () => {
 
   test("should format midnight as 12 AM", () => {
     expect(to12Hour(0, "00")).toBe("12:00 AM UTC");
+  });
+});
+
+describe("formatUtcAttributeTimestamp", () => {
+  test("should append UTC and trim the raw attribute value", () => {
+    expect(formatUtcAttributeTimestamp("  10:20 AM  ")).toBe("10:20 AM UTC");
+  });
+
+  test("should return undefined for missing values", () => {
+    expect(formatUtcAttributeTimestamp(undefined)).toBeUndefined();
+    expect(formatUtcAttributeTimestamp(null)).toBeUndefined();
+    expect(formatUtcAttributeTimestamp("")).toBeUndefined();
   });
 });
 

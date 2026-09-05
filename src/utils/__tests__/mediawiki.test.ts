@@ -7,11 +7,13 @@ import {
 } from "@osrs-wiki/mediawiki-builder";
 
 import {
+  escapeTablePipe,
   getFirstStringContent,
   getNextContent,
   isEmpty,
   startsWith,
   trim,
+  trimAroundBreaks,
   trimContentEdge,
   trimContentEdges,
 } from "../mediawiki";
@@ -53,6 +55,35 @@ describe("mediawiki utils", () => {
       ];
       const trimmedContent = trim(contents);
       expect(trimmedContent).toEqual([content]);
+    });
+  });
+
+  describe("trimAroundBreaks", () => {
+    test("should trim trailing/leading whitespace on either side of a break", () => {
+      const before = new MediaWikiText("before ");
+      const after = new MediaWikiText(" after");
+      const contents = [before, new MediaWikiBreak(), after];
+      trimAroundBreaks(contents);
+      expect(before.children).toBe("before");
+      expect(after.children).toBe("after");
+    });
+
+    test("should do nothing when there are no breaks", () => {
+      const content = new MediaWikiText(" content ");
+      trimAroundBreaks([content]);
+      expect(content.children).toBe(" content ");
+    });
+  });
+
+  describe("escapeTablePipe", () => {
+    test("should escape a literal pipe with the {{!}} template", () => {
+      expect(escapeTablePipe("TABLET | Special Attack")).toBe(
+        "TABLET {{!}} Special Attack"
+      );
+    });
+
+    test("should return undefined for undefined input", () => {
+      expect(escapeTablePipe(undefined)).toBeUndefined();
     });
   });
 
