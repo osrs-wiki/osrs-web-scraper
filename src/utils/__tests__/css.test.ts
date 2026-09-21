@@ -29,6 +29,16 @@ describe("CSS utils", () => {
       expect(extractBackgroundColor(style)).toBe(null);
     });
 
+    test("should extract a color from bare background shorthand", () => {
+      const style = "background:#b86600";
+      expect(extractBackgroundColor(style)).toBe("#b86600");
+    });
+
+    test("should return null for bare background shorthand with a non-color value", () => {
+      const style = "background: url(image.png) center/cover no-repeat;";
+      expect(extractBackgroundColor(style)).toBe(null);
+    });
+
     test("should return null for empty or undefined style", () => {
       expect(extractBackgroundColor("")).toBe(null);
       expect(extractBackgroundColor(undefined)).toBe(null);

@@ -35,8 +35,8 @@ export function to12Hour(hours: number, minutes: string): string {
 export function formatUtcAttributeTimestamp(
   utc: string | undefined | null
 ): string | undefined {
-  if (!utc) return undefined;
-  return `${utc.trim()} UTC`;
+  const value = utc?.trim();
+  return value ? `${value} UTC` : undefined;
 }
 
 export function ordinalSuffix(day: number): string {

@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`issueList issue description containing a literal pipe is escaped for table syntax 1`] = `
+"<center>
+{| class=\\"wikitable\\"
+|-
+! Title
+! Status
+! Raised
+! Updated
+! Description
+|-
+| Priority Swapping
+| style=\\"background-color:#8b3a62;color:#000000\\" | Issue Raised
+| Thursday, September 3rd at 10:55 AM UTC
+| 01:55 PM UTC
+| Walk Here {{!}} Attack priority is affected, see the [https://discord.com/channels/324132423636090880/1545018908506062918 priority {{!}} options] thread.
+|}
+</center>
+
+"
+`;
+
 exports[`issueList issue title containing a literal pipe is escaped for table syntax 1`] = `
 "<center>
 {| class=\\"wikitable\\"
@@ -44,6 +65,27 @@ We've also seen reports of the [https://discord.com/channels/324132423636090880/
 | Thursday, September 3rd at 10:25 AM UTC
 | 10:25 AM UTC
 | Some players have raised that the [https://discord.com/channels/324132423636090880/960550250530086993/1545015850900127796 Total Level text] now appears in the top-left of the screen rather than over the appropriate skill.
+|}
+</center>
+
+"
+`;
+
+exports[`issueList timestamp containing a literal pipe is escaped for table syntax 1`] = `
+"<center>
+{| class=\\"wikitable\\"
+|-
+! Title
+! Status
+! Raised
+! Updated
+! Description
+|-
+| Resolved Issue
+| style=\\"background-color:#1f7a36;color:#000000\\" | Resolved
+| Thursday, September 3rd at 10:55 AM UTC
+| September 10 {{!}} 10:30 AM UTC
+| This issue has been resolved.
 |}
 </center>
 

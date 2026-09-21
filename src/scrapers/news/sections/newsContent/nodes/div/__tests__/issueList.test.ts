@@ -84,6 +84,58 @@ describe("issueList", () => {
     expect(builder.build()).toMatchSnapshot();
   });
 
+  test("issue description containing a literal pipe is escaped for table syntax", () => {
+    const root = parse(`
+      <div class="issue-list">
+        <div class="issue">
+          <button class="issue-button" type="button">
+            <div class="issue-summary">
+              <span class="issue-title">Priority Swapping</span>
+              <span class="issue-status" style="background:#8b3a62">Issue Raised</span>
+              <span class="issue-meta"><span class="issue-meta-left">
+                <span class="issue-time-toggle" data-local="Thursday, September 3rd at 06:55 AM" data-utc="Thursday, September 3rd at 10:55 AM">
+                  <span class="issue-time-value">Thursday, September 3rd at 10:55 AM</span>
+                </span>
+              </span><span class="issue-meta-updated issue-updated-time" data-local="09:55 AM" data-utc="01:55 PM">Updated 01:55 PM</span></span>
+            </div>
+          </button>
+          <div class="issue-details"><div class="issue-description">Walk Here | Attack priority is affected, see the <a href="https://discord.com/channels/324132423636090880/1545018908506062918">priority | options</a> thread.</div></div>
+        </div>
+      </div>
+    `);
+    const builder = new MediaWikiBuilder();
+    builder.addContents(
+      [issueListParser(root.querySelector(".issue-list"))].flat()
+    );
+    expect(builder.build()).toMatchSnapshot();
+  });
+
+  test("timestamp containing a literal pipe is escaped for table syntax", () => {
+    const root = parse(`
+      <div class="issue-list">
+        <div class="issue">
+          <button class="issue-button" type="button">
+            <div class="issue-summary">
+              <span class="issue-title">Resolved Issue</span>
+              <span class="issue-status" style="background:#1f7a36">Resolved</span>
+              <span class="issue-meta"><span class="issue-meta-left">
+                <span class="issue-time-toggle" data-local="Thursday, September 3rd at 06:55 AM" data-utc="Thursday, September 3rd at 10:55 AM">
+                  <span class="issue-time-value">Thursday, September 3rd at 10:55 AM</span>
+                </span>
+              </span><span class="issue-meta-updated issue-updated-time" data-local="September 10 | 06:30 AM" data-utc="September 10 | 10:30 AM">Updated September 10 | 10:30 AM</span></span>
+            </div>
+          </button>
+          <div class="issue-details"><div class="issue-description">This issue has been resolved.</div></div>
+        </div>
+      </div>
+    `);
+    const builder = new MediaWikiBuilder();
+    builder.addContents(
+      [issueListParser(root.querySelector(".issue-list"))].flat()
+    );
+    expect(builder.build()).toMatchSnapshot();
+  });
+
   test("non issue-list div returns undefined", () => {
     const root = parse('<div class="some-other-class"></div>');
     expect(issueListParser(root.firstChild)).toBeUndefined();

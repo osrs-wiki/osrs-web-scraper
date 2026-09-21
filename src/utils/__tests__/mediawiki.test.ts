@@ -1,5 +1,6 @@
 import {
   MediaWikiBreak,
+  MediaWikiExternalLink,
   MediaWikiFile,
   MediaWikiTemplate,
   MediaWikiText,
@@ -7,6 +8,7 @@ import {
 } from "@osrs-wiki/mediawiki-builder";
 
 import {
+  escapeContentPipes,
   escapeTablePipe,
   getFirstStringContent,
   getNextContent,
@@ -84,6 +86,32 @@ describe("mediawiki utils", () => {
 
     test("should return undefined for undefined input", () => {
       expect(escapeTablePipe(undefined)).toBeUndefined();
+    });
+  });
+
+  describe("escapeContentPipes", () => {
+    test("should escape a literal pipe in plain text content", () => {
+      const content = new MediaWikiText("before | after");
+      escapeContentPipes([content]);
+      expect(content.children).toBe("before {{!}} after");
+    });
+
+    test("should escape a literal pipe inside a link's label without touching the URL", () => {
+      const link = new MediaWikiExternalLink(
+        [new MediaWikiText("click | here")],
+        "https://example.com/a|b"
+      );
+      escapeContentPipes([link]);
+      expect(link.build()).toBe("[https://example.com/a|b click {{!}} here]");
+    });
+
+    test("should escape a literal pipe inside a link's raw string label", () => {
+      const link = new MediaWikiExternalLink(
+        "click | here",
+        "https://example.com/a"
+      );
+      escapeContentPipes([link]);
+      expect(link.build()).toBe("[https://example.com/a click {{!}} here]");
     });
   });
 

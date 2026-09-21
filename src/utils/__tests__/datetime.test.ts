@@ -34,6 +34,7 @@ describe("formatUtcAttributeTimestamp", () => {
     expect(formatUtcAttributeTimestamp(undefined)).toBeUndefined();
     expect(formatUtcAttributeTimestamp(null)).toBeUndefined();
     expect(formatUtcAttributeTimestamp("")).toBeUndefined();
+    expect(formatUtcAttributeTimestamp("   ")).toBeUndefined();
   });
 });
 

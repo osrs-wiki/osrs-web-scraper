@@ -13,6 +13,7 @@ import { HTMLElement } from "node-html-parser";
 import { extractBackgroundColor } from "../../../../../../utils/css";
 import { formatUtcAttributeTimestamp } from "../../../../../../utils/datetime";
 import {
+  escapeContentPipes,
   escapeTablePipe,
   trimAroundBreaks,
   trimContentEdges,
@@ -27,8 +28,8 @@ const headerNames = ["Title", "Status", "Raised", "Updated", "Description"];
 const buildUtcTimestamp = (
   element: HTMLElement | null
 ): MediaWikiText | undefined => {
-  const formatted = formatUtcAttributeTimestamp(
-    element?.getAttribute("data-utc")
+  const formatted = escapeTablePipe(
+    formatUtcAttributeTimestamp(element?.getAttribute("data-utc"))
   );
   return formatted ? new MediaWikiText(formatted) : undefined;
 };
@@ -49,6 +50,7 @@ const buildDescriptionContent = (
 
   trimContentEdges(content);
   trimAroundBreaks(content);
+  escapeContentPipes(content);
 
   return content.length > 0 ? content : [new MediaWikiText("")];
 };

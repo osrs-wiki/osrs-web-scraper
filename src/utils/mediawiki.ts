@@ -164,6 +164,32 @@ export const escapeTablePipe = (text?: string): string | undefined =>
   text?.replaceAll("|", "{{!}}");
 
 /**
+ * Recursively escapes literal "|" in every string leaf of a content tree (e.g. a
+ * link's display label), without touching non-text fields like URLs.
+ */
+const escapeContentPipe = (content: MediaWikiContent): void => {
+  if (typeof content.children === "string") {
+    content.children = escapeTablePipe(content.children);
+    return;
+  }
+  if (Array.isArray(content.children)) {
+    content.children.forEach(escapeContentPipe);
+  } else if (content.children instanceof MediaWikiContent) {
+    escapeContentPipe(content.children);
+  }
+};
+
+/**
+ * Escapes literal "|" throughout an entire content array, for content destined for a
+ * single-line wikitable cell (e.g. a description that may contain links or plain text).
+ *
+ * @param contents The content array to escape in place.
+ */
+export const escapeContentPipes = (contents: MediaWikiContent[]): void => {
+  contents.forEach(escapeContentPipe);
+};
+
+/**
  * Get the next non-break, non-whitespace content after a given index.
  * Skips over MediaWikiBreak elements and empty MediaWikiText elements.
  *
