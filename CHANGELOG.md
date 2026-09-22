@@ -1,5 +1,18 @@
 # osrs-web-scraper
 
+## 0.30.0
+
+### Minor Changes
+
+- 6ce7bfd: Update table rendering with colspan support and background color extraction
+- 6ce7bfd: Implement table-container parser and associated tests for rendering nested tables
+
+### Patch Changes
+
+- 6ce7bfd: Update time formatting to support end time ranges and add corresponding tests
+- bcd3d90: Add support for the "known issues" (`.issue-list`) news post format, rendering each issue as a row in a MediaWiki table.
+- 6ce7bfd: Add "divider" to ignored image classes for improved content parsing
+
 ## 0.29.1
 
 ### Patch Changes
