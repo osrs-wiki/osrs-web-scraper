@@ -137,6 +137,59 @@ export const trimContentEdges = (contents: MediaWikiContent[]): void => {
 };
 
 /**
+ * Source HTML indentation often leaves whitespace-only text either side of a
+ * `<br>`, so trim it there too (without disturbing other interior spacing).
+ *
+ * @param content The content array to trim around breaks in place.
+ */
+export const trimAroundBreaks = (content: MediaWikiContent[]): void => {
+  content.forEach((item, index) => {
+    if (!(item instanceof MediaWikiBreak)) {
+      return;
+    }
+    if (index > 0) {
+      trimContentEdge(content[index - 1], "end");
+    }
+    if (index < content.length - 1) {
+      trimContentEdge(content[index + 1], "start");
+    }
+  });
+};
+
+/**
+ * Escapes a literal "|" so it isn't parsed as a table cell attribute/content
+ * separator when placed in single-line wikitable cell text.
+ */
+export const escapeTablePipe = (text?: string): string | undefined =>
+  text?.replaceAll("|", "{{!}}");
+
+/**
+ * Recursively escapes literal "|" in every string leaf of a content tree (e.g. a
+ * link's display label), without touching non-text fields like URLs.
+ */
+const escapeContentPipe = (content: MediaWikiContent): void => {
+  if (typeof content.children === "string") {
+    content.children = escapeTablePipe(content.children);
+    return;
+  }
+  if (Array.isArray(content.children)) {
+    content.children.forEach(escapeContentPipe);
+  } else if (content.children instanceof MediaWikiContent) {
+    escapeContentPipe(content.children);
+  }
+};
+
+/**
+ * Escapes literal "|" throughout an entire content array, for content destined for a
+ * single-line wikitable cell (e.g. a description that may contain links or plain text).
+ *
+ * @param contents The content array to escape in place.
+ */
+export const escapeContentPipes = (contents: MediaWikiContent[]): void => {
+  contents.forEach(escapeContentPipe);
+};
+
+/**
  * Get the next non-break, non-whitespace content after a given index.
  * Skips over MediaWikiBreak elements and empty MediaWikiText elements.
  *

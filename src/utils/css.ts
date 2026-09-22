@@ -46,14 +46,33 @@ export function extractBackgroundImages(elements: HTMLElement[]): string[] {
 }
 
 /**
- * Extracts background-color from a CSS style attribute (hex, rgb(...), or named colors)
+ * Whether a value is a plain color (hex, rgb(...)/hsl(...), or a single named color word)
+ * as opposed to a `background` shorthand value (e.g. a gradient, image, or position/repeat).
+ */
+function isPlainColorValue(value: string): boolean {
+  return /^(#[0-9a-f]{3,8}|rgba?\([^)]*\)|hsla?\([^)]*\)|[a-z]+)$/i.test(
+    value.trim()
+  );
+}
+
+/**
+ * Extracts background-color from a CSS style attribute (hex, rgb(...), or named colors).
+ * Matches `background-color:` always, and bare `background:` only when its value is a
+ * plain color rather than a shorthand (e.g. `background: url(...) center/cover no-repeat`).
  */
 export function extractBackgroundColor(
   style: string | undefined
 ): string | null {
   if (!style) return null;
 
-  const match = style.match(/background-color\s*:\s*([^;]+?)\s*(?:;|$)/i);
+  const match = style.match(/background(-color)?\s*:\s*([^;]+?)\s*(?:;|$)/i);
+  if (!match) return null;
 
-  return match ? match[1].trim() : null;
+  const [, isColorProperty, rawValue] = match;
+  const value = rawValue.trim();
+  if (!isColorProperty && !isPlainColorValue(value)) {
+    return null;
+  }
+
+  return value;
 }
