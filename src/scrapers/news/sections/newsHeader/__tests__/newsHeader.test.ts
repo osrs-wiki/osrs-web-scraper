@@ -1,4 +1,8 @@
-import { MediaWikiFile } from "@osrs-wiki/mediawiki-builder";
+import {
+  MediaWikiFile,
+  MediaWikiTOC,
+  MediaWikiTemplate,
+} from "@osrs-wiki/mediawiki-builder";
 import fs from "fs";
 
 jest.mock("../newsHeader.utils", () => ({
@@ -38,6 +42,18 @@ describe("newsHeader", () => {
     const result = await newsHeader.format(html, url, title);
     const fileItem = result.find((item) => item instanceof MediaWikiFile);
     expect(fileItem).toBeInstanceOf(MediaWikiFile);
+  });
+
+  test("should place the table of contents before the clear template", async () => {
+    const html = `<div class="news-article-header__date">06 March 2026</div>`;
+
+    const result = await newsHeader.format(html, url, title);
+    const tocIndex = result.findIndex((item) => item instanceof MediaWikiTOC);
+    const clearIndex = result.findIndex(
+      (item) => item instanceof MediaWikiTemplate && item.name === "clear"
+    );
+
+    expect(tocIndex).toBeLessThan(clearIndex);
   });
 
   test("should include image when img has data-src but no src", async () => {
