@@ -8,7 +8,7 @@ import {
 import { format, isBefore, parse } from "date-fns";
 import { HTMLElement } from "node-html-parser";
 
-import { getPollEndDate } from "./polls.utils";
+import { formatPollNoticeDate, getPollEndDate, getPollId } from "./polls.utils";
 import { PollSection } from "./types";
 
 const pollHeader: PollSection = {
@@ -48,7 +48,7 @@ const pollHeader: PollSection = {
     const voteDateNodes = htmlElement.querySelectorAll("time[datetime]");
     const startDate =
       voteDateNodes.length > 0
-        ? voteDateNodes[0].getAttribute("datetime")
+        ? voteDateNodes[0].textContent
         : title.match(/\(([^)]+)\)/)?.[1];
     const endDate =
       voteDateNodes.length > 1
@@ -68,20 +68,20 @@ const pollHeader: PollSection = {
 
     const content: MediaWikiContent[] = [];
 
-    const number = url.match(/(?:[?&]id=|\/polls\/\d{4}\/)(\d+)$/)?.[1];
+    const number = getPollId(url);
     if (!number) {
       throw new Error("Could not find poll number in URL");
     }
 
-    const start = voteDateNodes.length
-      ? new Date(startDate)
-      : parse(startDate, "d MMMM yyyy", new Date());
-
     content.push(
       new PollNoticeTemplate(
         parseInt(number),
-        format(start, "d MMMM yyyy"),
-        format(endDate, "d MMMM yyyy")
+        voteDateNodes.length
+          ? formatPollNoticeDate(startDate)
+          : format(parse(startDate, "d MMMM yyyy", new Date()), "d MMMM yyyy"),
+        voteDateNodes.length > 1
+          ? formatPollNoticeDate(voteDateNodes[1].textContent)
+          : format(endDate, "d MMMM yyyy")
       ).build()
     );
     content.push(new MediaWikiBreak());

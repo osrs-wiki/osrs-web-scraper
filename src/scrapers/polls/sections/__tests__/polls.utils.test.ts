@@ -1,9 +1,47 @@
-import { getPollEndDate, getPollQuestionVote } from "../polls.utils";
+import {
+  formatPollNoticeDate,
+  getPollEndDate,
+  getPollId,
+  getPollQuestionVote,
+} from "../polls.utils";
 
 describe("polls.utils", () => {
+  describe("getPollId", () => {
+    it.each([
+      ["https://oldschool.runescape.com/polls/2025/1708", "1708"],
+      ["https://oldschool.runescape.com/polls/2025/1708/", "1708"],
+      [
+        "https://oldschool.runescape.com/polls/2025/1708?utm_source=test",
+        "1708",
+      ],
+      [
+        "https://oldschool.runescape.com/polls/2025/1708#poll-questions",
+        "1708",
+      ],
+      [
+        "https://secure.runescape.com/m=poll/a=13/oldschool/results?id=1708",
+        "1708",
+      ],
+    ])("should extract a poll id from %s", (url, expected) => {
+      expect(getPollId(url)).toBe(expected);
+    });
+  });
+
+  describe("formatPollNoticeDate", () => {
+    it.each(["08 August 2025", "8 August 2025", "2025-08-08"])(
+      "should format %s without converting time zones",
+      (date) => {
+        expect(formatPollNoticeDate(date)).toBe("8 August 2025");
+      }
+    );
+  });
+
   describe("getPollQuestionVote", () => {
     test("getPollQuestionVote - hidden", () => {
       expect(getPollQuestionVote("Results Hidden")).toBe("1");
+    });
+    test("getPollQuestionVote - hidden with whitespace", () => {
+      expect(getPollQuestionVote("  Results Hidden  ")).toBe("1");
     });
     test("getPollQuestionVote - not hidden", () => {
       expect(getPollQuestionVote("80.7% (56454 votes)")).toBe("56454");
