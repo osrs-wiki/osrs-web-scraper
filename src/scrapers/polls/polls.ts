@@ -14,19 +14,26 @@ const polls: ScrapingService<MediaWikiBuilder> = {
   scrape: async (page): Promise<MediaWikiBuilder> => {
     try {
       const results = await page.evaluate(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore Ignore window typing
-        const $ = window.$;
-        const title = $(".widescroll-content h2").html();
-        const content = $(".widescroll-content").html();
+        const poll = document.querySelector(
+          '[data-testid="PollView"], .widescroll-content'
+        );
+        const title = poll?.querySelector("h1, h2")?.textContent;
+
+        if (!poll || !title) {
+          throw new Error("Could not find poll content");
+        }
 
         return {
-          content,
+          content: poll.outerHTML,
           title,
         };
       });
 
-      const contentNodes = parse(results.content);
+      const contentRoot = parse(results.content);
+      const contentNodes =
+        contentRoot.querySelector(
+          '[data-testid="PollView"], .widescroll-content'
+        ) ?? contentRoot;
 
       const builder = new MediaWikiBuilder();
       builder.addContents(await pollHeader.format(contentNodes, page.url()));
@@ -42,7 +49,7 @@ const polls: ScrapingService<MediaWikiBuilder> = {
         const fileName = formatFileName(
           results.title.replaceAll(/\((.)*\)/g, "")
         );
-        await fs.writeFileSync(`out/poll/${fileName}.txt`, builder.build());
+        fs.writeFileSync(`out/poll/${fileName}.txt`, builder.build());
         console.info("Successfully created poll file");
       } catch (err) {
         console.error(err);

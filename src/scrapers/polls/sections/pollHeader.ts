@@ -5,7 +5,7 @@ import {
   PollNoticeTemplate,
   PollWrapperTemplate,
 } from "@osrs-wiki/mediawiki-builder";
-import { format, isBefore } from "date-fns";
+import { format, isBefore, parse } from "date-fns";
 import { HTMLElement } from "node-html-parser";
 
 import { getPollEndDate } from "./polls.utils";
@@ -13,35 +13,75 @@ import { PollSection } from "./types";
 
 const pollHeader: PollSection = {
   format: async (htmlElement, url) => {
-    const title = htmlElement.querySelector("h2").textContent;
-    const descriptionNodes = htmlElement.childNodes.filter(
-      (node) =>
-        !(node instanceof HTMLElement) ||
-        (node instanceof HTMLElement && node.tagName === "div")
-    );
-    const description = descriptionNodes.reduce(
-      (value, element) => value + element.textContent,
-      ""
-    );
-    const total = htmlElement
-      .querySelector("div")
-      .textContent.match(/(\d)+/g)?.[0];
+    const title = htmlElement.querySelector("h1, h2")?.textContent;
+    if (!title) {
+      throw new Error("Could not find poll title");
+    }
+
+    const pollView = htmlElement.getAttribute("data-testid") === "PollView";
+    let description: string;
+    if (pollView) {
+      const descriptionNodes: HTMLElement[] = [];
+      for (const child of htmlElement.childNodes) {
+        if (!(child instanceof HTMLElement)) {
+          continue;
+        }
+        if (child.id === "poll-questions") {
+          break;
+        }
+        descriptionNodes.push(...child.querySelectorAll("p"));
+      }
+      description = descriptionNodes
+        .map((node) => node.textContent.trim())
+        .filter(Boolean)
+        .join("\n\n");
+    } else {
+      description = htmlElement.childNodes
+        .filter(
+          (node) =>
+            !(node instanceof HTMLElement) ||
+            (node instanceof HTMLElement && node.tagName === "div")
+        )
+        .reduce((value, element) => value + element.textContent, "");
+    }
+
+    const voteDateNodes = htmlElement.querySelectorAll("time[datetime]");
+    const startDate =
+      voteDateNodes.length > 0
+        ? voteDateNodes[0].getAttribute("datetime")
+        : title.match(/\(([^)]+)\)/)?.[1];
+    const endDate =
+      voteDateNodes.length > 1
+        ? new Date(voteDateNodes[1].getAttribute("datetime"))
+        : getPollEndDate(description);
+    const totalElement = pollView
+      ? htmlElement.querySelector("h3")
+      : htmlElement.querySelector("div");
+    const total = totalElement?.textContent
+      .replace("Total Votes:", "")
+      .replaceAll(",", "")
+      .match(/\d+/)?.[0];
+
+    if (!startDate || !endDate || isNaN(endDate.getTime())) {
+      throw new Error("Could not find poll dates");
+    }
 
     const content: MediaWikiContent[] = [];
 
-    const position = url.lastIndexOf("=");
-    const number = url.substring(position + 1, url.length);
-    const startDate = title
-      .match(/\(([^)]+)\)/g)?.[0]
-      .replaceAll(/(\()*(\))*/g, "");
+    const number = url.match(/(?:[?&]id=|\/polls\/\d{4}\/)(\d+)$/)?.[1];
+    if (!number) {
+      throw new Error("Could not find poll number in URL");
+    }
 
-    const endDate = getPollEndDate(description);
+    const start = voteDateNodes.length
+      ? new Date(startDate)
+      : parse(startDate, "d MMMM yyyy", new Date());
 
     content.push(
       new PollNoticeTemplate(
         parseInt(number),
-        format(new Date(startDate), "d MMMM yyyy"),
-        format(endDate ?? new Date(), "d MMMM yyyy")
+        format(start, "d MMMM yyyy"),
+        format(endDate, "d MMMM yyyy")
       ).build()
     );
     content.push(new MediaWikiBreak());
@@ -56,7 +96,7 @@ const pollHeader: PollSection = {
     content.push(new MediaWikiBreak());
 
     const totalTemplate = new MediaWikiTemplate("PollTotal");
-    totalTemplate.add("", isBefore(new Date(), endDate) ? "" : total);
+    totalTemplate.add("", isBefore(new Date(), endDate) ? "" : total ?? "");
     content.push(totalTemplate);
 
     return content;

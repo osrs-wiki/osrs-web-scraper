@@ -35,6 +35,7 @@ export const getPollEndDate = (description: string) => {
  * @returns
  */
 export const getPollQuestionVote = (voteValue: string) =>
-  voteValue === "Results Hidden"
+  voteValue === "Results Hidden" || !voteValue.trim()
     ? "1"
-    : voteValue.replaceAll(/([\d\.\d\%]* \()+/g, "").replaceAll(" votes)", "");
+    : voteValue.match(/\(([\d,]+)(?: votes)?\)/)?.[1].replaceAll(",", "") ??
+      voteValue;

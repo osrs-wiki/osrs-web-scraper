@@ -8,6 +8,15 @@ describe("polls.utils", () => {
     test("getPollQuestionVote - not hidden", () => {
       expect(getPollQuestionVote("80.7% (56454 votes)")).toBe("56454");
     });
+    test("getPollQuestionVote - formatted new layout", () => {
+      expect(getPollQuestionVote("23.2% (23,851)")).toBe("23851");
+    });
+    test("getPollQuestionVote - skipped new layout", () => {
+      expect(getPollQuestionVote(" (10,643)")).toBe("10643");
+    });
+    test("getPollQuestionVote - missing active result", () => {
+      expect(getPollQuestionVote("")).toBe("1");
+    });
   });
 
   describe("getPollEndDate", () => {
